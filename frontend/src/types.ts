@@ -17,6 +17,7 @@ export type LessonSection = {
   intuition?: LocalizedText;
   realWorld?: LocalizedText;
   examTrap?: LocalizedText;
+  formula?: LocalizedText;
   keyTerms?: KeyTerm[];
 };
 
