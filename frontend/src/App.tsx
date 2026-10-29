@@ -7,12 +7,14 @@ import { LessonView } from "./components/LessonView";
 import { LinearRegressionLab } from "./components/LinearRegressionLab";
 import { LogisticRegressionLab } from "./components/LogisticRegressionLab";
 import { MLPLab } from "./components/MLPLab";
+import { SGDLab } from "./components/SGDLab";
+import { BackpropLab } from "./components/BackpropLab";
 import { QuizView } from "./components/QuizView";
 import { lessons, questionBank } from "./data/course";
 import type { Language } from "./types";
 
 type View = "learn" | "quiz" | "lab";
-type LabId = "linear-regression" | "gradient-descent" | "feature-scaling" | "logistic-regression" | "generalization" | "mlp";
+type LabId = "linear-regression" | "gradient-descent" | "feature-scaling" | "logistic-regression" | "generalization" | "mlp" | "sgd" | "backprop";
 
 export default function App() {
   const [view, setView] = useState<View>("learn");
@@ -86,7 +88,7 @@ export default function App() {
         <header className="topbar">
           <div className="status">
             <span className="status-dot" />
-            <span>Study Lab v0.5</span>
+            <span>Study Lab v0.6</span>
           </div>
           <div className="language-row">
             <LanguageSwitcher
@@ -169,6 +171,18 @@ export default function App() {
                   >
                     MLP
                   </button>
+                  <button
+                    className={labId === "sgd" ? "active" : ""}
+                    onClick={() => setLabId("sgd")}
+                  >
+                    SGD / Mini-batch
+                  </button>
+                  <button
+                    className={labId === "backprop" ? "active" : ""}
+                    onClick={() => setLabId("backprop")}
+                  >
+                    Backpropagation
+                  </button>
                 </div>
               </div>
 
@@ -189,6 +203,12 @@ export default function App() {
               )}
               {labId === "mlp" && (
                 <MLPLab language={learningLanguage} />
+              )}
+              {labId === "sgd" && (
+                <SGDLab language={learningLanguage} />
+              )}
+              {labId === "backprop" && (
+                <BackpropLab language={learningLanguage} />
               )}
             </>
           )}
