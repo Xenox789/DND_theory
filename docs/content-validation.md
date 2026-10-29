@@ -208,6 +208,127 @@ The course explicitly contrasts this with using MSE after the sigmoid: the resul
 
 Training minimizes the **logistic/BCE loss J(θ)**. It does not minimize X, the sigmoid function g, or the numerical magnitude of θ itself.
 
+### Generalization, validation, and overfitting
+
+Lecture 4 explicitly states:
+
+- training set and test set must be disjoint;
+- do not use the test set for learning;
+- the test set estimates performance on unseen data.
+
+Underfitting pattern in the lecture:
+
+```text
+J_train: high
+J_test / J_val: high and similar
+high bias, low variance
+```
+
+Overfitting pattern:
+
+```text
+J_train keeps decreasing
+J_test / J_val starts increasing
+low bias, high variance
+```
+
+Explicit remedies listed by the course:
+
+- simpler model / fewer parameters;
+- more training data;
+- regularization such as L2;
+- early stopping.
+
+The lecture's L2 example uses:
+
+```text
+J(θ) =
+  1/(2m) * Σ_j (hθ(x^(j)) - y^(j))²
+  + λ * Σ_(i=1)^n θ_i²
+```
+
+The bias / intercept parameter θ₀ is **not penalized**.
+
+Important consequences:
+
+- λ = 0 gives the unregularized objective;
+- excessively large λ can force parameters too strongly toward zero and cause underfitting.
+
+### Training / validation / test split
+
+The lecture introduces three sets:
+
+```text
+training set -> learn model parameters θ
+validation set -> choose hyperparameters Ψ / early stopping
+test set -> final independent evaluation
+```
+
+The 50% / 25% / 25% split in the slides is an **example**, not a universal requirement.
+
+Hyperparameter examples from the lecture:
+
+- learning rate α;
+- polynomial degree or neural-network architecture;
+- number of training iterations / early stopping.
+
+The lecture says gradient descent generally cannot be used for arbitrary hyperparameter optimization.
+
+Techniques explicitly listed:
+
+- manual trial and error;
+- grid search;
+- random search;
+- Bayesian optimization;
+- evolutionary / genetic algorithms.
+
+### Early stopping
+
+Lecture 4 intentionally introduces a test-loss-based version first and then explains why it is incorrect.
+
+Incorrect:
+
+```text
+stop / select state using J_test
+```
+
+Reason: this adapts model selection to the test set. The lecture explicitly calls this **cheating**.
+
+Correct:
+
+```text
+monitor J_val
+retain the best-validation state
+stop after validation performance no longer improves
+```
+
+A key overfitting signal is:
+
+```text
+J_train decreases
+while
+J_val increases
+```
+
+Do not wait for J_train to increase.
+
+### Explicit Lecture 4 exam-scope exclusion
+
+The final Lecture 4 summary says these are **not included in tests / exam**:
+
+- polynomial regression;
+- polynomial interpolation;
+- biological neuron model and differences from the artificial model.
+
+The same summary says these **may be included**:
+
+- identifying and handling underfitting / overfitting;
+- hyperparameters;
+- validation set;
+- artificial neuron / Perceptron model.
+
+Polynomial regression may therefore be used in the app only as explanatory context for model complexity and overfitting, not as Theory Test question-bank material.
+
 ## Rule for future content
 
 If extracted PDF text omits a formula, diagram label, matrix dimension, or other material detail:
