@@ -3,6 +3,7 @@ import { linearRegressionLesson, linearRegressionQuestions } from "./linearRegre
 import { logisticRegressionLesson, logisticRegressionQuestions } from "./logisticRegression";
 import { generalizationLesson } from "./generalizationLesson";
 import { generalizationQuestions } from "./generalizationQuestions";
+import { mlpLesson, mlpQuestions } from "./mlp";
 
 export const lessons: Lesson[] = [
   {
@@ -149,7 +150,8 @@ export const lessons: Lesson[] = [
   },
   linearRegressionLesson,
   logisticRegressionLesson,
-  generalizationLesson
+  generalizationLesson,
+  mlpLesson
 ];
 
 export const questionBank: Question[] = [
@@ -307,5 +309,6 @@ export const questionBank: Question[] = [
   },
   ...linearRegressionQuestions,
   ...logisticRegressionQuestions,
-  ...generalizationQuestions
+  ...generalizationQuestions,
+  ...mlpQuestions
 ];
