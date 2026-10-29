@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { FeatureScalingLab } from "./components/FeatureScalingLab";
 import { GradientDescentLab } from "./components/GradientDescentLab";
+import { GeneralizationLab } from "./components/GeneralizationLab";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { LessonView } from "./components/LessonView";
 import { LinearRegressionLab } from "./components/LinearRegressionLab";
@@ -10,7 +11,7 @@ import { lessons, questionBank } from "./data/course";
 import type { Language } from "./types";
 
 type View = "learn" | "quiz" | "lab";
-type LabId = "linear-regression" | "gradient-descent" | "feature-scaling" | "logistic-regression";
+type LabId = "linear-regression" | "gradient-descent" | "feature-scaling" | "logistic-regression" | "generalization";
 
 export default function App() {
   const [view, setView] = useState<View>("learn");
@@ -84,7 +85,7 @@ export default function App() {
         <header className="topbar">
           <div className="status">
             <span className="status-dot" />
-            <span>Study Lab v0.3</span>
+            <span>Study Lab v0.4</span>
           </div>
           <div className="language-row">
             <LanguageSwitcher
@@ -155,6 +156,12 @@ export default function App() {
                   >
                     Logistic Regression
                   </button>
+                  <button
+                    className={labId === "generalization" ? "active" : ""}
+                    onClick={() => setLabId("generalization")}
+                  >
+                    Generalization
+                  </button>
                 </div>
               </div>
 
@@ -169,6 +176,9 @@ export default function App() {
               )}
               {labId === "logistic-regression" && (
                 <LogisticRegressionLab language={learningLanguage} />
+              )}
+              {labId === "generalization" && (
+                <GeneralizationLab language={learningLanguage} />
               )}
             </>
           )}
