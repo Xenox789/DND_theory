@@ -1,6 +1,8 @@
 import type { Lesson, Question } from "../types";
 import { linearRegressionLesson, linearRegressionQuestions } from "./linearRegression";
 import { logisticRegressionLesson, logisticRegressionQuestions } from "./logisticRegression";
+import { generalizationLesson } from "./generalizationLesson";
+import { generalizationQuestions } from "./generalizationQuestions";
 
 export const lessons: Lesson[] = [
   {
@@ -146,7 +148,8 @@ export const lessons: Lesson[] = [
     ]
   },
   linearRegressionLesson,
-  logisticRegressionLesson
+  logisticRegressionLesson,
+  generalizationLesson
 ];
 
 export const questionBank: Question[] = [
@@ -303,5 +306,6 @@ export const questionBank: Question[] = [
     }
   },
   ...linearRegressionQuestions,
-  ...logisticRegressionQuestions
+  ...logisticRegressionQuestions,
+  ...generalizationQuestions
 ];
