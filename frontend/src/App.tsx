@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { FeatureScalingLab } from "./components/FeatureScalingLab";
+import { GradientDescentLab } from "./components/GradientDescentLab";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { LessonView } from "./components/LessonView";
 import { LinearRegressionLab } from "./components/LinearRegressionLab";
@@ -7,11 +9,16 @@ import { lessons, questionBank } from "./data/course";
 import type { Language } from "./types";
 
 type View = "learn" | "quiz" | "lab";
+type LabId = "linear-regression" | "gradient-descent" | "feature-scaling";
 
 export default function App() {
   const [view, setView] = useState<View>("learn");
   const [learningLanguage, setLearningLanguage] = useState<Language>("hu");
   const [examLanguage, setExamLanguage] = useState<Language>("en");
+  const [lessonId, setLessonId] = useState(lessons[0].id);
+  const [labId, setLabId] = useState<LabId>("linear-regression");
+
+  const selectedLesson = lessons.find((lesson) => lesson.id === lessonId) ?? lessons[0];
 
   const ui = useMemo(
     () =>
@@ -23,7 +30,9 @@ export default function App() {
             course: "Deep Network Development",
             subtitle: "Theory Test 1 Study Lab",
             learningLanguage: "Tanulás",
-            examLanguage: "Teszt"
+            examLanguage: "Teszt",
+            lessons: "Fejezetek",
+            labs: "Labok"
           }
         : {
             learn: "Learn",
@@ -32,7 +41,9 @@ export default function App() {
             course: "Deep Network Development",
             subtitle: "Theory Test 1 Study Lab",
             learningLanguage: "Learning",
-            examLanguage: "Test"
+            examLanguage: "Test",
+            lessons: "Chapters",
+            labs: "Labs"
           },
     [learningLanguage]
   );
@@ -64,7 +75,7 @@ export default function App() {
           <strong>Theory Test 1</strong>
           <span>Lectures 1–6</span>
           <span>NumPy • Weeks 3–6</span>
-          <small>strides excluded</small>
+          <small>ndarray.strides / stride tricks excluded</small>
         </div>
       </aside>
 
@@ -72,7 +83,7 @@ export default function App() {
         <header className="topbar">
           <div className="status">
             <span className="status-dot" />
-            <span>Study Lab v0.1</span>
+            <span>Study Lab v0.2</span>
           </div>
           <div className="language-row">
             <LanguageSwitcher
@@ -90,13 +101,66 @@ export default function App() {
 
         <div className="content">
           {view === "learn" && (
-            <LessonView lesson={lessons[0]} language={learningLanguage} />
+            <>
+              <div className="section-toolbar">
+                <span>{ui.lessons}</span>
+                <div className="subnav">
+                  {lessons.map((lesson, index) => (
+                    <button
+                      key={lesson.id}
+                      className={lesson.id === selectedLesson.id ? "active" : ""}
+                      onClick={() => setLessonId(lesson.id)}
+                    >
+                      <small>{String(index + 1).padStart(2, "0")}</small>
+                      {lesson.title[learningLanguage]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <LessonView lesson={selectedLesson} language={learningLanguage} />
+            </>
           )}
+
           {view === "quiz" && (
             <QuizView questions={questionBank} language={examLanguage} />
           )}
+
           {view === "lab" && (
-            <LinearRegressionLab language={learningLanguage} />
+            <>
+              <div className="section-toolbar">
+                <span>{ui.labs}</span>
+                <div className="subnav">
+                  <button
+                    className={labId === "linear-regression" ? "active" : ""}
+                    onClick={() => setLabId("linear-regression")}
+                  >
+                    Linear Regression
+                  </button>
+                  <button
+                    className={labId === "gradient-descent" ? "active" : ""}
+                    onClick={() => setLabId("gradient-descent")}
+                  >
+                    Gradient Descent
+                  </button>
+                  <button
+                    className={labId === "feature-scaling" ? "active" : ""}
+                    onClick={() => setLabId("feature-scaling")}
+                  >
+                    Feature Scaling
+                  </button>
+                </div>
+              </div>
+
+              {labId === "linear-regression" && (
+                <LinearRegressionLab language={learningLanguage} />
+              )}
+              {labId === "gradient-descent" && (
+                <GradientDescentLab language={learningLanguage} />
+              )}
+              {labId === "feature-scaling" && (
+                <FeatureScalingLab language={learningLanguage} />
+              )}
+            </>
           )}
         </div>
       </main>
