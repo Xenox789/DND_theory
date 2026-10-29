@@ -143,8 +143,8 @@ export const lessons: Lesson[] = [
         ]
       }
     ]
-  }
-  ,linearRegressionLesson
+  },
+  linearRegressionLesson
 ];
 
 export const questionBank: Question[] = [
@@ -299,6 +299,6 @@ export const questionBank: Question[] = [
       hu: "A szokásos jelölésben x az input, y a true label, ŷ a prediction, θ pedig a model parameters.",
       en: "In the usual notation x is the input, y the true label, ŷ the prediction, and θ the model parameters."
     }
-  }
-  ,...linearRegressionQuestions
+  },
+  ...linearRegressionQuestions
 ];
