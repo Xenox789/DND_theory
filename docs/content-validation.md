@@ -329,6 +329,119 @@ The same summary says these **may be included**:
 
 Polynomial regression may therefore be used in the app only as explanatory context for model complexity and overfitting, not as Theory Test question-bank material.
 
+### Artificial neuron and MLP
+
+The lecture defines an artificial neuron as:
+
+```text
+z = weighted sum + bias
+output = g(z)
+```
+
+If `g` is sigmoid, the lecture explicitly states that the neuron is a multivariate logistic-regression model.
+
+A single sigmoid neuron represents one **linear decision surface**. It therefore only solves linearly separable problems; the lecture uses XOR as the key counterexample.
+
+For a fully connected MLP, the course notation is:
+
+```text
+W_k ∈ R^(S_k × S_(k-1))
+b_k ∈ R^(S_k)
+S_0 = n = number of input variables
+```
+
+Parameter count of one fully connected layer:
+
+```text
+S_k * S_(k-1) weights
++ S_k biases
+= S_k(S_(k-1)+1)
+```
+
+Official example-test architecture:
+
+```text
+20 inputs -> 10 hidden neurons -> 1 output
+```
+
+Verified counts:
+
+```text
+layer 1: 10*20 + 10 = 210
+layer 2: 1*10 + 1 = 11
+total: 221
+```
+
+The two-layer hypothesis in Lecture 5 is:
+
+```text
+h(x) = g2(W2 g1(W1 x + b1) + b2)
+Θ = {W1, b1, W2, b2}
+```
+
+### Hidden nonlinearity
+
+The course explicitly states:
+
+> Composition of multiple linear functions is still linear.
+
+Therefore, if hidden activations are omitted / identity, stacking linear layers does not add nonlinear expressive power.
+
+For regression:
+
+- keep a nonlinear hidden activation such as ReLU;
+- final activation `g2` is typically identity / omitted;
+- loss: MSE.
+
+For binary classification:
+
+- scalar probability output;
+- final activation: sigmoid;
+- loss: BCE / logistic loss.
+
+For multiclass classification with mutually exclusive classes:
+
+- output dimension = number of classes;
+- final activation: softmax;
+- loss: Cross-Entropy (CE).
+
+Softmax:
+
+```text
+softmax(z)_i = exp(z_i) / Σ_j exp(z_j)
+```
+
+Its output elements sum to 1 and are interpreted as category probabilities.
+
+The multiclass target is one-hot encoded: the true-category element is 1 and the others are 0.
+
+### Activation functions from Lecture 5
+
+The lecture explicitly shows:
+
+```text
+sigmoid(z) = 1/(1+e^(-z))
+range: 0..1
+
+tanh(z)
+range: -1..1
+
+ReLU(z) = max(0,z)
+0 for negative input; z for positive input
+```
+
+### Multiple-output regression
+
+The lecture also allows vector-valued regression labels.
+
+For multiple continuous labels:
+
+- y and ŷ are vectors;
+- final activation remains identity / omitted;
+- MSE is also averaged over elements of the label vector.
+
+Do not infer multiclass classification merely from the fact that the output is a vector.
+
 ## Rule for future content
 
 If extracted PDF text omits a formula, diagram label, matrix dimension, or other material detail:
