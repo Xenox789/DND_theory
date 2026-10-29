@@ -6,6 +6,9 @@ import { generalizationQuestions } from "./generalizationQuestions";
 import { mlpLesson, mlpQuestions } from "./mlp";
 import { sgdLesson, sgdQuestions } from "./sgd";
 import { backpropLesson, backpropQuestions } from "./backprop";
+import { numpyLesson } from "./numpyLesson";
+import { numpyCoreQuestions } from "./numpyQuestionsCore";
+import { numpyExampleQuestions } from "./numpyQuestionsExamples";
 
 export const lessons: Lesson[] = [
   {
@@ -155,7 +158,8 @@ export const lessons: Lesson[] = [
   generalizationLesson,
   mlpLesson,
   sgdLesson,
-  backpropLesson
+  backpropLesson,
+  numpyLesson
 ];
 
 export const questionBank: Question[] = [
@@ -316,5 +320,7 @@ export const questionBank: Question[] = [
   ...generalizationQuestions,
   ...mlpQuestions,
   ...sgdQuestions,
-  ...backpropQuestions
+  ...backpropQuestions,
+  ...numpyCoreQuestions,
+  ...numpyExampleQuestions
 ];
