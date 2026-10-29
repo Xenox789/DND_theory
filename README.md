@@ -2,7 +2,7 @@
 
 Interactive bilingual (HU/EN) study application for ELTE Deep Network Development – Theory Test 1.
 
-## Current status — v0.5
+## Current status — v0.6
 
 Implemented and pushed to `main`:
 
@@ -15,7 +15,9 @@ Implemented and pushed to `main`:
 - Logistic Regression & Binary Classification chapter
 - Generalization, Overfitting & Model Selection chapter
 - Artificial Neuron & MLP chapter
-- 74 bilingual practice questions
+- SGD & Mini-batch Optimization chapter
+- Computational Graph & Backpropagation chapter
+- 97 bilingual practice questions
 - interactive Linear Regression Lab
 - interactive 3D loss surface
 - step-by-step Gradient Descent trajectory lab
@@ -34,6 +36,10 @@ Implemented and pushed to `main`:
 - activation-function explorer
 - regression / binary / multiclass output-layer matrix
 - interactive softmax probability view
+- mini-batch gradient-variance visualizer
+- full-dataset vs mini-batch gradient comparison
+- step-by-step computational-graph backpropagation lab
+- Lecture 6 numerical backprop example with live gradients and parameter update
 - source-validation notes for exam-specific conventions
 
 ## Theory Test 1 scope
@@ -113,8 +119,6 @@ for verified notation and rules such as:
 
 Planned next:
 
-1. SGD / mini-batches
-2. Backpropagation and computational graphs
-3. NumPy fundamentals, indexing, broadcasting, reductions, views vs copies
-4. full 150–250 question bank
-5. weak-topic tracking and mock-exam mode
+1. NumPy fundamentals, indexing, broadcasting, reductions, views vs copies
+2. expand the full question bank toward 150–250 questions
+3. weak-topic tracking and mock-exam mode
