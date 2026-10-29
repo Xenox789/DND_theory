@@ -584,6 +584,176 @@ Lecture 6 training sequence:
 
 PyTorch tensors can participate in computational graphs, and `torch.autograd` automates gradient computation over those graphs.
 
+### NumPy Theory Test scope and conventions
+
+Official Theory Test 1 scope:
+
+- NumPy content from the "Video to watch before practice" materials for weeks 3–6;
+- `ndarray.strides` is explicitly excluded;
+- stride tricks are explicitly excluded.
+
+Important: view/copy behavior is still in scope even though the internal stride mechanism is not.
+
+### ndarray attributes
+
+Course definitions:
+
+```text
+size  = total number of elements
+ndim  = number of axes
+shape = tuple of axis lengths
+dtype = NumPy datatype of elements
+```
+
+For example:
+
+```text
+shape=(32,5)
+ndim=2
+size=160
+```
+
+Shape is a tuple. Zero-length axes are valid, e.g. `(2,0,3)`.
+
+### Indexing categories
+
+The practice material distinguishes:
+
+```text
+individual element indexing
+-> all axes integer-indexed
+-> scalar
+
+basic indexing
+-> integer indices + slices
+-> at least one slice
+-> array, typically a view
+-> integer-indexed axes collapse
+-> sliced axes remain
+
+advanced indexing
+-> integer sequence/array or boolean mask used at least once
+-> new array / selected elements copied
+```
+
+Week 6 explicitly states that advanced indexing never produces a view.
+
+### Broadcasting
+
+The week 5 shape-matching algorithm:
+
+1. Add leading length-1 axes to the shorter shape until ndim matches.
+2. For each matching position:
+   - equal dimensions -> compatible;
+   - one dimension is 1 -> virtually repeat it;
+   - unequal dimensions with neither equal to 1 -> broadcasting fails.
+
+Verified official-style examples:
+
+```text
+(32,5) + (32,)   -> ValueError
+(32,5) + (32,1) -> (32,5)
+(32,5) + (1,32) -> ValueError
+(32,5) + scalar -> (32,5)
+
+(32,5) + (32,1,5)
+where (32,5) is logically (1,32,5)
+-> (32,32,5)
+```
+
+`None` is an alias for `np.newaxis` in indexing context.
+
+```text
+v.shape=(32,)
+v[:,None] -> (32,1)
+v[None,:] -> (1,32)
+```
+
+### Reductions
+
+Reduction with an axis collapses that axis.
+
+```text
+a.shape=(32,5)
+
+np.mean(a, axis=0) -> (5,)
+np.mean(a, axis=1) -> (32,)
+np.sum(a, axis=0)  -> ndarray, shape (5,)
+np.sum(a)          -> scalar NumPy value
+```
+
+### Views and copies
+
+The source discusses these as view-producing operations:
+
+- reshape;
+- swapping axes / transpose;
+- basic indexing;
+- broadcasting.
+
+The source also notes that combinations of view-producing operations can sometimes require a copy.
+
+Official Theory Test examples use straightforward cases:
+
+```text
+x=np.arange(4)
+
+x.reshape(2,2) -> shared-memory view in this example
+x.T            -> view; for 1D shape remains (4,)
+x[1:2]         -> basic-indexing view
+
+x[[1,2]]       -> advanced-indexing copy
+x[x<2]         -> boolean advanced-indexing copy
+np.append(x,42)-> new array
+x+x            -> new computed array
+```
+
+### Official NumPy example outputs
+
+The official example-question document provides prompts but not answers for some result questions. Their outputs were additionally checked against the installed NumPy runtime before being added to the question bank.
+
+For:
+
+```text
+a = np.arange(4).reshape(2,-1)
+# [[0,1],
+#  [2,3]]
+```
+
+verified:
+
+```text
+a.shape -> (2,2)
+(a*2+1) -> [[1,3],[5,7]]
+a[a>0].shape -> (3,)
+a[(a>0) & (a%2==0)] -> [2], shape (1,)
+a.reshape(2,2,-1).shape -> (2,2,1)
+(a * a.reshape(2,2,-1)).shape -> (2,2,2)
+
+np.count_nonzero(a==0) -> 1
+np.any(a==0) -> True
+np.all(a==0, axis=1) -> [False, False]
+```
+
+For:
+
+```text
+a = np.array([3,1,2])
+```
+
+verified:
+
+```text
+np.unique(a) -> [1,2,3]
+np.unique(a==0) -> [False]
+np.bincount(a) -> [0,1,1,1]
+np.sort(a)[::-1] -> [3,2,1]
+np.argsort(a) -> [1,2,0]
+a[a!=0] -> [3,1,2]
+```
+
+These runtime checks validate the expected answers; the inclusion of the questions themselves comes from the official Theory Test example document.
+
 ## Rule for future content
 
 If extracted PDF text omits a formula, diagram label, matrix dimension, or other material detail:
