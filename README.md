@@ -2,7 +2,7 @@
 
 Interactive bilingual (HU/EN) study application for ELTE Deep Network Development – Theory Test 1.
 
-## Current status — v0.2
+## Current status — v0.3
 
 Implemented and pushed to `main`:
 
@@ -12,7 +12,8 @@ Implemented and pushed to `main`:
 - course-compatible partial scoring
 - Machine Learning Fundamentals chapter
 - Linear Regression & Optimization chapter
-- 22 bilingual practice questions
+- Logistic Regression & Binary Classification chapter
+- 36 bilingual practice questions
 - interactive Linear Regression Lab
 - interactive 3D loss surface
 - step-by-step Gradient Descent trajectory lab
@@ -20,6 +21,10 @@ Implemented and pushed to `main`:
 - Feature Scaling visualizer
 - min-max vs standardization comparison
 - outlier toggle
+- interactive sigmoid / probability / threshold explorer
+- BCE single-example loss explorer
+- 2-feature logistic-regression decision-boundary visualizer
+- interactive 3D probability surface
 - source-validation notes for exam-specific conventions
 
 ## Theory Test 1 scope
@@ -99,13 +104,12 @@ for verified notation and rules such as:
 
 Planned next:
 
-1. Logistic Regression and binary classification
-2. Polynomial regression, train/validation/test, underfitting and overfitting
-3. L2 regularization and early stopping
-4. Artificial neuron and MLP
-5. Activation functions and multi-output tasks
-6. SGD / mini-batches
-7. Backpropagation and computational graphs
-8. NumPy fundamentals, indexing, broadcasting, reductions, views vs copies
-9. full 150–250 question bank
-10. weak-topic tracking and mock-exam mode
+1. Polynomial regression, train/validation/test, underfitting and overfitting
+2. L2 regularization and early stopping
+3. Artificial neuron and MLP
+4. Activation functions and multi-output tasks
+5. SGD / mini-batches
+6. Backpropagation and computational graphs
+7. NumPy fundamentals, indexing, broadcasting, reductions, views vs copies
+8. full 150–250 question bank
+9. weak-topic tracking and mock-exam mode
