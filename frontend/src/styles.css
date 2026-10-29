@@ -526,3 +526,285 @@ main { min-width: 0; }
     transform: rotate(90deg);
   }
 }
+
+
+.mlp-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding: 18px;
+  margin-bottom: 18px;
+  border: 1px solid #1f324d;
+  border-radius: 16px;
+  background: #0c1828;
+}
+
+.mlp-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mlp-controls label > div {
+  display: flex;
+  justify-content: space-between;
+  color: #dce7f5;
+}
+
+.mlp-controls label span {
+  color: #72baff;
+}
+
+.mlp-controls input[type="range"] {
+  width: 100%;
+}
+
+.mlp-controls select,
+.activation-controls select {
+  background: #101e31;
+  border: 1px solid #263a58;
+  color: #eef5ff;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.mlp-main-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 18px;
+}
+
+.network-card {
+  overflow: hidden;
+}
+
+.network-svg {
+  width: 100%;
+  min-height: 360px;
+  display: block;
+}
+
+.network-edge {
+  stroke: #2f496b;
+  stroke-width: 1.3;
+  opacity: 0.55;
+}
+
+.network-node {
+  stroke-width: 2;
+}
+
+.input-node {
+  fill: #183052;
+  stroke: #5aa9e6;
+}
+
+.hidden-node {
+  fill: #182f29;
+  stroke: #55d4ad;
+}
+
+.output-node {
+  fill: #36271a;
+  stroke: #f4aa5f;
+}
+
+.network-label {
+  fill: #9db0c8;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.diagram-note {
+  color: #728aa7;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.parameter-breakdown {
+  display: grid;
+  gap: 8px;
+}
+
+.parameter-breakdown > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #0f1d2e;
+  color: #9eb0c4;
+}
+
+.parameter-breakdown strong {
+  color: #eef5ff;
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
+
+.parameter-breakdown .subtotal {
+  border: 1px solid #27425f;
+  background: #12223a;
+}
+
+.parameter-breakdown .total-row {
+  border: 1px solid #3c6a62;
+  background: #10251f;
+}
+
+.output-config-card {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid #223957;
+  border-radius: 16px;
+  background: #0c1929;
+}
+
+.output-config-card > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.output-config-card span {
+  color: #7188a5;
+  font-size: 11px;
+}
+
+.output-config-card strong {
+  color: #f1f6fd;
+}
+
+.output-config-card p {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  color: #9fb1c5;
+}
+
+.activation-controls {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.activation-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.activation-controls label > div {
+  display: flex;
+  justify-content: space-between;
+  color: #dce7f5;
+}
+
+.activation-result {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid #294566;
+  border-radius: 14px;
+  background: #101e31;
+  color: #8da6c3;
+}
+
+.activation-result strong {
+  color: #f4f8fd;
+  font-size: 25px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
+
+.softmax-card {
+  margin-top: 18px;
+}
+
+.softmax-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.softmax-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 70px;
+  gap: 12px;
+  align-items: center;
+  color: #9eb1c7;
+}
+
+.softmax-item strong {
+  text-align: right;
+  color: #edf4fc;
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
+
+.probability-bar {
+  height: 12px;
+  border-radius: 999px;
+  background: #14243a;
+  overflow: hidden;
+}
+
+.probability-bar > div {
+  height: 100%;
+  background: linear-gradient(90deg, #4f72ff, #20b8c7);
+}
+
+.task-matrix {
+  margin-top: 18px;
+  border: 1px solid #233957;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.task-matrix-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1.3fr 1fr 0.8fr;
+}
+
+.task-matrix-row span {
+  padding: 12px 14px;
+  border-right: 1px solid #1d304a;
+  border-bottom: 1px solid #1d304a;
+  color: #a6b7ca;
+}
+
+.task-matrix-row span:last-child {
+  border-right: 0;
+}
+
+.task-matrix-row.header span {
+  color: #6faee5;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  background: #101f33;
+}
+
+.task-matrix-row:last-child span {
+  border-bottom: 0;
+}
+
+@media (max-width: 980px) {
+  .mlp-controls,
+  .mlp-main-grid,
+  .output-config-card {
+    grid-template-columns: 1fr;
+  }
+
+  .output-config-card p {
+    grid-column: auto;
+  }
+
+  .task-matrix {
+    overflow-x: auto;
+  }
+
+  .task-matrix-row {
+    min-width: 700px;
+  }
+}
