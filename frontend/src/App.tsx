@@ -9,12 +9,13 @@ import { LogisticRegressionLab } from "./components/LogisticRegressionLab";
 import { MLPLab } from "./components/MLPLab";
 import { SGDLab } from "./components/SGDLab";
 import { BackpropLab } from "./components/BackpropLab";
+import { NumPyLab } from "./components/NumPyLab";
 import { QuizView } from "./components/QuizView";
 import { lessons, questionBank } from "./data/course";
 import type { Language } from "./types";
 
 type View = "learn" | "quiz" | "lab";
-type LabId = "linear-regression" | "gradient-descent" | "feature-scaling" | "logistic-regression" | "generalization" | "mlp" | "sgd" | "backprop";
+type LabId = "linear-regression" | "gradient-descent" | "feature-scaling" | "logistic-regression" | "generalization" | "mlp" | "sgd" | "backprop" | "numpy";
 
 export default function App() {
   const [view, setView] = useState<View>("learn");
@@ -88,7 +89,7 @@ export default function App() {
         <header className="topbar">
           <div className="status">
             <span className="status-dot" />
-            <span>Study Lab v0.6</span>
+            <span>Study Lab v0.7</span>
           </div>
           <div className="language-row">
             <LanguageSwitcher
@@ -183,6 +184,12 @@ export default function App() {
                   >
                     Backpropagation
                   </button>
+                  <button
+                    className={labId === "numpy" ? "active" : ""}
+                    onClick={() => setLabId("numpy")}
+                  >
+                    NumPy
+                  </button>
                 </div>
               </div>
 
@@ -209,6 +216,9 @@ export default function App() {
               )}
               {labId === "backprop" && (
                 <BackpropLab language={learningLanguage} />
+              )}
+              {labId === "numpy" && (
+                <NumPyLab language={learningLanguage} />
               )}
             </>
           )}
