@@ -24,6 +24,12 @@ export function LessonView({ lesson, language }: Props) {
             <h2>{section.title[language]}</h2>
             <p>{section.body[language]}</p>
 
+            {section.formula && (
+              <div className="formula-block">
+                {section.formula[language]}
+              </div>
+            )}
+
             {section.intuition && (
               <div className="callout intuition">
                 <strong>{language === "hu" ? "Intuíció" : "Intuition"}</strong>
