@@ -808,3 +808,154 @@ main { min-width: 0; }
     min-width: 700px;
   }
 }
+
+
+.backprop-stage-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+.backprop-stage-row button {
+  border: 1px solid #29405f;
+  border-radius: 10px;
+  background: #101e31;
+  color: #8fa6c1;
+  padding: 9px 13px;
+}
+
+.backprop-stage-row button.active {
+  background: #173052;
+  border-color: #4c7bb7;
+  color: #f4f8fd;
+}
+
+.backprop-graph {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(70px, 1fr));
+  gap: 10px;
+  align-items: center;
+  overflow-x: auto;
+  padding: 18px 0;
+}
+
+.graph-node,
+.graph-op {
+  min-height: 92px;
+  border: 1px solid #29405f;
+  border-radius: 12px;
+  background: #0f1d2e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+  padding: 10px;
+}
+
+.graph-node span {
+  color: #7890ad;
+  font-size: 11px;
+}
+
+.graph-node strong {
+  color: #f1f6fc;
+  font-size: 19px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
+
+.graph-node small {
+  color: #72c8ff;
+  font-size: 10px;
+}
+
+.graph-node.input {
+  border-color: #315681;
+}
+
+.graph-node.intermediate {
+  border-color: #356559;
+}
+
+.graph-node.loss {
+  border-color: #76502c;
+}
+
+.graph-op {
+  min-height: 58px;
+  font-size: 24px;
+  color: #7fb3e6;
+  font-weight: 800;
+}
+
+.backprop-steps,
+.update-equations {
+  display: grid;
+  gap: 9px;
+  margin: 18px 0;
+}
+
+.backprop-steps > div,
+.update-equations > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 14px;
+  border: 1px solid #223957;
+  border-radius: 11px;
+  background: #0d1b2c;
+}
+
+.backprop-steps span,
+.update-equations span {
+  color: #728ba8;
+}
+
+.backprop-steps strong,
+.update-equations strong {
+  color: #f0f6fd;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  text-align: right;
+}
+
+.update-panel {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid #2d4968;
+  border-radius: 15px;
+  background: #0c1929;
+}
+
+.update-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.update-panel label > div {
+  display: flex;
+  justify-content: space-between;
+  color: #dce7f5;
+}
+
+.update-panel input[type="range"] {
+  width: 100%;
+}
+
+@media (max-width: 980px) {
+  .backprop-graph {
+    min-width: 1100px;
+  }
+
+  .backprop-steps > div,
+  .update-equations > div {
+    flex-direction: column;
+  }
+
+  .backprop-steps strong,
+  .update-equations strong {
+    text-align: left;
+  }
+}
