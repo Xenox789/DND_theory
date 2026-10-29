@@ -442,6 +442,148 @@ For multiple continuous labels:
 
 Do not infer multiclass classification merely from the fact that the output is a vector.
 
+### SGD and mini-batches
+
+Lecture 5 defines full batch gradient descent as computing the loss / gradient over the entire training set before one parameter update.
+
+The lecture's SGD framing is:
+
+```text
+randomly select a sub-sample of the training set
+= mini-batch
+compute an approximate gradient from this mini-batch
+```
+
+Important course statements:
+
+- smaller mini-batch -> higher gradient-estimate variance;
+- smaller mini-batch -> greater chance that an update moves in the wrong direction;
+- larger mini-batch -> higher computing requirements;
+- larger mini-batch -> higher memory requirements;
+- for large networks, batch size is often constrained by GPU memory;
+- if only a small mini-batch can be used, the learning rate may need to be reduced to achieve convergence.
+
+Do not silently replace the course framing with the narrower textbook convention that "SGD must mean exactly one example per step". The lecture and Lecture 6 recap explicitly use mini-batches under the SGD name.
+
+Optimizer variants listed in Lecture 5:
+
+- SGD with Momentum;
+- AdaGrad;
+- Adam;
+- Adamax;
+- RMSprop.
+
+The lecture does not give detailed update equations for these variants in the tested material covered here, so the app does not invent them.
+
+### Computational graphs and backpropagation
+
+Lecture 6 defines a computational graph by decomposing a complicated expression into elementary operations and intermediate variables.
+
+Course framing:
+
+```text
+nodes = elementary operations
+edges = chaining elementary operations
+```
+
+Backpropagation uses the chain rule. At a node:
+
+```text
+grad_input = grad_output * local_derivative
+```
+
+Official Theory Test examples:
+
+Square node:
+
+```text
+c = b²
+grad_c = ∂J/∂c
+grad_b = grad_c * 2b
+```
+
+Not `grad_c * 2c`.
+
+Addition node:
+
+```text
+c = a + b
+grad_a = grad_c
+grad_b = grad_c
+```
+
+Lecture 6 also uses a multiplication node:
+
+```text
+c = a*b
+grad_a = grad_c*b
+grad_b = grad_c*a
+```
+
+### Lecture 6 numerical backprop example
+
+The slide defines:
+
+```text
+q = w*x
+ŷ = q+b
+z = y-ŷ
+J = z²
+```
+
+For:
+
+```text
+x=2
+w=3
+b=4
+y=5
+```
+
+Forward values:
+
+```text
+q=6
+ŷ=10
+z=-5
+J=25
+```
+
+Backward values shown by the lecture:
+
+```text
+∂J/∂z = -10
+∂J/∂ŷ = 10
+∂J/∂q = 10
+∂J/∂b = 10
+∂J/∂w = 20
+∂J/∂x = 30
+```
+
+Parameter-update example with α=0.1:
+
+```text
+w := 3 - 0.1*20 = 1
+b := 4 - 0.1*10 = 3
+```
+
+Important distinction:
+
+- backpropagation computes gradients;
+- the optimizer / gradient-descent update uses those gradients to change parameters.
+
+Lecture 6 training sequence:
+
+1. symbolic derivation;
+2. parameter initialization;
+3. choose an example or mini-batch;
+4. feed forward;
+5. backpropagation;
+6. update parameters;
+7. repeat until iteration limit or early stopping.
+
+PyTorch tensors can participate in computational graphs, and `torch.autograd` automates gradient computation over those graphs.
+
 ## Rule for future content
 
 If extracted PDF text omits a formula, diagram label, matrix dimension, or other material detail:
