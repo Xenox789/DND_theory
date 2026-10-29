@@ -119,6 +119,95 @@ The lecture explicitly states:
 
 Therefore, in the test context, standardization is the more robust of these two methods to a small number of outliers.
 
+### Logistic regression
+
+The course defines the sigmoid as:
+
+```text
+g(z) = 1 / (1 + e^(-z))
+```
+
+Univariate logistic-regression hypothesis:
+
+```text
+hθ(x) = g(θ₁x + θ₀)
+```
+
+Multivariate form used in the app:
+
+```text
+z = Xθ
+h = g(z)
+```
+
+The course uses a threshold of **0.5**:
+
+```text
+h(x) < 0.5  -> predicted label 0
+h(x) >= 0.5 -> predicted label 1
+```
+
+Decision boundary:
+
+```text
+{x | hθ(x) = 0.5}
+```
+
+For two input variables, the lecture visualizes the decision boundary as a line in the input plane.
+
+For m examples and n real input features, using the same x₀=1 intercept convention as linear regression:
+
+```text
+X      : (m, n+1)
+θ      : (n+1,)
+Xθ     : (m,)
+g(Xθ)  : (m,)
+```
+
+For the official Theory Test example with 100 patients and 2 blood-test features:
+
+```text
+X      : (100, 3)
+θ      : (3,)
+Xθ     : (100,)
+g(Xθ)  : (100,)
+```
+
+The blood-test values belong to X. The disease/healthy labels belong to y. θ contains model parameters.
+
+### Logistic loss / Binary Cross-Entropy
+
+The Lecture 4 NumPy recap implements:
+
+```text
+J(θ) = mean(
+  -y * log(h)
+  -(1-y) * log(1-h)
+)
+```
+
+Equivalent mathematical form:
+
+```text
+J(θ) = 1/m * Σ_j [
+  -y^(j) log(h^(j))
+  -(1-y^(j)) log(1-h^(j))
+]
+```
+
+The course states that logistic loss, when used with the logistic-regression hypothesis, is convex and has a global minimum that gradient descent can find.
+
+The Lecture 4 recap gives:
+
+```text
+gradient = Xᵀ(h-y) / m
+θ := θ - α * gradient
+```
+
+The course explicitly contrasts this with using MSE after the sigmoid: the resulting loss may have multiple local minima, so gradient descent is not guaranteed to find the global optimum.
+
+Training minimizes the **logistic/BCE loss J(θ)**. It does not minimize X, the sigmoid function g, or the numerical magnitude of θ itself.
+
 ## Rule for future content
 
 If extracted PDF text omits a formula, diagram label, matrix dimension, or other material detail:
