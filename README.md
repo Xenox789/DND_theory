@@ -2,7 +2,7 @@
 
 Interactive bilingual (HU/EN) study application for ELTE Deep Network Development – Theory Test 1.
 
-## Current status — v0.6
+## Current status — v0.7
 
 Implemented and pushed to `main`:
 
@@ -17,7 +17,8 @@ Implemented and pushed to `main`:
 - Artificial Neuron & MLP chapter
 - SGD & Mini-batch Optimization chapter
 - Computational Graph & Backpropagation chapter
-- 97 bilingual practice questions
+- NumPy Theory Test chapter
+- 157 bilingual practice questions
 - interactive Linear Regression Lab
 - interactive 3D loss surface
 - step-by-step Gradient Descent trajectory lab
@@ -40,6 +41,10 @@ Implemented and pushed to `main`:
 - full-dataset vs mini-batch gradient comparison
 - step-by-step computational-graph backpropagation lab
 - Lecture 6 numerical backprop example with live gradients and parameter update
+- NumPy indexing / shape explorer
+- interactive broadcasting solver
+- view-vs-copy mutation simulator
+- 60 NumPy Theory Test questions, including official-style code/result questions
 - source-validation notes for exam-specific conventions
 
 ## Theory Test 1 scope
@@ -119,6 +124,6 @@ for verified notation and rules such as:
 
 Planned next:
 
-1. NumPy fundamentals, indexing, broadcasting, reductions, views vs copies
-2. expand the full question bank toward 150–250 questions
-3. weak-topic tracking and mock-exam mode
+1. expand the question bank further toward 200–250 questions
+2. weak-topic tracking and mock-exam mode
+3. topic filters and dedicated Theory Test simulation mode
