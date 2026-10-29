@@ -4,6 +4,8 @@ import { logisticRegressionLesson, logisticRegressionQuestions } from "./logisti
 import { generalizationLesson } from "./generalizationLesson";
 import { generalizationQuestions } from "./generalizationQuestions";
 import { mlpLesson, mlpQuestions } from "./mlp";
+import { sgdLesson, sgdQuestions } from "./sgd";
+import { backpropLesson, backpropQuestions } from "./backprop";
 
 export const lessons: Lesson[] = [
   {
@@ -151,7 +153,9 @@ export const lessons: Lesson[] = [
   linearRegressionLesson,
   logisticRegressionLesson,
   generalizationLesson,
-  mlpLesson
+  mlpLesson,
+  sgdLesson,
+  backpropLesson
 ];
 
 export const questionBank: Question[] = [
@@ -310,5 +314,7 @@ export const questionBank: Question[] = [
   ...linearRegressionQuestions,
   ...logisticRegressionQuestions,
   ...generalizationQuestions,
-  ...mlpQuestions
+  ...mlpQuestions,
+  ...sgdQuestions,
+  ...backpropQuestions
 ];
