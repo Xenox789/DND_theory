@@ -6,12 +6,13 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { LessonView } from "./components/LessonView";
 import { LinearRegressionLab } from "./components/LinearRegressionLab";
 import { LogisticRegressionLab } from "./components/LogisticRegressionLab";
+import { MLPLab } from "./components/MLPLab";
 import { QuizView } from "./components/QuizView";
 import { lessons, questionBank } from "./data/course";
 import type { Language } from "./types";
 
 type View = "learn" | "quiz" | "lab";
-type LabId = "linear-regression" | "gradient-descent" | "feature-scaling" | "logistic-regression" | "generalization";
+type LabId = "linear-regression" | "gradient-descent" | "feature-scaling" | "logistic-regression" | "generalization" | "mlp";
 
 export default function App() {
   const [view, setView] = useState<View>("learn");
@@ -85,7 +86,7 @@ export default function App() {
         <header className="topbar">
           <div className="status">
             <span className="status-dot" />
-            <span>Study Lab v0.4</span>
+            <span>Study Lab v0.5</span>
           </div>
           <div className="language-row">
             <LanguageSwitcher
@@ -162,6 +163,12 @@ export default function App() {
                   >
                     Generalization
                   </button>
+                  <button
+                    className={labId === "mlp" ? "active" : ""}
+                    onClick={() => setLabId("mlp")}
+                  >
+                    MLP
+                  </button>
                 </div>
               </div>
 
@@ -179,6 +186,9 @@ export default function App() {
               )}
               {labId === "generalization" && (
                 <GeneralizationLab language={learningLanguage} />
+              )}
+              {labId === "mlp" && (
+                <MLPLab language={learningLanguage} />
               )}
             </>
           )}
