@@ -1,4 +1,5 @@
 import type { Lesson, Question } from "../types";
+import { linearRegressionLesson, linearRegressionQuestions } from "./linearRegression";
 
 export const lessons: Lesson[] = [
   {
@@ -143,6 +144,7 @@ export const lessons: Lesson[] = [
       }
     ]
   }
+  ,linearRegressionLesson
 ];
 
 export const questionBank: Question[] = [
@@ -298,4 +300,5 @@ export const questionBank: Question[] = [
       en: "In the usual notation x is the input, y the true label, ŷ the prediction, and θ the model parameters."
     }
   }
+  ,...linearRegressionQuestions
 ];
