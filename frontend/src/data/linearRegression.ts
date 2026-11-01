@@ -558,7 +558,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Standardization a átlag (mean)-t kivonja és szórással (standard deviation) oszt. Nem korlátozza az értékeket [0,1]-re.",
+      hu: "Standardization a átlagot (mean) kivonja és szórással (standard deviation) oszt. Nem korlátozza az értékeket [0,1]-re.",
       en: "Standardization subtracts the mean and divides by standard deviation. It does not constrain values to [0,1]."
     }
   },
