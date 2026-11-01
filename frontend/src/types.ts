@@ -10,14 +10,24 @@ export type KeyTerm = {
   hu?: string;
 };
 
+export type FormulaTerm = {
+  symbol: string;
+  hu: string;
+  en: string;
+};
+
 export type LessonSection = {
   id: string;
   title: LocalizedText;
   body: LocalizedText;
+  why?: LocalizedText;
   intuition?: LocalizedText;
+  formula?: LocalizedText;
+  formulaTerms?: FormulaTerm[];
+  workedExample?: LocalizedText;
+  connections?: LocalizedText;
   realWorld?: LocalizedText;
   examTrap?: LocalizedText;
-  formula?: LocalizedText;
   keyTerms?: KeyTerm[];
 };
 
