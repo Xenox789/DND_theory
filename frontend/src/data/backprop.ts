@@ -284,9 +284,9 @@ export const backpropQuestions: Question[] = [
     topics: ["chain-rule"],
     prompt: { hu: "Mi a backpropagation chain-rule alapelve egy node-nál?", en: "What is the chain-rule principle used by backpropagation at a node?" },
     choices: [
-      { id: "a", text: { hu: "Incoming gradiens (gradient) × local derivative.", en: "Incoming gradient × local derivative." } },
+      { id: "a", text: { hu: "Incoming gradiens (gradient) × lokális derivált (local derivative).", en: "Incoming gradient × local derivative." } },
       { id: "b", text: { hu: "Az elementary derivatives megfelelő lánc menti szorzata.", en: "Multiply the relevant elementary derivatives along the chain." } },
-      { id: "c", text: { hu: "Minden local derivative-et összeadunk a gradienthez.", en: "Add every local derivative to the gradient." } }
+      { id: "c", text: { hu: "Minden lokális derivált (local derivative)-et összeadunk a gradienthez.", en: "Add every local derivative to the gradient." } }
     ],
     correctIds: ["a","b"],
     explanation: { hu: "A chain rule szerint a derivative-ek a megfelelő path mentén szorzódnak.", en: "By the chain rule, derivatives multiply along the relevant path." }
@@ -314,7 +314,7 @@ export const backpropQuestions: Question[] = [
       { id: "c", text: { hu: "grad_a=grad_b=0.", en: "grad_a=grad_b=0." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "Addition local derivative-je mindkét bemenet (input) szerint 1.", en: "The local derivative of addition with respect to either input is 1." }
+    explanation: { hu: "Összeadás (addition) lokális derivált (local derivative)-je mindkét bemenet (input) szerint 1.", en: "The local derivative of addition with respect to either input is 1." }
   },
   {
     id: "bp-q5",
@@ -338,7 +338,7 @@ export const backpropQuestions: Question[] = [
       { id: "c", text: { hu: "Nem kell semmilyen derivative-et számolni.", en: "No derivatives need to be computed at all." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "Derivatives továbbra is kellenek, de az elementary/local derivatives és köztes eredmények újrahasznosíthatók.", en: "Derivatives are still required, but elementary/local derivatives and intermediate results can be reused." }
+    explanation: { hu: "Derivatives továbbra is kellenek, de az elementary/lokális derivált (local derivative)s és köztes eredmények újrahasznosíthatók.", en: "Derivatives are still required, but elementary/local derivatives and intermediate results can be reused." }
   },
   {
     id: "bp-q7",
@@ -376,7 +376,7 @@ export const backpropQuestions: Question[] = [
       { id: "c", text: { hu: "Mert z=ŷ−y.", en: "Because z=ŷ−y." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A slide z=y−ŷ definíciót használ, ezért jön be a −1 local derivative.", en: "The slide defines z=y−ŷ, which introduces the local derivative −1." }
+    explanation: { hu: "A slide z=y−ŷ definíciót használ, ezért jön be a −1 lokális derivált (local derivative).", en: "The slide defines z=y−ŷ, which introduces the local derivative −1." }
   },
   {
     id: "bp-q10",
@@ -405,7 +405,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q12",
     topics: ["training-cycle"],
-    prompt: { hu: "Mely lépések szerepelnek a előadás (lecture) 6 backprop training cycle-ban?", en: "Which steps appear in the Lecture 6 backpropagation training cycle?" },
+    prompt: { hu: "Mely lépések szerepelnek a előadás (lecture) 6 backpropagation tanítási ciklus (training cycle)-ban?", en: "Which steps appear in the Lecture 6 backpropagation training cycle?" },
     choices: [
       { id: "a", text: { hu: "paraméter (parameter) initialization.", en: "Parameter initialization." } },
       { id: "b", text: { hu: "példa (example) vagy mini-batch választása.", en: "Choosing an example or mini-batch." } },
@@ -434,12 +434,12 @@ export const backpropQuestions: Question[] = [
     topics: ["chain-rule","concept"],
     prompt: { hu: "Melyik megfogalmazás illik a backpropagation működésére?", en: "Which descriptions match how backpropagation works?" },
     choices: [
-      { id: "a", text: { hu: "A veszteség (loss) felől visszafelé haladunk a dependency graphon.", en: "We move backward from the loss through the dependency graph." } },
-      { id: "b", text: { hu: "Minden node-nál local derivative-et kombinálunk az incoming gradienttel.", en: "At each node, a local derivative is combined with the incoming gradient." } },
+      { id: "a", text: { hu: "A veszteség (loss) felől visszafelé haladunk a függőségi gráfon (dependency graph).", en: "We move backward from the loss through the dependency graph." } },
+      { id: "b", text: { hu: "Minden node-nál lokális derivált (local derivative)-et kombinálunk az bejövő gradiens (incoming gradient)tel.", en: "At each node, a local derivative is combined with the incoming gradient." } },
       { id: "c", text: { hu: "A chain rule segítségével gradients jutnak el a korábbi variables/paraméterek (parameters) felé.", en: "Using the chain rule, gradients propagate toward earlier variables/parameters." } },
       { id: "d", text: { hu: "Csak forward values értékeket számítunk, derivative-ek nélkül.", en: "We compute only forward values, without derivatives." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Backprop a forward graph dependencyit fordított irányban használja gradiens (gradient) propagationre.", en: "Backprop uses the forward graph dependencies in reverse for gradient propagation." }
+    explanation: { hu: "Backprop a forward gráf függőségeit (dependencies) fordított irányban használja gradiens (gradient) propagationre.", en: "Backprop uses the forward graph dependencies in reverse for gradient propagation." }
   }
 ];
