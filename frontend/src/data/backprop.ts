@@ -269,24 +269,24 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q1",
     topics: ["computational-graph"],
-    prompt: { hu: "Mely állítások igazak computational graphra az előadás (lecture) 6 szerint?", en: "Which statements are true about a computational graph according to Lecture 6?" },
+    prompt: { hu: "Mely állítások igazak számítási gráfra (computational graph) az előadás (lecture) 6 szerint?", en: "Which statements are true about a computational graph according to Lecture 6?" },
     choices: [
-      { id: "a", text: { hu: "Összetett expressiont elemi műveletek láncolataként reprezentál.", en: "It represents a complicated expression as chained elementary operations." } },
-      { id: "b", text: { hu: "Nodes elemi műveletek lehetnek.", en: "Nodes can be elementary operations." } },
-      { id: "c", text: { hu: "élek (edges) az műveletek chainingjét mutatják.", en: "Edges show how operations are chained." } },
-      { id: "d", text: { hu: "Nem tartalmazhat köztes változók értékeket.", en: "It cannot contain intermediate variables." } }
+      { id: "a", text: { hu: "Összetett kifejezést (expression) elemi műveletek láncolataként reprezentál.", en: "It represents a complicated expression as chained elementary operations." } },
+      { id: "b", text: { hu: "Csomópontok (nodes) elemi műveletek lehetnek.", en: "Nodes can be elementary operations." } },
+      { id: "c", text: { hu: "élek (edges) a műveletek egymásra épülését (operation chaining) mutatják.", en: "Edges show how operations are chained." } },
+      { id: "d", text: { hu: "Nem tartalmazhat köztes változókat.", en: "It cannot contain intermediate variables." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Az előadás (lecture) köztes változók és elemi műveletek felbontásával konstruál computational graphot.", en: "The lecture constructs a computational graph by introducing intermediate variables and elementary operations." }
+    explanation: { hu: "Az előadás (lecture) köztes változók és elemi műveletek felbontásával épít fel számítási gráfot (computational graph).", en: "The lecture constructs a computational graph by introducing intermediate variables and elementary operations." }
   },
   {
     id: "bp-q2",
     topics: ["chain-rule"],
-    prompt: { hu: "Mi a backpropagation chain-rule alapelve egy csomópontnál (node)?", en: "What is the chain-rule principle used by backpropagation at a node?" },
+    prompt: { hu: "Mi a visszaterjesztés láncszabályának (backpropagation chain rule) alapelve egy csomópontnál (node)?", en: "What is the chain-rule principle used by backpropagation at a node?" },
     choices: [
       { id: "a", text: { hu: "bejövő gradiens (incoming gradient) × lokális derivált (local derivative).", en: "Incoming gradient × local derivative." } },
-      { id: "b", text: { hu: "Az elementary deriváltak megfelelő lánc menti szorzata.", en: "Multiply the relevant elementary derivatives along the chain." } },
-      { id: "c", text: { hu: "Minden lokális deriváltat (local derivative) összeadunk a gradienthez.", en: "Add every local derivative to the gradient." } }
+      { id: "b", text: { hu: "Az elemi deriváltak (elementary derivatives) megfelelő lánc menti szorzata.", en: "Multiply the relevant elementary derivatives along the chain." } },
+      { id: "c", text: { hu: "Minden lokális deriváltat (local derivative) összeadunk a gradienshez (gradient).", en: "Add every local derivative to the gradient." } }
     ],
     correctIds: ["a","b"],
     explanation: { hu: "A láncszabály (chain rule) szerint a derivált-ek a megfelelő útvonal mentén szorzódnak.", en: "By the chain rule, derivatives multiply along the relevant path." }
@@ -319,7 +319,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q5",
     topics: ["multiplication-node"],
-    prompt: { hu: "c=a·b és grad_c bejövő gradiens (incoming gradient) esetén mely propagáció helyes?", en: "For c=a·b with incoming gradient grad_c, which propagation is correct?" },
+    prompt: { hu: "c=a·b és grad_c bejövő gradiens (incoming gradient) esetén mely visszaterjesztés helyes?", en: "For c=a·b with incoming gradient grad_c, which propagation is correct?" },
     choices: [
       { id: "a", text: { hu: "grad_a=grad_c·b.", en: "grad_a=grad_c·b." } },
       { id: "b", text: { hu: "grad_b=grad_c·a.", en: "grad_b=grad_c·a." } },
@@ -338,7 +338,7 @@ export const backpropQuestions: Question[] = [
       { id: "c", text: { hu: "Nem kell semmilyen derivált-et számolni.", en: "No derivatives need to be computed at all." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "deriváltak továbbra is kellenek, de az elementary/local deriváltak és köztes eredmények újrahasznosíthatók.", en: "Derivatives are still required, but elementary/local derivatives and intermediate results can be reused." }
+    explanation: { hu: "deriváltak továbbra is kellenek, de az elemi/lokális deriváltak (elementary/local derivatives) és köztes eredmények újrahasznosíthatók.", en: "Derivatives are still required, but elementary/local derivatives and intermediate results can be reused." }
   },
   {
     id: "bp-q7",
@@ -351,7 +351,7 @@ export const backpropQuestions: Question[] = [
       { id: "d", text: { hu: "J=25.", en: "J=25." } }
     ],
     correctIds: ["a","b","c","d"],
-    explanation: { hu: "Ezek a slide konkrét feed-előre (forward) értékei.", en: "These are the exact feed-forward values shown in the slide." }
+    explanation: { hu: "Ezek a dia (slide) konkrét feed-előre (forward) értékei.", en: "These are the exact feed-forward values shown in the slide." }
   },
   {
     id: "bp-q8",
@@ -364,7 +364,7 @@ export const backpropQuestions: Question[] = [
       { id: "d", text: { hu: "∂J/∂w = 20.", en: "∂J/∂w = 20." } }
     ],
     correctIds: ["a","b","c","d"],
-    explanation: { hu: "A slide visszaterjesztés (backprop) chainje pontosan ezeket az értékeket adja.", en: "The slide's backpropagation chain gives exactly these values." }
+    explanation: { hu: "A dia (slide) visszaterjesztés (backprop) chainje pontosan ezeket az értékeket adja.", en: "The slide's backpropagation chain gives exactly these values." }
   },
   {
     id: "bp-q9",
@@ -376,7 +376,7 @@ export const backpropQuestions: Question[] = [
       { id: "c", text: { hu: "Mert z=ŷ−y.", en: "Because z=ŷ−y." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A slide z=y−ŷ definíciót használ, ezért jön be a −1 lokális derivált (local derivative).", en: "The slide defines z=y−ŷ, which introduces the local derivative −1." }
+    explanation: { hu: "A dia (slide) z=y−ŷ definíciót használ, ezért jön be a −1 lokális derivált (local derivative).", en: "The slide defines z=y−ŷ, which introduces the local derivative −1." }
   },
   {
     id: "bp-q10",
@@ -424,7 +424,7 @@ export const backpropQuestions: Question[] = [
       { id: "a", text: { hu: "Tensors számítási gráf (computational graph) részei lehetnek.", en: "Tensors can be part of computational graphs." } },
       { id: "b", text: { hu: "torch.autograd automatikusan számolhat gradients értékeket a graphon.", en: "torch.autograd can automatically compute gradients over the graph." } },
       { id: "c", text: { hu: "Ez a láncszabály (chain rule) használatát automatizálja.", en: "This automates the use of the chain rule." } },
-      { id: "d", text: { hu: "Autograd miatt nincs szükség computational graphra.", en: "Autograd means no computational graph is needed." } }
+      { id: "d", text: { hu: "Autograd miatt nincs szükség számítási gráfra (computational graph).", en: "Autograd means no computational graph is needed." } }
     ],
     correctIds: ["a","b","c"],
     explanation: { hu: "Autograd a számítási gráf (computational graph) alapján végzi automatikusan a derivált/visszaterjesztés (backprop) számítást.", en: "Autograd performs automatic differentiation/backpropagation using the computational graph." }
@@ -435,7 +435,7 @@ export const backpropQuestions: Question[] = [
     prompt: { hu: "Melyik megfogalmazás illik a backpropagation működésére?", en: "Which descriptions match how backpropagation works?" },
     choices: [
       { id: "a", text: { hu: "A veszteség (loss) felől visszafelé haladunk a dependency graphon.", en: "We move backward from the loss through the dependency graph." } },
-      { id: "b", text: { hu: "Minden csomópontnál (node) lokális deriváltat (local derivative) kombinálunk az incoming gradienttel.", en: "At each node, a local derivative is combined with the incoming gradient." } },
+      { id: "b", text: { hu: "Minden csomópontnál (node) lokális deriváltat (local derivative) kombinálunk az bejövő gradienssel (incoming gradient).", en: "At each node, a local derivative is combined with the incoming gradient." } },
       { id: "c", text: { hu: "A láncszabály (chain rule) segítségével gradients jutnak el a korábbi variables/paraméterek (parameters) felé.", en: "Using the chain rule, gradients propagate toward earlier variables/parameters." } },
       { id: "d", text: { hu: "Csak előre (forward) values értékeket számítunk, derivált-ek nélkül.", en: "We compute only forward values, without derivatives." } }
     ],
