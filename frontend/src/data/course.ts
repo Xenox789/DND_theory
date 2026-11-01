@@ -84,7 +84,7 @@ export const questionBank: Question[] = [
     id: "q4",
     topics: ["ml-types"],
     prompt: {
-      hu: "Melyek szerepelnek a tananyagban a Machine Learning három fő csoportjaként?",
+      hu: "Melyek szerepelnek a tananyagban a gépi tanulás (Machine Learning) három fő csoportjaként?",
       en: "Which are listed in the course material as the three main groups of Machine Learning?"
     },
     choices: [
