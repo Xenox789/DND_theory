@@ -1353,3 +1353,19 @@ main { min-width: 0; }
 @media (max-width: 650px) {
   .formula-term-row { grid-template-columns: 1fr; }
 }
+
+
+.plot-description {
+  margin: -3px 0 12px;
+  color: #8197b1;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.plot-card .plot-description {
+  max-width: 780px;
+}
+
+.lesson-card .formula-block + .formula-term-grid {
+  margin-top: -16px;
+}
