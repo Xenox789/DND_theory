@@ -139,7 +139,7 @@ export const mlFundamentalsLesson: Lesson = {
         en: "Optimization needs a comparable objective value. If one parameter setting gives a smaller loss than another, it is considered better according to that loss function."
       },
       formula: {
-        hu: "J(θ) → skalár hibamérték; tanítás célja: olyan θ keresése, amely csökkenti J(θ)-t",
+        hu: "J(θ) → skalár hibamérték; tanítás célja: olyan θ keresése, amely csökkenti J(θ) értékét",
         en: "J(θ) → scalar error measure; training goal: find θ values that reduce J(θ)"
       },
       formulaTerms: [
