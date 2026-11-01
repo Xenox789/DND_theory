@@ -35,7 +35,7 @@ export const backpropLesson: Lesson = {
         en: "Backpropagation is not the optimizer itself. Backprop computes gradients; SGD, Adam, or another optimizer uses those gradients to update parameters."
       },
       examTrap: {
-        hu: "A „backpropagation” és a „gradient descent update” nem ugyanaz a lépés. Előbb kiszámítjuk a gradienseket, utána frissítjük velük a paramétereket.",
+        hu: "A „visszaterjesztés (backpropagation)” és a „gradienscsökkentési frissítés (gradient descent update)” nem ugyanaz a lépés. Előbb kiszámítjuk a gradienseket, utána frissítjük velük a paramétereket.",
         en: "Backpropagation and the gradient-descent update are not the same step. Gradients are computed first, then parameters are updated."
       },
       keyTerms: [
@@ -51,7 +51,7 @@ export const backpropLesson: Lesson = {
         en: "Computational graph: decompose the formula into small operations"
       },
       body: {
-        hu: "A számítási gráf (computational graph) egy összetett kifejezést elemi műveletekre bont. A Lecture 6 megfogalmazásában a csomópontok (nodes) elemi műveleteket, az élek (edges) pedig a műveletek egymásra épülését jelölik. A köztes változók (intermediate variables) megőrzik az egyes részszámítások eredményét.",
+        hu: "A számítási gráf (computational graph) egy összetett kifejezést elemi műveletekre bont. A 6. előadás (Lecture 6) megfogalmazásában a csomópontok (nodes) elemi műveleteket, az élek (edges) pedig a műveletek egymásra épülését jelölik. A köztes változók (intermediate variables) megőrzik az egyes részszámítások eredményét.",
         en: "A computational graph decomposes a complicated expression into elementary operations. In Lecture 6, nodes represent elementary operations and edges represent how operations are chained. Intermediate variables store results of subcomputations."
       },
       why: {
@@ -59,7 +59,7 @@ export const backpropLesson: Lesson = {
         en: "Once a long expression is decomposed into small steps, only a simple local derivative is needed at each node. The full derivative is assembled from these local rules."
       },
       workedExample: {
-        hu: "A lecture példája a J=(wx+b−y)² kifejezést így bontja fel: q=wx, ŷ=q+b, z=y−ŷ, J=z². A forward pass ebben a sorrendben számol, a backward pass pedig fordított sorrendben halad.",
+        hu: "Az előadás (lecture) példája a J=(wx+b−y)² kifejezést így bontja fel: q=wx, ŷ=q+b, z=y−ŷ, J=z². Az előrefelé számítás (forward pass) ebben a sorrendben számol, a visszafelé számítás (backward pass) pedig fordított sorrendben halad.",
         en: "The lecture decomposes J=(wx+b−y)² as q=wx, ŷ=q+b, z=y−ŷ, J=z². The forward pass follows this order; the backward pass traverses it in reverse."
       },
       keyTerms: [
@@ -109,7 +109,7 @@ export const backpropLesson: Lesson = {
         en: "Three basic backpropagation rules"
       },
       body: {
-        hu: "A Theory Test mintakérdései külön kiemelik a négyzetre emelést és az összeadást, a Lecture 6 példájában pedig szorzás is szerepel. Ezeknél a teljes visszaterjesztés egyszerű lokális deriváltakból áll össze.",
+        hu: "A Theory Test mintakérdései külön kiemelik a négyzetre emelést és az összeadást, a 6. előadás (Lecture 6) példájában pedig szorzás is szerepel. Ezeknél a teljes visszaterjesztés egyszerű lokális deriváltakból áll össze.",
         en: "The official Theory Test examples explicitly target square and addition nodes, and the Lecture 6 example also uses multiplication. The full backward pass is built from these simple local derivatives."
       },
       formula: {
@@ -134,11 +134,11 @@ export const backpropLesson: Lesson = {
     {
       id: "forward-example",
       title: {
-        hu: "Lecture 6 példa: előrefelé számítás",
+        hu: "6. előadás (Lecture 6) példája: előrefelé számítás",
         en: "Lecture 6 example: forward pass"
       },
       body: {
-        hu: "A Lecture 6 egy egyszerű, egydimenziós lineáris regressziós példán mutatja be a számítási gráfot. A képletet q=wx, ŷ=q+b, z=y−ŷ, J=z² lépésekre bontja. A példában x=2, w=3, b=4 és y=5.",
+        hu: "A 6. előadás (Lecture 6) egy egyszerű, egydimenziós lineáris regressziós példán mutatja be a számítási gráfot. A képletet q=wx, ŷ=q+b, z=y−ŷ, J=z² lépésekre bontja. A példában x=2, w=3, b=4 és y=5.",
         en: "Lecture 6 demonstrates the computational graph using a simple one-dimensional linear-regression example. It decomposes the expression into q=wx, ŷ=q+b, z=y−ŷ, J=z² with x=2, w=3, b=4, and y=5."
       },
       formula: {
@@ -152,7 +152,7 @@ export const backpropLesson: Lesson = {
         { symbol: "q=wx", hu: "A szorzás köztes eredménye.", en: "Intermediate result of multiplication." },
         { symbol: "ŷ=q+b", hu: "A modell becslése.", en: "Model prediction." },
         { symbol: "y", hu: "Valódi célérték (target / label).", en: "True target / label." },
-        { symbol: "z=y−ŷ", hu: "Előjeles hiba a lecture választott előjellel.", en: "Signed error using the lecture's chosen convention." },
+        { symbol: "z=y−ŷ", hu: "Előjeles hiba az előadás (lecture) által választott előjellel.", en: "Signed error using the lecture's chosen convention." },
         { symbol: "J=z²", hu: "Négyzetes veszteség ebben az egyetlen példában.", en: "Squared loss for this single example." }
       ],
       why: {
@@ -160,14 +160,14 @@ export const backpropLesson: Lesson = {
         en: "The forward pass moves from the graph inputs to the final loss. The intermediate values are then reused during the backward pass."
       },
       examTrap: {
-        hu: "Ebben a konkrét slide-példában z=y−ŷ, nem ŷ−y. A négyzet miatt a végső J ugyanaz lenne, de a köztes deriváltak előjele ettől függ.",
+        hu: "Ebben a konkrét dián szereplő példában (slide example) z=y−ŷ, nem ŷ−y. A négyzet miatt a végső J ugyanaz lenne, de a köztes deriváltak előjele ettől függ.",
         en: "In this specific slide example z=y−ŷ, not ŷ−y. Squaring would produce the same final J, but intermediate derivative signs depend on this convention."
       }
     },
     {
       id: "backward-example",
       title: {
-        hu: "Lecture 6 példa: lépésenkénti visszaterjesztés",
+        hu: "6. előadás (Lecture 6) példája: lépésenkénti visszaterjesztés",
         en: "Lecture 6 example: step-by-step backpropagation"
       },
       body: {
@@ -227,8 +227,8 @@ export const backpropLesson: Lesson = {
         en: "The complete training cycle"
       },
       body: {
-        hu: "A Lecture 6 a teljes folyamatot lépésekre bontja: 1) szimbolikus deriválási szabályok meghatározása, 2) paraméterek inicializálása, 3) tanítási példa vagy mini-batch választása, 4) forward pass, 5) backpropagation, 6) paraméterfrissítés, majd vissza a 3. lépéshez. A ciklus adott iterációszámig vagy korai leállításig (early stopping) ismétlődik.",
-        en: "Lecture 6 breaks training into: 1) symbolic derivative setup, 2) parameter initialization, 3) choose a training example or mini-batch, 4) forward pass, 5) backpropagation, 6) parameter update, then return to step 3 until an iteration limit or early stopping."
+        hu: "A 6. előadás (Lecture 6) a teljes folyamatot lépésekre bontja: 1) szimbolikus deriválási szabályok meghatározása, 2) paraméterek inicializálása, 3) tanítási példa vagy mini-batch választása, 4) előrefelé számítás (forward pass), 5) visszaterjesztés (backpropagation), 6) paraméterfrissítés, majd vissza a 3. lépéshez. A ciklus adott iterációszámig vagy korai leállításig (early stopping) ismétlődik.",
+        en: "Lecture 6 breaks training into: 1) symbolic derivative setup, 2) parameter initialization, 3) choose a training example or mini-batch, 4) előrefelé számítás (forward pass), 5) visszaterjesztés (backpropagation), 6) parameter update, then return to step 3 until an iteration limit or early stopping."
       },
       why: {
         hu: "Ez a séma összeköti a korábbi fejezeteket: a modell adja a forward számítást, a veszteség méri a hibát, a backpropagation gradienseket ad, az optimalizáló módosítja a paramétereket, a validáció pedig eldöntheti, mikor álljunk le.",
@@ -246,7 +246,7 @@ export const backpropLesson: Lesson = {
         en: "Automatic differentiation in PyTorch"
       },
       body: {
-        hu: "A lecture szerint a PyTorch tensorok részei lehetnek egy számítási gráfnak, és a torch.autograd automatikusan képes végrehajtani a szükséges deriválási műveleteket. A framework követi, milyen műveletekből jött létre a végső érték, majd a láncszabály alapján kiszámítja a gradienseket.",
+        hu: "Az előadás (lecture) szerint a PyTorch tensorok részei lehetnek egy számítási gráfnak, és a torch.autograd automatikusan képes végrehajtani a szükséges deriválási műveleteket. A keretrendszer (framework) követi, milyen műveletekből jött létre a végső érték, majd a láncszabály alapján kiszámítja a gradienseket.",
         en: "According to the lecture, PyTorch tensors can participate in a computational graph and torch.autograd can automatically perform the required differentiation. The framework tracks the operations that produced the final value and applies the chain rule to compute gradients."
       },
       why: {
@@ -436,7 +436,7 @@ export const backpropQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "A veszteség (loss) felől visszafelé haladunk a dependency graphon.", en: "We move backward from the loss through the dependency graph." } },
       { id: "b", text: { hu: "Minden csomópontnál (node) lokális deriváltat (local derivative) kombinálunk az bejövő gradienssel (incoming gradient).", en: "At each node, a local derivative is combined with the incoming gradient." } },
-      { id: "c", text: { hu: "A láncszabály (chain rule) segítségével gradients jutnak el a korábbi variables/paraméterek (parameters) felé.", en: "Using the chain rule, gradients propagate toward earlier variables/parameters." } },
+      { id: "c", text: { hu: "A láncszabály (chain rule) segítségével gradiensek (gradients) jutnak el a korábbi változókhoz/paraméterekhez (variables/parameters) (parameters) felé.", en: "Using the chain rule, gradients propagate toward earlier variables/parameters." } },
       { id: "d", text: { hu: "Csak előre (forward) values értékeket számítunk, derivált-ek nélkül.", en: "We compute only forward values, without derivatives." } }
     ],
     correctIds: ["a","b","c"],
