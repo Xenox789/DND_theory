@@ -208,18 +208,18 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q1",
     topics: ["logistic-regression", "classification"],
     prompt: {
-      hu: "Mely állítások igazak logistic regressionre?",
+      hu: "Mely állítások igazak logisztikus regresszióra (logistic regression)?",
       en: "Which statements are true about logistic regression?"
     },
     choices: [
       { id: "a", text: { hu: "Binary classificationre használható.", en: "It can be used for binary classification." } },
       { id: "b", text: { hu: "Supervised learning módszer (method).", en: "It is a supervised learning method." } },
-      { id: "c", text: { hu: "valószínűség (probability) estimate-et állít elő.", en: "It produces a probability estimate." } },
-      { id: "d", text: { hu: "Arbitrary continuous regresszió (regression) targetok becslésére tervezték.", en: "It is designed for arbitrary continuous regression targets." } }
+      { id: "c", text: { hu: "valószínűség (probability) becslést (estimate) állít elő.", en: "It produces a probability estimate." } },
+      { id: "d", text: { hu: "Tetszőleges folytonos (arbitrary continuous) regresszió (regression) célértékek (targets) becslésére tervezték.", en: "It is designed for arbitrary continuous regression targets." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A előadás (lecture) szerint logisztikus regresszió (logistic regression) bináris osztályozás (binary classification) módszer (method). A sigmoid miatt valószínűség (probability) estimate-et állít elő 0 és 1 között.",
+      hu: "A előadás (lecture) szerint logisztikus regresszió (logistic regression) bináris osztályozás (binary classification) módszer (method). A sigmoid miatt valószínűség (probability) becslést (estimate) állít elő 0 és 1 között.",
       en: "According to the lecture, logistic regression is a binary-classification method. The sigmoid produces a probability estimate between 0 and 1."
     }
   },
@@ -227,7 +227,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q2",
     topics: ["sigmoid"],
     prompt: {
-      hu: "Mely állítások igazak a g(z)=1/(1+e^(−z)) sigmoid functionre?",
+      hu: "Mely állítások igazak a g(z)=1/(1+e^(−z)) szigmoid függvényre (sigmoid function)?",
       en: "Which statements are true about the sigmoid function g(z)=1/(1+e^(−z))?"
     },
     choices: [
@@ -246,18 +246,18 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q3",
     topics: ["logistic-regression", "hypothesis"],
     prompt: {
-      hu: "Mely állítások igazak a logisztikus regresszió (logistic regression) hypothesisre?",
+      hu: "Mely állítások igazak a logisztikus regresszió (logistic regression) hipotézisre (hipotézis (hypothesis))?",
       en: "Which statements are true about the logistic-regression hypothesis?"
     },
     choices: [
-      { id: "a", text: { hu: "Előbb linear score-t számolunk.", en: "A linear score is computed first." } },
-      { id: "b", text: { hu: "A linear score-ra sigmoid kerül.", en: "A sigmoid is applied to the linear score." } },
+      { id: "a", text: { hu: "Előbb lineáris pontszám (lineáris (linear) score)-t számolunk.", en: "A linear score is computed first." } },
+      { id: "b", text: { hu: "A lineáris pontszám (lineáris (linear) score)-ra sigmoid kerül.", en: "A sigmoid is applied to the linear score." } },
       { id: "c", text: { hu: "Multivariate formában h=g(Xθ).", en: "In multivariate form h=g(Xθ)." } },
-      { id: "d", text: { hu: "A hypothesis maga tisztán linear function.", en: "The hypothesis itself is purely linear." } }
+      { id: "d", text: { hu: "A hipotézis (hypothesis) maga tisztán lineáris függvény (lineáris (linear) function).", en: "The hypothesis itself is purely linear." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A kurzus (course) megfogalmazása: logisztikus regresszió (logistic regression) hypothesis = Sigmoid ∘ lineáris regresszió (linear regression). Emiatt maga a teljes hypothesis nem linear.",
+      hu: "A kurzus (course) megfogalmazása: logisztikus regresszió (logistic regression) hipotézis (hypothesis) = Sigmoid ∘ lineáris regresszió (lineáris (linear) regression). Emiatt maga a teljes hipotézis (hypothesis) nem lineáris (linear).",
       en: "The course states: Logistic regression hypothesis = Sigmoid ∘ Linear regression. Therefore, the complete hypothesis itself is not linear."
     }
   },
@@ -272,11 +272,11 @@ export const logisticRegressionQuestions: Question[] = [
       { id: "a", text: { hu: "h(x)<0.5 → predicted címke (label) 0.", en: "h(x)<0.5 → predicted label 0." } },
       { id: "b", text: { hu: "h(x)≥0.5 → predicted címke (label) 1.", en: "h(x)≥0.5 → predicted label 1." } },
       { id: "c", text: { hu: "A döntési határ (decision boundary) pontjain h(x)=0.5.", en: "At points on the decision boundary, h(x)=0.5." } },
-      { id: "d", text: { hu: "A valószínűség (probability) becslés (prediction) és a class címke (label) mindig ugyanaz a numerikus érték.", en: "The probability prediction and class label are always numerically identical." } }
+      { id: "d", text: { hu: "A valószínűség (probability) becslés (prediction) és a osztálycímke (class label) (label) mindig ugyanaz a numerikus érték.", en: "The probability prediction and class label are always numerically identical." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A valószínűség (probability) becslés (prediction) thresholdolása külön lépés. Például h=0.73 esetén a class címke (label) 1.",
+      hu: "A valószínűség (probability) becslés (prediction) küszöbölése (thresholding) külön lépés. Például h=0.73 esetén a osztálycímke (class label) (label) 1.",
       en: "Thresholding the probability prediction is a separate step. For example, h=0.73 gives class label 1."
     }
   },
@@ -289,7 +289,7 @@ export const logisticRegressionQuestions: Question[] = [
     },
     choices: [
       { id: "a", text: { hu: "Egy bemeneti változó (input variable) esetén a döntési határ (decision boundary) egy pont lehet az x tengelyen.", en: "With one input variable, the decision boundary can be a point on the x-axis." } },
-      { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a bivariate döntési határ (decision boundary) egy line az bemenet (input) plane-ben.", en: "With two input variables, the bivariate decision boundary is a line in the input plane." } },
+      { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a kétváltozós (bivariate) döntési határ (decision boundary) egy line az bemenet (input) plane-ben.", en: "With two input variables, the bivariate decision boundary is a line in the input plane." } },
       { id: "c", text: { hu: "A boundary azokból az inputokból áll, ahol h=0.5.", en: "The boundary consists of inputs where h=0.5." } },
       { id: "d", text: { hu: "A döntési határ (decision boundary) a veszteség (loss) minimumának 3D görbéje.", en: "The decision boundary is a 3D curve of loss minima." } }
     ],
@@ -303,7 +303,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q6",
     topics: ["logistic-regression", "shapes"],
     prompt: {
-      hu: "100 beteg, 2 blood-test jellemző (feature) és x₀=1 tengelymetszet / eltolás (intercept) oszlop esetén mely állítások igazak?",
+      hu: "100 beteg, 2 laborvizsgálati (blood-test) jellemző (feature) és x₀=1 tengelymetszet / eltolás (intercept) oszlop esetén mely állítások igazak?",
       en: "With 100 patients, 2 blood-test features, and an x₀=1 intercept column, which statements are true?"
     },
     choices: [
@@ -315,7 +315,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "2 jellemző (feature) + tengelymetszet / eltolás (intercept) = 3 paraméter (parameter) és 3 X-oszlop. Mind Xθ, mind az elementwise sigmoid outputja egy 100 elemű vektor (vector).",
+      hu: "2 jellemző (feature) + tengelymetszet / eltolás (intercept) = 3 paraméter (parameter) és 3 X-oszlop. Mind Xθ, mind az elemenkénti (element-wise) szigmoid kimenete (sigmoid output) egy 100 elemű vektor (vector).",
       en: "Two features plus the intercept give 3 parameters and 3 columns in X. Both Xθ and its elementwise sigmoid output are 100-element vectors."
     }
   },
@@ -323,14 +323,14 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q7",
     topics: ["logistic-regression", "data"],
     prompt: {
-      hu: "A 100 beteg / 2 blood-test jellemző (feature) példában mely állítások igazak?",
+      hu: "A 100 beteg / 2 laborvizsgálati (blood-test) jellemző (feature) példában mely állítások igazak?",
       en: "In the 100-patient / 2-blood-test-feature example, which statements are true?"
     },
     choices: [
-      { id: "a", text: { hu: "A blood-test values X-ben vannak.", en: "The blood-test values are in X." } },
+      { id: "a", text: { hu: "A laborvizsgálati (blood-test) values X-ben vannak.", en: "The blood-test values are in X." } },
       { id: "b", text: { hu: "A disease/healthy címkék (labels) y-ban vannak.", en: "The disease/healthy labels are in y." } },
       { id: "c", text: { hu: "θ a megtanulandó modellparaméterek (model parameters) vektor (vector).", en: "θ is the learnable model-parameter vector." } },
-      { id: "d", text: { hu: "A blood-test values θ-ban vannak.", en: "The blood-test values are in θ." } }
+      { id: "d", text: { hu: "A laborvizsgálati (blood-test) values θ-ban vannak.", en: "The blood-test values are in θ." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
@@ -342,11 +342,11 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q8",
     topics: ["bce", "loss"],
     prompt: {
-      hu: "Mely állítások igazak a logistic veszteség (loss) / bináris keresztentrópia (binary cross-entropy) lossra?",
+      hu: "Mely állítások igazak a logistic veszteség (loss) / bináris keresztentrópia (binary cross-entropy) veszteségre (loss)?",
       en: "Which statements are true about logistic loss / binary cross-entropy loss?"
     },
     choices: [
-      { id: "a", text: { hu: "Binary classificationhöz alkalmas veszteség (loss).", en: "It is a suitable loss for binary classification." } },
+      { id: "a", text: { hu: "Bináris osztályozáshoz (binary classification) alkalmas veszteség (loss).", en: "It is a suitable loss for binary classification." } },
       { id: "b", text: { hu: "A teljes J(θ) skalár (scalar).", en: "The overall J(θ) is a scalar." } },
       { id: "c", text: { hu: "A formula log(h) és log(1−h) tagokat tartalmaz.", en: "The formula contains log(h) and log(1−h) terms." } },
       { id: "d", text: { hu: "A kurzus (course) logistic regressionhez MSE-t választ végső megfelelő lossként.", en: "The course ultimately chooses MSE as the appropriate loss for logistic regression." } }
@@ -441,10 +441,10 @@ export const logisticRegressionQuestions: Question[] = [
       en: "Which statements are true about the course explanation for choosing the loss?"
     },
     choices: [
-      { id: "a", text: { hu: "Sigmoid hypothesis + MSE esetén a lossnak lehetnek több local minimumai.", en: "With a sigmoid hypothesis + MSE, the loss may have multiple local minima." } },
-      { id: "b", text: { hu: "A logistic/BCE veszteség (loss) a logistic hypothesis-szel konvex (convex).", en: "Logistic/BCE loss with the logistic hypothesis is convex." } },
-      { id: "c", text: { hu: "A konvex (convex) logistic lossnak egy local/global minimuma van.", en: "The convex logistic loss has a local/global minimum." } },
-      { id: "d", text: { hu: "Ezért gradienscsökkentés (gradient descent) a logistic lossnál megtalálhatja a globally optimal paraméterek (parameters) értékeket.", en: "Therefore gradient descent can find the globally optimal parameters for logistic loss." } }
+      { id: "a", text: { hu: "Sigmoid hipotézis (hypothesis) + MSE esetén a lossnak lehetnek több local minimumai.", en: "With a sigmoid hypothesis + MSE, the loss may have multiple local minima." } },
+      { id: "b", text: { hu: "A logistic/BCE veszteség (loss) a logistic hipotézis (hypothesis)-szel konvex (convex).", en: "Logistic/BCE loss with the logistic hypothesis is convex." } },
+      { id: "c", text: { hu: "A konvex (convex) logisztikus veszteség (logistic loss)nak egy local/global minimuma van.", en: "The convex logistic loss has a local/global minimum." } },
+      { id: "d", text: { hu: "Ezért gradienscsökkentés (gradient descent) a logisztikus veszteség (logistic loss)nál megtalálhatja a globálisan (globally) optimal paraméterek (parameters) értékeket.", en: "Therefore gradient descent can find the globally optimal parameters for logistic loss." } }
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
@@ -456,18 +456,18 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q14",
     topics: ["logistic-regression", "prediction"],
     prompt: {
-      hu: "Egyetlen betegre a logisztikus regresszió (logistic regression) kimenet (output) hθ(x)=0.82. A kurzus (course) 0.5 thresholdját használva mely állítások igazak?",
+      hu: "Egyetlen betegre a logisztikus regresszió (logistic regression) kimenet (output) hθ(x)=0.82. A kurzus (course) 0.5 küszöbét (threshold) használva mely állítások igazak?",
       en: "For one patient, logistic regression outputs hθ(x)=0.82. Using the course's 0.5 threshold, which statements are true?"
     },
     choices: [
       { id: "a", text: { hu: "0.82 a valószínűség (probability) estimate.", en: "0.82 is a probability estimate." } },
-      { id: "b", text: { hu: "A predicted class címke (label) 1.", en: "The predicted class label is 1." } },
-      { id: "c", text: { hu: "A hypothesis outputja ezen az példa (example)-on skalár (scalar).", en: "The hypothesis output for this example is a scalar." } },
-      { id: "d", text: { hu: "A predicted class címke (label) 0.82.", en: "The predicted class label is 0.82." } }
+      { id: "b", text: { hu: "A predicted osztálycímke (class label) (label) 1.", en: "The predicted class label is 1." } },
+      { id: "c", text: { hu: "A hipotézis (hypothesis) outputja ezen az példa (example)-on skalár (scalar).", en: "The hypothesis output for this example is a scalar." } },
+      { id: "d", text: { hu: "A predicted osztálycímke (class label) (label) 0.82.", en: "The predicted class label is 0.82." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "0.82 a skalár (scalar) valószínűség (probability) estimate. Thresholdolás után discrete címke (label) 1 lesz.",
+      hu: "0.82 a skalár (scalar) valószínűség (probability) estimate. Thresholdolás után diszkrét (discrete) címke (label) 1 lesz.",
       en: "0.82 is a scalar probability estimate. After thresholding, the discrete label is 1."
     }
   }
