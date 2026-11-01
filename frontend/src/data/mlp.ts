@@ -39,7 +39,7 @@ export const mlpLesson: Lesson = {
         { symbol: "a", hu: "A neuron aktiváció utáni kimenete.", en: "Neuron output after the activation." }
       ],
       connections: {
-        hu: "A lecture explicit megjegyzése szerint ha g a szigmoid függvény, akkor egy mesterséges neuron többváltozós logisztikus regressziónak tekinthető.",
+        hu: "Az előadás (lecture) kifejezetten megjegyzi szerint ha g a szigmoid függvény, akkor egy mesterséges neuron többváltozós logisztikus regressziónak tekinthető.",
         en: "The lecture explicitly notes that if g is sigmoid, an artificial neuron is equivalent to multivariate logistic regression."
       },
       examTrap: {
@@ -60,7 +60,7 @@ export const mlpLesson: Lesson = {
         en: "Why is one neuron not enough?"
       },
       body: {
-        hu: "Egyetlen szigmoid neuronnal kapott döntési határ lineáris: két bemeneti változó esetén egy egyenes, magasabb dimenzióban hipersík. A Lecture 5 IRIS-példája azt mutatja, hogy bizonyos kategóriák nem választhatók szét egyetlen ilyen lineáris határral.",
+        hu: "Egyetlen szigmoid neuronnal kapott döntési határ lineáris: két bemeneti változó esetén egy egyenes, magasabb dimenzióban hipersík. Az 5. előadás (Lecture 5) IRIS-példája azt mutatja, hogy bizonyos kategóriák nem választhatók szét egyetlen ilyen lineáris határral.",
         en: "A single sigmoid neuron produces a linear decision boundary: a line for two input variables and a hyperplane in higher dimensions. The Lecture 5 IRIS example shows that some categories cannot be separated by one such boundary."
       },
       why: {
@@ -106,7 +106,7 @@ export const mlpLesson: Lesson = {
         { symbol: "a_(k−1)", hu: "Az előző réteg kimenete / aktivációja.", en: "Output / activation of the previous layer." }
       ],
       examTrap: {
-        hu: "A súlymátrix sorainak száma a célréteg neuronjainak száma, oszlopainak száma pedig az előző réteg mérete. A bias minden célneuronhoz egy külön értéket tartalmaz.",
+        hu: "A súlymátrix sorainak száma a célréteg neuronjainak száma, oszlopainak száma pedig az előző réteg mérete. Az eltolás (bias) minden célneuronhoz egy külön értéket tartalmaz.",
         en: "The weight matrix has one row per target neuron and one column per previous-layer output. The bias vector contains one value per target neuron."
       },
       keyTerms: [
@@ -187,7 +187,7 @@ export const mlpLesson: Lesson = {
         en: "The course presents three popular activation functions: sigmoid, tanh, and ReLU. Sigmoid maps to (0,1), tanh to (−1,1), and ReLU outputs 0 for negative inputs and the input itself for positive inputs."
       },
       why: {
-        hu: "A nemlineáris aktivációk teszik lehetővé, hogy több réteg együtt ne csak egyetlen lineáris függvényt valósítson meg. A Lecture 5 a ReLU-ról azt emeli ki, hogy egyszerűen számolható és gyakran jól működik.",
+        hu: "A nemlineáris aktivációk teszik lehetővé, hogy több réteg együtt ne csak egyetlen lineáris függvényt valósítson meg. Az 5. előadás (Lecture 5) a ReLU-ról azt emeli ki, hogy egyszerűen számolható és gyakran jól működik.",
         en: "Nonlinear activations allow multiple layers to represent more than a single linear function. Lecture 5 highlights ReLU as simple to compute and often effective."
       },
       formula: {
@@ -210,7 +210,7 @@ export const mlpLesson: Lesson = {
         en: "Output layer: determined by the task"
       },
       body: {
-        hu: "A kimeneti réteg aktivációját és méretét a megoldandó feladathoz kell igazítani. Regressziónál tetszőleges folytonos értéket szeretnénk, ezért a tananyag tipikusan identitás aktivációt (identity) vagy g₂ elhagyását javasolja. Bináris osztályozásnál egyetlen szigmoid kimenet adhat class-1 valószínűséget. Többosztályos, kölcsönösen kizáró kategóriáknál a softmax több valószínűséget ad, amelyek összege 1.",
+        hu: "A kimeneti réteg aktivációját és méretét a megoldandó feladathoz kell igazítani. Regressziónál tetszőleges folytonos értéket szeretnénk, ezért a tananyag tipikusan identitás aktivációt (identity) vagy g₂ elhagyását javasolja. Bináris osztályozásnál egyetlen szigmoid kimenet adhat az 1-es osztály valószínűségét (class-1 probability). Többosztályos, kölcsönösen kizáró kategóriáknál a softmax több valószínűséget ad, amelyek összege 1.",
         en: "Output activation and size must match the task. For regression, arbitrary continuous values are needed, so the course typically uses identity / omits g₂. Binary classification uses one sigmoid probability. Multiclass classification with mutually exclusive classes uses softmax probabilities summing to 1."
       },
       why: {
@@ -323,7 +323,7 @@ export const mlpQuestions: Question[] = [
     prompt: { hu: "Mit jelent a teljesen összekötött (fully-connected) / sűrű réteg (layer)?", en: "What does a fully connected / dense layer mean?" },
     choices: [
       { id: "a", text: { hu: "Minden neuron (neuron) kapcsolódik a következő réteg (layer) minden neuronjához.", en: "Every neuron is connected to every neuron in the next layer." } },
-      { id: "b", text: { hu: "PyTorchban torch.nn.Linear reprezentálhatja.", en: "In PyTorch it can be represented by torch.nn.Linear." } },
+      { id: "b", text: { hu: "PyTorchban ezt a torch.nn.Linear réteg reprezentálhatja.", en: "In PyTorch it can be represented by torch.nn.Linear." } },
       { id: "c", text: { hu: "Nincsenek tanulható súlyok (weights).", en: "It has no learnable weights." } }
     ],
     correctIds: ["a","b"],
@@ -398,8 +398,8 @@ export const mlpQuestions: Question[] = [
     topics: ["activation-functions"],
     prompt: { hu: "Mi történik, ha minden aktiváció (activation) identitásfüggvény (identity) egy több-réteg (layer) MLP-ben?", en: "What happens if every activation is identity in a multilayer MLP?" },
     choices: [
-      { id: "a", text: { hu: "Több lineáris függvény (multiple linear functions) kompozíciója továbbra is linear.", en: "A composition of multiple linear functions remains linear." } },
-      { id: "b", text: { hu: "Az kifejezőerő (expressive power) egy egyetlen (single) linear réteg (layer) szintjére esik vissza.", en: "Expressive power collapses to that of a single linear layer." } },
+      { id: "a", text: { hu: "Több lineáris függvény (multiple linear functions) kompozíciója továbbra is lineáris.", en: "A composition of multiple linear functions remains linear." } },
+      { id: "b", text: { hu: "A kifejezőerő (expressive power) egyetlen lineáris réteg (single linear layer) szintjére esik vissza.", en: "Expressive power collapses to that of a single linear layer." } },
       { id: "c", text: { hu: "A hálózat ettől automatikusan nonlinear lesz.", en: "The network automatically becomes nonlinear." } }
     ],
     correctIds: ["a","b"],
@@ -454,7 +454,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "identitásfüggvény (identity) végső (final) aktiváció (activation) + MSE az alapértelmezett választás.", en: "Identity final activation + MSE is the default choice." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A bináris felállás (binary setup) a logistic-regresszió (regression) valószínűség (probability)-kimenet (output) logikáját követi.", en: "The binary setup follows the logistic-regression probability-output logic." }
+    explanation: { hu: "A bináris felállás (binary setup) a logisztikus regresszió (logistic regression) valószínűség (probability)-kimenet (output) logikáját követi.", en: "The binary setup follows the logistic-regression probability-output logic." }
   },
   {
     id: "mlp-q14",
@@ -490,7 +490,7 @@ export const mlpQuestions: Question[] = [
       { id: "a", text: { hu: "A true címke (label) y one-hot encoded lehet.", en: "The true label y can be one-hot encoded." } },
       { id: "b", text: { hu: "A true category helyén 1, a többi helyen 0 van.", en: "The true category has value 1 and the others 0." } },
       { id: "c", text: { hu: "ŷ category-probabilities vektor (vector).", en: "ŷ is a vector of category probabilities." } },
-      { id: "d", text: { hu: "CE a BCE/logistic veszteség (loss) generalizációja.", en: "CE is a generalization of BCE/logistic loss." } }
+      { id: "d", text: { hu: "CE a BCE/logisztikus veszteség (logistic loss) általánosítása.", en: "CE is a generalization of BCE/logistic loss." } }
     ],
     correctIds: ["a","b","c","d"],
     explanation: { hu: "Ez pontosan az előadás (lecture) 5 multiclass részének értelmezése.", en: "This is exactly how Lecture 5 frames the multiclass case." }
