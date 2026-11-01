@@ -131,7 +131,7 @@ export const mlFundamentalsLesson: Lesson = {
         en: "The loss function: how do we measure error?"
       },
       body: {
-        hu: "A veszteségfüggvény (loss function) egyetlen számmal fejezi ki, mennyire rosszak a modell becslései az adott paraméterértékek mellett. A Lecture 1 hangsúlyozza, hogy a veszteség teljes értéke skalár (scalar). Ha a címke több komponensből áll, az eltéréseket előbb valamilyen összesítő művelettel – például normával – egyetlen számmá kell alakítani.",
+        hu: "A veszteségfüggvény (loss function) egyetlen számmal fejezi ki, mennyire rosszak a modell becslései az adott paraméterértékek mellett. Az 1. előadás (Lecture 1) hangsúlyozza, hogy a veszteség teljes értéke skalár (scalar). Ha a címke több komponensből áll, az eltéréseket előbb valamilyen összesítő művelettel – például normával – egyetlen számmá kell alakítani.",
         en: "The loss function expresses with a single number how poor the model's predictions are for the current parameter values. Lecture 1 emphasizes that the overall loss is scalar. If a label has multiple components, the differences must first be aggregated, for example using a norm."
       },
       why: {
