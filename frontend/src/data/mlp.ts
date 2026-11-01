@@ -302,7 +302,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "Mindig ReLU activationt kell használnia.", en: "It must always use ReLU activation." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A neuron (neuron) weighted sum + aktiváció (activation) szerkezetű. Sigmoid esetén a előadás (lecture) explicit logistic-regresszió (regression) kapcsolatot mond ki.", en: "A neuron has a weighted-sum + activation structure. With sigmoid, the lecture explicitly identifies it with logistic regression." }
+    explanation: { hu: "A neuron (neuron) weighted sum + aktiváció (activation) szerkezetű. Sigmoid esetén az előadás (lecture) explicit logistic-regresszió (regression) kapcsolatot mond ki.", en: "A neuron has a weighted-sum + activation structure. With sigmoid, the lecture explicitly identifies it with logistic regression." }
   },
   {
     id: "mlp-q2",
@@ -315,19 +315,19 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "Bármilyen XOR-like boundary-t egyedül is reprezentál.", en: "It can represent any XOR-like boundary by itself." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A előadás (lecture) szerint egyetlen neuron (single neuron) csak lineárisan szeparálható (linearly separable) problémákat tud megoldani; XOR nem ilyen.", en: "According to the lecture, a single neuron can only solve linearly separable problems; XOR is not one." }
+    explanation: { hu: "Az előadás (lecture) szerint egyetlen neuron (single neuron) csak lineárisan szeparálható (linearly separable) problémákat tud megoldani; XOR nem ilyen.", en: "According to the lecture, a single neuron can only solve linearly separable problems; XOR is not one." }
   },
   {
     id: "mlp-q3",
     topics: ["fully-connected"],
-    prompt: { hu: "Mit jelent a teljesen összekötött (fully-connected) / dense réteg (layer)?", en: "What does a fully connected / dense layer mean?" },
+    prompt: { hu: "Mit jelent a teljesen összekötött (fully-connected) / sűrű réteg (layer)?", en: "What does a fully connected / dense layer mean?" },
     choices: [
       { id: "a", text: { hu: "Minden neuron (neuron) kapcsolódik a következő réteg (layer) minden neuronjához.", en: "Every neuron is connected to every neuron in the next layer." } },
       { id: "b", text: { hu: "PyTorchban torch.nn.Linear reprezentálhatja.", en: "In PyTorch it can be represented by torch.nn.Linear." } },
-      { id: "c", text: { hu: "Nincsenek learnable súlyok (weights).", en: "It has no learnable weights." } }
+      { id: "c", text: { hu: "Nincsenek tanulható súlyok (weights).", en: "It has no learnable weights." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "Dense layerben teljes kapcsolati súly (weight) mátrix (matrix) és eltolás (bias) vektor (vector) van.", en: "A dense layer contains a full connection weight matrix and bias vector." }
+    explanation: { hu: "sűrű layerben teljes kapcsolati súly (weight) mátrix (matrix) és eltolás (bias) vektor (vector) van.", en: "A dense layer contains a full connection weight matrix and bias vector." }
   },
   {
     id: "mlp-q4",
@@ -340,7 +340,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "b_k shape-je mindig ugyanaz, mint W_k.", en: "b_k always has the same shape as W_k." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Ez pontosan a előadás (lecture) általános mátrix (matrix) notationje.", en: "This is exactly the general matrix notation given in the lecture." }
+    explanation: { hu: "Ez pontosan az előadás (lecture) általános mátrix (matrix) notationje.", en: "This is exactly the general matrix notation given in the lecture." }
   },
   {
     id: "mlp-q5",
@@ -371,14 +371,14 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q7",
     topics: ["mlp-hypothesis"],
-    prompt: { hu: "Melyik formula felel meg a előadás (lecture) kétrétegű (two-layer) MLP hypothesisának?", en: "Which formula matches the lecture's two-layer MLP hypothesis?" },
+    prompt: { hu: "Melyik formula felel meg az előadás (lecture) kétrétegű (two-layer) MLP hypothesisának?", en: "Which formula matches the lecture's two-layer MLP hypothesis?" },
     choices: [
       { id: "a", text: { hu: "h(x)=g₂(W₂ g₁(W₁x+b₁)+b₂).", en: "h(x)=g₂(W₂ g₁(W₁x+b₁)+b₂)." } },
       { id: "b", text: { hu: "Θ={W₁,b₁,W₂,b₂}.", en: "Θ={W₁,b₁,W₂,b₂}." } },
       { id: "c", text: { hu: "A rétegek (layers) egymás outputjára épülnek.", en: "Layers operate on outputs of previous layers." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Ez a előadás (lecture) közvetlen notationje.", en: "This is the notation used directly in the lecture." }
+    explanation: { hu: "Ez az előadás (lecture) közvetlen notationje.", en: "This is the notation used directly in the lecture." }
   },
   {
     id: "mlp-q8",
@@ -391,7 +391,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "MSE megfelelő veszteség (loss).", en: "MSE is an appropriate loss." } }
     ],
     correctIds: ["a","b","d"],
-    explanation: { hu: "rejtett nemlinearitás (hidden nonlinearity) kell expressive powerhez; arbitrary folytonos (continuous) outputnál végső (final) identitásfüggvény (identity) és MSE illeszkedik a előadás (lecture)-höz.", en: "Hidden nonlinearity is needed for expressive power; for arbitrary continuous output, final identity and MSE match the lecture." }
+    explanation: { hu: "rejtett nemlinearitás (hidden nonlinearity) kell expressive powerhez; arbitrary folytonos (continuous) outputnál végső (final) identitásfüggvény (identity) és MSE illeszkedik az előadás (lecture)-höz.", en: "Hidden nonlinearity is needed for expressive power; for arbitrary continuous output, final identity and MSE match the lecture." }
   },
   {
     id: "mlp-q9",
@@ -403,7 +403,7 @@ export const mlpQuestions: Question[] = [
       { id: "c", text: { hu: "A hálózat ettől automatikusan nonlinear lesz.", en: "The network automatically becomes nonlinear." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "Ez a előadás (lecture) explicit indoka hidden aktiváció (activation) használatára.", en: "This is the lecture's explicit reason for using hidden activations." }
+    explanation: { hu: "Ez az előadás (lecture) explicit indoka hidden aktiváció (activation) használatára.", en: "This is the lecture's explicit reason for using hidden activations." }
   },
   {
     id: "mlp-q10",
@@ -421,14 +421,14 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q11",
     topics: ["activation-functions","tanh"],
-    prompt: { hu: "Mely állítások igazak tanh activationre a előadás (lecture) alapján?", en: "Which statements are true about tanh activation according to the lecture?" },
+    prompt: { hu: "Mely állítások igazak tanh activationre az előadás (lecture) alapján?", en: "Which statements are true about tanh activation according to the lecture?" },
     choices: [
       { id: "a", text: { hu: "kimenet (output) range-e −1 és 1 között van.", en: "Its output range is between −1 and 1." } },
       { id: "b", text: { hu: "Nonlinear aktivációs függvény (activation function).", en: "It is a nonlinear activation function." } },
       { id: "c", text: { hu: "Ugyanaz, mint ReLU.", en: "It is the same as ReLU." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A előadás (lecture) külön grafikonon mutatja tanh-t −1..1 tartománnyal.", en: "The lecture shows tanh separately with range −1..1." }
+    explanation: { hu: "Az előadás (lecture) külön grafikonon mutatja tanh-t −1..1 tartománnyal.", en: "The lecture shows tanh separately with range −1..1." }
   },
   {
     id: "mlp-q12",
@@ -446,7 +446,7 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q13",
     topics: ["binary-classification","output-layer"],
-    prompt: { hu: "egyetlen (single)-címke (label) bináris osztályozás (binary classification) MLP kimeneti réteg (output layer)éhez mely párosítások illeszkednek a kurzus (course)-höz?", en: "Which choices match the course for the output layer of a single-label binary-classification MLP?" },
+    prompt: { hu: "egyetlen (single)-címke (label) bináris osztályozás (binary classification) MLP kimeneti réteg (output layer)éhez mely párosítások illeszkednek a kurzushoz (course)?", en: "Which choices match the course for the output layer of a single-label binary-classification MLP?" },
     choices: [
       { id: "a", text: { hu: "1 kimenet (output) neuron (neuron).", en: "1 output neuron." } },
       { id: "b", text: { hu: "Sigmoid végső (final) aktiváció (activation).", en: "Sigmoid final activation." } },
@@ -459,7 +459,7 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q14",
     topics: ["multiclass","softmax"],
-    prompt: { hu: "10 mutually exclusive class esetén mely állítások igazak?", en: "With 10 mutually exclusive classes, which statements are true?" },
+    prompt: { hu: "10 mutually exclusive osztály esetén mely állítások igazak?", en: "With 10 mutually exclusive classes, which statements are true?" },
     choices: [
       { id: "a", text: { hu: "10 kimenet (output) valószínűség (probability) becslése indokolt.", en: "Estimating 10 output probabilities is appropriate." } },
       { id: "b", text: { hu: "Softmax végső (final) aktiváció (activation) használható.", en: "Softmax can be used as the final activation." } },
@@ -467,7 +467,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "Egyetlen sigmoid skalár (scalar) szükségszerűen elegendő.", en: "A single sigmoid scalar is necessarily sufficient." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A előadás (lecture) multiclass esetben category-nként valószínűség (probability)-t becsül softmaxszal.", en: "For multiclass classification, the lecture estimates one probability per category using softmax." }
+    explanation: { hu: "Az előadás (lecture) multiclass esetben category-nként valószínűség (probability)-t becsül softmaxszal.", en: "For multiclass classification, the lecture estimates one probability per category using softmax." }
   },
   {
     id: "mlp-q15",
@@ -480,7 +480,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "Formula komponensenként e^(z_i)/Σ_j e^(z_j).", en: "Component-wise formula is e^(z_i)/Σ_j e^(z_j)." } }
     ],
     correctIds: ["a","b","c","d"],
-    explanation: { hu: "Mind a négy a előadás (lecture) softmax definíciójának része.", en: "All four are part of the lecture's softmax definition." }
+    explanation: { hu: "Mind a négy az előadás (lecture) softmax definíciójának része.", en: "All four are part of the lecture's softmax definition." }
   },
   {
     id: "mlp-q16",
@@ -493,7 +493,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "CE a BCE/logistic veszteség (loss) generalizációja.", en: "CE is a generalization of BCE/logistic loss." } }
     ],
     correctIds: ["a","b","c","d"],
-    explanation: { hu: "Ez pontosan a előadás (lecture) 5 multiclass részének framingje.", en: "This is exactly how Lecture 5 frames the multiclass case." }
+    explanation: { hu: "Ez pontosan az előadás (lecture) 5 multiclass részének értelmezése.", en: "This is exactly how Lecture 5 frames the multiclass case." }
   },
   {
     id: "mlp-q17",
@@ -524,7 +524,7 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q19",
     topics: ["parameter-count","multiclass"],
-    prompt: { hu: "20 bemenet (input) → 10 rejtett neuron (hidden neuron) → 4-class softmax kimenet (output) esetén hány paraméter (parameter) van?", en: "For 20 inputs → 10 hidden neurons → 4-class softmax output, how many parameters are there?" },
+    prompt: { hu: "20 bemenet (input) → 10 rejtett neuron (hidden neuron) → 4-osztály softmax kimenet (output) esetén hány paraméter (parameter) van?", en: "For 20 inputs → 10 hidden neurons → 4-class softmax output, how many parameters are there?" },
     choices: [
       { id: "a", text: { hu: "első (first) réteg (layer): 210.", en: "First layer: 210." } },
       { id: "b", text: { hu: "Second réteg (layer): 4·10+4=44.", en: "Second layer: 4·10+4=44." } },
@@ -537,14 +537,14 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q20",
     topics: ["training","parameters"],
-    prompt: { hu: "Mely állítások igazak MLP trainingre a előadás (lecture) szerint?", en: "Which statements are true about MLP training according to the lecture?" },
+    prompt: { hu: "Mely állítások igazak MLP trainingre az előadás (lecture) szerint?", en: "Which statements are true about MLP training according to the lecture?" },
     choices: [
       { id: "a", text: { hu: "Θ az összes súlyok (weights) és biases halmaza.", en: "Θ is the set of all weights and biases." } },
       { id: "b", text: { hu: "A veszteség (loss) gradientjét minden paraméter (parameter) szerint számítjuk.", en: "The gradient of the loss is computed with respect to every parameter." } },
-      { id: "c", text: { hu: "gradiens (gradient)-descent-based training használható.", en: "Gradient-descent-based training can be used." } },
-      { id: "d", text: { hu: "A súlyok (weights) nem learnable paraméterek (parameters).", en: "Weights are not learnable parameters." } }
+      { id: "c", text: { hu: "gradiens (gradient)-descent-based tanítás használható.", en: "Gradient-descent-based training can be used." } },
+      { id: "d", text: { hu: "A súlyok (weights) nem tanulható paraméterek (parameters).", en: "Weights are not learnable parameters." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A előadás (lecture) Θ-t az összes súly (weight)-mátrix (matrix) és eltolás (bias)-vektor (vector) elemeiként definiálja, és ezek szerint számít gradientet.", en: "The lecture defines Θ as all elements of weight matrices and bias vectors and computes gradients with respect to them." }
+    explanation: { hu: "Az előadás (lecture) Θ-t az összes súly (weight)-mátrix (matrix) és eltolás (bias)-vektor (vector) elemeiként definiálja, és ezek szerint számít gradientet.", en: "The lecture defines Θ as all elements of weight matrices and bias vectors and computes gradients with respect to them." }
   }
 ];
