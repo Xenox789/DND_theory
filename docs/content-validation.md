@@ -754,6 +754,46 @@ a[a!=0] -> [3,1,2]
 
 These runtime checks validate the expected answers; the inclusion of the questions themselves comes from the official Theory Test example document.
 
+
+### Presentation and terminology rules
+
+Hungarian learning mode uses natural Hungarian prose. Important course terminology is shown in the form:
+
+```text
+magyar kifejezés (English term)
+```
+
+Examples:
+
+```text
+súly (weight)
+eltolás (bias)
+veszteségfüggvény (loss function)
+tanulási ráta (learning rate)
+döntési határ (decision boundary)
+```
+
+Do not write hybrid sentences that switch languages unnecessarily when a natural Hungarian equivalent exists.
+
+For formulas and simulations:
+
+- each important symbol must have a plain-language meaning;
+- diagram axes should be understandable without guessing from context;
+- plot descriptions should state what one point / line / surface represents;
+- real-world examples that are not course examples must be explicitly marked as illustrative;
+- illustrative examples may explain course concepts but must not be presented as additional exam rules.
+
+For expanded lessons, prefer this explanatory order where relevant:
+
+1. what the concept is;
+2. why it is needed;
+3. formula;
+4. meaning of each formula symbol;
+5. worked or intuitive example;
+6. connection to neighboring concepts;
+7. illustrative real-world use;
+8. exam trap.
+
 ## Rule for future content
 
 If extracted PDF text omits a formula, diagram label, matrix dimension, or other material detail:
