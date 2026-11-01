@@ -2,7 +2,7 @@
 
 Interactive bilingual (HU/EN) study application for ELTE Deep Network Development – Theory Test 1.
 
-## Current status — v0.7
+## Current status — v0.8
 
 Implemented and pushed to `main`:
 
@@ -45,6 +45,9 @@ Implemented and pushed to `main`:
 - interactive broadcasting solver
 - view-vs-copy mutation simulator
 - 60 NumPy Theory Test questions, including official-style code/result questions
+- reusable simulation guides with axis explanations
+- formula/notation glossaries inside the labs
+- clearly marked illustrative real-world mappings for the simulated concepts
 - source-validation notes for exam-specific conventions
 
 ## Theory Test 1 scope
