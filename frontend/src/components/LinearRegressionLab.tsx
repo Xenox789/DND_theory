@@ -66,7 +66,7 @@ export function LinearRegressionLab({ language }: Props) {
       <div className="lab-controls">
         <label>
           <div>
-            <strong>θ₀ — bias</strong>
+            <strong>{language === "hu" ? "θ₀ — eltolás (bias)" : "θ₀ — bias"}</strong>
             <span>{theta0.toFixed(1)}</span>
           </div>
           <input
@@ -81,7 +81,7 @@ export function LinearRegressionLab({ language }: Props) {
 
         <label>
           <div>
-            <strong>θ₁ — slope</strong>
+            <strong>{language === "hu" ? "θ₁ — meredekség (slope)" : "θ₁ — slope"}</strong>
             <span>{theta1.toFixed(2)}</span>
           </div>
           <input
@@ -101,7 +101,7 @@ export function LinearRegressionLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Adatok és hypothesis" : "Data and hypothesis"}</h2>
+          <h2>{language === "hu" ? "Tanítóadatok és lineáris becslés" : "Training data and linear hypothesis"}</h2>\n          <p className="plot-description">{language === "hu" ? "Vízszintes tengely: bemenet (x). Függőleges tengely: valódi címke (y) és a modell becslése (ŷ)." : "Horizontal axis: input x. Vertical axis: true label y and model prediction ŷ."}</p>
           <Plot
             data={[
               {
@@ -125,8 +125,8 @@ export function LinearRegressionLab({ language }: Props) {
               plot_bgcolor: "rgba(0,0,0,0)",
               font: { color: "#d8e3f4" },
               margin: { l: 50, r: 20, b: 45, t: 10 },
-              xaxis: { title: "x", gridcolor: "#22314a" },
-              yaxis: { title: "y", gridcolor: "#22314a" },
+              xaxis: { title: language === "hu" ? "x — bemeneti jellemző (input feature)" : "x — input feature", gridcolor: "#22314a" },
+              yaxis: { title: language === "hu" ? "y / ŷ — valódi érték / becslés" : "y / ŷ — true value / prediction", gridcolor: "#22314a" },
               legend: { orientation: "h" }
             }}
             config={{ responsive: true, displaylogo: false }}
@@ -135,7 +135,7 @@ export function LinearRegressionLab({ language }: Props) {
         </div>
 
         <div className="plot-card">
-          <h2>3D Loss Surface — J(θ₀, θ₁)</h2>
+          <h2>{language === "hu" ? "3D veszteségfelület (loss surface)" : "3D Loss Surface — J(θ₀, θ₁)"}</h2>\n          <p className="plot-description">{language === "hu" ? "Minden pont egy θ₀, θ₁ paraméterbeállítás. A függőleges J érték mutatja, mennyire rosszul illeszkedik ez a beállítás az adatokra." : "Each point represents one θ₀, θ₁ parameter setting. Vertical J shows how poorly that setting fits the data."}</p>
           <Plot
             data={[
               {
