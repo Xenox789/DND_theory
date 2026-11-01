@@ -4,46 +4,46 @@ export const generalizationQuestions: Question[] = [
   {
     id: "gen-q1",
     topics: ["data-split"],
-    prompt: { hu: "Mely állítások igazak a training set és test set szerepére?", en: "Which statements are true about the roles of the training set and test set?" },
+    prompt: { hu: "Mely állítások igazak a tanítóhalmaz (training set) és teszthalmaz (test set) szerepére?", en: "Which statements are true about the roles of the training set and test set?" },
     choices: [
-      { id: "a", text: { hu: "A model parameters értékeit a training seten tanuljuk.", en: "Model parameters are learned on the training set." } },
-      { id: "b", text: { hu: "A test set célja unseen-data performance becslése.", en: "The test set is used to estimate unseen-data performance." } },
+      { id: "a", text: { hu: "A modellparaméterek (model paraméterek (parameters)) értékeit a training seten tanuljuk.", en: "Model parameters are learned on the training set." } },
+      { id: "b", text: { hu: "A teszthalmaz (test set) célja unseen-data performance becslése.", en: "The test set is used to estimate unseen-data performance." } },
       { id: "c", text: { hu: "A training és test setnek disjointnak kell lennie.", en: "The training and test sets must be disjoint." } },
-      { id: "d", text: { hu: "A test setet rendszeresen használjuk gradient update-ekhez.", en: "The test set is routinely used for gradient updates." } }
+      { id: "d", text: { hu: "A test setet rendszeresen használjuk gradiens (gradient) frissítés (update)-ekhez.", en: "The test set is routinely used for gradient updates." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "A test set független final evaluationra való, nem learningre.", en: "The test set is reserved for independent final evaluation, not learning." }
+    explanation: { hu: "A teszthalmaz (test set) független final evaluationra való, nem learningre.", en: "The test set is reserved for independent final evaluation, not learning." }
   },
   {
     id: "gen-q2",
     topics: ["underfitting"],
     prompt: { hu: "Melyek lehetnek underfitting jelei a lecture szerint?", en: "Which can be signs of underfitting according to the lecture?" },
     choices: [
-      { id: "a", text: { hu: "Training loss nagy.", en: "Training loss is high." } },
-      { id: "b", text: { hu: "Test loss nagy és hasonló a training losshoz.", en: "Test loss is high and similar to training loss." } },
-      { id: "c", text: { hu: "A model complexity túl alacsony.", en: "Model complexity is too low." } },
-      { id: "d", text: { hu: "Low bias, high variance.", en: "Low bias, high variance." } }
+      { id: "a", text: { hu: "tanítási veszteség (training veszteség (loss)) nagy.", en: "Training loss is high." } },
+      { id: "b", text: { hu: "tesztveszteség (test veszteség (loss)) nagy és hasonló a training losshoz.", en: "Test loss is high and similar to training loss." } },
+      { id: "c", text: { hu: "A modellösszetettség (model complexity) túl alacsony.", en: "Model complexity is too low." } },
+      { id: "d", text: { hu: "Low eltolás (bias), high variance.", en: "Low bias, high variance." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "A lecture underfittinget high bias, low variance helyzetként mutatja, magas training és test lossszal.", en: "The lecture presents underfitting as high bias, low variance, with high training and test losses." }
+    explanation: { hu: "A lecture underfittinget high eltolás (bias), low variance helyzetként mutatja, magas training és test lossszal.", en: "The lecture presents underfitting as high bias, low variance, with high training and test losses." }
   },
   {
     id: "gen-q3",
     topics: ["overfitting"],
     prompt: { hu: "Melyek lehetnek worsening overfitting jelei?", en: "Which can be signs of worsening overfitting?" },
     choices: [
-      { id: "a", text: { hu: "Training loss tovább csökken.", en: "Training loss keeps decreasing." } },
-      { id: "b", text: { hu: "Validation/test loss növekedni kezd.", en: "Validation/test loss starts increasing." } },
-      { id: "c", text: { hu: "A gap training és validation/test loss között nő.", en: "The gap between training and validation/test loss grows." } },
+      { id: "a", text: { hu: "tanítási veszteség (training veszteség (loss)) tovább csökken.", en: "Training loss keeps decreasing." } },
+      { id: "b", text: { hu: "Validation/tesztveszteség (test veszteség (loss)) növekedni kezd.", en: "Validation/test loss starts increasing." } },
+      { id: "c", text: { hu: "A gap training és validation/tesztveszteség (test veszteség (loss)) között nő.", en: "The gap between training and validation/test loss grows." } },
       { id: "d", text: { hu: "A model biztosan underfitel.", en: "The model is definitely underfitting." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "Ez a lecture tipikus overfitting görbéje: training loss le, unseen-data loss fel.", en: "This is the lecture's typical overfitting pattern: training loss down, unseen-data loss up." }
+    explanation: { hu: "Ez a lecture tipikus overfitting görbéje: tanítási veszteség (training veszteség (loss)) le, unseen-data veszteség (loss) fel.", en: "This is the lecture's typical overfitting pattern: training loss down, unseen-data loss up." }
   },
   {
     id: "gen-q4",
     topics: ["overfitting", "training-data"],
-    prompt: { hu: "Ha ugyanazt a neural network modelt kevesebb training example-lal tanítjuk, mit várunk?", en: "If we train the same neural-network model with fewer training examples, what do we expect?" },
+    prompt: { hu: "Ha ugyanazt a neurális hálózat (neural network) modelt kevesebb tanítási példa (training example)-lal tanítjuk, mit várunk?", en: "If we train the same neural-network model with fewer training examples, what do we expect?" },
     choices: [
       { id: "a", text: { hu: "Az overfitting kockázata / súlyossága növekedhet.", en: "Overfitting risk / severity can increase." } },
       { id: "b", text: { hu: "A modelnek kevesebb data alapján kell generalizálnia.", en: "The model must generalize from less data." } },
@@ -59,17 +59,17 @@ export const generalizationQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "Ez önmagában nem változtatja meg a training folyamat overfitting hajlamát.", en: "By itself, this does not change the training process's tendency to overfit." } },
       { id: "b", text: { hu: "A final performance estimate kevésbé megbízható lehet.", en: "The final performance estimate can become less reliable." } },
-      { id: "c", text: { hu: "A model parameters gradientjei automatikusan kisebbek lesznek.", en: "Model-parameter gradients automatically become smaller." } }
+      { id: "c", text: { hu: "A modellparaméterek (model paraméterek (parameters)) gradientjei automatikusan kisebbek lesznek.", en: "Model-parameter gradients automatically become smaller." } }
     ],
     correctIds: ["a", "b"],
-    explanation: { hu: "A test set nincs benne a helyes training folyamatban; mérete az evaluation megbízhatóságát befolyásolja.", en: "The test set is not part of the correct training procedure; its size affects evaluation reliability." }
+    explanation: { hu: "A teszthalmaz (test set) nincs benne a helyes training folyamatban; mérete az evaluation megbízhatóságát befolyásolja.", en: "The test set is not part of the correct training procedure; its size affects evaluation reliability." }
   },
   {
     id: "gen-q6",
     topics: ["overfitting", "model-capacity"],
     prompt: { hu: "Mely változtatások csökkenthetik az overfittinget a lecture szerint?", en: "Which changes can reduce overfitting according to the lecture?" },
     choices: [
-      { id: "a", text: { hu: "Egyszerűbb model / kevesebb parameter.", en: "A simpler model / fewer parameters." } },
+      { id: "a", text: { hu: "Egyszerűbb model / kevesebb paraméter (parameter).", en: "A simpler model / fewer parameters." } },
       { id: "b", text: { hu: "Több training data.", en: "More training data." } },
       { id: "c", text: { hu: "L2 regularization.", en: "L2 regularization." } },
       { id: "d", text: { hu: "Early stopping.", en: "Early stopping." } }
@@ -83,33 +83,33 @@ export const generalizationQuestions: Question[] = [
     prompt: { hu: "Egy súlyosan underfitted modelnél mely változtatás illeszkedik a lecture ajánlásához?", en: "For a severely underfitted model, which change matches the lecture recommendation?" },
     choices: [
       { id: "a", text: { hu: "Komplexebb model használata.", en: "Use a more complex model." } },
-      { id: "b", text: { hu: "Még kevesebb parameter.", en: "Use even fewer parameters." } },
-      { id: "c", text: { hu: "A task estimation errorának csökkentéséhez nagyobb model capacity lehet szükséges.", en: "Greater model capacity may be needed to reduce estimation error." } }
+      { id: "b", text: { hu: "Még kevesebb paraméter (parameter).", en: "Use even fewer parameters." } },
+      { id: "c", text: { hu: "A feladat (task) estimation errorának csökkentéséhez nagyobb modellkapacitás (model capacity) lehet szükséges.", en: "Greater model capacity may be needed to reduce estimation error." } }
     ],
     correctIds: ["a", "c"],
-    explanation: { hu: "Underfittingnél a model complexity túl alacsony, ezért a lecture komplexebb modelt javasol.", en: "With underfitting, model complexity is too low, so the lecture recommends a more complex model." }
+    explanation: { hu: "Underfittingnél a modellösszetettség (model complexity) túl alacsony, ezért a lecture komplexebb modelt javasol.", en: "With underfitting, model complexity is too low, so the lecture recommends a more complex model." }
   },
   {
     id: "gen-q8",
     topics: ["l2-regularization"],
     prompt: { hu: "Mely állítások igazak a lecture L2 regularization példájára?", en: "Which statements are true about the lecture's L2-regularization example?" },
     choices: [
-      { id: "a", text: { hu: "A loss large parameter values-t büntető λΣθᵢ² tagot kap.", en: "The loss gains a λΣθᵢ² term that penalizes large parameter values." } },
-      { id: "b", text: { hu: "A θ₀ bias nincs penalizálva.", en: "The θ₀ bias is not penalized." } },
+      { id: "a", text: { hu: "A veszteség (loss) large paraméter (parameter) values-t büntető λΣθᵢ² tagot kap.", en: "The loss gains a λΣθᵢ² term that penalizes large parameter values." } },
+      { id: "b", text: { hu: "A θ₀ eltolás (bias) nincs penalizálva.", en: "The θ₀ bias is not penalized." } },
       { id: "c", text: { hu: "λ=0 az unregularized model.", en: "λ=0 gives the unregularized model." } },
-      { id: "d", text: { hu: "L2 célja a model parameters számának növelése.", en: "The purpose of L2 is to increase the number of model parameters." } }
+      { id: "d", text: { hu: "L2 célja a modellparaméterek (model paraméterek (parameters)) számának növelése.", en: "The purpose of L2 is to increase the number of model parameters." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "L2 constraintet ad a weights nagyságára; nem új parameters hozzáadására szolgál.", en: "L2 constrains weight magnitude; it does not add more model parameters." }
+    explanation: { hu: "L2 constraintet ad a súlyok (weights) nagyságára; nem új paraméterek (parameters) hozzáadására szolgál.", en: "L2 constrains weight magnitude; it does not add more model parameters." }
   },
   {
     id: "gen-q9",
     topics: ["l2-regularization"],
     prompt: { hu: "Mi történhet, ha λ túl nagy L2 regularizationnél?", en: "What can happen if λ is too large in L2 regularization?" },
     choices: [
-      { id: "a", text: { hu: "A model túl erősen kis weights felé kényszerülhet.", en: "The model can be pushed too strongly toward small weights." } },
+      { id: "a", text: { hu: "A model túl erősen kis súlyok (weights) felé kényszerülhet.", en: "The model can be pushed too strongly toward small weights." } },
       { id: "b", text: { hu: "Underfitting alakulhat ki.", en: "Underfitting can occur." } },
-      { id: "c", text: { hu: "A lecture szerint könnyebb lehet közel zero parameters értékekkel csökkenteni a losst, mint megoldani a taskot.", en: "According to the lecture, minimizing the loss with near-zero parameters can become easier than solving the task." } },
+      { id: "c", text: { hu: "A lecture szerint könnyebb lehet közel zero paraméterek (parameters) értékekkel csökkenteni a losst, mint megoldani a taskot.", en: "According to the lecture, minimizing the loss with near-zero parameters can become easier than solving the task." } },
       { id: "d", text: { hu: "Ez mindig javítja a generalizationt, bármilyen nagy λ esetén.", en: "This always improves generalization no matter how large λ becomes." } }
     ],
     correctIds: ["a", "b", "c"],
@@ -120,26 +120,26 @@ export const generalizationQuestions: Question[] = [
     topics: ["validation", "hyperparameters"],
     prompt: { hu: "Melyek hyperparameters példák a lecture szerint?", en: "Which are examples of hyperparameters according to the lecture?" },
     choices: [
-      { id: "a", text: { hu: "Learning rate α.", en: "Learning rate α." } },
-      { id: "b", text: { hu: "Neural network architecture / number of layers or neurons.", en: "Neural-network architecture / number of layers or neurons." } },
+      { id: "a", text: { hu: "tanulási ráta (learning rate) α.", en: "Learning rate α." } },
+      { id: "b", text: { hu: "neurális hálózat (neural network) architecture / number of rétegek (layers) or neuronok (neurons).", en: "Neural-network architecture / number of layers or neurons." } },
       { id: "c", text: { hu: "Number of training iterations / early-stopping choice.", en: "Number of training iterations / early-stopping choice." } },
-      { id: "d", text: { hu: "A learned weight θ₁.", en: "A learned weight θ₁." } }
+      { id: "d", text: { hu: "A learned súly (weight) θ₁.", en: "A learned weight θ₁." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "θ weights model parameters. α, architecture és training duration a course példái szerint hyperparameters.", en: "θ weights are model parameters. α, architecture, and training duration are course examples of hyperparameters." }
+    explanation: { hu: "θ súlyok (weights) modellparaméterek (model paraméterek (parameters)). α, architecture és training duration a course példái szerint hyperparameters.", en: "θ weights are model parameters. α, architecture, and training duration are course examples of hyperparameters." }
   },
   {
     id: "gen-q11",
     topics: ["parameters", "hyperparameters"],
-    prompt: { hu: "Mely állítások igazak model parameters és hyperparameters optimalizálására?", en: "Which statements are true about optimizing model parameters and hyperparameters?" },
+    prompt: { hu: "Mely állítások igazak modellparaméterek (model paraméterek (parameters)) és hyperparameters optimalizálására?", en: "Which statements are true about optimizing model parameters and hyperparameters?" },
     choices: [
-      { id: "a", text: { hu: "θ model parameters értékeket a training seten gradient descent alapú módszerrel taníthatjuk.", en: "Model parameters θ can be trained on the training set with a gradient-descent-based method." } },
+      { id: "a", text: { hu: "θ modellparaméterek (model paraméterek (parameters)) értékeket a training seten gradienscsökkentés (gradiens (gradient) descent) alapú módszerrel taníthatjuk.", en: "Model parameters θ can be trained on the training set with a gradient-descent-based method." } },
       { id: "b", text: { hu: "Hyperparameters választásához validation performance használható.", en: "Validation performance can be used to select hyperparameters." } },
-      { id: "c", text: { hu: "Gradient descent általában nem használható minden hyperparameter optimalizálására.", en: "Gradient descent generally cannot be used to optimize every hyperparameter." } },
-      { id: "d", text: { hu: "A test set a fő hyperparameter tuning set.", en: "The test set is the main hyperparameter-tuning set." } }
+      { id: "c", text: { hu: "gradienscsökkentés (gradiens (gradient) descent) általában nem használható minden hyperparameter optimalizálására.", en: "Gradient descent generally cannot be used to optimize every hyperparameter." } },
+      { id: "d", text: { hu: "A teszthalmaz (test set) a fő hyperparameter tuning set.", en: "The test set is the main hyperparameter-tuning set." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "A test set final evaluationra van fenntartva. Hyperparameter tuning validation seten történik.", en: "The test set is reserved for final evaluation. Hyperparameter tuning uses validation data." }
+    explanation: { hu: "A teszthalmaz (test set) final evaluationra van fenntartva. Hyperparameter tuning validation seten történik.", en: "The test set is reserved for final evaluation. Hyperparameter tuning uses validation data." }
   },
   {
     id: "gen-q12",
@@ -165,7 +165,7 @@ export const generalizationQuestions: Question[] = [
       { id: "c", text: { hu: "A test sethez való minél pontosabb illesztés.", en: "Fitting the test set as closely as possible." } }
     ],
     correctIds: ["a", "b"],
-    explanation: { hu: "A test set alapján történő early stoppingot a lecture kifejezetten helytelennek / cheatingnek nevezi.", en: "The lecture explicitly labels early stopping based on the test set as incorrect / cheating." }
+    explanation: { hu: "A teszthalmaz (test set) alapján történő early stoppingot a lecture kifejezetten helytelennek / cheatingnek nevezi.", en: "The lecture explicitly labels early stopping based on the test set as incorrect / cheating." }
   },
   {
     id: "gen-q14",
@@ -173,12 +173,12 @@ export const generalizationQuestions: Question[] = [
     prompt: { hu: "Mely állítások igazak a helyes early stoppingra?", en: "Which statements are true about correct early stopping?" },
     choices: [
       { id: "a", text: { hu: "J_val-t figyeljük.", en: "We monitor J_val." } },
-      { id: "b", text: { hu: "A best validation state parameters értékeit érdemes megőrizni.", en: "It is useful to retain the parameters from the best validation state." } },
+      { id: "b", text: { hu: "A best validation state paraméterek (parameters) értékeit érdemes megőrizni.", en: "It is useful to retain the parameters from the best validation state." } },
       { id: "c", text: { hu: "Nem kell az első apró plateau-nál azonnal megállni; patience használható.", en: "We need not stop immediately at the first small plateau; patience can be used." } },
       { id: "d", text: { hu: "J_test alapján kell minden iteration után dönteni.", en: "J_test should be used to decide after every iteration." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "Helyesen validation loss irányítja a stopping decisiont; test data nem kerülhet model selectionbe.", en: "Correctly, validation loss drives the stopping decision; test data must not enter model selection." }
+    explanation: { hu: "Helyesen validációs veszteség (validation veszteség (loss)) irányítja a stopping decisiont; test data nem kerülhet model selectionbe.", en: "Correctly, validation loss drives the stopping decision; test data must not enter model selection." }
   },
   {
     id: "gen-q15",
@@ -199,7 +199,7 @@ export const generalizationQuestions: Question[] = [
     prompt: { hu: "Mely sorrend felel meg a lecture model-training procedure-jének?", en: "Which sequence matches the lecture's model-training procedure?" },
     choices: [
       { id: "a", text: { hu: "Válassz Ψ hyperparameters értékeket.", en: "Choose hyperparameters Ψ." } },
-      { id: "b", text: { hu: "Tanítsd θ model parameters értékeket training seten.", en: "Train model parameters θ on the training set." } },
+      { id: "b", text: { hu: "Tanítsd θ modellparaméterek (model paraméterek (parameters)) értékeket training seten.", en: "Train model parameters θ on the training set." } },
       { id: "c", text: { hu: "Értékeld validation seten és ez alapján válassz Ψ-t.", en: "Evaluate on the validation set and select Ψ from this performance." } },
       { id: "d", text: { hu: "A végén értékeld a kiválasztott final modelt test seten.", en: "At the end, evaluate the selected final model on the test set." } }
     ],
@@ -212,24 +212,24 @@ export const generalizationQuestions: Question[] = [
     prompt: { hu: "Miért helytelen J_test alapján early stoppingot végezni?", en: "Why is it incorrect to perform early stopping based on J_test?" },
     choices: [
       { id: "a", text: { hu: "A model selectionet a test sethez igazítjuk.", en: "We adapt model selection to the test set." } },
-      { id: "b", text: { hu: "A test set elveszíti független final-evaluation szerepét.", en: "The test set loses its role as an independent final evaluation." } },
+      { id: "b", text: { hu: "A teszthalmaz (test set) elveszíti független final-evaluation szerepét.", en: "The test set loses its role as an independent final evaluation." } },
       { id: "c", text: { hu: "A lecture ezt cheatingnek nevezi.", en: "The lecture calls this cheating." } },
       { id: "d", text: { hu: "Mert J_test matematikailag nem lehet scalar.", en: "Because J_test mathematically cannot be a scalar." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "A probléma nem a loss matematikai alakja, hanem test leakage: a test set beleszól a model selectionbe.", en: "The problem is not the mathematical form of the loss but test leakage: the test set influences model selection." }
+    explanation: { hu: "A probléma nem a veszteség (loss) matematikai alakja, hanem test leakage: a teszthalmaz (test set) beleszól a model selectionbe.", en: "The problem is not the mathematical form of the loss but test leakage: the test set influences model selection." }
   },
   {
     id: "gen-q18",
     topics: ["exam-scope"],
     prompt: { hu: "Mely témákat jelöli a Lecture 4 summary úgy, hogy NEM lesznek a tests/exam részei?", en: "Which topics does the Lecture 4 summary mark as NOT included in tests/exam?" },
     choices: [
-      { id: "a", text: { hu: "Polynomial regression.", en: "Polynomial regression." } },
+      { id: "a", text: { hu: "Polynomial regresszió (regression).", en: "Polynomial regression." } },
       { id: "b", text: { hu: "Polynomial interpolation.", en: "Polynomial interpolation." } },
       { id: "c", text: { hu: "Underfitting és overfitting.", en: "Underfitting and overfitting." } },
-      { id: "d", text: { hu: "Validation set és hyperparameters.", en: "Validation set and hyperparameters." } }
+      { id: "d", text: { hu: "validációs halmaz (validation set) és hyperparameters.", en: "Validation set and hyperparameters." } }
     ],
     correctIds: ["a", "b"],
-    explanation: { hu: "A summary szerint under/overfitting, hyperparameters és validation set tesztanyag; polynomial regression/interpolation nem.", en: "The summary says under/overfitting, hyperparameters, and validation set are test material; polynomial regression/interpolation are not." }
+    explanation: { hu: "A summary szerint under/overfitting, hyperparameters és validációs halmaz (validation set) tesztanyag; polynomial regresszió (regression)/interpolation nem.", en: "The summary says under/overfitting, hyperparameters, and validation set are test material; polynomial regression/interpolation are not." }
   }
 ];
