@@ -387,7 +387,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "A veszteség (loss) az összes példa (example) hibájából egyetlen skalár (scalar) célfüggvény (objective)-et készít. j példa (example)-index, m a példák száma, és a becslési hiba (prediction error) négyzete szerepel az összegben.",
+      hu: "A veszteség (loss) az összes példa (example) hibájából egyetlen skalár (scalar) célfüggvényt (objective) készít. j példaindex (example index), m a példák száma, a becslési hiba (prediction error) négyzete szerepel az összegben.",
       en: "The loss combines errors from all examples into one scalar objective. j is the example index, m is the number of examples, and squared prediction error is summed."
     }
   },
@@ -406,7 +406,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A gradiens (gradient) felfelé mutat, ezért descentnél kivonjuk a tanulási ráta (learning rate)-tel skálázott gradienst.",
+      hu: "A gradiens (gradient) felfelé mutat, ezért descentnél kivonjuk a tanulási rátával (learning rate) skálázott gradienst.",
       en: "The gradient points uphill, so descent subtracts the gradient scaled by the learning rate."
     }
   },
@@ -420,7 +420,7 @@ export const linearRegressionQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "A veszteség (loss) kvadratikus (quadratic) és konvex (convex).", en: "The loss is quadratic and convex." } },
       { id: "b", text: { hu: "Megfelelően kicsi lépésméret (step size) mellett a globális optimum (global optimum) megtalálható / közelíthető.", en: "With a sufficiently small step size, the global optimum can be found / approximated." } },
-      { id: "c", text: { hu: "Túl nagy tanulási ráta (learning rate) ronthatja a konvergencia (convergence)-t.", en: "An excessively large learning rate can harm convergence." } },
+      { id: "c", text: { hu: "Túl nagy tanulási ráta (learning rate) ronthatja a konvergenciát (convergence).", en: "An excessively large learning rate can harm convergence." } },
       { id: "d", text: { hu: "Ugyanez a global-optimum guarantee minden MLP-re is igaz.", en: "The same global-optimum guarantee holds for every MLP." } }
     ],
     correctIds: ["a", "b", "c"],
@@ -444,7 +444,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "X minden példa (example)-hoz egy sort és az n jellemző (feature) + tengelymetszet / eltolás (intercept) miatt n+1 oszlopot tartalmaz. Xθ ezért egy becslést ad mind az m példára (example).",
+      hu: "X minden példához (example) egy sort és az n jellemző (feature) + tengelymetszet / eltolás (intercept) miatt n+1 oszlopot tartalmaz. Xθ ezért egy becslést ad mind az m példára (example).",
       en: "X has one row per example and n+1 columns for n features plus intercept. Therefore Xθ produces one prediction for each of the m examples."
     }
   },
@@ -514,13 +514,13 @@ export const linearRegressionQuestions: Question[] = [
     },
     choices: [
       { id: "a", text: { hu: "Az bemeneti változók (input variables) hasonló nagyságrendbe hozása.", en: "Bringing input variables to a similar order of magnitude." } },
-      { id: "b", text: { hu: "A nagyon megnyúlt veszteség (loss) surface és lassú konvergencia (convergence) mérséklése.", en: "Reducing the highly elongated loss surface and slow convergence problem." } },
+      { id: "b", text: { hu: "A nagyon megnyúlt veszteségfelület (loss surface) és lassú konvergencia (convergence) mérséklése.", en: "Reducing the highly elongated loss surface and slow convergence problem." } },
       { id: "c", text: { hu: "A tanítás címkék (labels) számának csökkentése.", en: "Reducing the number of training labels." } },
-      { id: "d", text: { hu: "A scalinget jellemző (feature)-önként külön végezzük.", en: "Scaling is performed independently for each feature." } }
+      { id: "d", text: { hu: "A scalinget jellemzőnként (feature) külön végezzük.", en: "Scaling is performed independently for each feature." } }
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "Az előadás (lecture) a különböző jellemző (feature) scale-ekből eredő elnyúlt veszteség (loss) surface és lassú gradiens (gradient)-descent konvergencia (convergence) miatt javasolja a jellemző (feature) scalinget, minden variable-re külön.",
+      hu: "Az előadás (lecture) a különböző jellemzőskálákból (feature scales) eredő elnyúlt veszteségfelület (loss surface) és lassú gradienscsökkentés (gradient descent) konvergencia (convergence) miatt javasolja a jellemző (feature) scalinget, minden változóra (variable) külön.",
       en: "The lecture motivates feature scaling by the elongated loss surface and slow gradient-descent convergence caused by different feature scales, independently for each variable."
     }
   },
@@ -532,10 +532,10 @@ export const linearRegressionQuestions: Question[] = [
       en: "Which statements are true about min-max scaling according to the course?"
     },
     choices: [
-      { id: "a", text: { hu: "A tárgyalt képlet (formula) a jellemző (feature)-t [0,1] intervalba skálázza.", en: "The discussed formula scales the feature to the [0,1] interval." } },
+      { id: "a", text: { hu: "A tárgyalt képlet (formula) a jellemzőt (feature) [0,1] intervalba skálázza.", en: "The discussed formula scales the feature to the [0,1] interval." } },
       { id: "b", text: { hu: "A képlet (formula) (x−min)/(max−min).", en: "The formula is (x−min)/(max−min)." } },
       { id: "c", text: { hu: "Az előadás (lecture) szerint érzékenyebb az outliers-re.", en: "According to the lecture it is more sensitive to outliers." } },
-      { id: "d", text: { hu: "Az eredmény átlag (mean)-je szükségszerűen 0.", en: "The result necessarily has mean 0." } }
+      { id: "d", text: { hu: "Az eredmény átlaga (mean) szükségszerűen 0.", en: "The result necessarily has mean 0." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
@@ -552,13 +552,13 @@ export const linearRegressionQuestions: Question[] = [
     },
     choices: [
       { id: "a", text: { hu: "A képlet (formula) (x−μ)/σ.", en: "The formula is (x−μ)/σ." } },
-      { id: "b", text: { hu: "A transzformált jellemző (feature) átlag (mean)-je 0.", en: "The transformed feature has mean 0." } },
-      { id: "c", text: { hu: "A transzformált jellemző (feature) szórás (standard deviation)-je 1.", en: "The transformed feature has standard deviation 1." } },
+      { id: "b", text: { hu: "A transzformált jellemző (feature) átlaga (mean) 0.", en: "The transformed feature has mean 0." } },
+      { id: "c", text: { hu: "A transzformált jellemző (feature) szórása (standard deviation) 1.", en: "The transformed feature has standard deviation 1." } },
       { id: "d", text: { hu: "Minden érték szükségszerűen [0,1] közé kerül.", en: "Every value necessarily lies in [0,1]." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Standardization a átlag (mean)-t kivonja és szórás (standard deviation)-nel oszt. Nem korlátozza az értékeket [0,1]-re.",
+      hu: "Standardization a átlag (mean)-t kivonja és szórással (standard deviation) oszt. Nem korlátozza az értékeket [0,1]-re.",
       en: "Standardization subtracts the mean and divides by standard deviation. It does not constrain values to [0,1]."
     }
   },
