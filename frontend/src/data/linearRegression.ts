@@ -336,19 +336,19 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q1",
     topics: ["linear-regression", "shapes"],
     prompt: {
-      hu: "200 betegből álló tanítóhalmaz (training set)ünk van. Minden betegnél 4 jellemző (feature) (súly (weight), életkor (age), magasság (height), nem (sex)) alapján cholesterol levelt becslünk linear regressionnel. Az interceptet x₀=1 oszloppal kezeljük. Mely állítások igazak?",
+      hu: "200 betegből álló tanítóhalmaz (training set)ünk van. Minden betegnél 4 jellemző (feature) (súly (weight), életkor (age), magasság (height), nem (sex)) alapján koleszterinszintet becslünk egyenesáris regresszióval. Az tengelymetszetet / eltolást x₀=1 oszloppal kezeljük. Mely állítások igazak?",
       en: "We have a training set of 200 patients. We predict cholesterol level with linear regression from 4 features (weight, age, height, sex), using an x₀=1 column for the intercept. Which statements are true?"
     },
     choices: [
       { id: "a", text: { hu: "X shape-je (200, 5).", en: "X has shape (200, 5)." } },
-      { id: "b", text: { hu: "θ 5 model parametert tartalmaz.", en: "θ contains 5 model parameters." } },
+      { id: "b", text: { hu: "θ 5 modellparamétert tartalmaz.", en: "θ contains 5 model parameters." } },
       { id: "c", text: { hu: "y shape-je (200,).", en: "y has shape (200,)." } },
       { id: "d", text: { hu: "Az életkor (age) értékek θ-ban találhatók.", en: "Age values are stored in θ." } },
       { id: "e", text: { hu: "Ez osztályozás (classification) feladat (task).", en: "This is a classification task." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "4 valódi jellemző (feature) + az x₀=1 tengelymetszet / eltolás (intercept) oszlop miatt X-ben 5 oszlop van, és θ-ban 5 paraméter (parameter). A 200 cholesterol címke (label) a y vectorban van. Az életkor (age) X egyik jellemző (feature) oszlopa. A koleszterinszint (cholesterol level) folytonos címke (label), ezért regresszió (regression).",
+      hu: "4 valódi jellemző (feature) + az x₀=1 tengelymetszet / eltolás (intercept) oszlop miatt X-ben 5 oszlop van, és θ-ban 5 paraméter (parameter). A 200 koleszterin címke (label) a y vektorban van. Az életkor (age) X egyik jellemző (feature) oszlopa. A koleszterinszint (cholesterol level) folytonos címke (label), ezért regresszió (regression).",
       en: "Four real features plus the x₀=1 intercept column give X five columns and θ five parameters. The 200 cholesterol labels form y. Age is a feature column in X. Cholesterol level is continuous, so this is regression."
     }
   },
@@ -356,13 +356,13 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q2",
     topics: ["linear-regression", "geometry"],
     prompt: {
-      hu: "Mely geometriai állítások igazak lineáris regresszió (linear regression) esetén?",
+      hu: "Mely geometriai állítások igazak egyenesáris regresszió (linear regression) esetén?",
       en: "Which geometric statements are true for linear regression?"
     },
     choices: [
       { id: "a", text: { hu: "1 bemeneti változó (input variable) esetén a hipotézis (hypothesis) egyenes a 2D x–y síkon.", en: "With 1 input variable, the hypothesis is a line in the 2D x–y plane." } },
       { id: "b", text: { hu: "2 bemeneti változó (input variable) esetén a hipotézis (hypothesis) sík lehet 3D-ben.", en: "With 2 input variables, the hypothesis can be a plane in 3D." } },
-      { id: "c", text: { hu: "n bemeneti változó (input variable) esetén a linear hipotézis (hypothesis) hipersík (hyperplane).", en: "With n input variables, the linear hypothesis is a hyperplane." } },
+      { id: "c", text: { hu: "n bemeneti változó (input variable) esetén a egyenesáris hipotézis (hypothesis) hipersík (hyperplane).", en: "With n input variables, the linear hypothesis is a hyperplane." } },
       { id: "d", text: { hu: "2 bemeneti változó (input variable) esetén csak 2 modellparaméter (model parameter) van.", en: "With 2 input variables there are only 2 model parameters." } }
     ],
     correctIds: ["a", "b", "c"],
@@ -375,7 +375,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q3",
     topics: ["least-squares", "loss"],
     prompt: {
-      hu: "A kurzus (course)-ban használt J(θ)=1/(2m) Σⱼ(hθ(x⁽ʲ⁾)−y⁽ʲ⁾)² veszteség (loss) formuláról mely állítások igazak?",
+      hu: "A kurzusban (course) használt J(θ)=1/(2m) Σⱼ(hθ(x⁽ʲ⁾)−y⁽ʲ⁾)² veszteség (loss) formuláról mely állítások igazak?",
       en: "Which statements are true about the course loss formula J(θ)=1/(2m) Σⱼ(hθ(x⁽ʲ⁾)−y⁽ʲ⁾)²?"
     },
     choices: [
@@ -402,11 +402,11 @@ export const linearRegressionQuestions: Question[] = [
       { id: "a", text: { hu: "A gradiens (gradient) komponensei parciális deriváltak (partial derivatives).", en: "The components of the gradient are partial derivatives." } },
       { id: "b", text: { hu: "A gradiens (gradient) a veszteség (loss) legmeredekebb növekedésének irányába mutat.", en: "The gradient points in the direction of steepest increase of the loss." } },
       { id: "c", text: { hu: "gradiens (gradient) descentben θ := θ − α∇J(θ).", en: "Gradient descent uses θ := θ − α∇J(θ)." } },
-      { id: "d", text: { hu: "A gradientet hozzá kell adni θ-hoz, hogy lefelé menjünk.", en: "The gradient must be added to θ to move downhill." } }
+      { id: "d", text: { hu: "A gradienst hozzá kell adni θ-hoz, hogy lefelé menjünk.", en: "The gradient must be added to θ to move downhill." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A gradiens (gradient) felfelé mutat, ezért descentnél kivonjuk a tanulási ráta (learning rate)-tel skálázott gradientet.",
+      hu: "A gradiens (gradient) felfelé mutat, ezért descentnél kivonjuk a tanulási ráta (learning rate)-tel skálázott gradienst.",
       en: "The gradient points uphill, so descent subtracts the gradient scaled by the learning rate."
     }
   },
@@ -414,7 +414,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q5",
     topics: ["gradient-descent", "convexity"],
     prompt: {
-      hu: "Mely állítások igazak lineáris regresszió (linear regression) + MSE gradienscsökkentés (gradient descent) trainingre?",
+      hu: "Mely állítások igazak egyenesáris regresszió (linear regression) + MSE gradienscsökkentés (gradient descent) tanításra?",
       en: "Which statements are true for gradient-descent training of linear regression with MSE?"
     },
     choices: [
@@ -425,7 +425,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "lineáris regresszió (linear regression) MSE veszteség (loss) konvex (convex), ezért megfelelő lépésméret (step size) mellett gradienscsökkentés (gradient descent) a globális minimum (global minimum) felé konvergálhat. MLP veszteség (loss) általánosan nem konvex (convex), ezért ugyanez a garancia nincs.",
+      hu: "egyenesáris regresszió (linear regression) MSE veszteség (loss) konvex (convex), ezért megfelelő lépésméret (step size) mellett gradienscsökkentés (gradient descent) a globális minimum (global minimum) felé konvergálhat. MLP veszteség (loss) általánosan nem konvex (convex), ezért ugyanez a garancia nincs.",
       en: "The MSE loss of linear regression is convex, so with an appropriate step size gradient descent can converge toward the global minimum. MLP losses are generally non-convex, so the same guarantee does not hold."
     }
   },
@@ -444,7 +444,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "X minden példa (example)-hoz egy sort és az n jellemző (feature) + tengelymetszet / eltolás (intercept) miatt n+1 oszlopot tartalmaz. Xθ ezért egy predictiont ad mind az m példa (example)-ra.",
+      hu: "X minden példa (example)-hoz egy sort és az n jellemző (feature) + tengelymetszet / eltolás (intercept) miatt n+1 oszlopot tartalmaz. Xθ ezért egy becslést ad mind az m példára (example).",
       en: "X has one row per example and n+1 columns for n features plus intercept. Therefore Xθ produces one prediction for each of the m examples."
     }
   },
@@ -459,7 +459,7 @@ export const linearRegressionQuestions: Question[] = [
       { id: "a", text: { hu: "Lehetővé teszi, hogy az tengelymetszet / eltolás (intercept) θ₀ is a dot product része legyen.", en: "It allows the intercept θ₀ to be included in the dot product." } },
       { id: "b", text: { hu: "Minden tanítási példa (training example) esetén az értéke 1.", en: "Its value is 1 for every training example." } },
       { id: "c", text: { hu: "Ez maga a címke (label).", en: "It is the label itself." } },
-      { id: "d", text: { hu: "Ez egy külön tanulandó jellemzőérték (feature value) minden példa (example)-ra.", en: "It is a separately learned feature value for every example." } }
+      { id: "d", text: { hu: "Ez egy külön tanulandó jellemzőérték (feature value) minden példára (example).", en: "It is a separately learned feature value for every example." } }
     ],
     correctIds: ["a", "b"],
     explanation: {
@@ -471,18 +471,18 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q8",
     topics: ["normal-equation"],
     prompt: {
-      hu: "Mely állítások igazak a normal equationre linear least squares esetén?",
+      hu: "Mely állítások igazak a normal equationre egyenesáris least squares esetén?",
       en: "Which statements are true about the normal equation for linear least squares?"
     },
     choices: [
       { id: "a", text: { hu: "θ = (XᵀX)⁻¹Xᵀy egy közvetlen megoldási képlet (formula).", en: "θ = (XᵀX)⁻¹Xᵀy is a direct solution formula." } },
-      { id: "b", text: { hu: "A előadás (lecture) a θ = X⁺y pseudoinverse formát is megadja.", en: "The lecture also gives the pseudoinverse form θ = X⁺y." } },
+      { id: "b", text: { hu: "Az előadás (lecture) a θ = X⁺y pseudoinverse formát is megadja.", en: "The lecture also gives the pseudoinverse form θ = X⁺y." } },
       { id: "c", text: { hu: "Ehhez ugyanúgy sok gradienscsökkentés (gradient descent) iteráció (iteration) kötelező.", en: "It necessarily requires many gradient-descent iterations." } },
       { id: "d", text: { hu: "X és y a data alapján ismert.", en: "X and y are known from the data." } }
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "A normal equation algebrai, egy lépéses least-squares megoldás. A előadás (lecture) a Moore–Penrose pseudoinverse alakot is megadja.",
+      hu: "A normal equation algebrai, egy lépéses least-squares megoldás. Az előadás (lecture) a Moore–Penrose pseudoinverse alakot is megadja.",
       en: "The normal equation is a direct algebraic least-squares solution. The lecture also gives the Moore–Penrose pseudoinverse form."
     }
   },
@@ -509,18 +509,18 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q10",
     topics: ["feature-scaling"],
     prompt: {
-      hu: "Mi a jellemzőskálázás (feature scaling) fő célja a előadás (lecture) szerint?",
+      hu: "Mi a jellemzőskálázás (feature scaling) fő célja az előadás (lecture) szerint?",
       en: "What is the main purpose of feature scaling according to the lecture?"
     },
     choices: [
       { id: "a", text: { hu: "Az bemeneti változók (input variables) hasonló nagyságrendbe hozása.", en: "Bringing input variables to a similar order of magnitude." } },
       { id: "b", text: { hu: "A nagyon megnyúlt veszteség (loss) surface és lassú konvergencia (convergence) mérséklése.", en: "Reducing the highly elongated loss surface and slow convergence problem." } },
-      { id: "c", text: { hu: "A training címkék (labels) számának csökkentése.", en: "Reducing the number of training labels." } },
+      { id: "c", text: { hu: "A tanítás címkék (labels) számának csökkentése.", en: "Reducing the number of training labels." } },
       { id: "d", text: { hu: "A scalinget jellemző (feature)-önként külön végezzük.", en: "Scaling is performed independently for each feature." } }
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "A előadás (lecture) a különböző jellemző (feature) scale-ekből eredő elnyúlt veszteség (loss) surface és lassú gradiens (gradient)-descent konvergencia (convergence) miatt javasolja a jellemző (feature) scalinget, minden variable-re külön.",
+      hu: "Az előadás (lecture) a különböző jellemző (feature) scale-ekből eredő elnyúlt veszteség (loss) surface és lassú gradiens (gradient)-descent konvergencia (convergence) miatt javasolja a jellemző (feature) scalinget, minden variable-re külön.",
       en: "The lecture motivates feature scaling by the elongated loss surface and slow gradient-descent convergence caused by different feature scales, independently for each variable."
     }
   },
@@ -534,12 +534,12 @@ export const linearRegressionQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "A tárgyalt képlet (formula) a jellemző (feature)-t [0,1] intervalba skálázza.", en: "The discussed formula scales the feature to the [0,1] interval." } },
       { id: "b", text: { hu: "A képlet (formula) (x−min)/(max−min).", en: "The formula is (x−min)/(max−min)." } },
-      { id: "c", text: { hu: "A előadás (lecture) szerint érzékenyebb az outliers-re.", en: "According to the lecture it is more sensitive to outliers." } },
+      { id: "c", text: { hu: "Az előadás (lecture) szerint érzékenyebb az outliers-re.", en: "According to the lecture it is more sensitive to outliers." } },
       { id: "d", text: { hu: "Az eredmény átlag (mean)-je szükségszerűen 0.", en: "The result necessarily has mean 0." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Min-max scaling a minimumot 0-ra, a maximumot 1-re viszi. A átlag (mean) nem lesz általában 0, és a előadás (lecture) kiemeli az outlier-érzékenységet.",
+      hu: "Min-max scaling a minimumot 0-ra, a maximumot 1-re viszi. A átlag (mean) nem lesz általában 0, és az előadás (lecture) kiemeli az outlier-érzékenységet.",
       en: "Min-max scaling maps the minimum to 0 and maximum to 1. The mean is not generally 0, and the lecture highlights its sensitivity to outliers."
     }
   },
@@ -547,7 +547,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q12",
     topics: ["feature-scaling", "standardization"],
     prompt: {
-      hu: "Mely állítások igazak standardization után egy jellemző (feature)-re?",
+      hu: "Mely állítások igazak standardization után egy jellemzőre (feature)?",
       en: "Which statements are true for a feature after standardization?"
     },
     choices: [
@@ -576,7 +576,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b"],
     explanation: {
-      hu: "A előadás (lecture) explicit megjegyzése: 'Min-max scaling: More sensitive to outliers.' Ezért a két itt tárgyalt módszer közül standardization a robusztusabb.",
+      hu: "Az előadás (lecture) explicit megjegyzése: 'Min-max scaling: More sensitive to outliers.' Ezért a két itt tárgyalt módszer közül standardization a robusztusabb.",
       en: "The lecture explicitly notes: 'Min-max scaling: More sensitive to outliers.' Therefore, among these two methods, standardization is the more robust one."
     }
   },
@@ -584,7 +584,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q14",
     topics: ["linear-regression", "prediction"],
     prompt: {
-      hu: "Egyetlen példa (example)-ra hθ(x)=θ₁x+θ₀ lineáris regresszió (linear regression) hipotézis (hypothesis) esetén mely állítások igazak?",
+      hu: "Egyetlen példára (example) hθ(x)=θ₁x+θ₀ egyenesáris regresszió (linear regression) hipotézis (hypothesis) esetén mely állítások igazak?",
       en: "For a single example with the linear-regression hypothesis hθ(x)=θ₁x+θ₀, which statements are true?"
     },
     choices: [
@@ -595,7 +595,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Egy univariate lineáris regresszió (linear regression) példa (example) predictionje skalár (scalar). θ₀ és θ₁ modellparaméterek (model parameters), míg x bemenet (input) jellemzőérték (feature value).",
+      hu: "Egy egyváltozós egyenesáris regresszió (linear regression) példa (example) becslése skalár (scalar). θ₀ és θ₁ modellparaméterek (model parameters), míg x bemenet (input) jellemzőérték (feature value).",
       en: "The prediction for one univariate linear-regression example is a scalar. θ₀ and θ₁ are model parameters, while x is the input-feature value."
     }
   }
