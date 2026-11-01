@@ -3,353 +3,289 @@ import type { Lesson, Question } from "../types";
 export const mlpLesson: Lesson = {
   id: "artificial-neuron-mlp",
   title: {
-    hu: "Artificial Neuron és Multilayer Perceptron",
+    hu: "Mesterséges neuron és többrétegű perceptron",
     en: "Artificial Neuron and Multilayer Perceptron"
   },
   subtitle: {
-    hu: "Neuronmodell, fully-connected layer, parameter count, activation functions és task-specifikus output",
-    en: "Neuron model, fully connected layers, parameter counting, activation functions, and task-specific outputs"
+    hu: "A súlyozott összegtől az aktivációs függvényeken és teljesen összekötött rétegeken át a megfelelő kimeneti rétegig",
+    en: "From weighted sums and activation functions through fully connected layers to task-specific output layers"
   },
-  source: "Lectures 4–5",
+  source: "Lectures 4–6",
   sections: [
     {
       id: "artificial-neuron",
       title: {
-        hu: "Az artificial neuron modell",
-        en: "The artificial-neuron model"
+        hu: "A mesterséges neuron alapötlete",
+        en: "The basic idea of an artificial neuron"
       },
       body: {
-        hu: "Egy artificial neuron weighted sumot képez az inputokból, majd activation functiont alkalmaz. A lecture szerint ha g sigmoid, akkor az artificial neuron egy multivariate logistic regression modellnek felel meg.",
-        en: "An artificial neuron forms a weighted sum of its inputs and then applies an activation function. According to the lecture, if g is sigmoid, the artificial neuron corresponds to a multivariate logistic-regression model."
+        hu: "Egy mesterséges neuron (artificial neuron) több bemeneti jellemzőből súlyozott összeget számol, hozzáad egy eltolást (bias), majd az eredményt egy aktivációs függvényen (activation function) vezeti át. A lineáris rész ugyanazt a szerkezetet követi, mint a többváltozós lineáris vagy logisztikus regresszió: z=W·x+b, majd a neuron kimenete a=g(z).",
+        en: "An artificial neuron computes a weighted sum of multiple input features, adds a bias, and passes the result through an activation function. Its linear part follows the same structure as multivariate linear or logistic regression: z=W·x+b, followed by a=g(z)."
       },
-      intuition: {
-        hu: "A neuron két lépése: 1) z = weighted sum + bias; 2) output = g(z). A weights azt mondják meg, mely input mennyire számít.",
-        en: "A neuron has two steps: 1) z = weighted sum + bias; 2) output = g(z). The weights determine how strongly each input contributes."
-      },
-      examTrap: {
-        hu: "A neuron nem csak sigmoidot használhat; g lehet más activation function is. Sigmoid esetén azonban a lecture explicit logistic regression kapcsolatot mond ki.",
-        en: "A neuron is not restricted to sigmoid; g can be another activation function. With sigmoid, however, the lecture explicitly identifies it with multivariate logistic regression."
+      why: {
+        hu: "A súlyok (weights) szabályozzák, hogy az egyes bemenetek milyen erősen hassanak a neuronra. Az aktivációs függvény teszi lehetővé, hogy a neuron ne csak tisztán lineáris leképezést valósítson meg.",
+        en: "Weights control how strongly each input influences the neuron. The activation function allows the neuron to implement more than a purely linear mapping."
       },
       formula: {
-        hu: "z = w·x + b;   output = g(z)",
-        en: "z = w·x + b;   output = g(z)"
+        hu: "z = w₁x₁ + … + wₙxₙ + b    →    a = g(z)",
+        en: "z = w₁x₁ + … + wₙxₙ + b    →    a = g(z)"
+      },
+      formulaTerms: [
+        { symbol: "xᵢ", hu: "Az i-edik bemeneti jellemző.", en: "The i-th input feature." },
+        { symbol: "wᵢ", hu: "Az i-edik bemenethez tartozó tanulható súly (weight).", en: "Learnable weight for input i." },
+        { symbol: "b", hu: "Tanulható eltolás (bias).", en: "Learnable bias." },
+        { symbol: "z", hu: "Az aktiváció előtti lineáris pontszám, más néven preaktiváció (pre-activation).", en: "Linear score before the activation, also called pre-activation." },
+        { symbol: "g", hu: "Az aktivációs függvény (activation function).", en: "The activation function." },
+        { symbol: "a", hu: "A neuron aktiváció utáni kimenete.", en: "Neuron output after the activation." }
+      ],
+      connections: {
+        hu: "A lecture explicit megjegyzése szerint ha g a szigmoid függvény, akkor egy mesterséges neuron többváltozós logisztikus regressziónak tekinthető.",
+        en: "The lecture explicitly notes that if g is sigmoid, an artificial neuron is equivalent to multivariate logistic regression."
+      },
+      examTrap: {
+        hu: "A b eltolás (bias) ugyanazt a szerepet tölti be, mint a korábbi θ₀ konstans tag. A W és b jelölés a neurális hálózatok mátrixos jelölése, míg θ-t korábban lineáris/logisztikus regressziónál használtuk.",
+        en: "The bias b plays the same role as the earlier θ₀ constant term. W and b are common matrix-form neural-network notation, while θ was used earlier for linear/logistic regression."
       },
       keyTerms: [
-        { term: "artificial neuron" },
-        { term: "weight" },
-        { term: "bias" },
-        { term: "activation function" }
+        { term: "artificial neuron", hu: "mesterséges neuron" },
+        { term: "weight", hu: "súly" },
+        { term: "bias", hu: "eltolás" },
+        { term: "activation function", hu: "aktivációs függvény" }
       ]
     },
     {
       id: "single-neuron-limit",
       title: {
-        hu: "Mit tud egyetlen sigmoid neuron?",
-        en: "What can a single sigmoid neuron represent?"
+        hu: "Miért nem elég egyetlen neuron?",
+        en: "Why is one neuron not enough?"
       },
       body: {
-        hu: "Egyetlen sigmoid neuron egyetlen linear decision surface-t tud reprezentálni. Két input variable esetén ez egy line az x₁,x₂ plane-ben; általánosan hyperplane. Emiatt csak linearly separable problémákat tud jól megoldani.",
-        en: "A single sigmoid neuron can represent one linear decision surface. With two input variables this is a line in the x₁,x₂ plane; generally it is a hyperplane. Therefore it can only solve linearly separable problems well."
+        hu: "Egyetlen szigmoid neuronnal kapott döntési határ lineáris: két bemeneti változó esetén egy egyenes, magasabb dimenzióban hipersík. A Lecture 5 IRIS-példája azt mutatja, hogy bizonyos kategóriák nem választhatók szét egyetlen ilyen lineáris határral.",
+        en: "A single sigmoid neuron produces a linear decision boundary: a line for two input variables and a hyperplane in higher dimensions. The Lecture 5 IRIS example shows that some categories cannot be separated by one such boundary."
+      },
+      why: {
+        hu: "Ha az osztályok elrendezése nem lineárisan szeparálható (linearly separable), akkor bármilyen súlyokat választunk, egyetlen lineáris határ nem tudja jól szétválasztani őket. Több neuron és több réteg összetettebb döntési felületeket tud létrehozni.",
+        en: "If classes are not linearly separable, no choice of weights lets a single linear boundary separate them correctly. Multiple neurons and layers can form more complex decision surfaces."
       },
       intuition: {
-        hu: "Ha a két class egyetlen egyenessel nem választható szét, egy sigmoid neuron expressive power-je kevés.",
-        en: "If two classes cannot be separated by a single line, one sigmoid neuron's expressive power is insufficient."
+        hu: "Az XOR a klasszikus szemléltető példa: négy pontból az átlósan elhelyezkedő párok tartoznak ugyanabba az osztályba, amit egyetlen egyenes nem tud szétválasztani.",
+        en: "XOR is the classic illustration: diagonally opposite pairs belong to the same class, which cannot be separated by a single straight line."
       },
-      examTrap: {
-        hu: "A lecture XOR példája nem linearly separable, ezért single neuron nem tudja jól reprezentálni.",
-        en: "The lecture's XOR example is not linearly separable, so a single neuron cannot represent it well."
+      connections: {
+        hu: "Ez motiválja a többrétegű perceptron (Multilayer Perceptron, MLP) használatát: az első réteg új reprezentációkat hoz létre, amelyekre a következő rétegek további leképezéseket alkalmaznak.",
+        en: "This motivates the Multilayer Perceptron: the first layer creates new representations that later layers can transform further."
       },
       keyTerms: [
-        { term: "linear decision surface" },
-        { term: "linearly separable" },
-        { term: "XOR" }
+        { term: "linearly separable", hu: "lineárisan szeparálható" },
+        { term: "decision boundary", hu: "döntési határ" }
       ]
     },
     {
-      id: "why-mlp",
+      id: "fully-connected",
       title: {
-        hu: "Miért kell több neuron és több layer?",
-        en: "Why do we need multiple neurons and layers?"
+        hu: "Teljesen összekötött réteg és a mátrixok alakja",
+        en: "Fully connected layers and matrix shapes"
       },
       body: {
-        hu: "A lecture olyan classification feladatokat mutat, ahol egy line nem elég a classok elválasztására. Több neuron linear decision surfaces eredményeit kombinálva összetettebb decision boundary-k reprezentálhatók.",
-        en: "The lecture shows classification tasks where one line is insufficient to separate classes. By combining outputs of multiple neurons and their linear decision surfaces, more complex decision boundaries can be represented."
+        hu: "Teljesen összekötött rétegben (fully connected / dense layer) az előző réteg minden kimenete kapcsolatban áll a következő réteg minden neuronjával. Ha az előző réteg S_(k−1) értéket ad és a k-adik réteg S_k neuront tartalmaz, akkor a súlymátrix W_k alakja (S_k, S_(k−1)), az eltolásvektor b_k alakja pedig (S_k,).",
+        en: "In a fully connected / dense layer, every output of the previous layer connects to every neuron in the next layer. If the previous layer has size S_(k−1) and layer k has S_k neurons, W_k has shape (S_k, S_(k−1)) and b_k has shape (S_k,)."
       },
-      intuition: {
-        hu: "Az első layer több egyszerű 'vágást' készíthet az input space-ben, a következő layer pedig kombinálhatja ezeket.",
-        en: "The first layer can create several simple 'cuts' in input space, while the next layer can combine them."
-      },
-      examTrap: {
-        hu: "A lecture szerint akár két-layer sigmoid network is nagyon erős approximator lehet elegendő neuron mellett; ez nem azt jelenti, hogy a megfelelő weights könnyen megtalálhatók.",
-        en: "According to the lecture, even a two-layer sigmoid network can be a very powerful approximator with enough neurons; this does not mean the required weights are easy to find."
-      },
-      keyTerms: [
-        { term: "expressive power" },
-        { term: "Multilayer Perceptron (MLP)" }
-      ]
-    },
-    {
-      id: "dense-layers",
-      title: {
-        hu: "Fully-connected / dense layer",
-        en: "Fully connected / dense layer"
-      },
-      body: {
-        hu: "Fully-connected (dense) layerben a layer minden neuronja kapcsolódik a következő layer minden neuronjához. A lecture PyTorch megfelelője a torch.nn.Linear.",
-        en: "In a fully connected (dense) layer, every neuron in one layer is connected to every neuron in the next layer. The lecture identifies torch.nn.Linear as the PyTorch equivalent."
-      },
-      intuition: {
-        hu: "Ha egy layerben S_(k−1) input érték és a következőben S_k neuron van, minden új neuron minden előző értékhez külön weightet kap.",
-        en: "If a layer receives S_(k−1) values and contains S_k neurons, every new neuron receives a separate weight for every previous value."
-      },
-      examTrap: {
-        hu: "A lecture diagramjában az input és output 'layer' elnevezés vizuális konvenció: ezekben nincs külön neuron vagy weight. A learnable fully-connected layers azok, amelyek W és b parameters értékeket tartalmaznak.",
-        en: "In the lecture diagram, the input and output 'layers' are visual conventions: they do not themselves contain separate neurons or weights. Learnable fully connected layers contain W and b parameters."
-      },
-      keyTerms: [
-        { term: "fully connected" },
-        { term: "dense" },
-        { term: "torch.nn.Linear" }
-      ]
-    },
-    {
-      id: "matrix-shapes",
-      title: {
-        hu: "Weight matrix és bias vector shape-ek",
-        en: "Weight-matrix and bias-vector shapes"
-      },
-      body: {
-        hu: "A course általános jelölése szerint layer k esetén W_k ∈ R^(S_k × S_(k−1)) és b_k ∈ R^(S_k), ahol S_k a k. layer neurons száma. S₀=n az input variables száma.",
-        en: "Using the course notation, for layer k, W_k ∈ R^(S_k × S_(k−1)) and b_k ∈ R^(S_k), where S_k is the number of neurons in layer k. S₀=n is the number of input variables."
-      },
-      intuition: {
-        hu: "W minden sora egy neuron weight vectora. Ezért S_k neuron → S_k sor; minden neuron S_(k−1) előző aktivációt kap → S_(k−1) oszlop.",
-        en: "Each row of W is one neuron's weight vector. Therefore S_k neurons give S_k rows; each neuron receives S_(k−1) previous activations, giving S_(k−1) columns."
-      },
-      examTrap: {
-        hu: "A bias nem plusz oszlopként szerepel W-ben ebben az MLP notationben: külön b vector van.",
-        en: "In this MLP notation, the bias is not an extra column of W; it is stored separately in b."
+      why: {
+        hu: "A mátrixos alak egyszerre számítja ki egy réteg összes neuronjának súlyozott összegét. Ez felel meg annak, amit a gyakorlati PyTorch-kódban egy nn.Linear réteg végez.",
+        en: "The matrix form computes weighted sums for all neurons in a layer at once. This corresponds to what a PyTorch nn.Linear layer implements."
       },
       formula: {
-        hu: "W_k ∈ R^(S_k × S_(k−1));   b_k ∈ R^(S_k);   S₀ = n",
-        en: "W_k ∈ R^(S_k × S_(k−1));   b_k ∈ R^(S_k);   S₀ = n"
+        hu: "z_k = W_k a_(k−1) + b_k    |    W_k ∈ ℝ^(S_k×S_(k−1)), b_k ∈ ℝ^(S_k)",
+        en: "z_k = W_k a_(k−1) + b_k    |    W_k ∈ ℝ^(S_k×S_(k−1)), b_k ∈ ℝ^(S_k)"
+      },
+      formulaTerms: [
+        { symbol: "S₀", hu: "A bemeneti „réteg” mérete, vagyis a bemeneti változók száma.", en: "Input 'layer' size, i.e. number of input variables." },
+        { symbol: "S_k", hu: "A k-adik réteg neuronjainak száma.", en: "Number of neurons in layer k." },
+        { symbol: "W_k", hu: "A k-adik réteg súlymátrixa.", en: "Weight matrix of layer k." },
+        { symbol: "b_k", hu: "A k-adik réteg eltolásvektora.", en: "Bias vector of layer k." },
+        { symbol: "a_(k−1)", hu: "Az előző réteg kimenete / aktivációja.", en: "Output / activation of the previous layer." }
+      ],
+      examTrap: {
+        hu: "A súlymátrix sorainak száma a célréteg neuronjainak száma, oszlopainak száma pedig az előző réteg mérete. A bias minden célneuronhoz egy külön értéket tartalmaz.",
+        en: "The weight matrix has one row per target neuron and one column per previous-layer output. The bias vector contains one value per target neuron."
       },
       keyTerms: [
-        { term: "weight matrix" },
-        { term: "bias vector" },
-        { term: "layer size" }
+        { term: "fully connected layer", hu: "teljesen összekötött réteg" },
+        { term: "dense layer", hu: "sűrű réteg" },
+        { term: "weight matrix", hu: "súlymátrix" },
+        { term: "bias vector", hu: "eltolásvektor" }
       ]
     },
     {
       id: "parameter-count",
       title: {
-        hu: "Parameter count",
-        en: "Parameter count"
+        hu: "Hány tanulható paramétere van egy rétegnek?",
+        en: "How many learnable parameters does a layer have?"
       },
       body: {
-        hu: "Egy fully-connected layer parameter countja: S_k·S_(k−1) weights + S_k biases = S_k(S_(k−1)+1). Az egész network parameter countja a layerek parameter countjainak összege.",
-        en: "A fully connected layer has S_k·S_(k−1) weights plus S_k biases, giving S_k(S_(k−1)+1) parameters. The total network parameter count is the sum across all layers."
-      },
-      intuition: {
-        hu: "Minden neuronhoz annyi weight kell, ahány bemenete van, plusz egy bias.",
-        en: "Each neuron needs one weight per input plus one bias."
-      },
-      realWorld: {
-        hu: "A mintateszt 20 input → 10 hidden neuron → 1 output példájában: első layer = 10·20 + 10 = 210; második = 1·10 + 1 = 11; total = 221.",
-        en: "In the example-test architecture 20 inputs → 10 hidden neurons → 1 output: first layer = 10·20 + 10 = 210; second = 1·10 + 1 = 11; total = 221."
-      },
-      examTrap: {
-        hu: "Ne felejtsd el a bias parameters értékeket. A 20×10 weights önmagában csak 200; a first layer total 210.",
-        en: "Do not forget the bias parameters. The 20×10 weights alone give only 200; the first-layer total is 210."
+        hu: "Egy teljesen összekötött rétegben minden bemeneti érték minden kimeneti neuronhoz egy súllyal kapcsolódik. Ez S_in·S_out súlyt jelent. Emellett minden kimeneti neuronhoz egy eltolás tartozik, tehát további S_out paraméter. Így a réteg paraméterszáma S_in·S_out+S_out.",
+        en: "In a fully connected layer, each input connects to each output neuron with one weight, giving S_in·S_out weights. Each output neuron also has one bias, adding S_out parameters. Total: S_in·S_out+S_out."
       },
       formula: {
-        hu: "params(layer k) = S_k·S_(k−1) + S_k = S_k(S_(k−1)+1)",
-        en: "params(layer k) = S_k·S_(k−1) + S_k = S_k(S_(k−1)+1)"
+        hu: "paraméterek száma = S_in·S_out + S_out",
+        en: "parameter count = S_in·S_out + S_out"
       },
-      keyTerms: [
-        { term: "parameter count" }
-      ]
+      formulaTerms: [
+        { symbol: "S_in·S_out", hu: "A súlyok száma.", en: "Number of weights." },
+        { symbol: "S_out", hu: "Az eltolások száma, egy minden kimeneti neuronhoz.", en: "Number of biases, one per output neuron." }
+      ],
+      workedExample: {
+        hu: "A hivatalos 20→10→1 példában az első réteg 20·10+10=210 paraméteres. A második réteg 10·1+1=11 paraméteres. Összesen 221 tanulható paraméter van.",
+        en: "In the official 20→10→1 example, the first layer has 20·10+10=210 parameters. The second has 10·1+1=11. Total: 221 learnable parameters."
+      },
+      examTrap: {
+        hu: "A neuronok száma nem azonos a paraméterek számával. Egyetlen neuron is sok súllyal rendelkezhet, ha sok bemenete van.",
+        en: "Number of neurons is not the same as number of parameters. A single neuron can have many weights if it has many inputs."
+      }
     },
     {
       id: "two-layer-hypothesis",
       title: {
-        hu: "Two-layer MLP hypothesis",
-        en: "Two-layer MLP hypothesis"
+        hu: "Kétrétegű MLP hipotézisfüggvénye",
+        en: "Hypothesis function of a two-layer MLP"
       },
       body: {
-        hu: "A lecture two-layer MLP hypothesis függvénye: h(x)=g₂(W₂ g₁(W₁x+b₁)+b₂). Θ az összes weight matrix és bias vector halmaza.",
-        en: "The lecture's two-layer MLP hypothesis is h(x)=g₂(W₂ g₁(W₁x+b₁)+b₂). Θ denotes the set of all weight matrices and bias vectors."
+        hu: "Két tanulható réteg esetén először az első teljesen összekötött réteg számol lineáris transzformációt, majd g₁ aktivációt alkalmazunk. Ennek eredményét a második réteg újabb lineáris transzformációra használja, végül g₂ adja a hálózat kimenetét. A kompozíció: h(x)=g₂(W₂ g₁(W₁x+b₁)+b₂).",
+        en: "With two learnable layers, the first fully connected layer computes a linear transformation followed by activation g₁. The second layer transforms that result and g₂ produces the network output: h(x)=g₂(W₂ g₁(W₁x+b₁)+b₂)."
       },
-      intuition: {
-        hu: "Layer 1: linear transformation → g₁. Layer 2: újabb linear transformation → g₂. A layers outputjai egymás inputjai.",
-        en: "Layer 1: linear transformation → g₁. Layer 2: another linear transformation → g₂. The output of one layer becomes the input of the next."
+      why: {
+        hu: "A köztes nemlinearitás kulcsfontosságú. Ha g₁ identitásfüggvény lenne, akkor két lineáris transzformáció kompozíciója továbbra is egyetlen lineáris transzformációval lenne ekvivalens, így a plusz réteg nem adna valódi nemlineáris kifejezőerőt.",
+        en: "The hidden nonlinearity is crucial. If g₁ were identity, the composition of two linear transformations would still be equivalent to one linear transformation, so the extra layer would not add nonlinear expressive power."
       },
       formula: {
-        hu: "h(x) = g₂(W₂·g₁(W₁x+b₁)+b₂)",
-        en: "h(x) = g₂(W₂·g₁(W₁x+b₁)+b₂)"
+        hu: "h(x) = g₂(W₂ · g₁(W₁x+b₁) + b₂)",
+        en: "h(x) = g₂(W₂ · g₁(W₁x+b₁) + b₂)"
       },
-      keyTerms: [
-        { term: "hidden layer" },
-        { term: "Θ" }
-      ]
-    },
-    {
-      id: "nonlinearity",
-      title: {
-        hu: "Miért kell hidden activation?",
-        en: "Why do hidden layers need an activation?"
-      },
-      body: {
-        hu: "A lecture kulcsállítása: multiple linear functions kompozíciója továbbra is linear. Ha a hidden layerből elhagyjuk g₁ nonlinearity-t, több fully-connected layer expressive power-je összeomlik egyetlen linear layer szintjére.",
-        en: "A key lecture statement is that a composition of multiple linear functions is still linear. If g₁ nonlinearity is omitted from the hidden layer, multiple fully connected layers collapse in expressive power to a single linear layer."
-      },
-      intuition: {
-        hu: "Két linear transformation egymás után algebrailag összevonható egy linear transformationné. A nonlinearity az, ami ezt megtöri.",
-        en: "Two linear transformations in sequence can be algebraically collapsed into one linear transformation. The nonlinearity is what breaks this collapse."
+      formulaTerms: [
+        { symbol: "W₁,b₁", hu: "Az első réteg súlyai és eltolásai.", en: "Weights and biases of the first layer." },
+        { symbol: "g₁", hu: "A rejtett réteg aktivációs függvénye; tipikusan nemlineáris.", en: "Hidden-layer activation function, typically nonlinear." },
+        { symbol: "W₂,b₂", hu: "A kimeneti réteg súlyai és eltolásai.", en: "Weights and biases of the output layer." },
+        { symbol: "g₂", hu: "A kimeneti aktiváció, amely a feladat típusától függ.", en: "Output activation determined by the task." }
+      ],
+      connections: {
+        hu: "Ez a képlet ugyanazt a „lineáris transzformáció + aktiváció” építőelemet ismétli, amely egyetlen neuronnál már megjelent. A mély hálózatok (deep networks) ezt sok rétegben egymásra fűzik.",
+        en: "This repeats the same 'linear transformation + activation' building block introduced by a single neuron. Deep networks stack this pattern many times."
       },
       examTrap: {
-        hu: "Regression outputnál g₂ elhagyható, de g₁-et nem érdemes elhagyni. Ez a mintateszt egyik explicit kérdése.",
-        en: "For regression, g₂ can be omitted, but g₁ should not be omitted. This is an explicit example-test question."
-      },
-      keyTerms: [
-        { term: "nonlinearity" },
-        { term: "expressive power" }
-      ]
+        hu: "A rejtett aktivációt (g₁) általában nem hagyjuk el. A kimeneti aktiváció (g₂) viszont a feladattól függően lehet identitás, szigmoid vagy softmax.",
+        en: "The hidden activation g₁ is generally not omitted. The output activation g₂ depends on the task and may be identity, sigmoid, or softmax."
+      }
     },
     {
-      id: "activations",
+      id: "activation-functions",
       title: {
-        hu: "Sigmoid, tanh és ReLU",
-        en: "Sigmoid, tanh, and ReLU"
+        hu: "Szigmoid, tanh és ReLU aktivációs függvények",
+        en: "Sigmoid, tanh, and ReLU activation functions"
       },
       body: {
-        hu: "A lecture három popular activation functiont mutat: sigmoid, tanh és ReLU. Sigmoid output 0 és 1 között; tanh −1 és 1 között; ReLU(z)=max(0,z), tehát negatív inputokra 0, pozitív inputokra az input maga.",
-        en: "The lecture presents three popular activation functions: sigmoid, tanh, and ReLU. Sigmoid outputs between 0 and 1; tanh between −1 and 1; ReLU(z)=max(0,z), so it outputs 0 for negative inputs and the input itself for positive inputs."
+        hu: "A tananyag három népszerű aktivációs függvényt mutat: szigmoid (sigmoid), hiperbolikus tangens (tanh) és ReLU (Rectified Linear Unit). A szigmoid 0 és 1 közé képez, a tanh −1 és 1 közé, a ReLU pedig negatív bemenetnél 0-t, pozitív bemenetnél magát a bemenetet adja.",
+        en: "The course presents three popular activation functions: sigmoid, tanh, and ReLU. Sigmoid maps to (0,1), tanh to (−1,1), and ReLU outputs 0 for negative inputs and the input itself for positive inputs."
       },
-      intuition: {
-        hu: "ReLU egyszerű piecewise-linear nonlinearity; a lecture megjegyzése szerint könnyű számolni és szinte mindig jól működik.",
-        en: "ReLU is a simple piecewise-linear nonlinearity; the lecture notes that it is easy to compute and almost always works well."
+      why: {
+        hu: "A nemlineáris aktivációk teszik lehetővé, hogy több réteg együtt ne csak egyetlen lineáris függvényt valósítson meg. A Lecture 5 a ReLU-ról azt emeli ki, hogy egyszerűen számolható és gyakran jól működik.",
+        en: "Nonlinear activations allow multiple layers to represent more than a single linear function. Lecture 5 highlights ReLU as simple to compute and often effective."
       },
       formula: {
-        hu: "sigmoid(z)=1/(1+e^(−z));   tanh(z)=(e^(2z)−1)/(e^(2z)+1);   ReLU(z)=max(0,z)",
-        en: "sigmoid(z)=1/(1+e^(−z));   tanh(z)=(e^(2z)−1)/(e^(2z)+1);   ReLU(z)=max(0,z)"
+        hu: "sigmoid(z)=1/(1+e^(−z))    |    tanh(z)∈(−1,1)    |    ReLU(z)=max(0,z)",
+        en: "sigmoid(z)=1/(1+e^(−z))    |    tanh(z)∈(−1,1)    |    ReLU(z)=max(0,z)"
       },
-      keyTerms: [
-        { term: "sigmoid" },
-        { term: "tanh" },
-        { term: "ReLU" }
-      ]
-    },
-    {
-      id: "regression-output",
-      title: {
-        hu: "MLP regression: hidden nonlinearity, identity output",
-        en: "MLP regression: hidden nonlinearity, identity output"
-      },
-      body: {
-        hu: "Regressionnél a lecture továbbra is nonlinear hidden activationt használ (például ReLU), de az utolsó g₂ activation tipikusan identity, vagyis elhagyható. Loss: MSE.",
-        en: "For regression, the lecture still uses a nonlinear hidden activation such as ReLU, but the final g₂ activation is typically identity and can be omitted. Loss: MSE."
-      },
-      intuition: {
-        hu: "A hidden ReLU ad nonlinear expressive power-t. Az output viszont arbitrary real értéket becsülhet, ezért nem akarjuk sigmoid által [0,1]-re korlátozni.",
-        en: "The hidden ReLU provides nonlinear expressive power. The output may need to estimate arbitrary real values, so we do not want a sigmoid to restrict it to [0,1]."
-      },
+      formulaTerms: [
+        { symbol: "z", hu: "A neuron preaktivációja (pre-activation), vagyis a súlyozott összeg és az eltolás eredménye.", en: "Neuron pre-activation, i.e. weighted sum plus bias." },
+        { symbol: "g(z)", hu: "Az aktiváció után továbbadott érték.", en: "Value passed onward after the activation." }
+      ],
       examTrap: {
-        hu: "Regressionnél: g₁-et ne hagyd el; g₂ tipikusan identity/omit; sigmoid g₂ általában rossz választás arbitrary continuous targethoz.",
-        en: "For regression: do not omit g₁; g₂ is typically identity/omitted; sigmoid g₂ is generally unsuitable for an arbitrary continuous target."
-      },
-      keyTerms: [
-        { term: "identity activation" },
-        { term: "MSE" }
-      ]
+        hu: "Az aktivációs függvény grafikonjának alakja és kimeneti tartománya vizsgakérdés lehet. A szigmoid nem ad negatív értéket; a tanh igen; a ReLU negatív z esetén 0.",
+        en: "The graph shape and output range of activation functions can be tested. Sigmoid never outputs negative values, tanh can, and ReLU is zero for negative z."
+      }
     },
     {
-      id: "binary-output",
+      id: "output-by-task",
       title: {
-        hu: "MLP binary classification output",
-        en: "MLP binary-classification output"
+        hu: "Kimeneti réteg: a feladat dönti el",
+        en: "Output layer: determined by the task"
       },
       body: {
-        hu: "Single binary label esetén a lecture logikája logistic regressionből folytatódik: scalar probability output, sigmoid final activation és Binary Cross-Entropy / logistic loss.",
-        en: "For a single binary label, the lecture continues the logistic-regression setup: scalar probability output, sigmoid final activation, and Binary Cross-Entropy / logistic loss."
+        hu: "A kimeneti réteg aktivációját és méretét a megoldandó feladathoz kell igazítani. Regressziónál tetszőleges folytonos értéket szeretnénk, ezért a tananyag tipikusan identitás aktivációt (identity) vagy g₂ elhagyását javasolja. Bináris osztályozásnál egyetlen szigmoid kimenet adhat class-1 valószínűséget. Többosztályos, kölcsönösen kizáró kategóriáknál a softmax több valószínűséget ad, amelyek összege 1.",
+        en: "Output activation and size must match the task. For regression, arbitrary continuous values are needed, so the course typically uses identity / omits g₂. Binary classification uses one sigmoid probability. Multiclass classification with mutually exclusive classes uses softmax probabilities summing to 1."
       },
-      intuition: {
-        hu: "A hidden layers összetett feature representationt tanulhatnak; az utolsó sigmoid ezt egyetlen 0–1 probability-vé alakítja.",
-        en: "Hidden layers can learn a complex feature representation; the final sigmoid turns it into one probability between 0 and 1."
-      },
-      examTrap: {
-        hu: "A hidden activation és output activation szerepe nem ugyanaz: hidden nonlinearity expressive power-t ad, output activation a task output semantics-hoz igazodik.",
-        en: "Hidden and output activations do not serve the same role: hidden nonlinearities provide expressive power, while the output activation matches the semantics of the task."
-      },
-      keyTerms: [
-        { term: "binary classification" },
-        { term: "BCE" }
-      ]
-    },
-    {
-      id: "multi-output-regression",
-      title: {
-        hu: "Multiple-output regression",
-        en: "Multiple-output regression"
-      },
-      body: {
-        hu: "Regressionnél y és ŷ vector is lehet, ha egyszerre több continuous label variable-t becslünk. A final activation továbbra is tipikusan identity. A lecture szerint az MSE-t ilyenkor a label vector elemein is átlagoljuk.",
-        en: "For regression, y and ŷ can be vectors when predicting multiple continuous label variables at once. The final activation is still typically identity. According to the lecture, MSE is then also averaged over elements of the label vector."
-      },
-      examTrap: {
-        hu: "Multiple output nem automatikusan multiclass classification: lehet multiple continuous regression target is.",
-        en: "Multiple outputs do not automatically mean multiclass classification: they can also represent multiple continuous regression targets."
-      },
-      keyTerms: [
-        { term: "multiple label variables" },
-        { term: "vector output" }
-      ]
-    },
-    {
-      id: "multiclass",
-      title: {
-        hu: "Multiclass classification: Softmax",
-        en: "Multiclass classification: Softmax"
-      },
-      body: {
-        hu: "Több mutually exclusive category esetén a lecture minden category-hoz probability-t becsül. A final activation softmax; output dimension k a categories száma. A softmax output elemei pozitív probability-k és összegük 1.",
-        en: "For multiple mutually exclusive categories, the lecture estimates a probability for each category. The final activation is softmax; output dimension k equals the number of categories. Softmax outputs positive probabilities whose sum is 1."
+      why: {
+        hu: "Ha regressziónál szigmoid lenne a végső aktiváció, a hálózat csak 0 és 1 közötti számokat tudna becsülni, ami például életkor becslésére alkalmatlan. A kimeneti aktiváció tehát a címke értelmezéséhez igazodik.",
+        en: "If regression used sigmoid as the final activation, outputs would be restricted to [0,1], unsuitable for values such as age. The output activation must therefore match the meaning of the label."
       },
       formula: {
-        hu: "softmax(z)_i = e^(z_i) / Σⱼ₌₁ᵏ e^(z_j)",
-        en: "softmax(z)_i = e^(z_i) / Σⱼ₌₁ᵏ e^(z_j)"
+        hu: "regresszió: identity + MSE    |    bináris osztályozás: sigmoid + BCE    |    többosztályos: softmax + cross-entropy",
+        en: "regression: identity + MSE    |    binary classification: sigmoid + BCE    |    multiclass: softmax + cross-entropy"
+      },
+      connections: {
+        hu: "A logisztikus regresszió sigmoid + BCE párosa közvetlenül visszatér a bináris neurális hálózati kimenetnél. A cross-entropy a BCE többosztályos általánosítása a tananyag megfogalmazása szerint.",
+        en: "The sigmoid+BCE pairing from logistic regression reappears for binary neural-network outputs. The course presents cross-entropy as the multiclass generalization of BCE/logistic loss."
       },
       examTrap: {
-        hu: "10-class MNIST esetén 10 output probability kell, nem egyetlen sigmoid scalar.",
-        en: "For 10-class MNIST, 10 output probabilities are needed, not a single sigmoid scalar."
+        hu: "A rejtett réteg és a kimeneti réteg aktivációját ne keverd össze. Regressziónál a végső g₂ lehet identitás, de a rejtett g₁ nemlinearitását ettől még megtartjuk.",
+        en: "Do not confuse hidden and output activations. For regression g₂ may be identity, while hidden g₁ should still provide nonlinearity."
+      }
+    },
+    {
+      id: "softmax",
+      title: {
+        hu: "Softmax és többosztályos kimenet",
+        en: "Softmax and multiclass output"
+      },
+      body: {
+        hu: "Több címkeváltozóval / több osztállyal a modell kimenete vektor. A softmax aktiváció minden komponens exponenciálisát elosztja az összes exponenciális összegével. Emiatt minden eredmény pozitív, és a kimeneti vektor elemeinek összege 1, így valószínűségi eloszlásként értelmezhető.",
+        en: "For multiclass outputs, the model prediction is a vector. Softmax divides the exponential of each component by the sum of all exponentials. Outputs are positive and sum to 1, so the vector can be interpreted as a probability distribution."
+      },
+      formula: {
+        hu: "softmax(z)ᵢ = e^(zᵢ) / Σⱼ e^(zⱼ)",
+        en: "softmax(z)ᵢ = e^(zᵢ) / Σⱼ e^(zⱼ)"
+      },
+      formulaTerms: [
+        { symbol: "zᵢ", hu: "Az i-edik osztályhoz tartozó nyers pontszám (logit).", en: "Raw score (logit) for class i." },
+        { symbol: "e^(zᵢ)", hu: "Az i-edik pontszám exponenciálisa.", en: "Exponential of the i-th score." },
+        { symbol: "Σⱼ e^(zⱼ)", hu: "Normalizáló összeg minden osztály fölött.", en: "Normalization sum over all classes." }
+      ],
+      workedExample: {
+        hu: "Ha három osztály van, a softmax például [0,10; 0,25; 0,65] valószínűségeket adhat. Ezek összege 1, és a legnagyobb komponenshez tartozó osztály a legvalószínűbb.",
+        en: "With three classes, softmax might output probabilities such as [0.10, 0.25, 0.65]. They sum to 1, and the class with the largest component is the most probable."
+      },
+      examTrap: {
+        hu: "A softmax nem egyetlen skalár valószínűséget ad, hanem osztályonként egy komponenst. A címke (y) és az előrejelzés (ŷ) is vektor lehet, például one-hot címkével.",
+        en: "Softmax does not produce one scalar probability; it produces one component per class. Both y and ŷ can be vectors, for example using one-hot labels."
       },
       keyTerms: [
         { term: "softmax" },
-        { term: "multiclass classification" }
+        { term: "cross-entropy", hu: "keresztentrópia" },
+        { term: "one-hot" },
+        { term: "logit", hu: "nyers osztálypontszám" }
       ]
     },
     {
-      id: "cross-entropy",
+      id: "nonconvex",
       title: {
-        hu: "Multiclass Cross-Entropy és one-hot label",
-        en: "Multiclass Cross-Entropy and one-hot labels"
+        hu: "Miért nehezebb MLP-t optimalizálni?",
+        en: "Why is MLP optimization harder?"
       },
       body: {
-        hu: "Multiclass classificationnél a course Cross-Entropy (CE) losst használ, a BCE/logistic loss generalizációjaként. A true label y one-hot encoded: a true category eleme 1, a többi 0. ŷ a category probabilities vector.",
-        en: "For multiclass classification, the course uses Cross-Entropy (CE) loss as a generalization of BCE/logistic loss. The true label y is one-hot encoded: the true-category element is 1 and all others are 0. ŷ is the vector of category probabilities."
+        hu: "A lineáris regresszió négyzetes vesztesége konvex, ezért megfelelő lépésméret mellett a globális optimum megtalálására vonatkozó erős garanciánk van. Egy MLP esetén a sok egymásba ágyazott lineáris transzformáció és nemlinearitás miatt a veszteségfüggvény általában nem konvex.",
+        en: "Linear-regression squared loss is convex, giving strong global-optimum guarantees with a suitable step size. An MLP combines many nested linear transformations and nonlinearities, so its loss is generally non-convex."
       },
-      formula: {
-        hu: "J(Θ) = −1/m · Σⱼ₌₁ᵐ Σᵢ₌₁ᵏ yᵢ⁽ʲ⁾ log(ŷᵢ⁽ʲ⁾)",
-        en: "J(Θ) = −1/m · Σⱼ₌₁ᵐ Σᵢ₌₁ᵏ yᵢ⁽ʲ⁾ log(ŷᵢ⁽ʲ⁾)"
+      why: {
+        hu: "Nem konvex veszteségfelületnél több különböző lokális szerkezet, lapos tartomány és bonyolult geometria jelenhet meg. Emiatt gradienscsökkentésnél nem garantálható ugyanúgy, hogy a globálisan legjobb paramétereket találjuk meg.",
+        en: "A non-convex loss surface can contain multiple local structures, flat regions, and complex geometry. Gradient descent therefore does not carry the same guarantee of finding globally optimal parameters."
+      },
+      connections: {
+        hu: "A paraméterek gradiensét ettől még ki kell számolni; ezt szolgálja a visszaterjesztés (backpropagation). Az optimalizáló, például SGD vagy Adam, ezután használja a gradienseket a frissítéshez.",
+        en: "Gradients are still required; backpropagation computes them. An optimizer such as SGD or Adam then uses those gradients to update parameters."
       },
       examTrap: {
-        hu: "One-hot true label nem probability prediction. y például [0,1,0,0], míg ŷ például [0.64,0.21,0.06,0.09].",
-        en: "A one-hot true label is not the probability prediction. For example y may be [0,1,0,0], while ŷ may be [0.64,0.21,0.06,0.09]."
-      },
-      keyTerms: [
-        { term: "Cross-Entropy (CE)" },
-        { term: "one-hot encoding" }
-      ]
+        hu: "A hivatalos mintakérdés direkt összeveti a lineáris regresszió + MSE és az MLP + MSE esetét. Az elsőnél a konvexitás miatt van globális-optimum garancia megfelelően kis lépésnél; az MLP-nél általában nincs.",
+        en: "The official example directly contrasts linear regression + MSE with MLP + MSE. Convexity provides a global-optimum guarantee for the former with a sufficiently small step, but generally not for the MLP."
+      }
     }
   ]
 };
