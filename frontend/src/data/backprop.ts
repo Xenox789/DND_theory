@@ -269,27 +269,27 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q1",
     topics: ["computational-graph"],
-    prompt: { hu: "Mely állítások igazak computational graphra a előadás (lecture) 6 szerint?", en: "Which statements are true about a computational graph according to Lecture 6?" },
+    prompt: { hu: "Mely állítások igazak computational graphra az előadás (lecture) 6 szerint?", en: "Which statements are true about a computational graph according to Lecture 6?" },
     choices: [
-      { id: "a", text: { hu: "Összetett expressiont elementary operations láncolataként reprezentál.", en: "It represents a complicated expression as chained elementary operations." } },
-      { id: "b", text: { hu: "Nodes elementary operations lehetnek.", en: "Nodes can be elementary operations." } },
-      { id: "c", text: { hu: "élek (edges) az operations chainingjét mutatják.", en: "Edges show how operations are chained." } },
-      { id: "d", text: { hu: "Nem tartalmazhat intermediate variables értékeket.", en: "It cannot contain intermediate variables." } }
+      { id: "a", text: { hu: "Összetett expressiont elemi műveletek láncolataként reprezentál.", en: "It represents a complicated expression as chained elementary operations." } },
+      { id: "b", text: { hu: "Nodes elemi műveletek lehetnek.", en: "Nodes can be elementary operations." } },
+      { id: "c", text: { hu: "élek (edges) az műveletek chainingjét mutatják.", en: "Edges show how operations are chained." } },
+      { id: "d", text: { hu: "Nem tartalmazhat köztes változók értékeket.", en: "It cannot contain intermediate variables." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A előadás (lecture) intermediate variables és elementary operations felbontásával konstruál computational graphot.", en: "The lecture constructs a computational graph by introducing intermediate variables and elementary operations." }
+    explanation: { hu: "Az előadás (lecture) köztes változók és elemi műveletek felbontásával konstruál computational graphot.", en: "The lecture constructs a computational graph by introducing intermediate variables and elementary operations." }
   },
   {
     id: "bp-q2",
     topics: ["chain-rule"],
-    prompt: { hu: "Mi a backpropagation chain-rule alapelve egy csomópont (node)-nál?", en: "What is the chain-rule principle used by backpropagation at a node?" },
+    prompt: { hu: "Mi a backpropagation chain-rule alapelve egy csomópontnál (node)?", en: "What is the chain-rule principle used by backpropagation at a node?" },
     choices: [
       { id: "a", text: { hu: "bejövő gradiens (incoming gradient) × lokális derivált (local derivative).", en: "Incoming gradient × local derivative." } },
-      { id: "b", text: { hu: "Az elementary derivatives megfelelő lánc menti szorzata.", en: "Multiply the relevant elementary derivatives along the chain." } },
-      { id: "c", text: { hu: "Minden lokális derivált (local derivative)-et összeadunk a gradienthez.", en: "Add every local derivative to the gradient." } }
+      { id: "b", text: { hu: "Az elementary deriváltak megfelelő lánc menti szorzata.", en: "Multiply the relevant elementary derivatives along the chain." } },
+      { id: "c", text: { hu: "Minden lokális deriváltat (local derivative) összeadunk a gradienthez.", en: "Add every local derivative to the gradient." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A láncszabály (chain rule) szerint a derivative-ek a megfelelő path mentén szorzódnak.", en: "By the chain rule, derivatives multiply along the relevant path." }
+    explanation: { hu: "A láncszabály (chain rule) szerint a derivált-ek a megfelelő útvonal mentén szorzódnak.", en: "By the chain rule, derivatives multiply along the relevant path." }
   },
   {
     id: "bp-q3",
@@ -331,19 +331,19 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q6",
     topics: ["backprop-purpose"],
-    prompt: { hu: "Miért hatékonyabb a backpropagation, mint minden paraméter (parameter) derivative-jének teljes újraszámolása?", en: "Why is backpropagation more efficient than recomputing the full derivative separately for every parameter?" },
+    prompt: { hu: "Miért hatékonyabb a backpropagation, mint minden paraméter (parameter) derivált-jének teljes újraszámolása?", en: "Why is backpropagation more efficient than recomputing the full derivative separately for every parameter?" },
     choices: [
-      { id: "a", text: { hu: "Újrahasznosítja a közös sub-results / intermediate derivatives értékeket.", en: "It reuses shared sub-results / intermediate derivatives." } },
+      { id: "a", text: { hu: "Újrahasznosítja a közös sub-results / intermediate deriváltak értékeket.", en: "It reuses shared sub-results / intermediate derivatives." } },
       { id: "b", text: { hu: "A számítási gráf (computational graph) dependency structure-jét kihasználja.", en: "It exploits the dependency structure of the computational graph." } },
-      { id: "c", text: { hu: "Nem kell semmilyen derivative-et számolni.", en: "No derivatives need to be computed at all." } }
+      { id: "c", text: { hu: "Nem kell semmilyen derivált-et számolni.", en: "No derivatives need to be computed at all." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "Derivatives továbbra is kellenek, de az elementary/local derivatives és köztes eredmények újrahasznosíthatók.", en: "Derivatives are still required, but elementary/local derivatives and intermediate results can be reused." }
+    explanation: { hu: "deriváltak továbbra is kellenek, de az elementary/local deriváltak és köztes eredmények újrahasznosíthatók.", en: "Derivatives are still required, but elementary/local derivatives and intermediate results can be reused." }
   },
   {
     id: "bp-q7",
     topics: ["lecture-example","forward-pass"],
-    prompt: { hu: "A előadás (lecture) 6 példájában x=2,w=3,b=4,y=5 és q=wx, ŷ=q+b, z=y−ŷ, J=z². Mely értékek helyesek?", en: "In the Lecture 6 example x=2,w=3,b=4,y=5 with q=wx, ŷ=q+b, z=y−ŷ, J=z², which values are correct?" },
+    prompt: { hu: "Az előadás (lecture) 6 példájában x=2,w=3,b=4,y=5 és q=wx, ŷ=q+b, z=y−ŷ, J=z². Mely értékek helyesek?", en: "In the Lecture 6 example x=2,w=3,b=4,y=5 with q=wx, ŷ=q+b, z=y−ŷ, J=z², which values are correct?" },
     choices: [
       { id: "a", text: { hu: "q=6.", en: "q=6." } },
       { id: "b", text: { hu: "ŷ=10.", en: "ŷ=10." } },
@@ -356,7 +356,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q8",
     topics: ["lecture-example","backward-pass"],
-    prompt: { hu: "Ugyanebben a előadás (lecture) 6 példában mely gradients helyesek?", en: "In the same Lecture 6 example, which gradients are correct?" },
+    prompt: { hu: "Ugyanebben az előadás (lecture) 6 példában mely gradients helyesek?", en: "In the same Lecture 6 example, which gradients are correct?" },
     choices: [
       { id: "a", text: { hu: "∂J/∂z = −10.", en: "∂J/∂z = −10." } },
       { id: "b", text: { hu: "∂J/∂ŷ = 10.", en: "∂J/∂ŷ = 10." } },
@@ -369,7 +369,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q9",
     topics: ["lecture-example","signs"],
-    prompt: { hu: "Miért lesz ∂J/∂ŷ pozitív 10, miközben ∂J/∂z=−10 a előadás (lecture) 6 példában?", en: "Why is ∂J/∂ŷ positive 10 while ∂J/∂z=−10 in the Lecture 6 example?" },
+    prompt: { hu: "Miért lesz ∂J/∂ŷ pozitív 10, miközben ∂J/∂z=−10 az előadás (lecture) 6 példában?", en: "Why is ∂J/∂ŷ positive 10 while ∂J/∂z=−10 in the Lecture 6 example?" },
     choices: [
       { id: "a", text: { hu: "Mert z=y−ŷ, így ∂z/∂ŷ=−1.", en: "Because z=y−ŷ, so ∂z/∂ŷ=−1." } },
       { id: "b", text: { hu: "(−10)·(−1)=10.", en: "(−10)·(−1)=10." } },
@@ -405,7 +405,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q12",
     topics: ["training-cycle"],
-    prompt: { hu: "Mely lépések szerepelnek a előadás (lecture) 6 visszaterjesztés (backprop) tanítási ciklus (training cycle)-ban?", en: "Which steps appear in the Lecture 6 backpropagation training cycle?" },
+    prompt: { hu: "Mely lépések szerepelnek az előadás (lecture) 6 visszaterjesztés (backprop) tanítási ciklus (training cycle)-ban?", en: "Which steps appear in the Lecture 6 backpropagation training cycle?" },
     choices: [
       { id: "a", text: { hu: "paraméter (parameter) initialization.", en: "Parameter initialization." } },
       { id: "b", text: { hu: "példa (example) vagy mini-batch választása.", en: "Choosing an example or mini-batch." } },
@@ -414,12 +414,12 @@ export const backpropQuestions: Question[] = [
       { id: "e", text: { hu: "paraméterfrissítés (parameter update).", en: "Parameter update." } }
     ],
     correctIds: ["a","b","c","d","e"],
-    explanation: { hu: "A előadás (lecture) summary ezeket mind explicit felsorolja.", en: "The lecture summary explicitly lists all of these." }
+    explanation: { hu: "Az előadás (lecture) summary ezeket mind explicit felsorolja.", en: "The lecture summary explicitly lists all of these." }
   },
   {
     id: "bp-q13",
     topics: ["autograd","pytorch"],
-    prompt: { hu: "Mely állítások igazak PyTorch tensors és autograd kapcsolatára a előadás (lecture) szerint?", en: "Which statements are true about PyTorch tensors and autograd according to the lecture?" },
+    prompt: { hu: "Mely állítások igazak PyTorch tensors és autograd kapcsolatára az előadás (lecture) szerint?", en: "Which statements are true about PyTorch tensors and autograd according to the lecture?" },
     choices: [
       { id: "a", text: { hu: "Tensors számítási gráf (computational graph) részei lehetnek.", en: "Tensors can be part of computational graphs." } },
       { id: "b", text: { hu: "torch.autograd automatikusan számolhat gradients értékeket a graphon.", en: "torch.autograd can automatically compute gradients over the graph." } },
@@ -427,7 +427,7 @@ export const backpropQuestions: Question[] = [
       { id: "d", text: { hu: "Autograd miatt nincs szükség computational graphra.", en: "Autograd means no computational graph is needed." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Autograd a számítási gráf (computational graph) alapján végzi automatikusan a derivative/visszaterjesztés (backprop) számítást.", en: "Autograd performs automatic differentiation/backpropagation using the computational graph." }
+    explanation: { hu: "Autograd a számítási gráf (computational graph) alapján végzi automatikusan a derivált/visszaterjesztés (backprop) számítást.", en: "Autograd performs automatic differentiation/backpropagation using the computational graph." }
   },
   {
     id: "bp-q14",
@@ -435,11 +435,11 @@ export const backpropQuestions: Question[] = [
     prompt: { hu: "Melyik megfogalmazás illik a backpropagation működésére?", en: "Which descriptions match how backpropagation works?" },
     choices: [
       { id: "a", text: { hu: "A veszteség (loss) felől visszafelé haladunk a dependency graphon.", en: "We move backward from the loss through the dependency graph." } },
-      { id: "b", text: { hu: "Minden csomópont (node)-nál lokális derivált (local derivative)-et kombinálunk az incoming gradienttel.", en: "At each node, a local derivative is combined with the incoming gradient." } },
+      { id: "b", text: { hu: "Minden csomópontnál (node) lokális deriváltat (local derivative) kombinálunk az incoming gradienttel.", en: "At each node, a local derivative is combined with the incoming gradient." } },
       { id: "c", text: { hu: "A láncszabály (chain rule) segítségével gradients jutnak el a korábbi variables/paraméterek (parameters) felé.", en: "Using the chain rule, gradients propagate toward earlier variables/parameters." } },
-      { id: "d", text: { hu: "Csak előre (forward) values értékeket számítunk, derivative-ek nélkül.", en: "We compute only forward values, without derivatives." } }
+      { id: "d", text: { hu: "Csak előre (forward) values értékeket számítunk, derivált-ek nélkül.", en: "We compute only forward values, without derivatives." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "visszaterjesztés (backprop) a előre (forward) graph dependencyit fordított irányban használja gradiens (gradient) propagationre.", en: "Backprop uses the forward graph dependencies in reverse for gradient propagation." }
+    explanation: { hu: "visszaterjesztés (backprop) a előre (forward) gráf dependencyit fordított irányban használja gradiens (gradient) propagationre.", en: "Backprop uses the forward graph dependencies in reverse for gradient propagation." }
   }
 ];
