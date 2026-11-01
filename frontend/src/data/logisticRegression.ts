@@ -101,11 +101,11 @@ export const logisticRegressionLesson: Lesson = {
         { symbol: "hθ(x)", hu: "Az 1-es osztály becsült valószínűsége.", en: "Estimated probability of class 1." }
       ],
       workedExample: {
-        hu: "Szemléltető példa: két laborértékből betegségkockázatot becsülünk. A modell z=θ₀+θ₁x₁+θ₂x₂ pontszámot számol, majd a szigmoid például h=0,82 értéket adhat, amit 82%-os becsült class-1 valószínűségként értelmezünk.",
+        hu: "Szemléltető példa: két laborértékből betegségkockázatot becsülünk. A modell z=θ₀+θ₁x₁+θ₂x₂ pontszámot számol, majd a szigmoid például h=0,82 értéket adhat, amit 82%-os becsült az 1-es osztály valószínűségeként (class-1 probability) értelmezünk.",
         en: "Illustrative example: estimate disease risk from two lab values. The model computes z=θ₀+θ₁x₁+θ₂x₂ and the sigmoid may produce h=0.82, interpreted as an 82% estimated class-1 probability."
       },
       connections: {
-        hu: "Ha a mesterséges neuron (artificial neuron) aktivációs függvénye szigmoid, akkor a Lecture 4–6 megfogalmazása szerint maga a neuron többváltozós logisztikus regressziónak tekinthető.",
+        hu: "Ha a mesterséges neuron (artificial neuron) aktivációs függvénye szigmoid, akkor a a 4–6. előadás (Lectures 4–6) megfogalmazása szerint maga a neuron többváltozós logisztikus regressziónak tekinthető.",
         en: "If an artificial neuron uses sigmoid activation, Lectures 4–6 describe it as multivariate logistic regression."
       },
       examTrap: {
@@ -160,7 +160,7 @@ export const logisticRegressionLesson: Lesson = {
       },
       formulaTerms: [
         { symbol: "y", hu: "A valódi bináris címke: 0 vagy 1.", en: "True binary label: 0 or 1." },
-        { symbol: "h", hu: "A modell becsült class-1 valószínűsége.", en: "Predicted probability of class 1." },
+        { symbol: "h", hu: "A modell becsült 1-es osztályhoz tartozás valószínűsége (class-1 probability).", en: "Predicted probability of class 1." },
         { symbol: "log", hu: "Természetes logaritmus a veszteségképletben.", en: "Natural logarithm used in the loss." },
         { symbol: "L", hu: "Egyetlen példa vesztesége.", en: "Loss for a single example." }
       ],
@@ -403,14 +403,14 @@ export const logisticRegressionQuestions: Question[] = [
       en: "What do we minimize during logistic-regression training?"
     },
     choices: [
-      { id: "a", text: { hu: "A logistic/BCE veszteség (loss) J(θ) értékét.", en: "The logistic/BCE loss J(θ)." } },
+      { id: "a", text: { hu: "A logisztikus/BCE-veszteség (logistic/BCE loss) (loss) J(θ) értékét.", en: "The logistic/BCE loss J(θ)." } },
       { id: "b", text: { hu: "X-et.", en: "X." } },
       { id: "c", text: { hu: "A sigmoid függvény (function) g-t.", en: "The sigmoid function g." } },
       { id: "d", text: { hu: "θ numerikus értékét önmagában.", en: "The numerical value of θ itself." } }
     ],
     correctIds: ["a"],
     explanation: {
-      hu: "A modellparaméterek (model parameters) azért változnak, hogy a logistic/BCE célfüggvény (objective) J(θ) csökkenjen.",
+      hu: "A modellparaméterek (model parameters) azért változnak, hogy a logisztikus/BCE-célfüggvény (logistic/BCE objective) (objective) J(θ) csökkenjen.",
       en: "Model parameters are changed so that the logistic/BCE objective J(θ) decreases."
     }
   },
@@ -441,14 +441,14 @@ export const logisticRegressionQuestions: Question[] = [
       en: "Which statements are true about the course explanation for choosing the loss?"
     },
     choices: [
-      { id: "a", text: { hu: "Sigmoid hipotézis (hypothesis) + MSE esetén a lossnak lehetnek több local minimumai.", en: "With a sigmoid hypothesis + MSE, the loss may have multiple local minima." } },
-      { id: "b", text: { hu: "A logistic/BCE veszteség (loss) a logistic hipotézis (hypothesis)-szel konvex (convex).", en: "Logistic/BCE loss with the logistic hypothesis is convex." } },
-      { id: "c", text: { hu: "A konvex (convex) logistic lossnak egy lokális/globális minimuma (local/global minimum) van.", en: "The convex logistic loss has a local/global minimum." } },
-      { id: "d", text: { hu: "Ezért gradienscsökkentés (gradient descent) a logistic lossnál megtalálhatja a globálisan (globally) optimális (optimal) paraméterek (parameters) értékeket.", en: "Therefore gradient descent can find the globally optimal parameters for logistic loss." } }
+      { id: "a", text: { hu: "Szigmoid hipotézis (sigmoid hypothesis) + MSE esetén a veszteségnek (loss) több lokális minimuma (local minima) is lehet.", en: "With a sigmoid hypothesis + MSE, the loss may have multiple local minima." } },
+      { id: "b", text: { hu: "A logisztikus/BCE-veszteség (logistic/BCE loss) (loss) a logisztikus hipotézis (logistic hypothesis) (hypothesis)-szel konvex (convex).", en: "Logistic/BCE loss with the logistic hypothesis is convex." } },
+      { id: "c", text: { hu: "A konvex logisztikus veszteségnek (convex logistic loss) egy lokális/globális minimuma (local/global minimum) van.", en: "The convex logistic loss has a local/global minimum." } },
+      { id: "d", text: { hu: "Ezért gradienscsökkentés (gradient descent) a logisztikus veszteségnél (logistic loss) megtalálhatja a globálisan (globally) optimális (optimal) paraméterek (parameters) értékeket.", en: "Therefore gradient descent can find the globally optimal parameters for logistic loss." } }
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "Pontosan ez az előadás (lecture) érvelése: az MSE+sigmoid problémás non-konvex (convex) célfüggvény (objective)-et adhat; a logistic/BCE veszteség (loss) konvex (convex), ezért gradienscsökkentés (gradient descent) számára megfelelőbb.",
+      hu: "Pontosan ez az előadás (lecture) érvelése: az MSE+sigmoid problémás nem konvex (non-convex) célfüggvény (objective)-et adhat; a logisztikus/BCE-veszteség (logistic/BCE loss) (loss) konvex (convex), ezért gradienscsökkentés (gradient descent) számára megfelelőbb.",
       en: "This is exactly the lecture's argument: MSE + sigmoid can create a problematic non-convex objective; logistic/BCE loss is convex and therefore better suited to gradient descent."
     }
   },
