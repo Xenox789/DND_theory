@@ -6,13 +6,13 @@ export const generalizationQuestions: Question[] = [
     topics: ["data-split"],
     prompt: { hu: "Mely állítások igazak a tanítóhalmaz (training set) és teszthalmaz (test set) szerepére?", en: "Which statements are true about the roles of the training set and test set?" },
     choices: [
-      { id: "a", text: { hu: "A modellparaméterek (model parameters) értékeit a tanítás seten tanuljuk.", en: "Model parameters are learned on the training set." } },
+      { id: "a", text: { hu: "A modellparaméterek (model parameters) értékeit a tanítóhalmazon (training set) tanuljuk.", en: "Model parameters are learned on the training set." } },
       { id: "b", text: { hu: "A teszthalmaz (test set) célja nem látott adatokon mért teljesítmény (performance) becslése.", en: "The test set is used to estimate unseen-data performance." } },
-      { id: "c", text: { hu: "A tanítás és test setnek disjointnak kell lennie.", en: "The training and test sets must be disjoint." } },
-      { id: "d", text: { hu: "A test setet rendszeresen használjuk gradiens (gradient) frissítés (update)-ekhez.", en: "The test set is routinely used for gradient updates." } }
+      { id: "c", text: { hu: "A tanító- és teszthalmaznak (training and test sets) disjointnak kell lennie.", en: "The training and test sets must be disjoint." } },
+      { id: "d", text: { hu: "A teszthalmazt (test set) rendszeresen használjuk gradiens (gradient) frissítés (update)-ekhez.", en: "The test set is routinely used for gradient updates." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "A teszthalmaz (test set) független végső (final) evaluationra való, nem learningre.", en: "The test set is reserved for independent final evaluation, not learning." }
+    explanation: { hu: "A teszthalmaz (test set) független végső (final) értékelésre (evaluation) való, nem tanításra (learning).", en: "The test set is reserved for independent final evaluation, not learning." }
   },
   {
     id: "gen-q2",
@@ -43,23 +43,23 @@ export const generalizationQuestions: Question[] = [
   {
     id: "gen-q4",
     topics: ["overfitting", "training-data"],
-    prompt: { hu: "Ha ugyanazt a neurális hálózat (neural network) modelt kevesebb tanítási példával (training example) tanítjuk, mit várunk?", en: "If we train the same neural-network model with fewer training examples, what do we expect?" },
+    prompt: { hu: "Ha ugyanazt a neurális hálózat (neural network) modellt (model) kevesebb tanítási példával (training example) tanítjuk, mit várunk?", en: "If we train the same neural-network model with fewer training examples, what do we expect?" },
     choices: [
       { id: "a", text: { hu: "Az túlillesztés (overfitting) kockázata / súlyossága növekedhet.", en: "Overfitting risk / severity can increase." } },
       { id: "b", text: { hu: "A modelnek kevesebb data alapján kell generalizálnia.", en: "The model must generalize from less data." } },
       { id: "c", text: { hu: "Ez garantáltan megszünteti az overfittinget.", en: "This is guaranteed to eliminate overfitting." } }
     ],
     correctIds: ["a", "b"],
-    explanation: { hu: "Az előadás (lecture) a több tanítóadatok (training data)-t az túlillesztés (overfitting) egyik kezelési módjaként adja meg; ennek ellenkezője növelheti a problémát.", en: "The lecture lists more training data as one way to reduce overfitting; the opposite can make the problem worse." }
+    explanation: { hu: "Az előadás (lecture) a több tanítóadat (training data)-t az túlillesztés (overfitting) egyik kezelési módjaként adja meg; ennek ellenkezője növelheti a problémát.", en: "The lecture lists more training data as one way to reduce overfitting; the opposite can make the problem worse." }
   },
   {
     id: "gen-q5",
     topics: ["overfitting", "test-data"],
-    prompt: { hu: "Ha ugyanazt a modelt ugyanazon tanítás seten tanítjuk, de csökkentjük a test példák (examples) számát, mely állítások igazak?", en: "If we train the same model on the same training set but reduce the number of test examples, which statements are true?" },
+    prompt: { hu: "Ha ugyanazt a modellt (model) ugyanazon tanítóhalmazon (training set) tanítjuk, de csökkentjük a test példák (examples) számát, mely állítások igazak?", en: "If we train the same model on the same training set but reduce the number of test examples, which statements are true?" },
     choices: [
       { id: "a", text: { hu: "Ez önmagában nem változtatja meg a tanítás folyamat túlillesztés (overfitting) hajlamát.", en: "By itself, this does not change the training process's tendency to overfit." } },
       { id: "b", text: { hu: "A végső (final) teljesítmény (performance) estimate kevésbé megbízható lehet.", en: "The final performance estimate can become less reliable." } },
-      { id: "c", text: { hu: "A modellparaméterek (model parameters) gradientjei automatikusan kisebbek lesznek.", en: "Model-parameter gradients automatically become smaller." } }
+      { id: "c", text: { hu: "A modellparaméterek (model parameters) gradiensei (gradients) automatikusan kisebbek lesznek.", en: "Model-parameter gradients automatically become smaller." } }
     ],
     correctIds: ["a", "b"],
     explanation: { hu: "A teszthalmaz (test set) nincs benne a helyes tanítás folyamatban; mérete az értékelés (evaluation) megbízhatóságát befolyásolja.", en: "The test set is not part of the correct training procedure; its size affects evaluation reliability." }
@@ -70,7 +70,7 @@ export const generalizationQuestions: Question[] = [
     prompt: { hu: "Mely változtatások csökkenthetik az overfittinget az előadás (lecture) szerint?", en: "Which changes can reduce overfitting according to the lecture?" },
     choices: [
       { id: "a", text: { hu: "Egyszerűbb modell / kevesebb paraméter (parameter).", en: "A simpler model / fewer parameters." } },
-      { id: "b", text: { hu: "Több tanítóadatok (training data).", en: "More training data." } },
+      { id: "b", text: { hu: "Több tanítóadat (training data).", en: "More training data." } },
       { id: "c", text: { hu: "L2 regularizáció (regularization).", en: "L2 regularization." } },
       { id: "d", text: { hu: "Early stopping.", en: "Early stopping." } }
     ],
@@ -84,10 +84,10 @@ export const generalizationQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "Komplexebb modell használata.", en: "Use a more complex model." } },
       { id: "b", text: { hu: "Még kevesebb paraméter (parameter).", en: "Use even fewer parameters." } },
-      { id: "c", text: { hu: "A feladat (task) estimation errorának csökkentéséhez nagyobb modellkapacitás (model capacity) lehet szükséges.", en: "Greater model capacity may be needed to reduce estimation error." } }
+      { id: "c", text: { hu: "A feladat (task) becslési hibájának (estimation error) csökkentéséhez nagyobb modellkapacitás (model capacity) lehet szükséges.", en: "Greater model capacity may be needed to reduce estimation error." } }
     ],
     correctIds: ["a", "c"],
-    explanation: { hu: "Underfittingnél a modellösszetettség (model complexity) túl alacsony, ezért az előadás (lecture) komplexebb modelt javasol.", en: "With underfitting, model complexity is too low, so the lecture recommends a more complex model." }
+    explanation: { hu: "Alulillesztésnél (underfitting) a modellösszetettség (model complexity) túl alacsony, ezért az előadás (lecture) komplexebb modellt (model) javasol.", en: "With underfitting, model complexity is too low, so the lecture recommends a more complex model." }
   },
   {
     id: "gen-q8",
@@ -133,13 +133,13 @@ export const generalizationQuestions: Question[] = [
     topics: ["parameters", "hyperparameters"],
     prompt: { hu: "Mely állítások igazak modellparaméterek (model parameters) és hiperparaméterek (hyperparameters) optimalizálására?", en: "Which statements are true about optimizing model parameters and hyperparameters?" },
     choices: [
-      { id: "a", text: { hu: "θ modellparaméterek (model parameters) értékeket a tanítás seten gradienscsökkentés (gradient descent) alapú módszerrel taníthatjuk.", en: "Model parameters θ can be trained on the training set with a gradient-descent-based method." } },
+      { id: "a", text: { hu: "θ modellparaméterek (model parameters) értékeket a tanítóhalmazon (training set) gradienscsökkentés (gradient descent) alapú módszerrel taníthatjuk.", en: "Model parameters θ can be trained on the training set with a gradient-descent-based method." } },
       { id: "b", text: { hu: "hiperparaméterek (hyperparameters) választásához validáció teljesítmény (performance) használható.", en: "Validation performance can be used to select hyperparameters." } },
       { id: "c", text: { hu: "gradienscsökkentés (gradient descent) általában nem használható minden hiperparaméter (hyperparameter) optimalizálására.", en: "Gradient descent generally cannot be used to optimize every hyperparameter." } },
       { id: "d", text: { hu: "A teszthalmaz (test set) a fő hiperparaméter (hyperparameter) hangolás (tuning) set.", en: "The test set is the main hyperparameter-tuning set." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "A teszthalmaz (test set) végső (final) evaluationra van fenntartva. hiperparaméter (hyperparameter) hangolás (tuning) validáció seten történik.", en: "The test set is reserved for final evaluation. Hyperparameter tuning uses validation data." }
+    explanation: { hu: "A teszthalmaz (test set) végső (final) értékelésre (evaluation) van fenntartva. hiperparaméter (hyperparameter) hangolás (tuning) validáció seten történik.", en: "The test set is reserved for final evaluation. Hyperparameter tuning uses validation data." }
   },
   {
     id: "gen-q12",
@@ -178,7 +178,7 @@ export const generalizationQuestions: Question[] = [
       { id: "d", text: { hu: "J_test alapján kell minden iteráció (iteration) után dönteni.", en: "J_test should be used to decide after every iteration." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "Helyesen validációs veszteség (validation loss) irányítja a stopping decisiont; tesztadatok (test data) nem kerülhet modell selectionbe.", en: "Correctly, validation loss drives the stopping decision; test data must not enter model selection." }
+    explanation: { hu: "Helyesen validációs veszteség (validation loss) irányítja a leállítási döntést (stopping decision); tesztadatok (test data) nem kerülhet modell selectionbe.", en: "Correctly, validation loss drives the stopping decision; test data must not enter model selection." }
   },
   {
     id: "gen-q15",
@@ -199,9 +199,9 @@ export const generalizationQuestions: Question[] = [
     prompt: { hu: "Mely sorrend felel meg az előadás (lecture) modell-tanítás eljárás (procedure)-jének?", en: "Which sequence matches the lecture's model-training procedure?" },
     choices: [
       { id: "a", text: { hu: "Válassz Ψ hiperparaméterek (hyperparameters) értékeket.", en: "Choose hyperparameters Ψ." } },
-      { id: "b", text: { hu: "Tanítsd θ modellparaméterek (model parameters) értékeket tanítás seten.", en: "Train model parameters θ on the training set." } },
+      { id: "b", text: { hu: "Tanítsd θ modellparaméterek (model parameters) értékeket tanítóhalmazon (training set).", en: "Train model parameters θ on the training set." } },
       { id: "c", text: { hu: "Értékeld validáció seten és ez alapján válassz Ψ-t.", en: "Evaluate on the validation set and select Ψ from this performance." } },
-      { id: "d", text: { hu: "A végén értékeld a kiválasztott végső (final) modelt test seten.", en: "At the end, evaluate the selected final model on the test set." } }
+      { id: "d", text: { hu: "A végén értékeld a kiválasztott végső (final) modellt (model) teszthalmazon (test set).", en: "At the end, evaluate the selected final model on the test set." } }
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: { hu: "Ez az előadás (lecture) explicit eljárás (procedure)-je: tanítás → validáció modellválasztás (model selection) → végső (final) test.", en: "This is the lecture's explicit procedure: training → validation model selection → final test." }
