@@ -8,7 +8,7 @@ export const numpyCoreQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "Az elemeknek közös dtype-juk van.", en: "Its elements have a common dtype." } },
       { id: "b", text: { hu: "Lehet multidimensional.", en: "It can be multidimensional." } },
-      { id: "c", text: { hu: "Vectorized operations használhatók rajta.", en: "Vectorized operations can be used on it." } },
+      { id: "c", text: { hu: "Vektorizált műveletek (vectorized operations) használhatók rajta.", en: "Vectorized operations can be used on it." } },
       { id: "d", text: { hu: "Minden elem kötelezően külön Python object reference.", en: "Every element must be a separate Python object reference." } }
     ],
     correctIds: ["a","b","c"],
@@ -35,7 +35,7 @@ export const numpyCoreQuestions: Question[] = [
       { id: "a", text: { hu: "a.ndim=2.", en: "a.ndim=2." } },
       { id: "b", text: { hu: "a.size=160.", en: "a.size=160." } },
       { id: "c", text: { hu: "Az első axis hossza 32.", en: "The first axis has length 32." } },
-      { id: "d", text: { hu: "a.shape egy scalar integer.", en: "a.shape is a scalar integer." } }
+      { id: "d", text: { hu: "a.shape egy skalár egész szám (scalar integer).", en: "a.shape is a scalar integer." } }
     ],
     correctIds: ["a","b","c"],
     explanation: { hu: "shape tuple; ndim a tuple hossza, size az axis-lengths szorzata.", en: "shape is a tuple; ndim is its length and size is the product of its axis lengths." }
@@ -114,7 +114,7 @@ export const numpyCoreQuestions: Question[] = [
       { id: "c", text: { hu: "a[[1],[2]]", en: "a[[1],[2]]" } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "Ha minden axis individual integer indexet kap, scalar element jön vissza.", en: "When every axis receives an individual integer index, a scalar element is returned." }
+    explanation: { hu: "Ha minden axis individual integer indexet kap, skalár elem (scalar element) jön vissza.", en: "When every axis receives an individual integer index, a scalar element is returned." }
   },
   {
     id: "np-q10",
@@ -163,7 +163,7 @@ export const numpyCoreQuestions: Question[] = [
       { id: "b", text: { hu: "Mindig view az original arrayre.", en: "It is always a view of the original array." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "A week 6 source explicit: advanced indexing will never produce a view.", en: "Week 6 explicitly states that advanced indexing will never produce a view." }
+    explanation: { hu: "A 6. hét source explicit: advanced indexing will never produce a view.", en: "Week 6 explicitly states that advanced indexing will never produce a view." }
   },
   {
     id: "np-q14",
@@ -173,7 +173,7 @@ export const numpyCoreQuestions: Question[] = [
       { id: "a", text: { hu: "a<0 az a-val azonos shape-jű bool arrayt ad.", en: "a<0 returns a bool array with the same shape as a." } },
       { id: "b", text: { hu: "a[a<0] a True pozíciók values értékeit választja.", en: "a[a<0] selects values at True positions." } },
       { id: "c", text: { hu: "Mask indexing advanced indexing.", en: "Mask indexing is advanced indexing." } },
-      { id: "d", text: { hu: "a<0 scalar bool minden multidimensional arraynél.", en: "a<0 is a scalar bool for every multidimensional array." } }
+      { id: "d", text: { hu: "a<0 skalár logikai érték (scalar bool) minden többdimenziós tömbnél (multidimensional array).", en: "a<0 is a scalar bool for every multidimensional array." } }
     ],
     correctIds: ["a","b","c"],
     explanation: { hu: "Comparisons element-wise működnek.", en: "Comparisons operate element-wise." }
@@ -249,7 +249,7 @@ export const numpyCoreQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "np.sum(a,axis=0) → (5,)", en: "np.sum(a,axis=0) → (5,)" } },
       { id: "b", text: { hu: "np.sum(a,axis=1) → (4,)", en: "np.sum(a,axis=1) → (4,)" } },
-      { id: "c", text: { hu: "np.sum(a) → scalar", en: "np.sum(a) → scalar" } },
+      { id: "c", text: { hu: "np.sum(a) → skalár (scalar)", en: "np.sum(a) → skalár (scalar)" } },
       { id: "d", text: { hu: "np.sum(a,axis=0) → (4,)", en: "np.sum(a,axis=0) → (4,)" } }
     ],
     correctIds: ["a","b","c"],
@@ -274,7 +274,7 @@ export const numpyCoreQuestions: Question[] = [
     prompt: { hu: "Mit csinál egy 1D array .T property-je?", en: "What does .T do for a 1D array?" },
     choices: [
       { id: "a", text: { hu: "A shape (n,) marad.", en: "Shape remains (n,)." } },
-      { id: "b", text: { hu: "Automatikusan (n,1) column vector lesz.", en: "It automatically becomes an (n,1) column vector." } }
+      { id: "b", text: { hu: "Automatikusan (n,1) oszlopvektor (column vector) lesz.", en: "It automatically becomes an (n,1) column vector." } }
     ],
     correctIds: ["a"],
     explanation: { hu: "1D-ben nincs két axis, amit meg lehetne cserélni.", en: "A 1D array has no pair of axes to swap." }
@@ -294,7 +294,7 @@ export const numpyCoreQuestions: Question[] = [
   {
     id: "np-q24",
     topics: ["numpy","views"],
-    prompt: { hu: "Mely operations szerepelnek view-producing operationként a week 6 anyagban?", en: "Which operations are discussed as view-producing in week 6?" },
+    prompt: { hu: "Mely műveletek (operations) szerepelnek view-t előállító műveletként (view-producing operation) a 6. hét anyagában?", en: "Which operations are discussed as view-producing in 6. hét?" },
     choices: [
       { id: "a", text: { hu: "Reshape", en: "Reshape" } },
       { id: "b", text: { hu: "Transpose / axis swapping", en: "Transpose / axis swapping" } },
@@ -376,6 +376,6 @@ export const numpyCoreQuestions: Question[] = [
       { id: "d", text: { hu: "views vs copies", en: "views vs copies" } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A hivatalos example-question dokumentum csak a strides és stride tricks részt zárja ki explicit.", en: "The official example-question document explicitly excludes only strides and stride tricks from this list." }
+    explanation: { hu: "A hivatalos mintakérdés-dokumentum (example-question document) csak a strides és stride tricks részt zárja ki explicit.", en: "The official example-question document explicitly excludes only strides and stride tricks from this list." }
   }
 ];
