@@ -89,7 +89,7 @@ export default function App() {
         <header className="topbar">
           <div className="status">
             <span className="status-dot" />
-            <span>Study Lab v0.7</span>
+            <span>Study Lab v0.8</span>
           </div>
           <div className="language-row">
             <LanguageSwitcher
