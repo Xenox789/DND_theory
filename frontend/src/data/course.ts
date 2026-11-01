@@ -32,13 +32,13 @@ export const questionBank: Question[] = [
     },
     choices: [
       { id: "a", text: { hu: "bemenet (input)–címke (label) párokból állhat.", en: "It can consist of input–label pairs." } },
-      { id: "b", text: { hu: "Az x jelöli az inputot.", en: "x denotes the input." } },
+      { id: "b", text: { hu: "Az x jelöli az bemenetet.", en: "x denotes the input." } },
       { id: "c", text: { hu: "Az y jelöli a modellparaméterek (model parameters) értékeit.", en: "y denotes the model parameters." } },
-      { id: "d", text: { hu: "Az y jelölheti a true labelt.", en: "y can denote the true label." } }
+      { id: "d", text: { hu: "Az y jelölheti a valódi címkét.", en: "y can denote the true label." } }
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "Supervised learningben a tanítóminta (training sample) (x, y) párokból áll. x az bemenet (input), y a true címke (label). A modellparaméterek (model parameters) külön, például θ-val vannak jelölve.",
+      hu: "Felügyelt tanulásban a tanítóminta (training sample) (x, y) párokból áll. x az bemenet (input), y a true címke (label). A modellparaméterek (model parameters) külön, például θ-val vannak jelölve.",
       en: "In supervised learning the training sample consists of (x, y) pairs. x is the input and y is the true label. Model parameters are separate, for example θ."
     }
   },
@@ -50,14 +50,14 @@ export const questionBank: Question[] = [
       en: "Which statements are true about the hypothesis function hθ(x)?"
     },
     choices: [
-      { id: "a", text: { hu: "Inputból predictiont állít elő.", en: "It produces a prediction from an input." } },
+      { id: "a", text: { hu: "Inputból becslést állít elő.", en: "It produces a prediction from an input." } },
       { id: "b", text: { hu: "A θ a modell paraméterek (parameters) értékeit jelölheti.", en: "θ can denote model parameters." } },
       { id: "c", text: { hu: "A hθ(x) értéke ŷ lehet.", en: "The value of hθ(x) can be ŷ." } },
       { id: "d", text: { hu: "Tanulás közben X-et próbáljuk minimalizálni.", en: "During learning we try to minimize X." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A hipotézisfüggvény (hypothesis function) az bemenet (input) és a paraméterek (parameters) alapján predictiont ad. Az optimalizálás (optimization) célja nem X minimalizálása.",
+      hu: "A hipotézisfüggvény (hypothesis function) az bemenet (input) és a paraméterek (parameters) alapján becslést ad. Az optimalizálás (optimization) célja nem X minimalizálása.",
       en: "The hypothesis function produces a prediction using the input and parameters. Optimization does not minimize X."
     }
   },
@@ -72,7 +72,7 @@ export const questionBank: Question[] = [
       { id: "a", text: { hu: "A modell hibáját/teljesítményét számszerűsíti.", en: "It quantifies model error/performance." } },
       { id: "b", text: { hu: "A tanulás során általában minimalizálni szeretnénk.", en: "During learning we usually want to minimize it." } },
       { id: "c", text: { hu: "A teljes célfüggvény (objective) értéke tipikusan skalár (scalar).", en: "The overall objective value is typically a scalar." } },
-      { id: "d", text: { hu: "Mindig ugyanazt a veszteség (loss) functiont használjuk minden ML tasknál.", en: "We always use the same loss function for every ML task." } }
+      { id: "d", text: { hu: "Mindig ugyanazt a veszteség (loss) functiont használjuk minden gépi tanulási feladatnál.", en: "We always use the same loss function for every ML task." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
@@ -91,11 +91,11 @@ export const questionBank: Question[] = [
       { id: "a", text: { hu: "felügyelt tanulás (supervised learning)", en: "Supervised learning" } },
       { id: "b", text: { hu: "felügyelet nélküli tanulás (unsupervised learning)", en: "Unsupervised learning" } },
       { id: "c", text: { hu: "megerősítéses tanulás (reinforcement learning)", en: "Reinforcement learning" } },
-      { id: "d", text: { hu: "Linear programming", en: "Linear programming" } }
+      { id: "d", text: { hu: "egyenesáris programming", en: "Linear programming" } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A előadás (lecture) három fő csoportot nevez meg: supervised, unsupervised és megerősítéses tanulás (reinforcement learning).",
+      hu: "Az előadás (lecture) három fő csoportot nevez meg: supervised, unsupervised és megerősítéses tanulás (reinforcement learning).",
       en: "The lecture names supervised, unsupervised, and reinforcement learning as the three main groups."
     }
   },
@@ -122,18 +122,18 @@ export const questionBank: Question[] = [
     id: "q6",
     topics: ["linear-regression"],
     prompt: {
-      hu: "Melyik állítás igaz a lineáris regresszió (linear regression) geometriai értelmezésére?",
+      hu: "Melyik állítás igaz a egyenesáris regresszió (linear regression) geometriai értelmezésére?",
       en: "Which statement is true about the geometric interpretation of linear regression?"
     },
     choices: [
       { id: "a", text: { hu: "Egy bemeneti változó (input variable) esetén a hipotézis (hypothesis) egy egyenes lehet a 2D x–y síkon.", en: "With one input variable, the hypothesis can be a line in the 2D x–y plane." } },
-      { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a linear hipotézis (hypothesis) egy sík lehet 3D-ben.", en: "With two input variables, the linear hypothesis can be a plane in 3D." } },
-      { id: "c", text: { hu: "A lineáris regresszió (linear regression) csak classificationre használható.", en: "Linear regression can only be used for classification." } },
+      { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a egyenesáris hipotézis (hypothesis) egy sík lehet 3D-ben.", en: "With two input variables, the linear hypothesis can be a plane in 3D." } },
+      { id: "c", text: { hu: "A egyenesáris regresszió (linear regression) csak osztályozásra használható.", en: "Linear regression can only be used for classification." } },
       { id: "d", text: { hu: "A slope és eltolás (bias) a modell paraméterek (parameters) részei lehetnek.", en: "Slope and bias can be model parameters." } }
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "lineáris regresszió (linear regression) folytonos érték becslésére szolgál. Egy inputnál egyenes, két inputnál sík a geometriai linear hipotézis (hypothesis).",
+      hu: "egyenesáris regresszió (linear regression) folytonos érték becslésére szolgál. Egy inputnál egyenes, két inputnál sík a geometriai egyenesáris hipotézis (hypothesis).",
       en: "Linear regression predicts continuous values. Geometrically, with one input the linear hypothesis is a line; with two inputs it is a plane."
     }
   },
@@ -141,14 +141,14 @@ export const questionBank: Question[] = [
     id: "q7",
     topics: ["optimization"],
     prompt: {
-      hu: "Mit szeretnénk minimalizálni model training során?",
+      hu: "Mit szeretnénk minimalizálni modelltanítás során?",
       en: "What do we want to minimize during model training?"
     },
     choices: [
       { id: "a", text: { hu: "Az bemenet (input) mátrix (matrix) X méretét.", en: "The size of the input matrix X." } },
       { id: "b", text: { hu: "A veszteségfüggvény (loss function) J(θ) értékét.", en: "The value of the loss function J(θ)." } },
       { id: "c", text: { hu: "A tanítási példák (training examples) számát.", en: "The number of training examples." } },
-      { id: "d", text: { hu: "Olyan θ értékeket keresünk, amelyek kis veszteség (loss)-t eredményeznek.", en: "We search for θ values that result in low loss." } }
+      { id: "d", text: { hu: "Olyan θ értékeket keresünk, amelyek kis veszteséget (loss) eredményeznek.", en: "We search for θ values that result in low loss." } }
     ],
     correctIds: ["b", "d"],
     explanation: {
