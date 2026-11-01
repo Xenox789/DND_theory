@@ -3,266 +3,243 @@ import type { Lesson } from "../types";
 export const generalizationLesson: Lesson = {
   id: "generalization-overfitting",
   title: {
-    hu: "Generalization, overfitting és model selection",
+    hu: "Általánosítás, túlillesztés és modellválasztás",
     en: "Generalization, Overfitting, and Model Selection"
   },
   subtitle: {
-    hu: "Training/validation/test, underfitting, overfitting, L2 regularization, early stopping és hyperparameters",
-    en: "Training/validation/test, underfitting, overfitting, L2 regularization, early stopping, and hyperparameters"
+    hu: "Miért nem elég az alacsony tanítási hiba, mire való a validációs halmaz, és hogyan segít a regularizáció és a korai leállítás?",
+    en: "Why low training error is not enough, what validation data is for, and how regularization and early stopping help"
   },
   source: "Lectures 4–5",
   sections: [
     {
-      id: "scope-polynomial-context",
+      id: "generalization",
       title: {
-        hu: "Polynomial regression: csak szemléltető kontextus",
-        en: "Polynomial regression: illustrative context only"
+        hu: "Az igazi cél: általánosítás új adatokra",
+        en: "The real goal: generalization to unseen data"
       },
       body: {
-        hu: "A lecture polynomial regression példákkal szemlélteti a model complexity, underfitting és overfitting jelenségeit. A Lecture 4 summary explicit kimondja, hogy polynomial regression és polynomial interpolation nem lesz a tests/exam része.",
-        en: "The lecture uses polynomial-regression examples to illustrate model complexity, underfitting, and overfitting. The Lecture 4 summary explicitly states that polynomial regression and polynomial interpolation will not be included in tests/exam."
+        hu: "A modell célja nem az, hogy kizárólag a tanítóhalmazt (training set) tudja minél pontosabban visszaadni, hanem hogy korábban nem látott adatpontokon is jól teljesítsen. Ezt nevezzük általánosításnak (generalization). A túlillesztett modell (overfitted model) képes lehet nagyon alacsony tanítási veszteséget elérni, miközben új adatokon lényegesen rosszabbul teljesít.",
+        en: "The goal of a model is not merely to reproduce the training set as accurately as possible, but to perform well on previously unseen data. This is generalization. An overfitted model may obtain extremely low training loss while performing substantially worse on new data."
+      },
+      why: {
+        hu: "A valós használat során a modell tipikusan olyan példákat kap, amelyeket a tanítás alatt nem látott. Ezért a tanítási veszteség önmagában nem elegendő mérőszám a modell minőségéhez.",
+        en: "In real use, a model usually receives examples that were not present during training. Training loss alone is therefore not sufficient to assess model quality."
       },
       intuition: {
-        hu: "A polynomial degree itt csak egy könnyen elképzelhető 'complexity knob'. A vizsgán az általános tanulság számít: túl egyszerű model → underfitting; túl komplex model → overfitting kockázat.",
-        en: "Polynomial degree is only an easy-to-visualize 'complexity knob' here. For the exam, the general lesson matters: an overly simple model risks underfitting; an overly complex model risks overfitting."
+        hu: "Egy vizsgára készülő hallgató megtanulhatja szó szerint az előző évi feladatsor megoldásait. Ettől még nem biztos, hogy egy új feladatot meg tud oldani. A gépi tanulásban ugyanez a különbség a memorizálás és az általánosítás között.",
+        en: "A student may memorize the answers to last year's exam without being able to solve a new problem. The same distinction exists between memorization and generalization in machine learning."
       },
-      examTrap: {
-        hu: "Ne tölts Theory Test tanulási időt polynomial-regression képletek magolásával; a source summary szerint ez nem tesztanyag.",
-        en: "Do not spend Theory Test study time memorizing polynomial-regression formulas; the source summary says this is not test material."
-      },
-      keyTerms: [
-        { term: "model complexity" },
-        { term: "underfitting" },
-        { term: "overfitting" }
-      ]
-    },
-    {
-      id: "train-test",
-      title: {
-        hu: "Training set és test set szerepe",
-        en: "Roles of the training set and test set"
-      },
-      body: {
-        hu: "A modellt a training seten tanítjuk, majd külön test seten értékeljük. A két setnek disjointnak kell lennie. A test set célja annak becslése, hogyan teljesít a trained model korábban nem látott data pointokon.",
-        en: "We train the model on the training set and evaluate it on a separate test set. The two sets must be disjoint. The purpose of the test set is to estimate how the trained model performs on previously unseen data points."
-      },
-      intuition: {
-        hu: "A test set olyan, mint egy lezárt végső vizsga: ha training vagy model selection közben folyamatosan hozzá igazítod a modellt, már nem független mérés.",
-        en: "Think of the test set as a sealed final exam: if you repeatedly adapt the model to it during training or model selection, it is no longer an independent measurement."
-      },
-      examTrap: {
-        hu: "A test setet nem használjuk learningre vagy hyperparameter választásra.",
-        en: "The test set is not used for learning or hyperparameter selection."
+      connections: {
+        hu: "A modellkapacitás (model capacity), az adatmennyiség, a regularizáció és a tanítás hossza mind befolyásolhatják, mennyire képes a modell általánosítani.",
+        en: "Model capacity, data quantity, regularization, and training duration can all influence generalization."
       },
       keyTerms: [
-        { term: "training set" },
-        { term: "test set" },
-        { term: "disjoint" },
-        { term: "unseen data" }
+        { term: "generalization", hu: "általánosítás" },
+        { term: "unseen data", hu: "korábban nem látott adat" }
       ]
     },
     {
       id: "underfit-overfit",
       title: {
-        hu: "Underfitting, just right, overfitting",
-        en: "Underfitting, just right, overfitting"
+        hu: "Alulillesztés és túlillesztés",
+        en: "Underfitting and overfitting"
       },
       body: {
-        hu: "Underfittingnél a model complexity túl alacsony: a training és test loss is nagy; a lecture ezt 'high bias, low variance' helyzetként jelöli. Jó illeszkedésnél mindkettő alacsony. Overfittingnél a training loss tovább csökken, miközben az unseen-data loss romlik; ez 'low bias, high variance'.",
-        en: "With underfitting, model complexity is too low: both training and test loss are high; the lecture labels this 'high bias, low variance'. With an appropriate fit, both are low. With overfitting, training loss keeps decreasing while unseen-data loss worsens; this is 'low bias, high variance'."
+        hu: "Alulillesztésnél (underfitting) a modell túl egyszerű ahhoz, hogy még a tanítóadatok fő szerkezetét is jól leírja. Ilyenkor a tanítási és a kiértékelési veszteség is magas lehet. Túlillesztésnél (overfitting) a modell már a tanítóhalmaz egyedi részleteihez is túlságosan hozzáigazodik: a tanítási veszteség tovább csökkenhet, miközben a korábban nem látott adatokon mért veszteség nő.",
+        en: "With underfitting, the model is too simple to capture even the main structure of the training data, so both training and evaluation loss can be high. With overfitting, the model adapts too closely to idiosyncrasies of the training set: training loss may keep falling while loss on unseen data increases."
       },
-      intuition: {
-        hu: "Underfit: a modell még az alapmintát sem tudja leírni. Overfit: a training examples egyedi részleteit is megtanulja, ezért elveszíti a generalization képességét.",
-        en: "Underfit: the model cannot capture even the main structure. Overfit: it learns details specific to individual training examples and loses the ability to generalize."
+      why: {
+        hu: "A modell összetettsége (model complexity) egyensúlyt kíván. Túl kevés kapacitással a modell nem tudja megtanulni a szükséges kapcsolatot; túl sok kapacitással és kevés adattal viszont könnyebben megtanulhatja a zajt és az egyedi részleteket is.",
+        en: "Model complexity requires a balance. Too little capacity cannot represent the required relationship, while excessive capacity relative to the amount of data makes it easier to fit noise and individual details."
+      },
+      workedExample: {
+        hu: "A lecture polinomos görbékkel szemlélteti a jelenséget: túl alacsony fokszámnál a görbe nem követi az adat trendjét, túl magas fokszámnál pedig az egyes pontokhoz túl erősen igazodik. A polinomiális regresszió képletei itt szemléltetésre szolgálnak; a Lecture 4 összefoglalója szerint maga a polinomiális regresszió/interpoláció nem tesztanyag.",
+        en: "The lecture illustrates this using polynomial curves: a low-degree curve misses the data trend, while a high-degree curve bends too closely around individual points. Polynomial regression/interpolation itself is marked as excluded from the test; it is used here as visual context."
       },
       examTrap: {
-        hu: "Nagyon alacsony training loss önmagában nem bizonyít jó modellt. Ha validation/test loss magas vagy növekszik, ez lehet overfitting.",
-        en: "A very low training loss alone does not prove that the model is good. If validation/test loss is high or increasing, this can indicate overfitting."
+        hu: "A nagyon alacsony tanítási veszteség nem bizonyítja, hogy a modell jó. Ha a validációs veszteség (validation loss) közben romlik, az a túlillesztés erősödésének jele lehet.",
+        en: "Very low training loss does not prove that the model is good. If validation loss worsens while training loss improves, overfitting may be becoming more severe."
       },
       keyTerms: [
-        { term: "generalization" },
-        { term: "high bias" },
-        { term: "high variance" }
+        { term: "underfitting", hu: "alulillesztés" },
+        { term: "overfitting", hu: "túlillesztés" },
+        { term: "model complexity", hu: "modellösszetettség" }
       ]
     },
     {
-      id: "overfit-risk",
+      id: "risk-factors",
       title: {
-        hu: "Mi növeli vagy csökkenti az overfitting kockázatát?",
-        en: "What increases or decreases overfitting risk?"
+        hu: "Mi növeli a túlillesztés kockázatát?",
+        en: "What increases overfitting risk?"
       },
       body: {
-        hu: "A course szerint több training data segíthet az overfitting csökkentésében. Egyszerűbb model / kevesebb parameter szintén csökkentheti az overfittinget. Kevés training data és sok learnable parameter mellett könnyebb a training examples egyedi részleteire specializálódni.",
-        en: "According to the course, more training data can help reduce overfitting. A simpler model / fewer parameters can also reduce overfitting. With little training data and many learnable parameters, it is easier to specialize to individual training examples."
+        hu: "A tananyag szerint sok tanulható paraméter (learnable parameters) és kevés tanítóadat mellett könnyebb túlilleszteni a modellt. Több tanítási példa általában csökkentheti ezt a kockázatot, míg a modell egyszerűsítése – például kevesebb paraméter használata – szintén segíthet. A teszthalmaz méretének csökkentése ezzel szemben nem teszi magát a tanítást jobban túlillesztetté; inkább a végső teljesítménybecslés válik bizonytalanabbá.",
+        en: "According to the course, many learnable parameters combined with little training data make overfitting easier. More training examples can generally reduce this risk, while simplifying the model—for example by using fewer parameters—can also help. Reducing the test-set size does not itself make training more overfit; it mainly makes final performance estimation less reliable."
       },
-      intuition: {
-        hu: "A model capacity és a training evidence aránya számít: sok parameter + kevés example → több lehetőség memorizationre.",
-        en: "The balance between model capacity and training evidence matters: many parameters + few examples → more opportunity for memorization."
+      why: {
+        hu: "A modellkapacitás és a rendelkezésre álló bizonyíték mennyisége együtt számít. Ha sok szabadságfokot kevés adat korlátoz, több olyan paraméterbeállítás létezhet, amely a tanítóhalmazra kiváló, de az általános mintázatot rosszul ragadja meg.",
+        en: "Model capacity and the amount of evidence must be considered together. With many degrees of freedom constrained by little data, many parameter settings can fit the training set while failing to capture the general pattern."
       },
       examTrap: {
-        hu: "A test examples számának csökkentése önmagában nem növeli a model training alatti overfittinget; inkább a final evaluation lesz kevésbé megbízható. A training examples csökkentése viszont növelheti az overfitting kockázatát.",
-        en: "Reducing the number of test examples does not itself increase overfitting during model training; it mainly makes final evaluation less reliable. Reducing the number of training examples can increase overfitting risk."
-      },
-      keyTerms: [
-        { term: "model capacity" },
-        { term: "training data" },
-        { term: "parameters" }
-      ]
+        hu: "A hivatalos mintakérdések külön megkülönböztetik a tanítási példák és a tesztpéldák számát. Kevesebb tanítási adat növelheti a túlillesztés kockázatát; kevesebb tesztadat elsősorban a mérés megbízhatóságát rontja.",
+        en: "The official example questions distinguish training-example count from test-example count. Less training data can increase overfitting risk; less test data mainly reduces evaluation reliability."
+      }
     },
     {
-      id: "overfit-solutions",
+      id: "three-way-split",
       title: {
-        hu: "Overfitting kezelési lehetőségei",
-        en: "Ways to handle overfitting"
+        hu: "Tanító-, validációs és teszthalmaz",
+        en: "Training, validation, and test sets"
       },
       body: {
-        hu: "A lecture négy fő megoldást sorol: egyszerűbb model (kevesebb parameter), több training data, regularization method (például L2), illetve early stopping.",
-        en: "The lecture lists four main approaches: a simpler model (fewer parameters), more training data, a regularization method such as L2, and early stopping."
+        hu: "A későbbi, helyes modellválasztási eljárás három külön adathalmazt használ. A tanítóhalmaz (training set) a modell paramétereinek megtanítására szolgál. A validációs halmazt (validation set) hiperparaméterek (hyperparameters) és modellválasztási döntések értékelésére használjuk. A teszthalmaz (test set) a végleges, független teljesítménybecslésre marad.",
+        en: "The later, correct model-selection procedure uses three separate datasets. The training set is used to learn model parameters. The validation set is used to evaluate hyperparameters and model-selection decisions. The test set is reserved for final independent performance estimation."
       },
-      intuition: {
-        hu: "Mindegyik módszer valamilyen módon csökkenti annak lehetőségét, hogy a model túl szorosan a training set egyedi részleteihez igazodjon.",
-        en: "Each method reduces, in some way, the model's ability to fit idiosyncrasies of the training set too closely."
-      },
-      examTrap: {
-        hu: "Underfittingnél viszont a lecture szerint komplexebb modelre lehet szükség.",
-        en: "For underfitting, the lecture says a more complex model may be needed."
-      },
-      keyTerms: [
-        { term: "regularization" },
-        { term: "early stopping" },
-        { term: "simpler model" }
-      ]
-    },
-    {
-      id: "l2",
-      title: {
-        hu: "L2 regularization",
-        en: "L2 regularization"
-      },
-      body: {
-        hu: "L2 regularization a prediction error mellé a nagy parameters értékeket büntető tagot ad. A lecture példájában J(θ)=MSE + λΣᵢ₌₁ⁿθᵢ². A bias/intercept θ₀ nincs penalizálva.",
-        en: "L2 regularization adds a term that penalizes large parameter values in addition to prediction error. In the lecture example, J(θ)=MSE + λΣᵢ₌₁ⁿθᵢ². The bias/intercept θ₀ is not penalized."
-      },
-      intuition: {
-        hu: "A model nemcsak jól akar illeszkedni, hanem ezt túl nagy weights nélkül próbálja megtenni.",
-        en: "The model is encouraged not only to fit the data well, but also to do so without relying on excessively large weights."
-      },
-      examTrap: {
-        hu: "λ=0 az eredeti, unregularized objective. Túl nagy λ esetén túl kicsi weights felé tolhatjuk a modellt, ami underfittinget okozhat.",
-        en: "λ=0 gives the original unregularized objective. If λ is too large, the model can be pushed toward overly small weights, causing underfitting."
+      why: {
+        hu: "Ha ugyanazt a teszthalmazt újra és újra felhasználjuk döntésekhez, akkor közvetve ahhoz is hozzáigazítjuk a modellt. Ezért a teszthalmaz többé nem lenne valóban független mérés.",
+        en: "If the test set is repeatedly used to make decisions, the model-selection process becomes indirectly adapted to it. The test set would no longer provide an independent measurement."
       },
       formula: {
-        hu: "J(θ) = 1/(2m)·Σⱼ(hθ(x⁽ʲ⁾)−y⁽ʲ⁾)² + λ·Σᵢ₌₁ⁿ θᵢ²   (θ₀ nincs penalizálva)",
-        en: "J(θ) = 1/(2m)·Σⱼ(hθ(x⁽ʲ⁾)−y⁽ʲ⁾)² + λ·Σᵢ₌₁ⁿ θᵢ²   (θ₀ is not penalized)"
+        hu: "TRAIN → modellparaméterek θ    |    VALIDATION → hiperparaméterek Ψ    |    TEST → végső értékelés",
+        en: "TRAIN → model parameters θ    |    VALIDATION → hyperparameters Ψ    |    TEST → final evaluation"
       },
-      keyTerms: [
-        { term: "L2 regularization" },
-        { term: "lambda (λ)" },
-        { term: "penalty" },
-        { term: "bias parameter" }
-      ]
-    },
-    {
-      id: "validation",
-      title: {
-        hu: "Miért kell validation set?",
-        en: "Why do we need a validation set?"
-      },
-      body: {
-        hu: "A helyes felosztás training set, validation set és test set. A model parameters θ értékeit training seten optimalizáljuk. A validation set segítségével hyperparameters értékeket választunk. A test set a kiválasztott final model független értékelésére szolgál.",
-        en: "The correct split uses training, validation, and test sets. Model parameters θ are optimized on the training set. The validation set is used to select hyperparameters. The test set is used for independent evaluation of the selected final model."
-      },
-      intuition: {
-        hu: "Validation = development exam, amely alapján döntéseket hozhatsz. Test = final exam, amelyhez model selection közben nem nyúlsz.",
-        en: "Validation = a development exam that can guide decisions. Test = the final exam that is not used during model selection."
+      formulaTerms: [
+        { symbol: "θ", hu: "A modell tanulható paraméterei; tipikusan a tanítóhalmazon optimalizáljuk őket.", en: "Learnable model parameters, typically optimized on the training set." },
+        { symbol: "Ψ", hu: "A hiperparaméter-konfiguráció, például tanulási ráta, hálózati architektúra vagy iterációszám.", en: "Hyperparameter configuration, such as learning rate, architecture, or iteration count." }
+      ],
+      workedExample: {
+        hu: "A Lecture 5 modellválasztási eljárása: választunk egy Ψ hiperparaméter-konfigurációt, ezzel a tanítóhalmazon optimalizáljuk θ-t, majd a validációs halmazon értékelünk. Több Ψ kipróbálása után a legjobb validációs teljesítményű konfigurációt választjuk, és csak ezután mérünk a teszthalmazon.",
+        en: "Lecture 5 procedure: choose a hyperparameter configuration Ψ, optimize θ on the training set, evaluate on the validation set, repeat for multiple Ψ values, then choose the best validation configuration and only afterward evaluate on the test set."
       },
       examTrap: {
-        hu: "Az 50/25/25 split csak példa a lecture-ben, nem univerzális szabály.",
-        en: "The 50/25/25 split is only an example in the lecture, not a universal rule."
+        hu: "A teszthalmaz nem modellválasztási eszköz. A hiperparamétereket és a korai leállítást a validációs halmaz alapján választjuk.",
+        en: "The test set is not a model-selection tool. Hyperparameters and early stopping are selected using validation data."
       },
       keyTerms: [
-        { term: "validation set" },
-        { term: "model selection" },
-        { term: "final evaluation" }
+        { term: "training set", hu: "tanítóhalmaz" },
+        { term: "validation set", hu: "validációs halmaz" },
+        { term: "test set", hu: "teszthalmaz" }
       ]
     },
     {
       id: "hyperparameters",
       title: {
-        hu: "Model parameters vs hyperparameters",
-        en: "Model parameters vs hyperparameters"
+        hu: "Paraméter és hiperparaméter nem ugyanaz",
+        en: "Parameters and hyperparameters are different"
       },
       body: {
-        hu: "θ jelöli a model parameters értékeket, amelyeket például gradient descenttel a training seten tanulunk. Hyperparameters (Ψ) közé tartozhat a learning rate α, model architecture / polynomial degree és az iteration count / early-stopping choice. Ezeket validation performance alapján választjuk.",
-        en: "θ denotes model parameters learned on the training set, for example with gradient descent. Hyperparameters (Ψ) can include the learning rate α, model architecture / polynomial degree, and iteration count / early-stopping choice. They are selected using validation performance."
+        hu: "A modellparaméterek (model parameters), például a lineáris modell θ értékei vagy egy neurális hálózat súlyai és eltolásai, közvetlenül a tanítás során tanulhatók. A hiperparaméterek (hyperparameters) a tanítás vagy a modell felépítésének beállításai. A lecture példái közé tartozik a tanulási ráta (learning rate), a polinom foka vagy a neurális hálózat architektúrája, valamint a gradiensmódszer iterációinak száma.",
+        en: "Model parameters, such as θ in a linear model or weights and biases in a neural network, are learned directly during training. Hyperparameters configure the model or training procedure. Lecture examples include learning rate, polynomial degree or neural-network architecture, and number of gradient-method iterations."
       },
-      intuition: {
-        hu: "Parameter: amit a model a training examplesból közvetlenül megtanul. Hyperparameter: ami a learning process vagy model structure működését állítja.",
-        en: "Parameter: something the model directly learns from training examples. Hyperparameter: something that configures the learning process or model structure."
+      why: {
+        hu: "A hiperparaméterekre általában nem alkalmazható ugyanúgy a gradienscsökkentés, mert nem feltétlenül létezik rájuk nézve differenciálható veszteség. A tananyag kézi próbálgatást, rácskeresést (grid search), véletlen keresést (random search), Bayes-i optimalizálást és evolúciós módszereket is említ.",
+        en: "Gradient descent cannot generally be applied to hyperparameters in the same way because a differentiable loss with respect to them may not exist. The course mentions manual trial and error, grid search, random search, Bayesian optimization, and evolutionary methods."
+      },
+      connections: {
+        hu: "A korai leállításnál (early stopping) az iterációk száma is hiperparaméterként viselkedik: a validációs teljesítmény alapján döntjük el, melyik tanítási állapotot érdemes megtartani.",
+        en: "In early stopping, the number of iterations behaves as a hyperparameter: validation performance determines which training state should be retained."
       },
       examTrap: {
-        hu: "A lecture szerint gradient descent általában nem használható hyperparameters optimalizálására. Példák: manual trial and error, grid search, random search, Bayesian optimization, evolutionary/genetic algorithms.",
-        en: "According to the lecture, gradient descent generally cannot be used to optimize hyperparameters. Examples include manual trial and error, grid search, random search, Bayesian optimization, and evolutionary/genetic algorithms."
+        hu: "A neurális hálózat súlyait tipikusan gradiensalapú módszer tanítja, a hiperparamétereket viszont általában nem egyszerűen SGD-vel tanítjuk.",
+        en: "Neural-network weights are typically trained using gradient-based methods, while hyperparameters are generally not simply trained with SGD."
       },
       keyTerms: [
-        { term: "model parameter" },
-        { term: "hyperparameter" },
-        { term: "grid search" },
-        { term: "random search" }
+        { term: "model parameter", hu: "modellparaméter" },
+        { term: "hyperparameter", hu: "hiperparaméter" },
+        { term: "grid search", hu: "rácskeresés" }
+      ]
+    },
+    {
+      id: "l2",
+      title: {
+        hu: "L2-regularizáció: ne csak jól illeszkedjen, legyen visszafogott is",
+        en: "L2 regularization: fit the data without excessively large weights"
+      },
+      body: {
+        hu: "Az L2-regularizáció (L2 regularization) a predikciós veszteség mellé olyan büntetőtagot ad, amely a nagy súlyokat bünteti. A course példájában a regularizációs tag λΣθᵢ². A konstans eltolást, θ₀-t a bemutatott képlet nem bünteti.",
+        en: "L2 regularization adds a penalty for large weights to the prediction loss. In the course example the penalty is λΣθᵢ², while θ₀, the constant bias term, is not penalized."
+      },
+      why: {
+        hu: "Túlillesztés során a modell nagy paraméterértékekkel nagyon erősen reagálhat az egyedi tanítópontokra. Az L2 korlátozza ezt a szabadságot, így csökkentheti a túlillesztést, különösen kevés tanítóadat esetén.",
+        en: "During overfitting, large parameter values can make the model react strongly to individual training examples. L2 constrains this freedom and can reduce overfitting, especially when training data are scarce."
+      },
+      formula: {
+        hu: "J_reg(θ) = J_data(θ) + λ Σᵢ₌₁ⁿ θᵢ²",
+        en: "J_reg(θ) = J_data(θ) + λ Σᵢ₌₁ⁿ θᵢ²"
+      },
+      formulaTerms: [
+        { symbol: "J_data", hu: "Az eredeti, adatokhoz való illeszkedést mérő veszteség.", en: "Original data-fitting loss." },
+        { symbol: "λ", hu: "A regularizáció erőssége. λ=0 esetén nincs L2-büntetés.", en: "Regularization strength. λ=0 means no L2 penalty." },
+        { symbol: "Σθᵢ²", hu: "A súlyok négyzeteinek összege; a nagy értékeket erősebben bünteti.", en: "Sum of squared weights, penalizing large values more strongly." }
+      ],
+      connections: {
+        hu: "A regularizált normálegyenletben megjelenő λI tag ugyanehhez az L2-gondolathoz kapcsolódik. Neurális hálózatoknál is alkalmazható L2-jellegű regularizáció.",
+        en: "The λI term in the regularized normal equation is connected to the same L2 idea. L2-style regularization can also be applied to neural networks."
+      },
+      examTrap: {
+        hu: "Túl nagy λ a modellt túlzottan egyszerűvé teheti és alulillesztéshez vezethet. λ=0 az eredeti, regularizálatlan célfüggvényt adja vissza.",
+        en: "An excessively large λ can make the model too constrained and lead to underfitting. λ=0 recovers the unregularized objective."
+      },
+      keyTerms: [
+        { term: "L2 regularization", hu: "L2-regularizáció" },
+        { term: "regularization strength", hu: "regularizációs erősség" }
       ]
     },
     {
       id: "early-stopping",
       title: {
-        hu: "Early stopping: helyes és helytelen",
-        en: "Early stopping: correct and incorrect"
+        hu: "Korai leállítás: mikor hagyjuk abba a tanítást?",
+        en: "Early stopping: when should training stop?"
       },
       body: {
-        hu: "Early stopping célja az overfitting mérséklése. A Lecture 4 először J_test alapú stoppingot mutat, majd ezt explicit cheatingnek nevezi. A helyes módszer J_val figyelése.",
-        en: "Early stopping aims to reduce overfitting. Lecture 4 first demonstrates stopping based on J_test, then explicitly calls it cheating. The correct method monitors J_val."
+        hu: "A korai leállítás (early stopping) azt használja ki, hogy hosszú tanítás során a tanítási veszteség tovább csökkenhet akkor is, amikor az általánosítás már romlik. A helyes eljárás a validációs veszteséget figyeli, és azt a tanítási állapotot tartja meg, amelynél a validációs teljesítmény a legjobb.",
+        en: "Early stopping exploits the fact that training loss can continue decreasing even after generalization starts getting worse. The correct procedure monitors validation loss and retains the training state with the best validation performance."
       },
-      intuition: {
-        hu: "Mentsd azt az állapotot, ahol validation loss a legjobb. Ha J_val tartósan nem javul, állj meg és használd a best-validation state parameters értékeit.",
-        en: "Keep the state with the best validation loss. If J_val stops improving persistently, stop and use the parameters from the best-validation state."
+      why: {
+        hu: "A tanítási veszteség önmagában nem jelzi, hogy elkezdődött-e túlillesztés, mert overfitting közben is tovább csökkenhet. A validációs veszteség viszont korábban nem használt adatokon mutatja, hogyan változik az általánosítás.",
+        en: "Training loss alone does not reveal when overfitting begins because it may keep decreasing during overfitting. Validation loss provides a signal from data not used to fit the parameters."
       },
-      examTrap: {
-        hu: "Nem J_train növekedésére várunk. Tipikus overfitting jel, hogy J_train csökken, miközben J_val emelkedik. És nem J_test alapján döntünk.",
-        en: "We do not wait for J_train to increase. A typical overfitting sign is that J_train decreases while J_val increases. And we do not make the decision from J_test."
+      workedExample: {
+        hu: "Fontos a slide-ok sorrendje: a Lecture 4 először szándékosan bemutatja a J_test figyelését, majd megkérdezi, mi a probléma ezzel. Ezután vezeti be a helyes változatot: a korai leállításhoz J_val-t figyelünk. A Lecture 5 összefoglalója is ezt ismétli.",
+        en: "The slide sequence matters: Lecture 4 first deliberately shows monitoring J_test and asks what is wrong with it. It then introduces the correct version: monitor J_val for early stopping. Lecture 5 repeats this corrected procedure."
       },
       formula: {
-        hu: "helyes: monitor J_val   |   helytelen: tune/stop using J_test",
-        en: "correct: monitor J_val   |   incorrect: tune/stop using J_test"
+        hu: "helyes jel: J_train tovább csökken, miközben J_val már nő → erősödő túlillesztés",
+        en: "correct signal: J_train keeps decreasing while J_val increases → worsening overfitting"
+      },
+      formulaTerms: [
+        { symbol: "J_train", hu: "A tanítóhalmazon mért veszteség.", en: "Loss measured on the training set." },
+        { symbol: "J_val", hu: "A validációs halmazon mért veszteség; ezt használjuk a leállítási döntéshez.", en: "Loss measured on the validation set; used for the stopping decision." },
+        { symbol: "J_test", hu: "A végső független értékeléshez fenntartott veszteség; nem a korai leállítás vezérlőjele.", en: "Loss reserved for final independent evaluation, not the early-stopping control signal." }
+      ],
+      examTrap: {
+        hu: "Nem azért állunk meg, mert a tanítási veszteség növekedni kezd. A helyes jel a validációs teljesítmény romlása vagy javulásának megszűnése.",
+        en: "We do not stop because training loss starts increasing. The correct signal is that validation performance stops improving or begins to worsen."
       },
       keyTerms: [
-        { term: "early stopping" },
-        { term: "validation loss" },
-        { term: "patience" },
-        { term: "test leakage" }
+        { term: "early stopping", hu: "korai leállítás" },
+        { term: "validation loss", hu: "validációs veszteség" }
       ]
     },
     {
-      id: "training-procedure",
+      id: "solutions-summary",
       title: {
-        hu: "Teljes model training procedure",
-        en: "Complete model-training procedure"
+        hu: "Túlillesztés kezelése: a négy fő eszköz",
+        en: "Handling overfitting: four main approaches"
       },
       body: {
-        hu: "1) Válassz hyperparameter configuration Ψ-t. 2) Optimalizáld θ model parameters értékeit a training seten. 3) Értékeld a modellt validation seten, majd próbálj más Ψ-t. Végül válaszd a best validation performance hyperparameters értékeit, és csak ezután értékeld a final modelt a test seten.",
-        en: "1) Choose a hyperparameter configuration Ψ. 2) Optimize model parameters θ on the training set. 3) Evaluate the model on the validation set, then try another Ψ. Finally choose the hyperparameters with the best validation performance and only then evaluate the final model on the test set."
+        hu: "A Lecture 4 négy fő megoldást sorol fel: egyszerűbb modell használata, több tanítóadat gyűjtése, regularizációs módszerek – például L2 – alkalmazása, illetve korai leállítás. Ezek különböző módon ugyanazt a problémát célozzák: ne engedjük, hogy a modell túlságosan a tanítóhalmaz egyedi részleteihez igazodjon.",
+        en: "Lecture 4 lists four main approaches: use a simpler model, obtain more training data, apply regularization methods such as L2, and use early stopping. They all aim to prevent excessive specialization to training-set details."
       },
-      intuition: {
-        hu: "Két nested optimization történik: belül θ-t tanuljuk training data alapján; kívül Ψ-t választjuk validation performance alapján.",
-        en: "There are two nested optimization problems: internally we learn θ from training data; externally we select Ψ using validation performance."
+      connections: {
+        hu: "A neurális hálózatoknál a modell egyszerűsítése jelentheti például kevesebb réteg vagy neuron használatát. Több adat több különböző példát mutat a modellnek. L2 a súlyokat korlátozza, early stopping pedig a tanítás hosszát.",
+        en: "For neural networks, simplification may mean fewer layers or neurons. More data provides more diverse examples. L2 constrains weights, while early stopping constrains training duration."
       },
       examTrap: {
-        hu: "Ha test performance alapján választod ki Ψ-t, a test set már része lett a model selectionnek, így nem marad független final evaluation.",
-        en: "If Ψ is selected based on test performance, the test set has become part of model selection and is no longer an independent final evaluation."
-      },
-      keyTerms: [
-        { term: "nested optimization" },
-        { term: "model selection" },
-        { term: "final test" }
-      ]
+        hu: "Alulillesztésnél az ellenkező irány lehet szükséges: összetettebb modell vagy jobb reprezentáció kellhet. A túlillesztés elleni megoldásokat nem szabad automatikusan minden magas veszteségre alkalmazni.",
+        en: "Underfitting may require the opposite direction: a more expressive model or better representation. Overfitting remedies should not be applied automatically to every high-loss situation."
+      }
     }
   ]
 };
