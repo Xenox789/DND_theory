@@ -118,7 +118,7 @@ export function GradientDescentLab({ language }: Props) {
       <div className="lab-controls gradient-controls">
         <label>
           <div>
-            <strong>α — learning rate</strong>
+            <strong>{language === "hu" ? "α — tanulási ráta (learning rate)" : "α — learning rate"}</strong>
             <span>{learningRate.toFixed(5)}</span>
           </div>
           <input
@@ -168,7 +168,7 @@ export function GradientDescentLab({ language }: Props) {
       </div>
 
       <div className="plot-card">
-        <h2>3D Loss Surface + Gradient Descent trajectory</h2>
+        <h2>{language === "hu" ? "3D veszteségfelület és a gradienscsökkentés útvonala" : "3D Loss Surface + Gradient Descent trajectory"}</h2>\n        <p className="plot-description">{language === "hu" ? "A vízszintes két tengely a modell két paramétere. A magasság a veszteség. A pontsor azt mutatja, hogyan változnak a paraméterek minden frissítés után." : "The two horizontal axes are the model parameters and height is loss. The path shows how the parameters change after each update."}</p>
         <Plot
           data={[
             {
