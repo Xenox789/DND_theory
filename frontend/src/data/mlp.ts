@@ -294,25 +294,25 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q1",
     topics: ["artificial-neuron"],
-    prompt: { hu: "Mely állítások igazak egy artificial neuronra?", en: "Which statements are true about an artificial neuron?" },
+    prompt: { hu: "Mely állítások igazak egy mesterséges neuronra (artificial neuron)?", en: "Which statements are true about an artificial neuron?" },
     choices: [
-      { id: "a", text: { hu: "Weighted sumot képez az inputokból.", en: "It forms a weighted sum of its inputs." } },
-      { id: "b", text: { hu: "aktiváció (activation) functiont alkalmazhat a weighted sumra.", en: "It can apply an activation function to the weighted sum." } },
-      { id: "c", text: { hu: "Sigmoid g esetén multivariate logistic regressionnek felel meg.", en: "With sigmoid g, it corresponds to multivariate logistic regression." } },
+      { id: "a", text: { hu: "Súlyozott összeget (weighted sum) képez az bemenetekből (inputs).", en: "It forms a weighted sum of its inputs." } },
+      { id: "b", text: { hu: "aktiváció (activation) függvényt (function) alkalmazhat a súlyozott összegre (weighted sum).", en: "It can apply an activation function to the weighted sum." } },
+      { id: "c", text: { hu: "Sigmoid g esetén többváltozós logisztikus regressziónak (multivariate logistic regression) felel meg.", en: "With sigmoid g, it corresponds to multivariate logistic regression." } },
       { id: "d", text: { hu: "Mindig ReLU activationt kell használnia.", en: "It must always use ReLU activation." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A neuron (neuron) weighted sum + aktiváció (activation) szerkezetű. Sigmoid esetén az előadás (lecture) explicit logistic-regresszió (regression) kapcsolatot mond ki.", en: "A neuron has a weighted-sum + activation structure. With sigmoid, the lecture explicitly identifies it with logistic regression." }
+    explanation: { hu: "A neuron (neuron) súlyozott összeg (weighted sum) + aktiváció (activation) szerkezetű. Sigmoid esetén az előadás (lecture) kifejezett logisztikus regressziós (explicit logistic-regression) (regression) kapcsolatot mond ki.", en: "A neuron has a weighted-sum + activation structure. With sigmoid, the lecture explicitly identifies it with logistic regression." }
   },
   {
     id: "mlp-q2",
     topics: ["artificial-neuron","expressive-power"],
-    prompt: { hu: "Mit tud egyetlen sigmoid neuron (neuron) classificationnél?", en: "What can a single sigmoid neuron represent in classification?" },
+    prompt: { hu: "Mit tud egyetlen sigmoid neuron (neuron) osztályozásnál (classification)?", en: "What can a single sigmoid neuron represent in classification?" },
     choices: [
-      { id: "a", text: { hu: "Egyetlen linear decision surface-t.", en: "A single linear decision surface." } },
-      { id: "b", text: { hu: "Két inputnál egy line decision boundary-t.", en: "With two inputs, a line decision boundary." } },
+      { id: "a", text: { hu: "Egyetlen lineáris döntési felület (linear decision surface)-t.", en: "A single linear decision surface." } },
+      { id: "b", text: { hu: "Két inputnál egy egyenes döntési határ (line decision boundary)-t.", en: "With two inputs, a line decision boundary." } },
       { id: "c", text: { hu: "Általánosan lineárisan szeparálható (linearly separable) problémákra alkalmas.", en: "It is suitable for linearly separable problems in general." } },
-      { id: "d", text: { hu: "Bármilyen XOR-like boundary-t egyedül is reprezentál.", en: "It can represent any XOR-like boundary by itself." } }
+      { id: "d", text: { hu: "Bármilyen XOR-szerű döntési határ (XOR-like boundary)-t egyedül is reprezentál.", en: "It can represent any XOR-like boundary by itself." } }
     ],
     correctIds: ["a","b","c"],
     explanation: { hu: "Az előadás (lecture) szerint egyetlen neuron (single neuron) csak lineárisan szeparálható (linearly separable) problémákat tud megoldani; XOR nem ilyen.", en: "According to the lecture, a single neuron can only solve linearly separable problems; XOR is not one." }
@@ -336,7 +336,7 @@ export const mlpQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "W_k: (S_k, S_(k−1)).", en: "W_k: (S_k, S_(k−1))." } },
       { id: "b", text: { hu: "b_k: (S_k,).", en: "b_k: (S_k,)." } },
-      { id: "c", text: { hu: "S₀ az bemenet (input) variables száma.", en: "S₀ is the number of input variables." } },
+      { id: "c", text: { hu: "S₀ az bemenet (input) változó (variable)s száma.", en: "S₀ is the number of input variables." } },
       { id: "d", text: { hu: "b_k shape-je mindig ugyanaz, mint W_k.", en: "b_k always has the same shape as W_k." } }
     ],
     correctIds: ["a","b","c"],
@@ -345,7 +345,7 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q5",
     topics: ["parameter-count"],
-    prompt: { hu: "20 bemenet (input) variable → 10-neuron (neuron) első (first) réteg (layer) esetén hány paraméter (parameter) van az első teljesen összekötött (fully-connected) layerben?", en: "With 20 input variables → a 10-neuron first layer, how many parameters are in the first fully connected layer?" },
+    prompt: { hu: "20 bemenet (input) változó (variable) → 10-neuron (neuron) első (first) réteg (layer) esetén hány paraméter (parameter) van az első teljesen összekötött (fully-connected) layerben?", en: "With 20 input variables → a 10-neuron first layer, how many parameters are in the first fully connected layer?" },
     choices: [
       { id: "a", text: { hu: "200 súlyok (weights).", en: "200 weights." } },
       { id: "b", text: { hu: "10 biases.", en: "10 biases." } },
@@ -371,7 +371,7 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q7",
     topics: ["mlp-hypothesis"],
-    prompt: { hu: "Melyik formula felel meg az előadás (lecture) kétrétegű (two-layer) MLP hypothesisának?", en: "Which formula matches the lecture's two-layer MLP hypothesis?" },
+    prompt: { hu: "Melyik képlet (formula) felel meg az előadás (lecture) kétrétegű (two-layer) MLP hipotézisének (hypothesis)?", en: "Which formula matches the lecture's two-layer MLP hypothesis?" },
     choices: [
       { id: "a", text: { hu: "h(x)=g₂(W₂ g₁(W₁x+b₁)+b₂).", en: "h(x)=g₂(W₂ g₁(W₁x+b₁)+b₂)." } },
       { id: "b", text: { hu: "Θ={W₁,b₁,W₂,b₂}.", en: "Θ={W₁,b₁,W₂,b₂}." } },
@@ -391,19 +391,19 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "MSE megfelelő veszteség (loss).", en: "MSE is an appropriate loss." } }
     ],
     correctIds: ["a","b","d"],
-    explanation: { hu: "rejtett nemlinearitás (hidden nonlinearity) kell expressive powerhez; arbitrary folytonos (continuous) outputnál végső (final) identitásfüggvény (identity) és MSE illeszkedik az előadás (lecture)-höz.", en: "Hidden nonlinearity is needed for expressive power; for arbitrary continuous output, final identity and MSE match the lecture." }
+    explanation: { hu: "rejtett nemlinearitás (hidden nonlinearity) kell kifejezőerőhöz (expressive power); tetszőleges folytonos (arbitrary continuous) (continuous) outputnál végső (final) identitásfüggvény (identity) és MSE illeszkedik az előadás (lecture)-höz.", en: "Hidden nonlinearity is needed for expressive power; for arbitrary continuous output, final identity and MSE match the lecture." }
   },
   {
     id: "mlp-q9",
     topics: ["activation-functions"],
     prompt: { hu: "Mi történik, ha minden aktiváció (activation) identitásfüggvény (identity) egy több-réteg (layer) MLP-ben?", en: "What happens if every activation is identity in a multilayer MLP?" },
     choices: [
-      { id: "a", text: { hu: "Multiple linear functions kompozíciója továbbra is linear.", en: "A composition of multiple linear functions remains linear." } },
+      { id: "a", text: { hu: "Több lineáris függvény (multiple linear functions) kompozíciója továbbra is linear.", en: "A composition of multiple linear functions remains linear." } },
       { id: "b", text: { hu: "Az kifejezőerő (expressive power) egy egyetlen (single) linear réteg (layer) szintjére esik vissza.", en: "Expressive power collapses to that of a single linear layer." } },
       { id: "c", text: { hu: "A hálózat ettől automatikusan nonlinear lesz.", en: "The network automatically becomes nonlinear." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "Ez az előadás (lecture) explicit indoka hidden aktiváció (activation) használatára.", en: "This is the lecture's explicit reason for using hidden activations." }
+    explanation: { hu: "Ez az előadás (lecture) explicit indoka rejtett aktiváció (hidden activation) (activation) használatára.", en: "This is the lecture's explicit reason for using hidden activations." }
   },
   {
     id: "mlp-q10",
@@ -450,11 +450,11 @@ export const mlpQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "1 kimenet (output) neuron (neuron).", en: "1 output neuron." } },
       { id: "b", text: { hu: "Sigmoid végső (final) aktiváció (activation).", en: "Sigmoid final activation." } },
-      { id: "c", text: { hu: "BCE / logistic veszteség (loss).", en: "BCE / logistic loss." } },
+      { id: "c", text: { hu: "BCE / logisztikus veszteség (logistic loss) (loss).", en: "BCE / logistic loss." } },
       { id: "d", text: { hu: "identitásfüggvény (identity) végső (final) aktiváció (activation) + MSE az alapértelmezett választás.", en: "Identity final activation + MSE is the default choice." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A binary setup a logistic-regresszió (regression) valószínűség (probability)-kimenet (output) logikáját követi.", en: "The binary setup follows the logistic-regression probability-output logic." }
+    explanation: { hu: "A bináris felállás (binary setup) a logistic-regresszió (regression) valószínűség (probability)-kimenet (output) logikáját követi.", en: "The binary setup follows the logistic-regression probability-output logic." }
   },
   {
     id: "mlp-q14",
