@@ -3,276 +3,329 @@ import type { Lesson, Question } from "../types";
 export const linearRegressionLesson: Lesson = {
   id: "linear-regression-optimization",
   title: {
-    hu: "Linear Regression és optimalizáció",
+    hu: "Lineáris regresszió és optimalizálás",
     en: "Linear Regression and Optimization"
   },
   subtitle: {
-    hu: "Hypothesis, least squares / MSE, gradient descent, normal equation és feature scaling",
-    en: "Hypothesis, least squares / MSE, gradient descent, normal equation, and feature scaling"
+    hu: "A lineáris hipotézistől a négyzetes hibán, a gradiensen és a gradienscsökkentésen át a normálegyenletig és a jellemzőskálázásig",
+    en: "From the linear hypothesis through squared error, gradients, gradient descent, the normal equation, and feature scaling"
   },
   source: "Lectures 2–4",
   sections: [
     {
       id: "regression-linear-hypothesis",
       title: {
-        hu: "Regression és a linear hypothesis",
-        en: "Regression and the linear hypothesis"
+        hu: "Mit old meg a lineáris regresszió?",
+        en: "What problem does linear regression solve?"
       },
       body: {
-        hu: "Regression esetén a label folytonos érték. Egy input variable esetén a linear regression hypothesis: hθ(x) = θ₁x + θ₀. θ₁ a slope, θ₀ az intercept / bias. A prediction ŷ = hθ(x).",
-        en: "In regression, the label is continuous. With one input variable, the linear regression hypothesis is hθ(x) = θ₁x + θ₀. θ₁ is the slope and θ₀ is the intercept / bias. The prediction is ŷ = hθ(x)."
+        hu: "A lineáris regresszió (linear regression) felügyelt tanulási módszer (supervised learning method), amely folytonos címke (continuous label) becslésére szolgál. Egyetlen bemeneti jellemző (feature) esetén a modell egy egyenest használ: hθ(x)=θ₁x+θ₀. A θ₁ paraméter a meredekség (slope), a θ₀ pedig a tengelymetszet vagy eltolás (intercept / bias). A modell kimenete az ŷ becslés.",
+        en: "Linear regression is a supervised-learning method for predicting continuous labels. With a single input feature, the model uses a line: hθ(x)=θ₁x+θ₀. θ₁ is the slope and θ₀ the intercept / bias. The model output is the prediction ŷ."
       },
-      intuition: {
-        hu: "Lakásár-becslésnél x lehet az alapterület, ŷ pedig a becsült ár. θ₁ azt mondja meg, mennyit változik a becsült ár egy egységnyi x-változásra; θ₀ pedig az egyenes eltolása.",
-        en: "For apartment-price prediction, x can be floor area and ŷ the predicted price. θ₁ controls how much the prediction changes per unit change in x; θ₀ shifts the line."
-      },
-      realWorld: {
-        hu: "A modell training előtt nem tudja a megfelelő θ₀ és θ₁ értékeket. Ezeket a training data alapján kell megtalálni.",
-        en: "Before training, the model does not know suitable θ₀ and θ₁ values. They must be found from the training data."
-      },
-      examTrap: {
-        hu: "A linear regression regression method, nem classification method. A hypothesis outputja egy scalar folytonos érték lehet, és nincs sigmoid által [0,1]-re korlátozva.",
-        en: "Linear regression is a regression method, not a classification method. Its hypothesis output can be a continuous scalar and is not constrained to [0,1] by a sigmoid."
+      why: {
+        hu: "A lineáris modell azért hasznos kiindulópont, mert egyszerű, jól értelmezhető, és a veszteségfüggvénye megfelelő választás mellett konvex. Emiatt tisztán meg lehet rajta érteni a paraméter, veszteség, gradiens és optimalizálás fogalmát.",
+        en: "The linear model is a useful starting point because it is simple, interpretable, and with the usual squared-error loss its objective is convex. It therefore provides a clean setting for understanding parameters, loss, gradients, and optimization."
       },
       formula: {
         hu: "ŷ = hθ(x) = θ₁x + θ₀",
         en: "ŷ = hθ(x) = θ₁x + θ₀"
       },
+      formulaTerms: [
+        { symbol: "x", hu: "A bemeneti jellemző (feature) értéke.", en: "The input-feature value." },
+        { symbol: "θ₁", hu: "A meredekség (slope): megadja, mennyit változik a becslés, ha x egy egységgel változik.", en: "The slope: how much the prediction changes when x increases by one unit." },
+        { symbol: "θ₀", hu: "A tengelymetszet vagy eltolás (intercept / bias): az egyenes függőleges eltolása.", en: "The intercept / bias: the vertical offset of the line." },
+        { symbol: "ŷ", hu: "A modell becslése (prediction).", en: "The model prediction." }
+      ],
+      workedExample: {
+        hu: "Szemléltető példa: ha x egy lakás alapterülete és ŷ a becsült ár, akkor θ₁ azt írja le, átlagosan mennyivel nő a becsült ár egy további négyzetméterrel. θ₀ az a konstans eltolás, amelyet a modell az x=0 helyhez rendel.",
+        en: "Illustrative example: if x is apartment floor area and ŷ the predicted price, θ₁ describes how much the predicted price changes per additional square meter, while θ₀ is the constant offset at x=0."
+      },
+      connections: {
+        hu: "A logisztikus regresszió ugyanilyen lineáris kifejezéssel indul, de a lineáris eredményt később szigmoid függvényen (sigmoid) vezeti át. Az egyetlen mesterséges neuron (artificial neuron) is ugyanezt a súlyozott összeget általánosítja.",
+        en: "Logistic regression starts from the same kind of linear expression but later passes it through a sigmoid. A single artificial neuron generalizes the same weighted-sum idea."
+      },
+      examTrap: {
+        hu: "A lineáris regresszió nem osztályozási (classification) módszer. A kimenete nincs 0 és 1 közé korlátozva; tetszőleges folytonos értéket felvehet.",
+        en: "Linear regression is not a classification method. Its output is not constrained to [0,1] and may take arbitrary continuous values."
+      },
       keyTerms: [
-        { term: "regression" },
-        { term: "hypothesis function" },
-        { term: "slope" },
+        { term: "linear regression", hu: "lineáris regresszió" },
+        { term: "slope", hu: "meredekség" },
         { term: "intercept", hu: "tengelymetszet" },
-        { term: "bias" }
+        { term: "bias", hu: "eltolás" }
       ]
     },
     {
       id: "multivariate-geometry",
       title: {
-        hu: "Univariate → multivariate linear regression",
-        en: "Univariate → multivariate linear regression"
+        hu: "Több jellemző: súlyok és geometriai értelmezés",
+        en: "Multiple features: weights and geometric interpretation"
       },
       body: {
-        hu: "Több input feature esetén a hypothesis minden feature-höz külön weightet használ: hθ(x) = θₙxₙ + … + θ₁x₁ + θ₀. n input variable mellett n+1 parameter van, mert θ₀ az intercept.",
-        en: "With multiple input features, the hypothesis uses a separate weight for every feature: hθ(x) = θₙxₙ + … + θ₁x₁ + θ₀. With n input variables there are n+1 parameters because θ₀ is the intercept."
+        hu: "Több bemeneti jellemző esetén minden jellemzőhöz külön súly (weight) tartozik. n valódi jellemző mellett a modellnek n súlya és egy eltolása van, vagyis összesen n+1 paramétere. A hipotézis: hθ(x)=θ₀+θ₁x₁+…+θₙxₙ. Egy jellemzőnél ez egy egyenes, két jellemzőnél egy sík, több jellemzőnél pedig ezek magasabb dimenziós általánosítása, egy hipersík (hyperplane).",
+        en: "With multiple input features, each feature has its own weight. With n real input features, the model has n weights plus one bias, for n+1 parameters total. The hypothesis is hθ(x)=θ₀+θ₁x₁+…+θₙxₙ. Geometrically this is a line for one feature, a plane for two features, and a hyperplane in higher dimensions."
       },
-      intuition: {
-        hu: "Egy feature esetén az adatpontokat 2D-ben látjuk és a hypothesis egy egyenes. Két feature esetén az adatpontok 3D-ben vannak és a hypothesis egy sík. n feature esetén ennek általánosítása egy hyperplane.",
-        en: "With one feature, data can be viewed in 2D and the hypothesis is a line. With two features, the data are in 3D and the hypothesis is a plane. With n features, the generalization is a hyperplane."
-      },
-      examTrap: {
-        hu: "1 input variable → 2 parameters. 2 input variables → 3 parameters. Általánosan n input variable → n+1 parameters.",
-        en: "1 input variable → 2 parameters. 2 input variables → 3 parameters. In general, n input variables → n+1 parameters."
+      why: {
+        hu: "A külön súlyok lehetővé teszik, hogy a modell eltérő erősséggel vegye figyelembe az egyes jellemzőket. A tanítás feladata ezeknek a súlyoknak és az eltolásnak a megtalálása.",
+        en: "Separate weights let the model use different strengths for different features. Training finds suitable weights and the bias."
       },
       formula: {
-        hu: "hθ(x) = θ₀ + θ₁x₁ + … + θₙxₙ",
-        en: "hθ(x) = θ₀ + θ₁x₁ + … + θₙxₙ"
+        hu: "hθ(x) = θ₀ + θ₁x₁ + θ₂x₂ + … + θₙxₙ",
+        en: "hθ(x) = θ₀ + θ₁x₁ + θ₂x₂ + … + θₙxₙ"
+      },
+      formulaTerms: [
+        { symbol: "xᵢ", hu: "Az i-edik bemeneti jellemző értéke.", en: "Value of the i-th input feature." },
+        { symbol: "θᵢ", hu: "Az i-edik jellemzőhöz tartozó tanulható súly (weight).", en: "Learnable weight associated with feature i." },
+        { symbol: "θ₀", hu: "Az eltolás (bias), amelyhez nem tartozik valódi bemeneti jellemző.", en: "The bias term, which is not tied to a real input feature." }
+      ],
+      workedExample: {
+        hu: "A hivatalos mintafeladatban a koleszterinszintet 4 jellemzőből – testsúly, életkor, magasság, nem – becsüljük. Ekkor 4 súly és 1 eltolás szükséges, tehát összesen 5 paraméter.",
+        en: "In the official example task, cholesterol is predicted from 4 features—weight, age, height, and sex. The model therefore needs 4 weights plus 1 bias, for 5 parameters."
+      },
+      examTrap: {
+        hu: "n bemeneti jellemző nem n paramétert jelent, hanem n+1-et, mert az eltolás (bias) is tanulható paraméter.",
+        en: "n input features do not mean n parameters; there are n+1 because the bias is also learnable."
       },
       keyTerms: [
-        { term: "univariate" },
-        { term: "multivariate" },
-        { term: "hyperplane" },
-        { term: "feature" },
-        { term: "weight" }
+        { term: "multivariate", hu: "többváltozós" },
+        { term: "weight", hu: "súly" },
+        { term: "hyperplane", hu: "hipersík" }
       ]
     },
     {
       id: "matrix-form",
       title: {
-        hu: "Matrix form és shape-ek",
-        en: "Matrix form and shapes"
+        hu: "Mátrixos alak: Xθ egyetlen műveletben",
+        en: "Matrix form: Xθ in a single operation"
       },
       body: {
-        hu: "A dot product formához bevezetjük az x₀ = 1 dummy variable-t. Ha m training example és n valódi input feature van, akkor az intercept oszloppal együtt X shape-je (m, n+1), θ shape-je (n+1,), és ŷ = Xθ shape-je (m,).",
-        en: "For the dot-product form, we introduce the dummy variable x₀ = 1. With m training examples and n real input features, including the intercept column X has shape (m, n+1), θ has shape (n+1,), and ŷ = Xθ has shape (m,)."
+        hu: "A többváltozós lineáris regresszió kényelmesen felírható mátrixos alakban. Bevezetjük az x₀=1 segédváltozót, így az eltolás is ugyanolyan módon kezelhető, mint a többi paraméter. Ha m tanítási példa és n valódi bemeneti jellemző van, akkor X alakja (shape) (m,n+1), θ alakja (n+1,), a becslések vektora ŷ=Xθ pedig (m,) alakú.",
+        en: "Multivariate linear regression can be written conveniently in matrix form. Introducing x₀=1 lets the bias be handled like the other parameters. With m training examples and n real input features, X has shape (m,n+1), θ has shape (n+1,), and the prediction vector ŷ=Xθ has shape (m,)."
       },
-      intuition: {
-        hu: "X minden sora egy training example. Az első oszlop csupa 1, utána következnek az adott example feature értékei. A θ vector elemei pontosan ezekhez az oszlopokhoz tartozó model parameters.",
-        en: "Each row of X is one training example. The first column contains ones, followed by that example's feature values. The elements of θ are the model parameters corresponding to these columns."
-      },
-      examTrap: {
-        hu: "A feature értékek X-ben vannak, nem θ-ban. A labels y-ban vannak. A θ a megtanulandó model parameters vector. A course későbbi összefoglalója explicit X ∈ R^(m×(n+1)), θ ∈ R^(n+1) alakot használ.",
-        en: "Feature values are in X, not θ. Labels are in y. θ is the learnable model-parameter vector. The later course summary explicitly uses X ∈ R^(m×(n+1)), θ ∈ R^(n+1)."
+      why: {
+        hu: "A mátrixos alak egyszerre írja le az összes tanítási példára végzett becslést, és közvetlenül illeszkedik a NumPy/PyTorch tömbműveletekhez. Ez az egyik fontos kapcsolat az elmélet és a gyakorlati implementáció között.",
+        en: "The matrix form describes predictions for all training examples at once and maps directly to NumPy/PyTorch array operations. It is an important bridge between the theory and implementation."
       },
       formula: {
-        hu: "x₀ := 1;   ŷ = Xθ;   X ∈ R^(m×(n+1));   θ ∈ R^(n+1);   ŷ,y ∈ R^m",
-        en: "x₀ := 1;   ŷ = Xθ;   X ∈ R^(m×(n+1));   θ ∈ R^(n+1);   ŷ,y ∈ R^m"
+        hu: "x₀ := 1,   ŷ = Xθ,   X ∈ ℝ^(m×(n+1)),   θ ∈ ℝ^(n+1),   ŷ,y ∈ ℝ^m",
+        en: "x₀ := 1,   ŷ = Xθ,   X ∈ ℝ^(m×(n+1)),   θ ∈ ℝ^(n+1),   ŷ,y ∈ ℝ^m"
+      },
+      formulaTerms: [
+        { symbol: "m", hu: "A tanítási példák (training examples) száma.", en: "Number of training examples." },
+        { symbol: "n", hu: "A valódi bemeneti jellemzők száma.", en: "Number of real input features." },
+        { symbol: "X", hu: "A bemeneti mátrix (design matrix): soronként egy példa, oszloponként egy jellemző, plusz az x₀=1 oszlop.", en: "The design matrix: one example per row, one feature per column, plus the x₀=1 column." },
+        { symbol: "θ", hu: "A tanulható paraméterek vektora.", en: "Vector of learnable parameters." },
+        { symbol: "y", hu: "A valódi címkék vektora.", en: "Vector of true labels." },
+        { symbol: "ŷ", hu: "Az összes példa becslésének vektora.", en: "Vector of predictions for all examples." }
+      ],
+      workedExample: {
+        hu: "A 200 betegből és 4 jellemzőből álló mintafeladatban X alakja (200,5), mert a négy valódi jellemző mellé bekerül az x₀=1 oszlop. θ alakja (5,), y és ŷ alakja pedig (200,).",
+        en: "For the example with 200 patients and 4 features, X has shape (200,5) because the x₀=1 column is added. θ has shape (5,), while y and ŷ have shape (200,)."
+      },
+      examTrap: {
+        hu: "Az életkor, testsúly és más konkrét jellemzőértékek X-ben vannak. A koleszterinszintek y-ban vannak. A θ nem adatokat, hanem a modell tanulható paramétereit tartalmazza.",
+        en: "Age, weight, and other concrete feature values are in X. Cholesterol values are in y. θ contains learnable model parameters, not data."
       },
       keyTerms: [
-        { term: "design matrix" },
-        { term: "dummy variable" },
-        { term: "dot product" },
-        { term: "shape" }
+        { term: "design matrix", hu: "bemeneti / tervezési mátrix" },
+        { term: "dot product", hu: "skalárszorzat / mátrix-vektor szorzás" },
+        { term: "shape", hu: "alak" }
       ]
     },
     {
       id: "least-squares",
       title: {
-        hu: "Least squares és MSE loss",
-        en: "Least squares and MSE loss"
+        hu: "Legkisebb négyzetek és a négyzetes veszteség",
+        en: "Least squares and squared-error loss"
       },
       body: {
-        hu: "A least squares method a prediction és a true label különbségének négyzetét összegzi a training examples felett. A tárgyban használt loss: J(θ) = (1/(2m)) Σⱼ(hθ(x⁽ʲ⁾) − y⁽ʲ⁾)². A loss egyetlen scalar szám.",
-        en: "The least-squares method sums squared differences between predictions and true labels over the training examples. The course uses J(θ) = (1/(2m)) Σⱼ(hθ(x⁽ʲ⁾) − y⁽ʲ⁾)². The loss is a single scalar."
+        hu: "A legkisebb négyzetek módszere (least squares) a becslések és a valódi címkék eltérését négyzetre emeli, majd a tanítási példákon összesíti. A tárgyban használt alak: J(θ)=1/(2m)·Σ(hθ(x^(j))−y^(j))². A teljes J(θ) egyetlen skalár szám.",
+        en: "Least squares squares the difference between predictions and true labels and aggregates it across training examples. The course uses J(θ)=1/(2m)·Σ(hθ(x^(j))−y^(j))². The overall J(θ) is a single scalar."
       },
-      intuition: {
-        hu: "A squaring miatt a pozitív és negatív prediction error nem oltja ki egymást, és a nagyobb hibák erősebben számítanak. A course formula 1/(2m) faktort használ; a 1/2 nem változtatja meg, hol van a minimum.",
-        en: "Squaring prevents positive and negative prediction errors from cancelling and gives larger errors more weight. The course formula uses the factor 1/(2m); the 1/2 does not change the location of the minimum."
-      },
-      examTrap: {
-        hu: "j a training example indexe, m a training examples száma. J(θ) scalar, még akkor is, ha sok example-ből számoljuk.",
-        en: "j indexes the training examples, and m is the number of training examples. J(θ) is a scalar even though it is computed from many examples."
+      why: {
+        hu: "A négyzetre emelés megakadályozza, hogy a pozitív és negatív hibák kioltsák egymást, és a nagy hibákat erősebben bünteti. A 1/2 tényező a deriválást kényelmesebbé teszi; a minimum helyét nem változtatja meg.",
+        en: "Squaring prevents positive and negative errors from canceling and penalizes large errors more strongly. The factor 1/2 simplifies derivatives and does not change the location of the minimum."
       },
       formula: {
-        hu: "J(θ) = 1/(2m) · Σⱼ₌₁ᵐ (hθ(x⁽ʲ⁾) − y⁽ʲ⁾)²",
-        en: "J(θ) = 1/(2m) · Σⱼ₌₁ᵐ (hθ(x⁽ʲ⁾) − y⁽ʲ⁾)²"
+        hu: "J(θ) = 1/(2m) · Σⱼ₌₁ᵐ (hθ(x^(j)) − y^(j))²",
+        en: "J(θ) = 1/(2m) · Σⱼ₌₁ᵐ (hθ(x^(j)) − y^(j))²"
+      },
+      formulaTerms: [
+        { symbol: "J(θ)", hu: "A teljes tanítási veszteség (loss), skalár érték.", en: "Overall training loss, a scalar." },
+        { symbol: "m", hu: "A tanítási példák száma.", en: "Number of training examples." },
+        { symbol: "j", hu: "A tanítási példák indexe.", en: "Index of a training example." },
+        { symbol: "hθ(x^(j))", hu: "A j-edik példa becslése.", en: "Prediction for training example j." },
+        { symbol: "y^(j)", hu: "A j-edik példa valódi címkéje.", en: "True label for training example j." },
+        { symbol: "(ŷ−y)²", hu: "A négyzetes hiba (squared error) egy példára.", en: "Squared error for one example." }
+      ],
+      connections: {
+        hu: "Ha θ két paraméterből áll, J(θ₀,θ₁) háromdimenziós veszteségfelületként (loss surface) rajzolható fel. A gradienscsökkentés ezen a felületen keresi az alacsonyabb veszteség felé vezető irányt.",
+        en: "With two parameters, J(θ₀,θ₁) can be visualized as a 3D loss surface. Gradient descent searches this surface for directions that reduce the loss."
+      },
+      examTrap: {
+        hu: "J(θ) nem vektor, hanem skalár, még akkor is, ha sok tanítási példából számoljuk. A j index nem jellemzőt, hanem tanítási példát jelöl ebben az összegben.",
+        en: "J(θ) is a scalar, not a vector, even though it is computed from many examples. j indexes training examples, not features."
       },
       keyTerms: [
-        { term: "least squares" },
-        { term: "Mean Squared Error (MSE)" },
-        { term: "loss function" },
-        { term: "scalar" }
+        { term: "least squares", hu: "legkisebb négyzetek" },
+        { term: "Mean Squared Error (MSE)", hu: "átlagos négyzetes hiba" },
+        { term: "loss function", hu: "veszteségfüggvény" }
       ]
     },
     {
       id: "gradient",
       title: {
-        hu: "Gradient és partial derivatives",
-        en: "Gradient and partial derivatives"
+        hu: "Parciális deriváltak és a gradiens",
+        en: "Partial derivatives and the gradient"
       },
       body: {
-        hu: "A gradient vector a loss partial derivative-jeit tartalmazza minden parameter szerint. A gradient a legmeredekebb növekedés irányába mutat. Gradient descentnél ezért a gradient ellenkező irányába lépünk.",
-        en: "The gradient vector contains the partial derivatives of the loss with respect to every parameter. The gradient points in the direction of steepest increase, so gradient descent moves in the opposite direction."
+        hu: "Több paraméter esetén a veszteség minden paraméterre külön-külön érzékeny. A parciális derivált (partial derivative) azt méri, hogyan változna a veszteség, ha egyetlen paramétert kis mértékben változtatnánk, miközben a többit rögzítettnek tekintjük. A gradiens (gradient) ezekből a parciális deriváltakból álló vektor.",
+        en: "With multiple parameters, the loss has a separate sensitivity to each parameter. A partial derivative measures how the loss would change if one parameter changed slightly while the others were fixed. The gradient is the vector of these partial derivatives."
       },
-      intuition: {
-        hu: "Képzeld el a loss surface-t hegyvidékként. A gradient felfelé, a legmeredekebb emelkedés felé mutat. Ha lefelé akarunk menni, kivonjuk a gradientet.",
-        en: "Imagine the loss surface as terrain. The gradient points uphill in the direction of steepest increase. To move downhill, we subtract the gradient."
-      },
-      examTrap: {
-        hu: "Partial differentiation során egy parameter szerint deriválunk, a többit konstansként kezeljük. A gradient nem a minimum felé mutat, hanem a maximum increase irányába.",
-        en: "In partial differentiation, we differentiate with respect to one parameter while treating the others as constants. The gradient does not point toward the minimum; it points toward maximum increase."
+      why: {
+        hu: "A gradiens nemcsak azt mondja meg, hogy melyik paraméter fontos, hanem egy közös irányt ad a paramétertérben. Matematikailag a legmeredekebb növekedés irányába mutat, ezért csökkentéshez az ellenkező irányba lépünk.",
+        en: "The gradient provides a joint direction in parameter space. Mathematically it points toward steepest increase, so to reduce the loss we move in the opposite direction."
       },
       formula: {
-        hu: "∇J(θ) = [∂J/∂θ₀, ∂J/∂θ₁, …]ᵀ",
-        en: "∇J(θ) = [∂J/∂θ₀, ∂J/∂θ₁, …]ᵀ"
+        hu: "∇J(θ) = [∂J/∂θ₀, ∂J/∂θ₁, …, ∂J/∂θₙ]ᵀ",
+        en: "∇J(θ) = [∂J/∂θ₀, ∂J/∂θ₁, …, ∂J/∂θₙ]ᵀ"
+      },
+      formulaTerms: [
+        { symbol: "∂J/∂θᵢ", hu: "A veszteség érzékenysége az i-edik paraméter kis változására.", en: "Sensitivity of the loss to a small change in parameter i." },
+        { symbol: "∇J", hu: "A gradiensvektor, amely minden paraméter parciális deriváltját összegyűjti.", en: "Gradient vector containing the partial derivative for every parameter." }
+      ],
+      intuition: {
+        hu: "Képzeld a veszteségfelületet hegyvidéknek. A gradiens arra mutat, amerre a leggyorsabban emelkedne a terep. Ha a minimum felé akarunk haladni, a gradiens negatív irányába indulunk.",
+        en: "Imagine the loss surface as terrain. The gradient points toward the steepest uphill direction. To move toward a minimum, go in the negative-gradient direction."
+      },
+      examTrap: {
+        hu: "A gradiens nem a minimum irányába mutat, hanem a legmeredekebb növekedés irányába. Ezért szerepel mínuszjel a gradienscsökkentés frissítési képletében.",
+        en: "The gradient points toward steepest increase, not toward the minimum. That is why gradient descent uses a minus sign."
       },
       keyTerms: [
-        { term: "gradient" },
-        { term: "partial derivative" },
-        { term: "steepest increase" }
+        { term: "partial derivative", hu: "parciális derivált" },
+        { term: "gradient", hu: "gradiens" }
       ]
     },
     {
       id: "gradient-descent",
       title: {
-        hu: "Gradient Descent és learning rate",
-        en: "Gradient Descent and learning rate"
+        hu: "Gradienscsökkentés és tanulási ráta",
+        en: "Gradient descent and learning rate"
       },
       body: {
-        hu: "Gradient descent iteratívan frissíti a parameters értékeit: θ := θ − α∇J(θ). Az α a learning rate / step size, amely a lépés nagyságát skálázza.",
-        en: "Gradient descent iteratively updates the parameters: θ := θ − α∇J(θ). α is the learning rate / step size and scales the size of the update."
+        hu: "A gradienscsökkentés (gradient descent) iteratív optimalizáló eljárás. Minden lépésben kiszámítjuk a veszteség gradiensét az aktuális paramétereknél, majd a paramétereket a gradienssel ellentétes irányban módosítjuk. A lépés nagyságát a tanulási ráta (learning rate), α szabályozza.",
+        en: "Gradient descent is an iterative optimization procedure. At each step we compute the gradient at the current parameters and update the parameters in the opposite direction. The step size is controlled by the learning rate α."
       },
-      intuition: {
-        hu: "Túl kicsi α esetén sok apró lépés kell. Túl nagy α esetén átléphetjük a minimumot, oszcillálhatunk vagy nem konvergálunk.",
-        en: "With an excessively small α, many tiny steps are needed. With an excessively large α, updates may overshoot the minimum, oscillate, or fail to converge."
-      },
-      examTrap: {
-        hu: "Linear regression + MSE loss esetén a loss quadratic és convex. A lecture szerint megfelelően kicsi step size mellett gradient descenttel elérhető / közelíthető a global optimum. Ez a garancia nem vihető át általánosan egy MLP non-convex lossára.",
-        en: "For linear regression with MSE, the loss is quadratic and convex. According to the lecture, with a sufficiently small step size gradient descent can reach / approximate the global optimum. This guarantee does not generally transfer to a non-convex MLP loss."
+      why: {
+        hu: "A veszteség minimumát általában nem tudjuk pusztán ránézésre megadni. A gradienscsökkentés helyi meredekségi információból épít fel egy útvonalat a jobb paraméterek felé.",
+        en: "We generally cannot identify the minimum just by inspection. Gradient descent builds a path toward better parameters using local slope information."
       },
       formula: {
         hu: "θ := θ − α∇J(θ)",
         en: "θ := θ − α∇J(θ)"
       },
+      formulaTerms: [
+        { symbol: "θ", hu: "A jelenlegi modellparaméterek.", en: "Current model parameters." },
+        { symbol: "α", hu: "A tanulási ráta (learning rate), vagyis a lépés méretét skálázó pozitív szám.", en: "Learning rate, a positive scalar that scales the update size." },
+        { symbol: "∇J(θ)", hu: "A veszteség gradiensének aktuális értéke.", en: "Current gradient of the loss." },
+        { symbol: "−", hu: "Azért vonjuk ki a gradienst, mert az a legnagyobb növekedés irányába mutat.", en: "We subtract the gradient because it points toward steepest increase." }
+      ],
+      intuition: {
+        hu: "Túl kis α esetén sok apró lépésre lehet szükség. Túl nagy α esetén a frissítés átlőhet a minimumon, oszcillálhat vagy akár szét is futhat.",
+        en: "If α is too small, many tiny steps may be required. If α is too large, updates can overshoot the minimum, oscillate, or diverge."
+      },
+      connections: {
+        hu: "Ugyanez az alapelv tér vissza a neurális hálózatok tanításánál. Ott azonban a paraméterek száma sokkal nagyobb, a veszteségfelület általában nem konvex, a gradienseket pedig visszaterjesztéssel (backpropagation) számítjuk ki.",
+        en: "The same principle is used for neural-network training. There are far more parameters, the loss surface is generally non-convex, and gradients are computed using backpropagation."
+      },
+      examTrap: {
+        hu: "Lineáris regresszió és négyzetes veszteség esetén a veszteség konvex kvadratikus függvény. A tananyag szerint kellően kis lépésmérettel a gradienscsökkentés közelítőleg megtalálja a globális optimumot. Ez a garancia nem vihető át automatikusan egy MLP-re.",
+        en: "For linear regression with squared-error loss, the objective is a convex quadratic. According to the course, with a sufficiently small step size gradient descent approximately finds the global optimum. This guarantee does not automatically carry over to an MLP."
+      },
       keyTerms: [
-        { term: "gradient descent" },
-        { term: "learning rate" },
-        { term: "step size" },
-        { term: "convex" },
-        { term: "global minimum" }
+        { term: "gradient descent", hu: "gradienscsökkentés" },
+        { term: "learning rate", hu: "tanulási ráta" },
+        { term: "convergence", hu: "konvergencia" }
+      ]
+    },
+    {
+      id: "feature-scaling",
+      title: {
+        hu: "Jellemzőskálázás: miért számít a bemenet nagyságrendje?",
+        en: "Feature scaling: why does input magnitude matter?"
+      },
+      body: {
+        hu: "A jellemzőskálázás (feature scaling) célja, hogy a különböző bemeneti változókat hasonló nagyságrendre hozzuk. A tananyag két módszert emel ki: a minimum–maximum skálázást (min-max scaling), amely tipikusan [0,1] tartományba képez, és a standardizálást (standardization), amely nulla átlagú és egységnyi szórású változót hoz létre.",
+        en: "Feature scaling brings input variables to a similar order of magnitude. The course highlights min-max scaling, typically mapping to [0,1], and standardization, producing zero mean and unit standard deviation."
+      },
+      why: {
+        hu: "Ha az egyik jellemző értékei nagyságrendekkel nagyobbak a másikénál, a veszteségfelület erősen megnyúlhat, és a gradienscsökkentés kedvezőtlenebb, cikcakkos útvonalon haladhat. Skálázással az optimalizálás jellemzően könnyebbé válik.",
+        en: "If one feature is orders of magnitude larger than another, the loss surface can become strongly elongated and gradient descent can follow an inefficient zig-zag path. Scaling typically makes optimization easier."
+      },
+      formula: {
+        hu: "Min-max: x'=(x−min)/(max−min)    |    Standardizálás: x'=(x−μ)/σ",
+        en: "Min-max: x'=(x−min)/(max−min)    |    Standardization: x'=(x−μ)/σ"
+      },
+      formulaTerms: [
+        { symbol: "x", hu: "Az eredeti jellemzőérték.", en: "Original feature value." },
+        { symbol: "min, max", hu: "Az adott jellemző minimuma és maximuma.", en: "Minimum and maximum of that feature." },
+        { symbol: "μ", hu: "Az adott jellemző átlaga (mean).", en: "Mean of the feature." },
+        { symbol: "σ", hu: "Az adott jellemző szórása (standard deviation).", en: "Standard deviation of the feature." },
+        { symbol: "x'", hu: "A skálázás utáni jellemzőérték.", en: "Scaled feature value." }
+      ],
+      workedExample: {
+        hu: "Szemléltető példa: ha az életkor 18–80, a jövedelem pedig milliós nagyságrendű, a két jellemző numerikus skálája nagyon eltér. A skálázás nem változtatja meg azt, melyik ember fiatalabb vagy gazdagabb; csak a numerikus reprezentáció nagyságrendjét rendezi.",
+        en: "Illustrative example: age may range from 18–80 while income may be in the millions. Scaling does not change ordering or meaning; it changes numerical magnitude."
+      },
+      examTrap: {
+        hu: "A tananyag szerint a minimum–maximum skálázás különösen érzékeny a szélsőértékekre (outliers), mert közvetlenül a minimum és maximum határozza meg a teljes tartományt. A két tárgyalt módszer közül a standardizálás robusztusabb néhány kiugró ponttal szemben, bár az átlag és a szórás maga is változhat kiugró értékek miatt.",
+        en: "According to the course, min-max scaling is especially sensitive to outliers because the minimum and maximum define the full range. Of the two discussed techniques, standardization is more robust to a small number of outliers, although its mean and standard deviation are also affected by outliers."
+      },
+      keyTerms: [
+        { term: "feature scaling", hu: "jellemzőskálázás" },
+        { term: "min-max scaling", hu: "minimum–maximum skálázás" },
+        { term: "standardization", hu: "standardizálás" },
+        { term: "outlier", hu: "kiugró érték" }
       ]
     },
     {
       id: "normal-equation",
       title: {
-        hu: "Normal equation: exact least-squares solution",
-        en: "Normal equation: exact least-squares solution"
+        hu: "Normálegyenlet: közvetlen megoldás a legkisebb négyzetekre",
+        en: "Normal equation: a direct least-squares solution"
       },
       body: {
-        hu: "Linear regression least-squares problémánál az optimal parameters egy lépésben is meghatározhatók a normal equation segítségével: θ = (XᵀX)⁻¹Xᵀy. A lecture megadja a Moore–Penrose pseudoinverse formát is: θ = X⁺y.",
-        en: "For a linear-regression least-squares problem, the optimal parameters can also be obtained in one step with the normal equation: θ = (XᵀX)⁻¹Xᵀy. The lecture also gives the Moore–Penrose pseudoinverse form θ = X⁺y."
+        hu: "A normálegyenlet (normal equation) a lineáris regresszió legkisebb négyzetes problémájának közvetlen megoldását adja. A tananyag hangsúlyozza, hogy ezzel egyetlen képlettel megtalálható az optimális paramétervektor, ha X és y adott. A levezetés nem része a kurzusnak; a gyakorlati példában Moore–Penrose-pszeudoinverz (pseudoinverse) is szerepel.",
+        en: "The normal equation gives a direct solution to the linear least-squares problem. The course emphasizes that the optimal parameter vector can be obtained from X and y in one formula. Its derivation is omitted; the practical presentation also uses the Moore–Penrose pseudoinverse."
       },
-      intuition: {
-        hu: "Gradient descent sok iterációval közelít. A normal equation közvetlen algebrai megoldást ad erre a speciális least-squares problémára.",
-        en: "Gradient descent approaches the solution iteratively. The normal equation gives a direct algebraic solution for this specific least-squares problem."
-      },
-      examTrap: {
-        hu: "A regularized formula a lecture-ben: θ = (XᵀX + λI)⁻¹Xᵀy. I az identity matrix, amelynek shape-je megegyezik XᵀX shape-jével, tehát n+1 parameter esetén (n+1)×(n+1).",
-        en: "The regularized formula in the lecture is θ = (XᵀX + λI)⁻¹Xᵀy. I is the identity matrix and has the same shape as XᵀX, so with n+1 parameters it is (n+1)×(n+1)."
+      why: {
+        hu: "Ez alternatíva az iteratív gradienscsökkentéshez. A normálegyenlet nem lépésről lépésre javítja θ-t, hanem közvetlenül a legkisebb négyzetes megoldást számítja ki.",
+        en: "It is an alternative to iterative gradient descent. Rather than gradually updating θ, the normal equation computes the least-squares solution directly."
       },
       formula: {
-        hu: "θ = (XᵀX)⁻¹Xᵀy;   regularized: θ = (XᵀX + λI)⁻¹Xᵀy",
-        en: "θ = (XᵀX)⁻¹Xᵀy;   regularized: θ = (XᵀX + λI)⁻¹Xᵀy"
+        hu: "θ = (XᵀX)⁻¹Xᵀy    |    regularizált alak: θ = (XᵀX + λI)⁻¹Xᵀy",
+        en: "θ = (XᵀX)⁻¹Xᵀy    |    regularized form: θ = (XᵀX + λI)⁻¹Xᵀy"
       },
-      keyTerms: [
-        { term: "normal equation" },
-        { term: "Moore-Penrose pseudoinverse" },
-        { term: "identity matrix" },
-        { term: "regularized least squares" }
-      ]
-    },
-    {
-      id: "feature-scaling-why",
-      title: {
-        hu: "Miért kell Feature Scaling?",
-        en: "Why do we need Feature Scaling?"
-      },
-      body: {
-        hu: "Feature scaling célja, hogy az input variables hasonló nagyságrendbe kerüljenek. Ha a feature-ek nagyságrendje nagyon eltér, a loss surface erősen megnyúlhat, és gradient descent konvergenciája nagyon lassú lehet.",
-        en: "Feature scaling brings input variables to a similar order of magnitude. If feature magnitudes differ greatly, the loss surface can become highly elongated and gradient-descent convergence can be very slow."
-      },
-      intuition: {
-        hu: "Egy keskeny, hosszú völgyben gradient descent könnyen cikk-cakkban halad. Hasonló feature scale mellett a contour közelebb kerül a kör alakhoz, így közvetlenebb út vezethet a minimumhoz.",
-        en: "In a long, narrow valley, gradient descent can zig-zag. With similar feature scales, contours become closer to circular, allowing a more direct path toward the minimum."
+      formulaTerms: [
+        { symbol: "X", hu: "A bemeneti mátrix az x₀=1 oszloppal.", en: "Design matrix including the x₀=1 column." },
+        { symbol: "Xᵀ", hu: "X transzponáltja (transpose).", en: "Transpose of X." },
+        { symbol: "y", hu: "A címkék vektora.", en: "Vector of labels." },
+        { symbol: "I", hu: "Egységmátrix (identity matrix) a megfelelő méretben.", en: "Identity matrix of the required size." },
+        { symbol: "λ", hu: "Regularizációs erősség; a regularizált megoldás stabilitását és a büntetés mértékét szabályozza.", en: "Regularization strength controlling the regularized solution." }
+      ],
+      connections: {
+        hu: "A λI tag ugyanahhoz az L2-regularizációs gondolathoz kapcsolódik, amelyet a túlillesztés (overfitting) kezelésénél részletesebben tárgyal a kurzus.",
+        en: "The λI term is connected to the same L2-regularization idea discussed later for handling overfitting."
       },
       examTrap: {
-        hu: "Feature scalinget minden input variable-re külön végzünk. Nem a labels vagy a model parameters 'minimalizálása' történik, hanem az input feature skálák átalakítása.",
-        en: "Feature scaling is performed independently for each input variable. It does not mean minimizing labels or model parameters; it transforms input-feature scales."
+        hu: "A hivatalos mintakérdések külön kérdezhetik X, y és θ alakját, illetve azt, mi az I mátrix. Az I nem az inputadat, hanem egységmátrix.",
+        en: "The official example questions may ask for the shapes of X, y, and θ and for the meaning of I. I is the identity matrix, not input data."
       },
       keyTerms: [
-        { term: "feature scaling" },
-        { term: "convergence" },
-        { term: "order of magnitude" }
-      ]
-    },
-    {
-      id: "feature-scaling-methods",
-      title: {
-        hu: "Min-max scaling és standardization",
-        en: "Min-max scaling and standardization"
-      },
-      body: {
-        hu: "Min-max scaling feature-önként a [0,1] intervalba transzformál: (x − min)/(max − min). Standardization feature-önként (x − μ)/σ transzformációt használ, így a transzformált feature mean-je 0, standard deviation-je 1.",
-        en: "Min-max scaling independently maps each feature to [0,1] using (x − min)/(max − min). Standardization independently uses (x − μ)/σ, giving the transformed feature mean 0 and standard deviation 1."
-      },
-      intuition: {
-        hu: "Min-max scaling a dataset minimumát és maximumát rögzíti a két végpontra. Egy szélsőséges outlier ezért erősen összenyomhatja a többi pontot.",
-        en: "Min-max scaling anchors the dataset minimum and maximum to the endpoints. An extreme outlier can therefore compress the remaining points strongly."
-      },
-      examTrap: {
-        hu: "A lecture explicit kiemeli: min-max scaling érzékenyebb az outliers-re. A két tárgyalt módszer közül ezért standardization a robusztusabb egy kis számú outlierrel szemben.",
-        en: "The lecture explicitly states that min-max scaling is more sensitive to outliers. Between the two discussed methods, standardization is therefore more robust to a small number of outliers."
-      },
-      formula: {
-        hu: "min-max: x' = (x − min)/(max − min)   |   standardization: x' = (x − μ)/σ",
-        en: "min-max: x' = (x − min)/(max − min)   |   standardization: x' = (x − μ)/σ"
-      },
-      keyTerms: [
-        { term: "min-max scaling" },
-        { term: "standardization" },
-        { term: "mean", hu: "átlag" },
-        { term: "standard deviation", hu: "szórás" },
-        { term: "outlier" }
+        { term: "normal equation", hu: "normálegyenlet" },
+        { term: "identity matrix", hu: "egységmátrix" },
+        { term: "pseudoinverse", hu: "pszeudoinverz" }
       ]
     }
   ]
