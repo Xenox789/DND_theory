@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
+import { SimulationGuide } from "./SimulationGuide";
 
 type Props = {
   language: Language;
@@ -227,6 +228,51 @@ export function LogisticRegressionLab({ language }: Props) {
         </div>
       </div>
 
+      <SimulationGuide
+        language={language}
+        axes={[
+          {
+            label: language === "hu" ? "Sigmoid x-axis: x" : "Sigmoid x-axis: x",
+            meaning: language === "hu" ? "A kiválasztott input feature értéke." : "The selected input-feature value."
+          },
+          {
+            label: "Sigmoid y-axis: hθ(x)",
+            meaning: language === "hu" ? "A model által becsült probability 0 és 1 között." : "The probability predicted by the model, between 0 and 1."
+          },
+          {
+            label: "threshold = 0.5",
+            meaning: language === "hu" ? "A jelenlegi class-decision szabály: h≥0.5 → class 1, különben class 0." : "The current class-decision rule: h≥0.5 → class 1, otherwise class 0."
+          }
+        ]}
+        terms={[
+          { label: "z", meaning: language === "hu" ? "linear score, z=θ₀+θ₁x; még nem probability" : "linear score, z=θ₀+θ₁x; not yet a probability" },
+          { label: "θ₀", meaning: language === "hu" ? "intercept / bias" : "intercept / bias" },
+          { label: "θ₁", meaning: language === "hu" ? "weight: megadja, hogyan változik z az inputtal" : "weight: controls how z changes with the input" },
+          { label: "hθ(x)", meaning: language === "hu" ? "sigmoid(z), azaz predicted probability" : "sigmoid(z), the predicted probability" },
+          { label: "y", meaning: language === "hu" ? "true binary label, 0 vagy 1" : "true binary label, 0 or 1" },
+          { label: "L", meaning: language === "hu" ? "egy example binary cross-entropy loss értéke" : "binary cross-entropy loss for one example" }
+        ]}
+        formulas={[
+          {
+            expression: "z = θ₀ + θ₁x",
+            meaning: language === "hu" ? "A feature-t egy linear score-rá alakítjuk." : "Convert the feature into a linear score."
+          },
+          {
+            expression: "hθ(x) = 1 / (1 + e^(−z))",
+            meaning: language === "hu" ? "A sigmoid a tetszőleges real score-t 0–1 probability tartományba képezi." : "The sigmoid maps any real-valued score into the 0–1 probability range."
+          },
+          {
+            expression: "L = −y log(h) − (1−y) log(1−h)",
+            meaning: language === "hu" ? "BCE erősen bünteti, ha a model nagy confidence-szel a true labellel ellentétes probabilityt ad." : "BCE strongly penalizes confident probabilities that disagree with the true label."
+          }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Spam detectionnél x lehet egy emailből képzett feature, hθ(x) pedig annak becsült valószínűsége, hogy spam. Több feature esetén ugyanennek a logikának a linear score-ja θ₀+θ₁x₁+θ₂x₂+…."
+            : "In spam detection, x could be a feature extracted from an email and hθ(x) the estimated probability that it is spam. With multiple features, the same logic uses a linear score θ₀+θ₁x₁+θ₂x₂+…."
+        }
+      />
+
       <div className="hero-card compact lab-section-hero">
         <div>
           <span className="eyebrow">BIVARIATE VIEW</span>
@@ -329,6 +375,33 @@ export function LogisticRegressionLab({ language }: Props) {
           />
         </div>
       </div>
+
+      <SimulationGuide
+        language={language}
+        axes={[
+          { label: "2D x-axis: x₁", meaning: language === "hu" ? "Az első input feature." : "The first input feature." },
+          { label: "2D y-axis: x₂", meaning: language === "hu" ? "A második input feature." : "The second input feature." },
+          { label: "3D x/y axes: x₁,x₂", meaning: language === "hu" ? "Ugyanaz a két-feature-es input space." : "The same two-feature input space." },
+          { label: "3D z-axis: hθ(x₁,x₂)", meaning: language === "hu" ? "Az adott feature-párhoz becsült class-1 probability." : "Predicted class-1 probability for that feature pair." }
+        ]}
+        terms={[
+          { label: "decision boundary", meaning: language === "hu" ? "Az inputok halmaza, ahol hθ(x)=0.5." : "The set of inputs where hθ(x)=0.5." },
+          { label: "θ₂", meaning: language === "hu" ? "A második feature weight-je." : "Weight of the second feature." }
+        ]}
+        formulas={[
+          {
+            expression: "θ₀ + θ₁x₁ + θ₂x₂ = 0",
+            meaning: language === "hu"
+              ? "0.5 thresholdnél ez írja le a linear decision boundary-t, mert sigmoid(0)=0.5."
+              : "At threshold 0.5 this describes the linear decision boundary because sigmoid(0)=0.5."
+          }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Például hitelkockázatnál x₁ lehet jövedelem, x₂ adósságterhelés, a surface pedig default probability. A pontok ebben a labban nem valós ügyféladatok, hanem szintetikus szemléltetés."
+            : "For example, in credit-risk prediction x₁ could represent income and x₂ debt burden, while the surface represents default probability. The points in this lab are synthetic, not real customer data."
+        }
+      />
 
       <div className="lab-explanation-grid">
         <div className="callout intuition">
