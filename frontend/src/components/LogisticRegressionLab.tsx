@@ -83,7 +83,7 @@ export function LogisticRegressionLab({ language }: Props) {
 
       <div className="lab-controls logistic-controls">
         <label>
-          <div><strong>θ₀ — intercept</strong><span>{theta0.toFixed(2)}</span></div>
+          <div><strong>{language === "hu" ? "θ₀ — eltolás (bias/intercept)" : "θ₀ — intercept / bias"}</strong><span>{theta0.toFixed(2)}</span></div>
           <input
             type="range"
             min="-6"
@@ -95,7 +95,7 @@ export function LogisticRegressionLab({ language }: Props) {
         </label>
 
         <label>
-          <div><strong>θ₁ — weight</strong><span>{theta1.toFixed(2)}</span></div>
+          <div><strong>{language === "hu" ? "θ₁ — súly (weight)" : "θ₁ — weight"}</strong><span>{theta1.toFixed(2)}</span></div>
           <input
             type="range"
             min="-5"
@@ -107,7 +107,7 @@ export function LogisticRegressionLab({ language }: Props) {
         </label>
 
         <label>
-          <div><strong>x — selected input</strong><span>{sampleX.toFixed(2)}</span></div>
+          <div><strong>{language === "hu" ? "x — kiválasztott bemenet (input)" : "x — selected input"}</strong><span>{sampleX.toFixed(2)}</span></div>
           <input
             type="range"
             min="-6"
@@ -140,7 +140,7 @@ export function LogisticRegressionLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>Univariate sigmoid hypothesis</h2>
+          <h2>{language === "hu" ? "Egydimenziós logisztikus hipotézis" : "Univariate sigmoid hypothesis"}</h2>\n          <p className="plot-description">{language === "hu" ? "Vízszintes tengely: bemeneti jellemző (x). Függőleges tengely: az 1-es osztály becsült valószínűsége hθ(x)." : "Horizontal axis: input feature x. Vertical axis: estimated probability hθ(x) of class 1."}</p>
           <Plot
             data={[
               {
@@ -183,8 +183,8 @@ export function LogisticRegressionLab({ language }: Props) {
               plot_bgcolor: "rgba(0,0,0,0)",
               font: { color: "#d8e3f4" },
               margin: { l: 45, r: 20, b: 45, t: 10 },
-              xaxis: { title: "x", gridcolor: "#22314a" },
-              yaxis: { title: "hθ(x)", range: [-0.05, 1.05], gridcolor: "#22314a" }
+              xaxis: { title: language === "hu" ? "x — bemeneti jellemző (input feature)" : "x — input feature", gridcolor: "#22314a" },
+              yaxis: { title: language === "hu" ? "hθ(x) — becsült valószínűség" : "hθ(x) — predicted probability", range: [-0.05, 1.05], gridcolor: "#22314a" }
             }}
             config={{ responsive: true, displaylogo: false }}
             style={{ width: "100%", height: "390px" }}
@@ -305,7 +305,7 @@ export function LogisticRegressionLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Input plane + boundary" : "Input plane + boundary"}</h2>
+          <h2>{language === "hu" ? "Bemeneti sík és döntési határ" : "Input plane + boundary"}</h2>\n          <p className="plot-description">{language === "hu" ? "Minden pont egy két jellemzőből álló adatpont. A vonal azokat a bemeneteket jelöli, amelyeknél a modell 0,5 valószínűséget ad." : "Each point is one example with two features. The line contains inputs for which the model predicts probability 0.5."}</p>
           <Plot
             data={[
               {
@@ -347,7 +347,7 @@ export function LogisticRegressionLab({ language }: Props) {
         </div>
 
         <div className="plot-card">
-          <h2>3D probability surface</h2>
+          <h2>{language === "hu" ? "3D valószínűségi felület" : "3D probability surface"}</h2>\n          <p className="plot-description">{language === "hu" ? "A két vízszintes tengely a két bemeneti jellemző, a magasság pedig az 1-es osztály becsült valószínűsége." : "The horizontal axes are the two input features and height is the predicted probability of class 1."}</p>
           <Plot
             data={[
               {
