@@ -9,7 +9,7 @@ export const generalizationQuestions: Question[] = [
       { id: "a", text: { hu: "A modellparaméterek (model parameters) értékeit a tanítóhalmazon (training set) tanuljuk.", en: "Model parameters are learned on the training set." } },
       { id: "b", text: { hu: "A teszthalmaz (test set) célja nem látott adatokon mért teljesítmény (performance) becslése.", en: "The test set is used to estimate unseen-data performance." } },
       { id: "c", text: { hu: "A tanító- és teszthalmaznak (training and test sets) disjointnak kell lennie.", en: "The training and test sets must be disjoint." } },
-      { id: "d", text: { hu: "A teszthalmazt (test set) rendszeresen használjuk gradiens (gradient) frissítés (update)-ekhez.", en: "The test set is routinely used for gradient updates." } }
+      { id: "d", text: { hu: "A teszthalmazt (test set) rendszeresen használjuk gradiensalapú frissítésekhez (gradient updates).", en: "The test set is routinely used for gradient updates." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: { hu: "A teszthalmaz (test set) független végső (final) értékelésre (evaluation) való, nem tanításra (learning).", en: "The test set is reserved for independent final evaluation, not learning." }
@@ -50,7 +50,7 @@ export const generalizationQuestions: Question[] = [
       { id: "c", text: { hu: "Ez garantáltan megszünteti az overfittinget.", en: "This is guaranteed to eliminate overfitting." } }
     ],
     correctIds: ["a", "b"],
-    explanation: { hu: "Az előadás (lecture) a több tanítóadat (training data)-t az túlillesztés (overfitting) egyik kezelési módjaként adja meg; ennek ellenkezője növelheti a problémát.", en: "The lecture lists more training data as one way to reduce overfitting; the opposite can make the problem worse." }
+    explanation: { hu: "Az előadás (lecture) a több tanítóadatot (training data) a túlillesztés (overfitting) egyik kezelési módjaként adja meg; ennek ellenkezője növelheti a problémát.", en: "The lecture lists more training data as one way to reduce overfitting; the opposite can make the problem worse." }
   },
   {
     id: "gen-q5",
@@ -75,7 +75,7 @@ export const generalizationQuestions: Question[] = [
       { id: "d", text: { hu: "Early stopping.", en: "Early stopping." } }
     ],
     correctIds: ["a", "b", "c", "d"],
-    explanation: { hu: "Az előadás (lecture) mind a négyet explicit túlillesztés (overfitting)-kezelési módszerként sorolja.", en: "The lecture explicitly lists all four as ways to handle overfitting." }
+    explanation: { hu: "Az előadás (lecture) mind a négyet explicit túlillesztést kezelő (overfitting) módszerként sorolja.", en: "The lecture explicitly lists all four as ways to handle overfitting." }
   },
   {
     id: "gen-q7",
@@ -113,7 +113,7 @@ export const generalizationQuestions: Question[] = [
       { id: "d", text: { hu: "Ez mindig javítja a generalizationt, bármilyen nagy λ esetén.", en: "This always improves generalization no matter how large λ becomes." } }
     ],
     correctIds: ["a", "b", "c"],
-    explanation: { hu: "Túl erős regularizáció (regularization) elveheti a modell szükséges kapacitás (capacity)-jét.", en: "Excessive regularization can remove model capacity needed for the task." }
+    explanation: { hu: "Túl erős regularizáció (regularization) elveheti a modell szükséges kapacitását (capacity).", en: "Excessive regularization can remove model capacity needed for the task." }
   },
   {
     id: "gen-q10",
@@ -186,7 +186,7 @@ export const generalizationQuestions: Question[] = [
     prompt: { hu: "tanítás közben J_train csökken, miközben J_val több iteráción át nő. Mit jelezhet ez?", en: "During training, J_train decreases while J_val increases over multiple iterations. What can this indicate?" },
     choices: [
       { id: "a", text: { hu: "romló túlillesztés (overfitting).", en: "Worsening overfitting." } },
-      { id: "b", text: { hu: "A modell egyre jobban illeszkedik tanítóadatok (training data)-ra, de általánosítás (generalization) romlik.", en: "The model fits training data better while generalization worsens." } },
+      { id: "b", text: { hu: "A modell egyre jobban illeszkedik tanítóadatokra (training data), de az általánosítás (generalization) romlik.", en: "The model fits training data better while generalization worsens." } },
       { id: "c", text: { hu: "Ez early stopping signal lehet.", en: "This can be an early-stopping signal." } },
       { id: "d", text: { hu: "Ez biztosan alulillesztés (underfitting).", en: "This is definitely underfitting." } }
     ],
@@ -196,7 +196,7 @@ export const generalizationQuestions: Question[] = [
   {
     id: "gen-q16",
     topics: ["training-procedure"],
-    prompt: { hu: "Mely sorrend felel meg az előadás (lecture) modell-tanítás eljárás (procedure)-jének?", en: "Which sequence matches the lecture's model-training procedure?" },
+    prompt: { hu: "Mely sorrend felel meg az előadás (lecture) modelltanítási eljárásának (procedure)?", en: "Which sequence matches the lecture's model-training procedure?" },
     choices: [
       { id: "a", text: { hu: "Válassz Ψ hiperparaméterek (hyperparameters) értékeket.", en: "Choose hyperparameters Ψ." } },
       { id: "b", text: { hu: "Tanítsd θ modellparaméterek (model parameters) értékeket tanítóhalmazon (training set).", en: "Train model parameters θ on the training set." } },
@@ -204,7 +204,7 @@ export const generalizationQuestions: Question[] = [
       { id: "d", text: { hu: "A végén értékeld a kiválasztott végső (final) modellt (model) teszthalmazon (test set).", en: "At the end, evaluate the selected final model on the test set." } }
     ],
     correctIds: ["a", "b", "c", "d"],
-    explanation: { hu: "Ez az előadás (lecture) explicit eljárás (procedure)-je: tanítás → validáció modellválasztás (model selection) → végső (final) test.", en: "This is the lecture's explicit procedure: training → validation model selection → final test." }
+    explanation: { hu: "Ez az előadás (lecture) explicit eljárása (procedure): tanítás → validáció modellválasztás (model selection) → végső teszt (final test).", en: "This is the lecture's explicit procedure: training → validation model selection → final test." }
   },
   {
     id: "gen-q17",
@@ -212,7 +212,7 @@ export const generalizationQuestions: Question[] = [
     prompt: { hu: "Miért helytelen J_test alapján early stoppingot végezni?", en: "Why is it incorrect to perform early stopping based on J_test?" },
     choices: [
       { id: "a", text: { hu: "A modell selectionet a test sethez igazítjuk.", en: "We adapt model selection to the test set." } },
-      { id: "b", text: { hu: "A teszthalmaz (test set) elveszíti független végső (final)-értékelés (evaluation) szerepét.", en: "The test set loses its role as an independent final evaluation." } },
+      { id: "b", text: { hu: "A teszthalmaz (test set) elveszíti független végső értékelési (final evaluation) szerepét.", en: "The test set loses its role as an independent final evaluation." } },
       { id: "c", text: { hu: "Az előadás (lecture) ezt cheatingnek nevezi.", en: "The lecture calls this cheating." } },
       { id: "d", text: { hu: "Mert J_test matematikailag nem lehet skalár (scalar).", en: "Because J_test mathematically cannot be a scalar." } }
     ],
