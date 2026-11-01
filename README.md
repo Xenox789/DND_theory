@@ -2,12 +2,12 @@
 
 Interactive bilingual (HU/EN) study application for ELTE Deep Network Development – Theory Test 1.
 
-## Current status — v0.8
+## Current status — v0.9
 
 Implemented and pushed to `main`:
 
 - separate learning-language and exam-language selectors
-- Hungarian explanations with important English terminology preserved
+- natural Hungarian explanations with technical English terminology shown in parentheses
 - bilingual Theory Test style multi-answer quiz engine
 - course-compatible partial scoring
 - Machine Learning Fundamentals chapter
@@ -45,8 +45,10 @@ Implemented and pushed to `main`:
 - interactive broadcasting solver
 - view-vs-copy mutation simulator
 - 60 NumPy Theory Test questions, including official-style code/result questions
+- self-explanatory diagram axis labels and short plot-reading descriptions
 - reusable simulation guides with axis explanations
 - formula/notation glossaries inside the labs
+- expanded lesson schema: what it is, why it matters, formula-term glossary, worked examples, connections, real-world use, and exam traps
 - clearly marked illustrative real-world mappings for the simulated concepts
 - source-validation notes for exam-specific conventions
 
@@ -114,7 +116,7 @@ See:
 docs/content-validation.md
 ```
 
-for verified notation and rules such as:
+for verified notation, source-specific rules, and the distinction between course-derived statements and illustrative explanations, such as:
 
 - course-specific `1/(2m)` least-squares loss convention
 - `X ∈ R^(m × (n+1))` with the `x₀=1` intercept column
