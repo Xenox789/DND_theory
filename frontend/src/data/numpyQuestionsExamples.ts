@@ -360,7 +360,7 @@ export const numpyExampleQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "A selected target shape (2,3).", en: "The selected target has shape (2,3)." } },
       { id: "b", text: { hu: "A right-hand side shape (2,1).", en: "The right-hand side has shape (2,1)." } },
-      { id: "c", text: { hu: "(2,1) broadcastolható (2,3)-ra.", en: "(2,1) can broadcast to (2,3)." } },
+      { id: "c", text: { hu: "A (2,1) alak (shape) broadcastolható (2,3) alakra.", en: "(2,1) can broadcast to (2,3)." } },
       { id: "d", text: { hu: "Broadcasting assignment előtt is történhet.", en: "Broadcasting can occur before assignment." } }
     ],
     correctIds: ["a","b","c","d"],
