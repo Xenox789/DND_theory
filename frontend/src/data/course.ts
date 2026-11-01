@@ -27,7 +27,7 @@ export const questionBank: Question[] = [
     id: "q1",
     topics: ["supervised-learning", "data"],
     prompt: {
-      hu: "Mely állítások igazak egy felügyelt tanulás (supervised learning) tanítóminta (training sample)-re?",
+      hu: "Mely állítások igazak egy felügyelt tanulás (supervised learning) tanítómintára (training sample)?",
       en: "Which statements are true about a supervised learning training sample?"
     },
     choices: [
@@ -38,7 +38,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "Felügyelt tanulásban a tanítóminta (training sample) (x, y) párokból áll. x az bemenet (input), y a true címke (label). A modellparaméterek (model parameters) külön, például θ-val vannak jelölve.",
+      hu: "Felügyelt tanulásban a tanítóminta (training sample) (x, y) párokból áll. x a bemenet (input), y a valódi címke (true label) (label). A modellparaméterek (model parameters) külön, például θ-val vannak jelölve.",
       en: "In supervised learning the training sample consists of (x, y) pairs. x is the input and y is the true label. Model parameters are separate, for example θ."
     }
   },
@@ -50,8 +50,8 @@ export const questionBank: Question[] = [
       en: "Which statements are true about the hypothesis function hθ(x)?"
     },
     choices: [
-      { id: "a", text: { hu: "Inputból becslést állít elő.", en: "It produces a prediction from an input." } },
-      { id: "b", text: { hu: "A θ a modell paraméterek (parameters) értékeit jelölheti.", en: "θ can denote model parameters." } },
+      { id: "a", text: { hu: "Bemenetből becslést állít elő.", en: "It produces a prediction from an input." } },
+      { id: "b", text: { hu: "A θ a modell paraméterei (parameters) értékeit jelölheti.", en: "θ can denote model parameters." } },
       { id: "c", text: { hu: "A hθ(x) értéke ŷ lehet.", en: "The value of hθ(x) can be ŷ." } },
       { id: "d", text: { hu: "Tanulás közben X-et próbáljuk minimalizálni.", en: "During learning we try to minimize X." } }
     ],
@@ -91,7 +91,7 @@ export const questionBank: Question[] = [
       { id: "a", text: { hu: "felügyelt tanulás (supervised learning)", en: "Supervised learning" } },
       { id: "b", text: { hu: "felügyelet nélküli tanulás (unsupervised learning)", en: "Unsupervised learning" } },
       { id: "c", text: { hu: "megerősítéses tanulás (reinforcement learning)", en: "Reinforcement learning" } },
-      { id: "d", text: { hu: "egyenesáris programming", en: "Linear programming" } }
+      { id: "d", text: { hu: "lineáris programming", en: "Linear programming" } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
@@ -122,18 +122,18 @@ export const questionBank: Question[] = [
     id: "q6",
     topics: ["linear-regression"],
     prompt: {
-      hu: "Melyik állítás igaz a egyenesáris regresszió (linear regression) geometriai értelmezésére?",
+      hu: "Melyik állítás igaz a lineáris regresszió (linear regression) geometriai értelmezésére?",
       en: "Which statement is true about the geometric interpretation of linear regression?"
     },
     choices: [
       { id: "a", text: { hu: "Egy bemeneti változó (input variable) esetén a hipotézis (hypothesis) egy egyenes lehet a 2D x–y síkon.", en: "With one input variable, the hypothesis can be a line in the 2D x–y plane." } },
-      { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a egyenesáris hipotézis (hypothesis) egy sík lehet 3D-ben.", en: "With two input variables, the linear hypothesis can be a plane in 3D." } },
-      { id: "c", text: { hu: "A egyenesáris regresszió (linear regression) csak osztályozásra használható.", en: "Linear regression can only be used for classification." } },
-      { id: "d", text: { hu: "A slope és eltolás (bias) a modell paraméterek (parameters) részei lehetnek.", en: "Slope and bias can be model parameters." } }
+      { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a lineáris hipotézis (hypothesis) egy sík lehet 3D-ben.", en: "With two input variables, the linear hypothesis can be a plane in 3D." } },
+      { id: "c", text: { hu: "A lineáris regresszió (linear regression) csak osztályozásra használható.", en: "Linear regression can only be used for classification." } },
+      { id: "d", text: { hu: "A slope és eltolás (bias) a modell paraméterei (parameters) részei lehetnek.", en: "Slope and bias can be model parameters." } }
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "egyenesáris regresszió (linear regression) folytonos érték becslésére szolgál. Egy inputnál egyenes, két inputnál sík a geometriai egyenesáris hipotézis (hypothesis).",
+      hu: "lineáris regresszió (linear regression) folytonos érték becslésére szolgál. Egy bemenetnél (input) egyenes, két bemenetnél (input) sík a geometriai lineáris hipotézis (hypothesis).",
       en: "Linear regression predicts continuous values. Geometrically, with one input the linear hypothesis is a line; with two inputs it is a plane."
     }
   },
@@ -171,7 +171,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A szokásos jelölésben x az bemenet (input), y a true címke (label), ŷ a becslés (prediction), θ pedig a modellparaméterek (model parameters).",
+      hu: "A szokásos jelölésben x a bemenet (input), y a valódi címke (true label) (label), ŷ a becslés (prediction), θ pedig a modellparaméterek (model parameters).",
       en: "In the usual notation x is the input, y the true label, ŷ the prediction, and θ the model parameters."
     }
   },
