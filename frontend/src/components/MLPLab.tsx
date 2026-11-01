@@ -46,20 +46,20 @@ export function MLPLab({ language }: Props) {
       ? {
           activation: "identity",
           loss: "MSE",
-          descriptionHu: "Arbitrary continuous output → final identity / g₂ omit.",
+          descriptionHu: "Folytonos kimenet → végső identitásfüggvény (identity), vagy g₂ elhagyása.",
           descriptionEn: "Arbitrary continuous output → final identity / omit g₂."
         }
       : task === "binary"
         ? {
             activation: "sigmoid",
             loss: "BCE",
-            descriptionHu: "Egy binary probability → 1 sigmoid output.",
+            descriptionHu: "Egy bináris valószínűség → 1 szigmoid (sigmoid) kimenet.",
             descriptionEn: "One binary probability → 1 sigmoid output."
           }
         : {
             activation: "softmax",
             loss: "CE",
-            descriptionHu: classCount + " mutually exclusive class → " + classCount + " probability.",
+            descriptionHu: classCount + " kölcsönösen kizáró osztály → " + classCount + " softmax-valószínűség.",
             descriptionEn: classCount + " mutually exclusive classes → " + classCount + " probabilities."
           };
 
@@ -124,12 +124,12 @@ export function MLPLab({ language }: Props) {
           <h1>Artificial Neuron → MLP</h1>
           <p>
             {language === "hu"
-              ? "Változtasd a layer sizes és task beállításokat. A parameter count és az output-layer választás azonnal frissül."
+              ? "Változtasd a rétegméreteket (layer sizes) és a feladattípust (task). A paraméterszám és a kimeneti réteg beállítása azonnal frissül."
               : "Change layer sizes and task settings. Parameter counts and output-layer choices update immediately."}
           </p>
         </div>
         <div className="score-box">
-          <span>{language === "hu" ? "Total parameters" : "Total parameters"}</span>
+          <span>{language === "hu" ? "Összes paraméter (parameters)" : "Total parameters"}</span>
           <strong>{totalParams}</strong>
           <span>{inputSize} → {hiddenSize} → {outputSize}</span>
         </div>
@@ -137,7 +137,7 @@ export function MLPLab({ language }: Props) {
 
       <div className="mlp-controls">
         <label>
-          <div><strong>{language === "hu" ? "Input variables" : "Input variables"}</strong><span>{inputSize}</span></div>
+          <div><strong>{language === "hu" ? "Bemeneti változók (input variables)" : "Input variables"}</strong><span>{inputSize}</span></div>
           <input
             type="range"
             min="1"
@@ -149,7 +149,7 @@ export function MLPLab({ language }: Props) {
         </label>
 
         <label>
-          <div><strong>{language === "hu" ? "Hidden neurons" : "Hidden neurons"}</strong><span>{hiddenSize}</span></div>
+          <div><strong>{language === "hu" ? "Rejtett neuronok (hidden neurons)" : "Hidden neurons"}</strong><span>{hiddenSize}</span></div>
           <input
             type="range"
             min="1"
@@ -161,17 +161,17 @@ export function MLPLab({ language }: Props) {
         </label>
 
         <label>
-          <div><strong>{language === "hu" ? "Task" : "Task"}</strong></div>
+          <div><strong>{language === "hu" ? "Feladat (task)" : "Task"}</strong></div>
           <select value={task} onChange={(event) => setTask(event.target.value as Task)}>
-            <option value="regression">Regression</option>
-            <option value="binary">Binary classification</option>
-            <option value="multiclass">Multiclass classification</option>
+            <option value="regression">{language === "hu" ? "Regresszió (regression)" : "Regression"}</option>
+            <option value="binary">{language === "hu" ? "Bináris osztályozás (binary classification)" : "Binary classification"}</option>
+            <option value="multiclass">{language === "hu" ? "Többosztályos osztályozás (multiclass classification)" : "Multiclass classification"}</option>
           </select>
         </label>
 
         {task === "multiclass" && (
           <label>
-            <div><strong>{language === "hu" ? "Classes" : "Classes"}</strong><span>{classCount}</span></div>
+            <div><strong>{language === "hu" ? "Osztályok (classes)" : "Classes"}</strong><span>{classCount}</span></div>
             <input
               type="range"
               min="3"
@@ -186,7 +186,7 @@ export function MLPLab({ language }: Props) {
 
       <div className="mlp-main-grid">
         <div className="plot-card network-card">
-          <h2>{language === "hu" ? "Network architecture" : "Network architecture"}</h2>
+          <h2>{language === "hu" ? "Hálózati architektúra (network architecture)" : "Network architecture"}</h2>
           <svg viewBox="0 0 620 300" className="network-svg" role="img">
             {diagramInputNodes.flatMap((inputIndex) =>
               diagramHiddenNodes.map((hiddenIndex) => (
@@ -329,7 +329,7 @@ export function MLPLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Popular activation functions" : "Popular activation functions"}</h2>
+          <h2>{language === "hu" ? "Gyakori aktivációs függvények" : "Popular activation functions"}</h2>\n          <p className="plot-description">{language === "hu" ? "Vízszintes tengely: z, vagyis a neuron aktiváció előtti lineáris pontszáma. Függőleges tengely: g(z), az aktivációs függvény kimenete." : "Horizontal axis: pre-activation z. Vertical axis: activation output g(z)."}</p>
           <Plot
             data={activationCurves}
             layout={{
@@ -338,8 +338,8 @@ export function MLPLab({ language }: Props) {
               plot_bgcolor: "rgba(0,0,0,0)",
               font: { color: "#d8e3f4" },
               margin: { l: 45, r: 20, b: 45, t: 10 },
-              xaxis: { title: "z", gridcolor: "#22314a", range: [-6, 6] },
-              yaxis: { title: "g(z)", gridcolor: "#22314a", range: [-1.2, 6] }
+              xaxis: { title: language === "hu" ? "z — preaktiváció (pre-activation)" : "z — pre-activation", gridcolor: "#22314a", range: [-6, 6] },
+              yaxis: { title: language === "hu" ? "g(z) — aktivált kimenet" : "g(z) — activation output", gridcolor: "#22314a", range: [-1.2, 6] }
             }}
             config={{ responsive: true, displaylogo: false }}
             style={{ width: "100%", height: "430px" }}
@@ -347,7 +347,7 @@ export function MLPLab({ language }: Props) {
         </div>
 
         <div className="plot-card">
-          <h2>{language === "hu" ? "Single-neuron activation" : "Single-neuron activation"}</h2>
+          <h2>{language === "hu" ? "Egyetlen neuron aktivációja" : "Single-neuron activation"}</h2>
           <div className="activation-controls">
             <label>
               <span>g₁</span>
@@ -383,10 +383,10 @@ export function MLPLab({ language }: Props) {
 
           {hiddenActivation === "identity" && (
             <div className="callout exam-trap">
-              <strong>{language === "hu" ? "Mi a gond hidden layerben?" : "Why is this a problem in a hidden layer?"}</strong>
+              <strong>{language === "hu" ? "Miért probléma ez a rejtett rétegben (hidden layer)?" : "Why is this a problem in a hidden layer?"}</strong>
               <span>
                 {language === "hu"
-                  ? "Ha az összes hidden activation identity, a linear layers kompozíciója továbbra is linear, így elveszítjük az MLP nonlinear expressive power-jét."
+                  ? "Ha minden rejtett aktiváció identitásfüggvény (identity), a lineáris rétegek (linear layers) egymásutánja továbbra is egyetlen lineáris leképezéssel ekvivalens. Így az MLP elveszíti a nemlineáris kifejezőerejét."
                   : "If all hidden activations are identity, the composition of linear layers remains linear, so the MLP loses its nonlinear expressive power."}
               </span>
             </div>
@@ -396,11 +396,11 @@ export function MLPLab({ language }: Props) {
 
       {task === "multiclass" && (
         <div className="plot-card softmax-card">
-          <h2>Softmax: {classCount} {language === "hu" ? "class probability" : "class probabilities"}</h2>
+          <h2>Softmax: {classCount} {language === "hu" ? "osztályvalószínűség" : "class probabilities"}</h2>
           <div className="softmax-grid">
             {probabilities.map((probability, index) => (
               <div className="softmax-item" key={index}>
-                <span>class {index}</span>
+                <span>{language === "hu" ? "osztály " : "class "}{index}</span>
                 <div className="probability-bar">
                   <div style={{ width: probability * 100 + "%" }} />
                 </div>
@@ -409,7 +409,7 @@ export function MLPLab({ language }: Props) {
             ))}
           </div>
           <div className="formula-block">
-            Σ probability = {probabilities.reduce((sum, value) => sum + value, 0).toFixed(6)}
+            {language === "hu" ? "Σ valószínűség" : "Σ probability"} = {probabilities.reduce((sum, value) => sum + value, 0).toFixed(6)}
           </div>
         </div>
       )}
@@ -418,50 +418,50 @@ export function MLPLab({ language }: Props) {
         language={language}
         axes={[
           {
-            label: language === "hu" ? "Activation plot x-axis: z" : "Activation plot x-axis: z",
+            label: language === "hu" ? "Aktivációs grafikon x-tengelye: z" : "Activation plot x-axis: z",
             meaning: language === "hu"
-              ? "A neuron activation előtti linear score / pre-activation értéke."
+              ? "A neuron aktiváció előtti lineáris pontszáma, azaz preaktivációja (pre-activation)."
               : "The neuron's linear score / pre-activation value before applying the activation function."
           },
           {
-            label: language === "hu" ? "Activation plot y-axis: g(z)" : "Activation plot y-axis: g(z)",
+            label: language === "hu" ? "Aktivációs grafikon y-tengelye: g(z)" : "Activation plot y-axis: g(z)",
             meaning: language === "hu"
-              ? "Az activation function outputja: sigmoid, tanh vagy ReLU esetén más nonlinear transzformáció."
+              ? "Az aktivációs függvény (activation function) kimenete. A sigmoid, tanh és ReLU eltérő nemlineáris transzformációt végez."
               : "Output of the activation function: sigmoid, tanh, and ReLU apply different nonlinear transformations."
           }
         ]}
         terms={[
-          { label: "S₀", meaning: language === "hu" ? "input layer size / input variables száma" : "input-layer size / number of input variables" },
-          { label: "S₁", meaning: language === "hu" ? "hidden layer neuron count" : "number of neurons in the hidden layer" },
-          { label: "S₂", meaning: language === "hu" ? "output layer size; a task határozza meg" : "output-layer size, determined by the task" },
-          { label: "w", meaning: language === "hu" ? "weight: egy connection learnable erőssége" : "weight: learnable strength of one connection" },
-          { label: "b", meaning: language === "hu" ? "bias: neuronenkénti learnable eltolás" : "bias: learnable offset for each neuron" },
-          { label: "z", meaning: language === "hu" ? "weighted sum + bias, activation előtt" : "weighted sum plus bias before activation" },
-          { label: "g(z)", meaning: language === "hu" ? "activation output" : "activation output" }
+          { label: "S₀", meaning: language === "hu" ? "A bemeneti réteg mérete (input layer size), vagyis a bemeneti változók száma." : "input-layer size / number of input variables" },
+          { label: "S₁", meaning: language === "hu" ? "A rejtett réteg (hidden layer) neuronjainak száma." : "number of neurons in the hidden layer" },
+          { label: "S₂", meaning: language === "hu" ? "A kimeneti réteg mérete (output layer size), amelyet a feladat típusa határoz meg." : "output-layer size, determined by the task" },
+          { label: "w", meaning: language === "hu" ? "Tanulható súly (weight), amely egy kapcsolat erősségét szabályozza." : "weight: learnable strength of one connection" },
+          { label: "b", meaning: language === "hu" ? "Neurononkénti tanulható eltolás (bias)." : "bias: learnable offset for each neuron" },
+          { label: "z", meaning: language === "hu" ? "A súlyozott összeg és az eltolás eredménye az aktiváció előtt." : "weighted sum plus bias before activation" },
+          { label: "g(z)", meaning: language === "hu" ? "Az aktivációs függvény kimenete." : "activation output" }
         ]}
         formulas={[
           {
             expression: "z = Σ wᵢxᵢ + b",
             meaning: language === "hu"
-              ? "Egy artificial neuron először weighted sumot számol az inputokból, majd hozzáadja a bias-t."
+              ? "Egy mesterséges neuron (artificial neuron) először súlyozott összeget számol a bemenetekből, majd hozzáadja az eltolást (bias)."
               : "An artificial neuron first computes a weighted sum of its inputs and adds a bias."
           },
           {
             expression: "a = g(z)",
             meaning: language === "hu"
-              ? "Az activation function a linear score-ból készíti a neuron outputját."
+              ? "Az aktivációs függvény (activation function) a lineáris pontszámból készíti a neuron kimenetét."
               : "The activation function converts the linear score into the neuron output."
           },
           {
             expression: "parameters(layer) = S_in·S_out + S_out",
             meaning: language === "hu"
-              ? "Minden input-output neuronpárhoz egy weight tartozik, és minden output neuronhoz egy bias."
+              ? "Minden bemeneti–kimeneti neuronpárhoz egy súly (weight), és minden kimeneti neuronhoz egy eltolás (bias) tartozik."
               : "There is one weight for each input-output neuron pair and one bias for each output neuron."
           }
         ]}
         realWorld={
           language === "hu"
-            ? "Képosztályozásnál az input layer feature-eket fogad, hidden layers egyre összetettebb reprezentációkat tanulhatnak, az output layer pedig class probabilities értékeket adhat softmaxszal. Regressionnél ugyanaz az MLP continuous értéket is becsülhet."
+            ? "Képosztályozásnál a bemeneti réteg (input layer) jellemzőket fogad, a rejtett rétegek (hidden layers) összetettebb reprezentációkat tanulhatnak, a kimeneti réteg (output layer) pedig softmax segítségével osztályvalószínűségeket adhat. Regressziónál ugyanaz az MLP folytonos értéket becsülhet."
             : "In image classification, the input layer receives features, hidden layers can learn increasingly complex representations, and the output layer can produce class probabilities using softmax. The same MLP idea can produce continuous predictions for regression."
         }
       />
