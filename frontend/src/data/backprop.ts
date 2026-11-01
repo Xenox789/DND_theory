@@ -3,210 +3,262 @@ import type { Lesson, Question } from "../types";
 export const backpropLesson: Lesson = {
   id: "backprop-computational-graphs",
   title: {
-    hu: "Computational Graph és Backpropagation",
+    hu: "Számítási gráf és visszaterjesztés",
     en: "Computational Graphs and Backpropagation"
   },
   subtitle: {
-    hu: "Chain rule, local derivatives, gradient propagation, feed forward és parameter update",
-    en: "Chain rule, local derivatives, gradient propagation, feed-forward evaluation, and parameter updates"
+    hu: "Hogyan jutunk el a végső veszteségtől visszafelé minden súly és eltolás gradienséhez?",
+    en: "How gradients are propagated backward from the final loss to every weight and bias"
   },
   source: "Lecture 6",
   sections: [
     {
       id: "why-backprop",
-      title: { hu: "Miért kell backpropagation?", en: "Why do we need backpropagation?" },
+      title: {
+        hu: "Miért van szükség visszaterjesztésre?",
+        en: "Why do we need backpropagation?"
+      },
       body: {
-        hu: "MLP traininghez a loss derivative-jét minden learnable parameter szerint ki kell számítani. A lecture rámutat, hogy a symbolic derivatives sok azonos sub-expressiont tartalmaznak, ezért pazarló lenne ezeket újra és újra kiszámítani. Backpropagation a sub-results követésével teszi ezt hatékonyabbá.",
-        en: "Training an MLP requires derivatives of the loss with respect to every learnable parameter. The lecture points out that symbolic derivatives contain repeated sub-expressions, so recomputing them repeatedly would be wasteful. Backpropagation makes this more efficient by tracking intermediate results."
+        hu: "Egy neurális hálózat tanításához minden tanulható paraméterre tudnunk kell, hogyan változna a veszteség (loss), ha azt a paramétert kissé módosítanánk. Vagyis szükségünk van például ∂J/∂w és ∂J/∂b deriváltakra. Nagy hálózatnál ezek közvetlen, külön-külön szimbolikus levezetése rengeteg ismétlődő részkifejezést számolna újra.",
+        en: "Training a neural network requires knowing how the loss would change if each learnable parameter changed slightly, for example ∂J/∂w and ∂J/∂b. Direct symbolic differentiation for every parameter in a large network would repeatedly recompute many shared subexpressions."
+      },
+      why: {
+        hu: "A visszaterjesztés (backpropagation) hatékonyan újrahasznosítja a köztes eredményeket és a láncszabályt (chain rule), ezért egyetlen visszafelé haladó menetben kiszámíthatók a szükséges gradiensek.",
+        en: "Backpropagation efficiently reuses intermediate results and the chain rule, allowing required gradients to be computed in one backward pass."
       },
       intuition: {
-        hu: "Nem minden parameterhez nulláról deriváljuk végig ugyanazt az expressiont; a köztes derivative-eket újrahasznosítjuk.",
-        en: "We do not differentiate the whole expression from scratch for every parameter; intermediate derivatives are reused."
+        hu: "A forward pass során kiszámoljuk, mi lett a hálózat kimenete és a veszteség. A backward pass során ugyanazon számítási útvonalon visszafelé megkérdezzük: „ha ezt a köztes értéket picit megváltoztatnám, mennyit változna a végső J?”",
+        en: "During the forward pass we compute the output and loss. During the backward pass we move through the same dependencies in reverse and ask how a small change in each intermediate value would affect the final J."
+      },
+      connections: {
+        hu: "A backpropagation nem maga az optimalizáló. A backpropagation gradienseket számol; az SGD, Adam vagy más optimalizáló ezeket a gradienseket használja a paraméterfrissítéshez.",
+        en: "Backpropagation is not the optimizer itself. Backprop computes gradients; SGD, Adam, or another optimizer uses those gradients to update parameters."
+      },
+      examTrap: {
+        hu: "A „backpropagation” és a „gradient descent update” nem ugyanaz a lépés. Előbb kiszámítjuk a gradienseket, utána frissítjük velük a paramétereket.",
+        en: "Backpropagation and the gradient-descent update are not the same step. Gradients are computed first, then parameters are updated."
       },
       keyTerms: [
-        { term: "backpropagation" },
-        { term: "intermediate result" },
-        { term: "gradient" }
+        { term: "backpropagation", hu: "visszaterjesztés" },
+        { term: "forward pass", hu: "előrefelé számítás" },
+        { term: "backward pass", hu: "visszafelé gradiensszámítás" }
       ]
     },
     {
       id: "computational-graph",
-      title: { hu: "Computational graph", en: "Computational graph" },
+      title: {
+        hu: "Számítási gráf: bontsuk a képletet apró műveletekre",
+        en: "Computational graph: decompose the formula into small operations"
+      },
       body: {
-        hu: "A computational graph összetett expressiont elementary operations láncolataként reprezentál. A lecture szerint a nodes elementary operations, az edges pedig az operations chainingjét jelölik.",
-        en: "A computational graph represents a complicated expression as a chain of elementary operations. According to the lecture, nodes are elementary operations and edges represent how those operations are chained."
+        hu: "A számítási gráf (computational graph) egy összetett kifejezést elemi műveletekre bont. A Lecture 6 megfogalmazásában a csomópontok (nodes) elemi műveleteket, az élek (edges) pedig a műveletek egymásra épülését jelölik. A köztes változók (intermediate variables) megőrzik az egyes részszámítások eredményét.",
+        en: "A computational graph decomposes a complicated expression into elementary operations. In Lecture 6, nodes represent elementary operations and edges represent how operations are chained. Intermediate variables store results of subcomputations."
       },
-      intuition: {
-        hu: "Egy hosszú formula helyett kisebb lépésekre bontjuk a számítást: multiplication, addition, subtraction, square stb.",
-        en: "Instead of one long formula, the computation is split into smaller steps such as multiplication, addition, subtraction, and squaring."
+      why: {
+        hu: "Ha egy hosszú képletet ilyen kis lépésekre bontunk, minden csomópontnál csak egy egyszerű lokális deriváltat kell ismernünk. A teljes derivált ezekből a helyi szabályokból épül fel.",
+        en: "Once a long expression is decomposed into small steps, only a simple local derivative is needed at each node. The full derivative is assembled from these local rules."
       },
-      examTrap: {
-        hu: "A graph azt is megmondja, mely intermediate variables szükségesek egy adott variable kiszámításához.",
-        en: "The graph also specifies which intermediate variables must be evaluated before a given variable can be computed."
+      workedExample: {
+        hu: "A lecture példája a J=(wx+b−y)² kifejezést így bontja fel: q=wx, ŷ=q+b, z=y−ŷ, J=z². A forward pass ebben a sorrendben számol, a backward pass pedig fordított sorrendben halad.",
+        en: "The lecture decomposes J=(wx+b−y)² as q=wx, ŷ=q+b, z=y−ŷ, J=z². The forward pass follows this order; the backward pass traverses it in reverse."
       },
       keyTerms: [
-        { term: "computational graph" },
-        { term: "node" },
-        { term: "edge" },
-        { term: "elementary operation" }
+        { term: "computational graph", hu: "számítási gráf" },
+        { term: "node", hu: "csomópont" },
+        { term: "edge", hu: "él" },
+        { term: "intermediate variable", hu: "köztes változó" }
       ]
     },
     {
       id: "chain-rule",
-      title: { hu: "Chain rule", en: "Chain rule" },
-      body: {
-        hu: "Composite functions derivative-jénél a chain rule-t használjuk: a megfelelő elementary derivatives értékeket összeszorozzuk a lánc mentén. Backpropagation ezt alkalmazza visszafelé a computational graphon.",
-        en: "For derivatives of composite functions, the chain rule multiplies the relevant elementary derivatives along the chain. Backpropagation applies this while moving backward through the computational graph."
+      title: {
+        hu: "Láncszabály: az egész backprop lényege",
+        en: "Chain rule: the core of backpropagation"
       },
-      intuition: {
-        hu: "Minden node kap egy incoming gradientet, és ezt megszorozza a saját local derivative-jével.",
-        en: "Each node receives an incoming gradient and multiplies it by its own local derivative."
+      body: {
+        hu: "Ha egy változó csak más köztes változókon keresztül hat a veszteségre, akkor a deriváltat a láncszabály (chain rule) segítségével kapjuk meg. Egy csomópont visszafelé megkap egy bejövő gradienst (incoming gradient), majd megszorozza a saját lokális deriváltjával (local derivative).",
+        en: "If a variable influences the loss through intermediate variables, its derivative is obtained using the chain rule. A node receives an incoming gradient during the backward pass and multiplies it by its local derivative."
       },
       formula: {
-        hu: "grad_input = grad_output · local_derivative",
+        hu: "gradiens_bemenet = gradiens_kimenet · lokális_derivált",
         en: "grad_input = grad_output · local_derivative"
       },
+      formulaTerms: [
+        { symbol: "grad_output", hu: "A későbbi számítás felől érkező derivált: mennyire érzékeny J a csomópont kimenetére.", en: "Derivative arriving from later computation: sensitivity of J to the node output." },
+        { symbol: "local derivative", hu: "A csomópont saját egyszerű műveletének deriváltja a bemenet szerint.", en: "Derivative of the node's own elementary operation with respect to its input." },
+        { symbol: "grad_input", hu: "A korábbi változó felé továbbított gradiens.", en: "Gradient propagated toward the earlier variable." }
+      ],
+      intuition: {
+        hu: "A teljes hatás = „hogyan hat ez a változó a következőre” × „hogyan hat a következő a végső veszteségre”. A backprop ezt ismétli csomópontról csomópontra.",
+        en: "Total effect = 'how this variable affects the next one' × 'how the next one affects the final loss'. Backprop repeats this from node to node."
+      },
+      examTrap: {
+        hu: "Nem a csomópont aktuális értékét szorozzuk automatikusan a gradienssel, hanem a csomópont lokális deriváltját. Ezért például négyzetre emelésnél 2b jelenik meg, nem 2c.",
+        en: "We do not automatically multiply by the node value; we multiply by the local derivative. For a square node this gives 2b, not 2c."
+      },
       keyTerms: [
-        { term: "chain rule" },
-        { term: "local derivative" },
-        { term: "incoming gradient" }
+        { term: "chain rule", hu: "láncszabály" },
+        { term: "local derivative", hu: "lokális derivált" },
+        { term: "incoming gradient", hu: "bejövő gradiens" }
       ]
     },
     {
-      id: "square-node",
-      title: { hu: "Square node: c = b²", en: "Square node: c = b²" },
+      id: "local-rules",
+      title: {
+        hu: "Három alapvető backprop-szabály",
+        en: "Three basic backpropagation rules"
+      },
       body: {
-        hu: "Ha c=b² és grad_c=∂J/∂c, akkor ∂c/∂b=2b. A chain rule miatt grad_b=grad_c·2b.",
-        en: "If c=b² and grad_c=∂J/∂c, then ∂c/∂b=2b. By the chain rule, grad_b=grad_c·2b."
+        hu: "A Theory Test mintakérdései külön kiemelik a négyzetre emelést és az összeadást, a Lecture 6 példájában pedig szorzás is szerepel. Ezeknél a teljes visszaterjesztés egyszerű lokális deriváltakból áll össze.",
+        en: "The official Theory Test examples explicitly target square and addition nodes, and the Lecture 6 example also uses multiplication. The full backward pass is built from these simple local derivatives."
+      },
+      formula: {
+        hu: "c=b² → grad_b=grad_c·2b    |    c=a+b → grad_a=grad_c, grad_b=grad_c    |    c=a·b → grad_a=grad_c·b, grad_b=grad_c·a",
+        en: "c=b² → grad_b=grad_c·2b    |    c=a+b → grad_a=grad_c, grad_b=grad_c    |    c=a·b → grad_a=grad_c·b, grad_b=grad_c·a"
+      },
+      formulaTerms: [
+        { symbol: "grad_c", hu: "A végső J kifejezés c szerinti deriváltja, azaz ∂J/∂c.", en: "Derivative of final expression J with respect to c, i.e. ∂J/∂c." },
+        { symbol: "c=b²", hu: "Lokális derivált: ∂c/∂b=2b.", en: "Local derivative: ∂c/∂b=2b." },
+        { symbol: "c=a+b", hu: "Mindkét bemenet lokális deriváltja 1.", en: "Local derivative with respect to either input is 1." },
+        { symbol: "c=a·b", hu: "a szerint a lokális derivált b, b szerint pedig a.", en: "Local derivative with respect to a is b, and with respect to b is a." }
+      ],
+      workedExample: {
+        hu: "Ha c=b², b=3 és grad_c=4, akkor grad_b=4·2·3=24. Nem c=9 értékét használjuk a lokális deriváltban, hanem b-t, mert ∂(b²)/∂b=2b.",
+        en: "If c=b², b=3, and grad_c=4, then grad_b=4·2·3=24. We use b in the local derivative because ∂(b²)/∂b=2b."
       },
       examTrap: {
-        hu: "A mintateszt explicit csapdája: nem grad_c·2c, hanem grad_c·2b, mert a local derivative ∂(b²)/∂b=2b.",
-        en: "The example test explicitly targets this trap: it is not grad_c·2c but grad_c·2b, because ∂(b²)/∂b=2b."
-      },
-      formula: {
-        hu: "c=b² → grad_b = grad_c · 2b",
-        en: "c=b² → grad_b = grad_c · 2b"
-      },
-      keyTerms: [{ term: "square node" }]
+        hu: "A hivatalos mintakérdés egyik direkt csapdája: c=b² esetén grad_b=grad_c·2b a helyes, nem grad_c·2c.",
+        en: "One official example-test trap is explicit: for c=b², grad_b=grad_c·2b, not grad_c·2c."
+      }
     },
     {
-      id: "addition-node",
-      title: { hu: "Addition node: c = a + b", en: "Addition node: c = a + b" },
+      id: "forward-example",
+      title: {
+        hu: "Lecture 6 példa: előrefelé számítás",
+        en: "Lecture 6 example: forward pass"
+      },
       body: {
-        hu: "Additionnél ∂c/∂a=1 és ∂c/∂b=1. Ezért az incoming grad_c mindkét input irányába változatlanul továbbmegy: grad_a=grad_c és grad_b=grad_c.",
-        en: "For addition, ∂c/∂a=1 and ∂c/∂b=1. Therefore the incoming grad_c passes unchanged to both inputs: grad_a=grad_c and grad_b=grad_c."
+        hu: "A Lecture 6 egy egyszerű, egydimenziós lineáris regressziós példán mutatja be a számítási gráfot. A képletet q=wx, ŷ=q+b, z=y−ŷ, J=z² lépésekre bontja. A példában x=2, w=3, b=4 és y=5.",
+        en: "Lecture 6 demonstrates the computational graph using a simple one-dimensional linear-regression example. It decomposes the expression into q=wx, ŷ=q+b, z=y−ŷ, J=z² with x=2, w=3, b=4, and y=5."
       },
       formula: {
-        hu: "c=a+b → grad_a=grad_c, grad_b=grad_c",
-        en: "c=a+b → grad_a=grad_c, grad_b=grad_c"
+        hu: "x=2, w=3, b=4, y=5 → q=6 → ŷ=10 → z=−5 → J=25",
+        en: "x=2, w=3, b=4, y=5 → q=6 → ŷ=10 → z=−5 → J=25"
       },
-      keyTerms: [{ term: "addition node" }]
-    },
-    {
-      id: "multiplication-node",
-      title: { hu: "Multiplication node: c = a·b", en: "Multiplication node: c = a·b" },
-      body: {
-        hu: "A Lecture 6 computational-graph példájában multiplication node is szerepel. c=a·b esetén ∂c/∂a=b és ∂c/∂b=a, tehát grad_a=grad_c·b, grad_b=grad_c·a.",
-        en: "Lecture 6 also uses a multiplication node. For c=a·b, ∂c/∂a=b and ∂c/∂b=a, so grad_a=grad_c·b and grad_b=grad_c·a."
-      },
-      formula: {
-        hu: "c=a·b → grad_a=grad_c·b; grad_b=grad_c·a",
-        en: "c=a·b → grad_a=grad_c·b; grad_b=grad_c·a"
-      },
-      keyTerms: [{ term: "multiplication node" }]
-    },
-    {
-      id: "linear-example-forward",
-      title: { hu: "Lecture példa: feed forward", en: "Lecture example: feed forward" },
-      body: {
-        hu: "A lecture egyszerű linear-regression MSE példája: q=wx, ŷ=q+b, z=y−ŷ, J=z². A demonstráció kedvéért egyetlen example-t használ és elhagyja az 1/2 faktort.",
-        en: "The lecture's simple linear-regression MSE example uses q=wx, ŷ=q+b, z=y−ŷ, J=z². For simplicity, it uses one example and omits the 1/2 factor."
-      },
-      realWorld: {
-        hu: "A slide numerikus példája: x=2, w=3, b=4, y=5 → q=6, ŷ=10, z=−5, J=25.",
-        en: "The slide's numerical example is x=2, w=3, b=4, y=5 → q=6, ŷ=10, z=−5, J=25."
+      formulaTerms: [
+        { symbol: "x", hu: "Bemeneti jellemző.", en: "Input feature." },
+        { symbol: "w", hu: "Tanulható súly (weight).", en: "Learnable weight." },
+        { symbol: "b", hu: "Tanulható eltolás (bias).", en: "Learnable bias." },
+        { symbol: "q=wx", hu: "A szorzás köztes eredménye.", en: "Intermediate result of multiplication." },
+        { symbol: "ŷ=q+b", hu: "A modell becslése.", en: "Model prediction." },
+        { symbol: "y", hu: "Valódi célérték (target / label).", en: "True target / label." },
+        { symbol: "z=y−ŷ", hu: "Előjeles hiba a lecture választott előjellel.", en: "Signed error using the lecture's chosen convention." },
+        { symbol: "J=z²", hu: "Négyzetes veszteség ebben az egyetlen példában.", en: "Squared loss for this single example." }
+      ],
+      why: {
+        hu: "A forward pass során a gráf bal oldalától a végső veszteségig haladunk. Ezeket a köztes értékeket a backward pass később felhasználja a deriváltakhoz.",
+        en: "The forward pass moves from the graph inputs to the final loss. The intermediate values are then reused during the backward pass."
       },
       examTrap: {
-        hu: "Itt z=y−ŷ, nem ŷ−y. Emiatt a köztes derivative előjelekre külön figyelni kell.",
-        en: "Here z=y−ŷ, not ŷ−y. Therefore the signs of intermediate derivatives require attention."
-      },
-      formula: {
-        hu: "q=wx; ŷ=q+b; z=y−ŷ; J=z²",
-        en: "q=wx; ŷ=q+b; z=y−ŷ; J=z²"
-      },
-      keyTerms: [{ term: "feed forward" }]
+        hu: "Ebben a konkrét slide-példában z=y−ŷ, nem ŷ−y. A négyzet miatt a végső J ugyanaz lenne, de a köztes deriváltak előjele ettől függ.",
+        en: "In this specific slide example z=y−ŷ, not ŷ−y. Squaring would produce the same final J, but intermediate derivative signs depend on this convention."
+      }
     },
     {
-      id: "linear-example-backward",
-      title: { hu: "Lecture példa: backpropagation", en: "Lecture example: backpropagation" },
-      body: {
-        hu: "A numerikus példában ∂J/∂J=1; ∂J/∂z=2z=−10; ∂J/∂ŷ=(−1)(−10)=10; ∂J/∂q=10 és ∂J/∂b=10; végül ∂J/∂w=x·10=20 és ∂J/∂x=w·10=30.",
-        en: "In the numerical example, ∂J/∂J=1; ∂J/∂z=2z=−10; ∂J/∂ŷ=(−1)(−10)=10; ∂J/∂q=10 and ∂J/∂b=10; finally ∂J/∂w=x·10=20 and ∂J/∂x=w·10=30."
+      id: "backward-example",
+      title: {
+        hu: "Lecture 6 példa: lépésenkénti visszaterjesztés",
+        en: "Lecture 6 example: step-by-step backpropagation"
       },
-      intuition: {
-        hu: "A gradient J felől indul 1-gyel, majd node-ról node-ra visszafelé halad a local derivatives segítségével.",
-        en: "The gradient starts from J with value 1 and moves backward node by node using local derivatives."
+      body: {
+        hu: "A visszafelé számítás J-ből indul. Triviálisan ∂J/∂J=1. Mivel J=z², ezért ∂J/∂z=2z=−10. A z=y−ŷ műveletnél ∂z/∂ŷ=−1, ezért ∂J/∂ŷ=(−10)·(−1)=10. Az ŷ=q+b összeadásnál ez a 10 változatlanul megy q és b felé. A q=wx szorzásnál w felé a lokális derivált x=2, így ∂J/∂w=10·2=20; x felé pedig w=3, ezért ∂J/∂x=30.",
+        en: "The backward pass starts at J with ∂J/∂J=1. Since J=z², ∂J/∂z=2z=−10. For z=y−ŷ, ∂z/∂ŷ=−1, giving ∂J/∂ŷ=10. The addition ŷ=q+b passes 10 unchanged to q and b. For q=wx, the local derivative toward w is x=2, so ∂J/∂w=20; toward x it is w=3, giving ∂J/∂x=30."
       },
       formula: {
-        hu: "x=2,w=3,b=4,y=5 → ∂J/∂w=20, ∂J/∂b=10",
-        en: "x=2,w=3,b=4,y=5 → ∂J/∂w=20, ∂J/∂b=10"
+        hu: "∂J/∂z=−10 → ∂J/∂ŷ=10 → ∂J/∂q=10, ∂J/∂b=10 → ∂J/∂w=20, ∂J/∂x=30",
+        en: "∂J/∂z=−10 → ∂J/∂ŷ=10 → ∂J/∂q=10, ∂J/∂b=10 → ∂J/∂w=20, ∂J/∂x=30"
       },
-      keyTerms: [{ term: "backward pass" }]
+      formulaTerms: [
+        { symbol: "∂J/∂w=20", hu: "A veszteség aktuális érzékenysége a súly változására.", en: "Current sensitivity of the loss to a change in the weight." },
+        { symbol: "∂J/∂b=10", hu: "A veszteség aktuális érzékenysége az eltolás változására.", en: "Current sensitivity of the loss to a change in the bias." },
+        { symbol: "∂J/∂x=30", hu: "A veszteség érzékenysége a bemenetre; x nem tanulható paraméter ebben a példában, de a derivált matematikailag kiszámítható.", en: "Sensitivity of loss to the input; x is not a learnable parameter here, but the derivative is still mathematically computable." }
+      ],
+      why: {
+        hu: "A tanításhoz elsősorban a tanulható paraméterek – itt w és b – deriváltjai kellenek. Ezek mondják meg az optimalizálónak, milyen irányban módosítsa a paramétereket.",
+        en: "Training mainly needs derivatives with respect to learnable parameters—here w and b. They tell the optimizer how the parameters should be changed."
+      },
+      examTrap: {
+        hu: "A gráfban megjelenő ∂J/∂q, ∂J/∂z stb. nem új bemenetek, hanem gradiensértékek: érzékenységi információk a végső veszteséghez képest.",
+        en: "Values such as ∂J/∂q and ∂J/∂z are not additional inputs. They are gradients—sensitivity information relative to the final loss."
+      }
     },
     {
       id: "parameter-update",
-      title: { hu: "Backprop után parameter update", en: "Parameter update after backpropagation" },
-      body: {
-        hu: "Backpropagation gradients értékeket számol. Ezeket ezután gradient-descent update használja. A lecture példájában α=0.1, ∂J/∂w=20 és ∂J/∂b=10, ezért w:3→1 és b:4→3.",
-        en: "Backpropagation computes gradients. A gradient-descent update then uses those values. In the lecture example, α=0.1, ∂J/∂w=20 and ∂J/∂b=10, so w changes 3→1 and b changes 4→3."
+      title: {
+        hu: "A gradiens kiszámítása után jön a paraméterfrissítés",
+        en: "Parameter updating comes after gradient computation"
       },
-      examTrap: {
-        hu: "Backpropagation és parameter update nem ugyanaz. Backprop gradients számol; az optimizer/update utána módosítja a parameters értékeket.",
-        en: "Backpropagation and parameter updating are not the same. Backprop computes gradients; the optimizer/update changes the parameters afterward."
+      body: {
+        hu: "A backpropagation eredménye a paraméterek szerinti gradiens. Ezt ezután egy optimalizáló használja fel. Egyszerű gradienscsökkentésnél a frissítés w:=w−α·∂J/∂w és b:=b−α·∂J/∂b.",
+        en: "Backpropagation outputs gradients with respect to parameters. An optimizer then uses them. With simple gradient descent: w:=w−α·∂J/∂w and b:=b−α·∂J/∂b."
       },
       formula: {
-        hu: "θ := θ − α·grad_θ",
-        en: "θ := θ − α·grad_θ"
+        hu: "α=0,1 esetén: w=3−0,1·20=1,   b=4−0,1·10=3",
+        en: "with α=0.1: w=3−0.1·20=1,   b=4−0.1·10=3"
       },
-      keyTerms: [
-        { term: "parameter update" },
-        { term: "optimizer" }
-      ]
+      formulaTerms: [
+        { symbol: "α", hu: "Tanulási ráta (learning rate).", en: "Learning rate." },
+        { symbol: "∂J/∂w", hu: "A backpropagation által kiszámított súlygradiens.", en: "Weight gradient computed by backpropagation." },
+        { symbol: "∂J/∂b", hu: "A backpropagation által kiszámított biasgradiens.", en: "Bias gradient computed by backpropagation." }
+      ],
+      connections: {
+        hu: "SGD esetén ugyanez a frissítési logika használható, csak a gradiens egy mini-batchből becsült gradiens lehet a teljes adathalmaz gradiense helyett.",
+        en: "SGD can use the same update logic, except the gradient may be estimated from a mini-batch rather than the full dataset."
+      },
+      examTrap: {
+        hu: "A backpropagation nem módosítja automatikusan a paramétereket. A gradiensek kiszámítása és a paraméterfrissítés két külön lépés.",
+        en: "Backpropagation does not itself automatically update parameters. Gradient computation and parameter updating are separate steps."
+      }
     },
     {
       id: "training-cycle",
-      title: { hu: "A Lecture 6 training cycle", en: "The Lecture 6 training cycle" },
-      body: {
-        hu: "A lecture lépései: symbolic derivation; parameter initialization; example vagy mini-batch választás; feed forward; backpropagation; parameter update; majd ismétlés. Stop lehet adott iteration count után vagy early stoppinggal.",
-        en: "The lecture steps are: symbolic derivation; parameter initialization; choose an example or mini-batch; feed forward; backpropagation; parameter update; then repeat. Training can stop after a fixed number of iterations or via early stopping."
+      title: {
+        hu: "A teljes tanítási ciklus",
+        en: "The complete training cycle"
       },
-      examTrap: {
-        hu: "Gyakorlati SGD-nél a lecture megjegyzi, hogy nem feltétlenül egyetlen example, hanem mini-batch használatos.",
-        en: "For practical SGD, the lecture notes that a mini-batch is used rather than necessarily a single example."
+      body: {
+        hu: "A Lecture 6 a teljes folyamatot lépésekre bontja: 1) szimbolikus deriválási szabályok meghatározása, 2) paraméterek inicializálása, 3) tanítási példa vagy mini-batch választása, 4) forward pass, 5) backpropagation, 6) paraméterfrissítés, majd vissza a 3. lépéshez. A ciklus adott iterációszámig vagy korai leállításig (early stopping) ismétlődik.",
+        en: "Lecture 6 breaks training into: 1) symbolic derivative setup, 2) parameter initialization, 3) choose a training example or mini-batch, 4) forward pass, 5) backpropagation, 6) parameter update, then return to step 3 until an iteration limit or early stopping."
+      },
+      why: {
+        hu: "Ez a séma összeköti a korábbi fejezeteket: a modell adja a forward számítást, a veszteség méri a hibát, a backpropagation gradienseket ad, az optimalizáló módosítja a paramétereket, a validáció pedig eldöntheti, mikor álljunk le.",
+        en: "This sequence connects earlier chapters: the model defines the forward computation, loss measures error, backprop produces gradients, the optimizer changes parameters, and validation can determine when to stop."
       },
       keyTerms: [
-        { term: "forward pass" },
-        { term: "backward pass" },
-        { term: "training loop" }
+        { term: "parameter initialization", hu: "paraméterinicializálás" },
+        { term: "training loop", hu: "tanítási ciklus" }
       ]
     },
     {
       id: "autograd",
-      title: { hu: "PyTorch és automatic differentiation", en: "PyTorch and automatic differentiation" },
-      body: {
-        hu: "A lecture szerint PyTorch tensors computational graph részei lehetnek, és torch.autograd automatikusan képes gradients számítására a graphon.",
-        en: "According to the lecture, PyTorch tensors can be part of computational graphs, and torch.autograd can automatically compute gradients over the graph."
+      title: {
+        hu: "Automatikus deriválás PyTorchban",
+        en: "Automatic differentiation in PyTorch"
       },
-      intuition: {
-        hu: "A backpropagation matematikája ugyanaz, de a framework követi a graphot és elvégzi a szükséges chain-rule számításokat.",
-        en: "The mathematics of backpropagation is unchanged, but the framework tracks the graph and performs the required chain-rule computations."
+      body: {
+        hu: "A lecture szerint a PyTorch tensorok részei lehetnek egy számítási gráfnak, és a torch.autograd automatikusan képes végrehajtani a szükséges deriválási műveleteket. A framework követi, milyen műveletekből jött létre a végső érték, majd a láncszabály alapján kiszámítja a gradienseket.",
+        en: "According to the lecture, PyTorch tensors can participate in a computational graph and torch.autograd can automatically perform the required differentiation. The framework tracks the operations that produced the final value and applies the chain rule to compute gradients."
+      },
+      why: {
+        hu: "A matematikai elv nem tűnik el: továbbra is számítási gráf és láncszabály működik, csak a kézi deriválást a keretrendszer automatizálja.",
+        en: "The mathematics does not disappear: computational graphs and the chain rule are still used, but the framework automates the derivative bookkeeping."
       },
       examTrap: {
-        hu: "Automatic differentiation nem azt jelenti, hogy nincs computational graph vagy chain rule; ezeket automatizálja.",
-        en: "Automatic differentiation does not mean there is no computational graph or chain rule; it automates their use."
+        hu: "Az automatikus deriválás (automatic differentiation) nem azt jelenti, hogy nincs backpropagation vagy láncszabály. Éppen ezek automatikus végrehajtását jelenti.",
+        en: "Automatic differentiation does not mean there is no backpropagation or chain rule. It automates those computations."
       },
       keyTerms: [
-        { term: "automatic differentiation" },
+        { term: "automatic differentiation", hu: "automatikus deriválás" },
         { term: "torch.autograd" }
       ]
     }
