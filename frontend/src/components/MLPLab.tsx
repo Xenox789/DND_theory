@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
+import { SimulationGuide } from "./SimulationGuide";
 
 type Props = {
   language: Language;
@@ -412,6 +413,58 @@ export function MLPLab({ language }: Props) {
           </div>
         </div>
       )}
+
+      <SimulationGuide
+        language={language}
+        axes={[
+          {
+            label: language === "hu" ? "Activation plot x-axis: z" : "Activation plot x-axis: z",
+            meaning: language === "hu"
+              ? "A neuron activation előtti linear score / pre-activation értéke."
+              : "The neuron's linear score / pre-activation value before applying the activation function."
+          },
+          {
+            label: language === "hu" ? "Activation plot y-axis: g(z)" : "Activation plot y-axis: g(z)",
+            meaning: language === "hu"
+              ? "Az activation function outputja: sigmoid, tanh vagy ReLU esetén más nonlinear transzformáció."
+              : "Output of the activation function: sigmoid, tanh, and ReLU apply different nonlinear transformations."
+          }
+        ]}
+        terms={[
+          { label: "S₀", meaning: language === "hu" ? "input layer size / input variables száma" : "input-layer size / number of input variables" },
+          { label: "S₁", meaning: language === "hu" ? "hidden layer neuron count" : "number of neurons in the hidden layer" },
+          { label: "S₂", meaning: language === "hu" ? "output layer size; a task határozza meg" : "output-layer size, determined by the task" },
+          { label: "w", meaning: language === "hu" ? "weight: egy connection learnable erőssége" : "weight: learnable strength of one connection" },
+          { label: "b", meaning: language === "hu" ? "bias: neuronenkénti learnable eltolás" : "bias: learnable offset for each neuron" },
+          { label: "z", meaning: language === "hu" ? "weighted sum + bias, activation előtt" : "weighted sum plus bias before activation" },
+          { label: "g(z)", meaning: language === "hu" ? "activation output" : "activation output" }
+        ]}
+        formulas={[
+          {
+            expression: "z = Σ wᵢxᵢ + b",
+            meaning: language === "hu"
+              ? "Egy artificial neuron először weighted sumot számol az inputokból, majd hozzáadja a bias-t."
+              : "An artificial neuron first computes a weighted sum of its inputs and adds a bias."
+          },
+          {
+            expression: "a = g(z)",
+            meaning: language === "hu"
+              ? "Az activation function a linear score-ból készíti a neuron outputját."
+              : "The activation function converts the linear score into the neuron output."
+          },
+          {
+            expression: "parameters(layer) = S_in·S_out + S_out",
+            meaning: language === "hu"
+              ? "Minden input-output neuronpárhoz egy weight tartozik, és minden output neuronhoz egy bias."
+              : "There is one weight for each input-output neuron pair and one bias for each output neuron."
+          }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Képosztályozásnál az input layer feature-eket fogad, hidden layers egyre összetettebb reprezentációkat tanulhatnak, az output layer pedig class probabilities értékeket adhat softmaxszal. Regressionnél ugyanaz az MLP continuous értéket is becsülhet."
+            : "In image classification, the input layer receives features, hidden layers can learn increasingly complex representations, and the output layer can produce class probabilities using softmax. The same MLP idea can produce continuous predictions for regression."
+        }
+      />
 
       <div className="task-matrix">
         <div className="task-matrix-row header">
