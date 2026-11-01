@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
+import { SimulationGuide } from "./SimulationGuide";
 
 type Props = {
   language: Language;
@@ -205,6 +206,36 @@ export function GradientDescentLab({ language }: Props) {
           style={{ width: "100%", height: "520px" }}
         />
       </div>
+
+      <SimulationGuide
+        language={language}
+        axes={[
+          { label: "x-axis: θ₀", meaning: language === "hu" ? "A bias / intercept parameter lehetséges értékei." : "Possible values of the bias / intercept parameter." },
+          { label: "y-axis: θ₁", meaning: language === "hu" ? "A slope / weight parameter lehetséges értékei." : "Possible values of the slope / weight parameter." },
+          { label: "z-axis: J(θ₀,θ₁)", meaning: language === "hu" ? "Az adott parameter pairhez tartozó loss. Alacsonyabb pont = jobb fit." : "Loss for that parameter pair. Lower points mean a better fit." },
+          { label: language === "hu" ? "Trajectory" : "Trajectory", meaning: language === "hu" ? "A successive gradient-descent update-ek útvonala a loss surface-en." : "The path of successive gradient-descent updates across the loss surface." }
+        ]}
+        terms={[
+          { label: "α", meaning: language === "hu" ? "learning rate / step size: mekkora update-et teszünk egyszerre" : "learning rate / step size: how large each update is" },
+          { label: "∇J(θ)", meaning: language === "hu" ? "gradient vector: a loss leggyorsabb növekedésének iránya" : "gradient vector: direction of steepest increase in loss" },
+          { label: "−∇J(θ)", meaning: language === "hu" ? "descent direction: amerre a loss csökken" : "descent direction: the direction in which loss decreases" },
+          { label: "∂J/∂θ₀", meaning: language === "hu" ? "a loss érzékenysége θ₀ változtatására" : "sensitivity of loss to changes in θ₀" },
+          { label: "∂J/∂θ₁", meaning: language === "hu" ? "a loss érzékenysége θ₁ változtatására" : "sensitivity of loss to changes in θ₁" }
+        ]}
+        formulas={[
+          {
+            expression: "θ := θ − α∇J(θ)",
+            meaning: language === "hu"
+              ? "A parameters értékeit a gradienttel ellentétes irányba mozdítjuk, a learning rate által meghatározott lépéssel."
+              : "Move the parameters opposite the gradient, with step size controlled by the learning rate."
+          }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Ugyanez történik nagy neural network trainingnél is, csak ott θ nem két szám, hanem akár milliónyi weight és bias. A 3D ábra azért használható itt, mert két parameter esetén a loss landscape még vizualizálható."
+            : "The same idea is used when training large neural networks, except θ can contain millions of weights and biases. The 3D view is possible here because a two-parameter loss landscape can still be visualized."
+        }
+      />
 
       <div className="lab-explanation-grid">
         <div className="callout intuition">
