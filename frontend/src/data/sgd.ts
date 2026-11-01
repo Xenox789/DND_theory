@@ -41,7 +41,7 @@ export const sgdLesson: Lesson = {
         en: "Before every update, we effectively ask every training example which direction the parameters should move."
       },
       examTrap: {
-        hu: "Ebben a kurzusban a batch gradient descent kifejezés a teljes tanítóhalmazt használó frissítést jelenti.",
+        hu: "Ebben a kurzusban a batch gradienscsökkentés (batch gradient descent) kifejezés a teljes tanítóhalmazt használó frissítést jelenti.",
         en: "In this course, batch gradient descent means using the full training set for an update."
       },
       keyTerms: [
@@ -114,7 +114,7 @@ export const sgdLesson: Lesson = {
         en: "If only one or two examples are used to estimate the full-dataset downhill direction, the estimate is easier to get wrong. More examples generally make it more stable."
       },
       examTrap: {
-        hu: "A kisebb batch nem jelent pontosabb gradienst. A lecture szerint éppen a gradiensbecslés varianciája nő, és nagyobb az esélye, hogy egy frissítés rossz irányba mutat.",
+        hu: "A kisebb batch nem jelent pontosabb gradienst. Az előadás (lecture) szerint éppen a gradiensbecslés varianciája nő, és nagyobb az esélye, hogy egy frissítés rossz irányba mutat.",
         en: "A smaller batch does not mean a more accurate gradient. The lecture explicitly says gradient-estimate variance increases and wrong-direction updates become more likely."
       }
     },
@@ -125,7 +125,7 @@ export const sgdLesson: Lesson = {
         en: "Why can learning rate depend on batch size?"
       },
       body: {
-        hu: "A Lecture 5 külön kiemeli, hogy ha csak kis mini-batch használható, a konvergenciához szükség lehet a tanulási ráta (learning rate) csökkentésére. Ennek oka, hogy a kisebb batch zajosabb gradiensbecslést ad.",
+        hu: "Az 5. előadás (Lecture 5) külön kiemeli, hogy ha csak kis mini-batch használható, a konvergenciához szükség lehet a tanulási ráta (learning rate) csökkentésére. Ennek oka, hogy a kisebb batch zajosabb gradiensbecslést ad.",
         en: "Lecture 5 explicitly notes that if only a small mini-batch can be used, the learning rate may need to be reduced to achieve convergence, because smaller batches produce noisier gradient estimates."
       },
       why: {
@@ -141,7 +141,7 @@ export const sgdLesson: Lesson = {
         { symbol: "g_batch", hu: "A mini-batchből becsült, zajosabb gradiens.", en: "Noisier gradient estimated from a mini-batch." }
       ],
       examTrap: {
-        hu: "A course nem azt állítja, hogy kisebb batch esetén mindig növelni kell α-t. Éppen azt emeli ki, hogy szükség lehet kisebb tanulási rátára.",
+        hu: "A kurzus (course) nem azt állítja, hogy kisebb batch esetén mindig növelni kell α-t. Éppen azt emeli ki, hogy szükség lehet kisebb tanulási rátára.",
         en: "The course does not say that α should always be increased for small batches. It explicitly notes that a smaller learning rate may be required."
       }
     },
@@ -152,7 +152,7 @@ export const sgdLesson: Lesson = {
         en: "Batch size in practice: GPU memory"
       },
       body: {
-        hu: "Nagy neurális hálózatoknál a lecture gyakorlati szempontként említi, hogy a mini-batch méretét gyakran a rendelkezésre álló GPU-memória korlátozza. Egy batch minden példájához köztes aktivációkat és egyéb adatokat kell tárolni, ezért a batch méretének növelése memóriaigényes.",
+        hu: "Nagy neurális hálózatoknál az előadás (lecture) gyakorlati szempontként említi, hogy a mini-batch méretét gyakran a rendelkezésre álló GPU-memória korlátozza. Egy batch minden példájához köztes aktivációkat és egyéb adatokat kell tárolni, ezért a batch méretének növelése memóriaigényes.",
         en: "For large neural networks, the lecture notes that mini-batch size is often constrained by available GPU memory. Intermediate activations and other data must be stored for examples in the batch, so larger batches require more memory."
       },
       why: {
@@ -164,7 +164,7 @@ export const sgdLesson: Lesson = {
         en: "Illustrative example: with large images or a large model, batch=128 may not fit in GPU memory while batch=16 does. Learning rate and other settings may then need adjustment."
       },
       examTrap: {
-        hu: "A „használjunk annyi példát, amennyi befér a GPU-ba” a lecture gyakorlati hatékonysági megfontolása, nem matematikailag bizonyított univerzális optimális batch méret.",
+        hu: "A „használjunk annyi példát, amennyi befér a GPU-ba” az előadás (lecture) gyakorlati hatékonysági megfontolása, nem matematikailag bizonyított univerzális optimális batch méret.",
         en: "Using as many examples as fit in GPU memory is presented as a practical efficiency consideration, not a universally optimal mathematical batch size."
       }
     },
@@ -175,8 +175,8 @@ export const sgdLesson: Lesson = {
         en: "SGD variants and optimizers"
       },
       body: {
-        hu: "A lecture példaként felsorolja az SGD with Momentum, AdaGrad, Adam, Adamax és RMSprop módszereket. Ezek mind gradiensalapú optimalizálási családhoz kapcsolódnak, de az adott Theory Test-anyag ezen a ponton nem vezeti le részletesen a frissítési képleteiket.",
-        en: "The lecture lists SGD with Momentum, AdaGrad, Adam, Adamax, and RMSprop as examples of gradient-based optimization variants. The tested material at this point does not derive their update equations in detail."
+        hu: "Az előadás (lecture) példaként felsorolja az momentumos SGD (SGD with Momentum), AdaGrad, Adam, Adamax és RMSprop módszereket. Ezek mind gradiensalapú optimalizálási családhoz kapcsolódnak, de az adott Theory Test-anyag ezen a ponton nem vezeti le részletesen a frissítési képleteiket.",
+        en: "The lecture lists momentumos SGD (SGD with Momentum), AdaGrad, Adam, Adamax, and RMSprop as examples of gradient-based optimization variants. The tested material at this point does not derive their update equations in detail."
       },
       why: {
         hu: "A fontos kapcsolat az, hogy a backpropagation kiszámítja a gradienseket, az optimalizáló pedig eldönti, hogyan használjuk fel őket a paraméterek módosítására.",
@@ -187,7 +187,7 @@ export const sgdLesson: Lesson = {
         en: "The next chapter explains how backpropagation obtains ∂J/∂w and ∂J/∂b. SGD or another optimizer then turns those gradients into parameter updates."
       },
       examTrap: {
-        hu: "Ne tanulj ki nem adott Adam/RMSprop képleteket vizsgaszabályként ebből a blokkból. A slide ezen a ponton név szerint sorolja fel a változatokat.",
+        hu: "Ne tanulj ki nem adott Adam/RMSprop képleteket vizsgaszabályként ebből a blokkból. A dia (slide) ezen a ponton név szerint sorolja fel a változatokat.",
         en: "Do not invent detailed Adam/RMSprop formulas as exam rules from this block. The slide lists these variants by name."
       },
       keyTerms: [
@@ -270,12 +270,12 @@ export const sgdQuestions: Question[] = [
     topics: ["batch-size","learning-rate"],
     prompt: { hu: "Mit mond az előadás (lecture) kis mini-batch és tanulási ráta (learning rate) kapcsolatáról?", en: "What does the lecture say about small mini-batches and learning rate?" },
     choices: [
-      { id: "a", text: { hu: "Kis mini-batch esetén szükség lehet kisebb tanulási ráta (learning rate)-re a convergence-hez.", en: "With a small mini-batch, a smaller learning rate may be needed for convergence." } },
+      { id: "a", text: { hu: "Kis mini-batch esetén szükség lehet kisebb tanulási ráta (learning rate)-re a konvergenciához (convergence).", en: "With a small mini-batch, a smaller learning rate may be needed for convergence." } },
       { id: "b", text: { hu: "A nagyobb gradiens (gradient) variancia (variance) miatt túl nagy tanulási ráta (learning rate) problémás lehet.", en: "Because of higher gradient variance, an excessively large learning rate can be problematic." } },
-      { id: "c", text: { hu: "Kis batch esetén mindig növelni kell a tanulási ráta (learning rate)-et.", en: "With a small batch, the learning rate must always be increased." } }
+      { id: "c", text: { hu: "Kis batch esetén mindig növelni kell a tanulási ráta (learning rate) értékét.", en: "With a small batch, the learning rate must always be increased." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A slide explicit azt mondja: kis mini-batch esetén csökkenteni kellhet a tanulási ráta (learning rate)-et a convergence-hez.", en: "The slide explicitly states that with a small mini-batch the learning rate may need to be reduced to achieve convergence." }
+    explanation: { hu: "A dia (slide) kifejezetten azt mondja: kis mini-batch esetén csökkenteni kellhet a tanulási ráta (learning rate) értékét a konvergenciához (convergence).", en: "The slide explicitly states that with a small mini-batch the learning rate may need to be reduced to achieve convergence." }
   },
   {
     id: "sgd-q7",
@@ -294,7 +294,7 @@ export const sgdQuestions: Question[] = [
     topics: ["sgd-variants"],
     prompt: { hu: "Melyeket sorolja fel az előadás (lecture) SGD/optimizer variantként?", en: "Which are listed by the lecture as SGD/optimizer variants?" },
     choices: [
-      { id: "a", text: { hu: "SGD with Momentum", en: "SGD with Momentum" } },
+      { id: "a", text: { hu: "momentumos SGD (SGD with Momentum)", en: "momentumos SGD (SGD with Momentum)" } },
       { id: "b", text: { hu: "AdaGrad", en: "AdaGrad" } },
       { id: "c", text: { hu: "Adam", en: "Adam" } },
       { id: "d", text: { hu: "Adamax", en: "Adamax" } },
