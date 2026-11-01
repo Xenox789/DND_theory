@@ -336,7 +336,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q1",
     topics: ["linear-regression", "shapes"],
     prompt: {
-      hu: "200 betegből álló tanítóhalmaz (training set)ünk van. Minden betegnél 4 jellemző (feature) (súly (weight), életkor (age), magasság (height), nem (sex)) alapján koleszterinszintet becslünk egyenesáris regresszióval. Az tengelymetszetet / eltolást x₀=1 oszloppal kezeljük. Mely állítások igazak?",
+      hu: "200 betegből álló tanítóhalmaz (training set)ünk van. Minden betegnél 4 jellemző (feature) (súly (weight), életkor (age), magasság (height), nem (sex)) alapján koleszterinszintet becslünk lineáris regresszióval. Az tengelymetszetet / eltolást x₀=1 oszloppal kezeljük. Mely állítások igazak?",
       en: "We have a training set of 200 patients. We predict cholesterol level with linear regression from 4 features (weight, age, height, sex), using an x₀=1 column for the intercept. Which statements are true?"
     },
     choices: [
@@ -356,13 +356,13 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q2",
     topics: ["linear-regression", "geometry"],
     prompt: {
-      hu: "Mely geometriai állítások igazak egyenesáris regresszió (linear regression) esetén?",
+      hu: "Mely geometriai állítások igazak lineáris regresszió (linear regression) esetén?",
       en: "Which geometric statements are true for linear regression?"
     },
     choices: [
       { id: "a", text: { hu: "1 bemeneti változó (input variable) esetén a hipotézis (hypothesis) egyenes a 2D x–y síkon.", en: "With 1 input variable, the hypothesis is a line in the 2D x–y plane." } },
       { id: "b", text: { hu: "2 bemeneti változó (input variable) esetén a hipotézis (hypothesis) sík lehet 3D-ben.", en: "With 2 input variables, the hypothesis can be a plane in 3D." } },
-      { id: "c", text: { hu: "n bemeneti változó (input variable) esetén a egyenesáris hipotézis (hypothesis) hipersík (hyperplane).", en: "With n input variables, the linear hypothesis is a hyperplane." } },
+      { id: "c", text: { hu: "n bemeneti változó (input variable) esetén a lineáris hipotézis (hypothesis) hipersík (hyperplane).", en: "With n input variables, the linear hypothesis is a hyperplane." } },
       { id: "d", text: { hu: "2 bemeneti változó (input variable) esetén csak 2 modellparaméter (model parameter) van.", en: "With 2 input variables there are only 2 model parameters." } }
     ],
     correctIds: ["a", "b", "c"],
@@ -414,7 +414,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q5",
     topics: ["gradient-descent", "convexity"],
     prompt: {
-      hu: "Mely állítások igazak egyenesáris regresszió (linear regression) + MSE gradienscsökkentés (gradient descent) tanításra?",
+      hu: "Mely állítások igazak lineáris regresszió (linear regression) + MSE gradienscsökkentés (gradient descent) tanításra?",
       en: "Which statements are true for gradient-descent training of linear regression with MSE?"
     },
     choices: [
@@ -425,7 +425,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "egyenesáris regresszió (linear regression) MSE veszteség (loss) konvex (convex), ezért megfelelő lépésméret (step size) mellett gradienscsökkentés (gradient descent) a globális minimum (global minimum) felé konvergálhat. MLP veszteség (loss) általánosan nem konvex (convex), ezért ugyanez a garancia nincs.",
+      hu: "lineáris regresszió (linear regression) MSE veszteség (loss) konvex (convex), ezért megfelelő lépésméret (step size) mellett gradienscsökkentés (gradient descent) a globális minimum (global minimum) felé konvergálhat. MLP veszteség (loss) általánosan nem konvex (convex), ezért ugyanez a garancia nincs.",
       en: "The MSE loss of linear regression is convex, so with an appropriate step size gradient descent can converge toward the global minimum. MLP losses are generally non-convex, so the same guarantee does not hold."
     }
   },
@@ -433,7 +433,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q6",
     topics: ["matrix-form", "shapes"],
     prompt: {
-      hu: "Általánosan m tanítási példa (training example) és n valódi bemenet (input) jellemző (feature) esetén, ha x₀=1 tengelymetszet / eltolás (intercept) oszlopot használunk, mely shape-ek helyesek?",
+      hu: "Általánosan m tanítási példa (training example) és n valódi bemenet (input) jellemző (feature) esetén, ha x₀=1 tengelymetszet / eltolás (intercept) oszlopot használunk, mely alakok (shapes) helyesek?",
       en: "In general, with m training examples and n real input features, using an x₀=1 intercept column, which shapes are correct?"
     },
     choices: [
@@ -471,7 +471,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q8",
     topics: ["normal-equation"],
     prompt: {
-      hu: "Mely állítások igazak a normal equationre egyenesáris least squares esetén?",
+      hu: "Mely állítások igazak a normal equationre lineáris least squares esetén?",
       en: "Which statements are true about the normal equation for linear least squares?"
     },
     choices: [
@@ -494,14 +494,14 @@ export const linearRegressionQuestions: Question[] = [
       en: "Which statements are true in the regularized least-squares formula θ=(XᵀX+λI)⁻¹Xᵀy?"
     },
     choices: [
-      { id: "a", text: { hu: "I identity mátrix (matrix).", en: "I is the identity matrix." } },
+      { id: "a", text: { hu: "I egységmátrix (identity matrix) (matrix).", en: "I is the identity matrix." } },
       { id: "b", text: { hu: "I shape-je megegyezik XᵀX shape-jével.", en: "I has the same shape as XᵀX." } },
       { id: "c", text: { hu: "λ egy skalár (scalar) regularizáció (regularization) paraméter (parameter).", en: "λ is a scalar regularization parameter." } },
       { id: "d", text: { hu: "I a címke (label) vektor (vector).", en: "I is the label vector." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "λI hozzáadható XᵀX-hez, ezért I ugyanakkora square identity mátrix (matrix). λ skalár (scalar) paraméter (parameter).",
+      hu: "λI hozzáadható XᵀX-hez, ezért I ugyanakkora square egységmátrix (identity matrix) (matrix). λ skalár (scalar) paraméter (parameter).",
       en: "λI is added to XᵀX, so I is an identity matrix of the same square shape. λ is a scalar parameter."
     }
   },
@@ -584,7 +584,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q14",
     topics: ["linear-regression", "prediction"],
     prompt: {
-      hu: "Egyetlen példára (example) hθ(x)=θ₁x+θ₀ egyenesáris regresszió (linear regression) hipotézis (hypothesis) esetén mely állítások igazak?",
+      hu: "Egyetlen példára (example) hθ(x)=θ₁x+θ₀ lineáris regresszió (linear regression) hipotézis (hypothesis) esetén mely állítások igazak?",
       en: "For a single example with the linear-regression hypothesis hθ(x)=θ₁x+θ₀, which statements are true?"
     },
     choices: [
@@ -595,7 +595,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Egy egyváltozós egyenesáris regresszió (linear regression) példa (example) becslése skalár (scalar). θ₀ és θ₁ modellparaméterek (model parameters), míg x bemenet (input) jellemzőérték (feature value).",
+      hu: "Egy egyváltozós lineáris regresszió (linear regression) példa (example) becslése skalár (scalar). θ₀ és θ₁ modellparaméterek (model parameters), míg x bemenet (input) jellemzőérték (feature value).",
       en: "The prediction for one univariate linear-regression example is a scalar. θ₀ and θ₁ are model parameters, while x is the input-feature value."
     }
   }
