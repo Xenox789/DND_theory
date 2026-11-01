@@ -212,7 +212,7 @@ export const logisticRegressionQuestions: Question[] = [
       en: "Which statements are true about logistic regression?"
     },
     choices: [
-      { id: "a", text: { hu: "Binary osztályozásra használható.", en: "It can be used for binary classification." } },
+      { id: "a", text: { hu: "Bináris osztályozásra (binary classification) használható.", en: "It can be used for binary classification." } },
       { id: "b", text: { hu: "felügyelt tanulás (supervised learning) módszer (method).", en: "It is a supervised learning method." } },
       { id: "c", text: { hu: "valószínűség (probability) becslést állít elő.", en: "It produces a probability estimate." } },
       { id: "d", text: { hu: "tetszőleges folytonos (arbitrary continuous) regresszió (regression) célértékek becslésére tervezték.", en: "It is designed for arbitrary continuous regression targets." } }
@@ -234,7 +234,7 @@ export const logisticRegressionQuestions: Question[] = [
       { id: "a", text: { hu: "g(0)=0.5.", en: "g(0)=0.5." } },
       { id: "b", text: { hu: "Nagy pozitív z esetén g(z) 1-hez közelít.", en: "For large positive z, g(z) approaches 1." } },
       { id: "c", text: { hu: "Nagy negatív z esetén g(z) 0-hoz közelít.", en: "For large negative z, g(z) approaches 0." } },
-      { id: "d", text: { hu: "Finite z esetén g(z) lehet 5.", en: "For finite z, g(z) can equal 5." } }
+      { id: "d", text: { hu: "Véges z (finite z) esetén g(z) lehet 5.", en: "For finite z, g(z) can equal 5." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
@@ -284,7 +284,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q5",
     topics: ["decision-boundary", "geometry"],
     prompt: {
-      hu: "Mely geometriai állítások igazak a kurzus (course) logistic-regresszió (regression) példáiban?",
+      hu: "Mely geometriai állítások igazak a kurzus (course) logisztikus regresszió (logistic regression) (regression) példáiban?",
       en: "Which geometric statements are true in the course logistic-regression examples?"
     },
     choices: [
@@ -315,7 +315,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "2 jellemző (feature) + tengelymetszet / eltolás (intercept) = 3 paraméter (parameter) és 3 X-oszlop. Mind Xθ, mind az elemenkénti (element-wise) sigmoid outputja egy 100 elemű vektor (vector).",
+      hu: "2 jellemző (feature) + tengelymetszet / eltolás (intercept) = 3 paraméter (parameter) és 3 X-oszlop. Mind Xθ, mind az elemenkénti (element-wise) szigmoid kimenete (sigmoid output) egy 100 elemű vektor (vector).",
       en: "Two features plus the intercept give 3 parameters and 3 columns in X. Both Xθ and its elementwise sigmoid output are 100-element vectors."
     }
   },
@@ -349,11 +349,11 @@ export const logisticRegressionQuestions: Question[] = [
       { id: "a", text: { hu: "Binary classificationhöz alkalmas veszteség (loss).", en: "It is a suitable loss for binary classification." } },
       { id: "b", text: { hu: "A teljes J(θ) skalár (scalar).", en: "The overall J(θ) is a scalar." } },
       { id: "c", text: { hu: "A képlet (formula) log(h) és log(1−h) tagokat tartalmaz.", en: "The formula contains log(h) and log(1−h) terms." } },
-      { id: "d", text: { hu: "A kurzus (course) logistic regressionhez MSE-t választ végső megfelelő lossként.", en: "The course ultimately chooses MSE as the appropriate loss for logistic regression." } }
+      { id: "d", text: { hu: "A kurzus (course) logisztikus regresszióhoz (logistic regression) MSE-t választ végső megfelelő veszteségként (loss).", en: "The course ultimately chooses MSE as the appropriate loss for logistic regression." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A kurzus (course) logistic regressionhez logisztikus veszteség (logistic loss) / BCE-t használ. A veszteség (loss) példák (examples) felett átlagolt skalár (scalar) célfüggvény (objective).",
+      hu: "A kurzus (course) logisztikus regresszióhoz (logistic regression) logisztikus veszteség (logistic loss) / BCE-t használ. A veszteség (loss) példák (examples) felett átlagolt skalár (scalar) célfüggvény (objective).",
       en: "The course uses logistic loss / BCE for logistic regression. It is a scalar objective averaged over examples."
     }
   },
@@ -443,7 +443,7 @@ export const logisticRegressionQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "Sigmoid hipotézis (hypothesis) + MSE esetén a lossnak lehetnek több local minimumai.", en: "With a sigmoid hypothesis + MSE, the loss may have multiple local minima." } },
       { id: "b", text: { hu: "A logistic/BCE veszteség (loss) a logistic hipotézis (hypothesis)-szel konvex (convex).", en: "Logistic/BCE loss with the logistic hypothesis is convex." } },
-      { id: "c", text: { hu: "A konvex (convex) logistic lossnak egy local/global minimuma van.", en: "The convex logistic loss has a local/global minimum." } },
+      { id: "c", text: { hu: "A konvex (convex) logistic lossnak egy lokális/globális minimuma (local/global minimum) van.", en: "The convex logistic loss has a local/global minimum." } },
       { id: "d", text: { hu: "Ezért gradienscsökkentés (gradient descent) a logistic lossnál megtalálhatja a globálisan (globally) optimális (optimal) paraméterek (parameters) értékeket.", en: "Therefore gradient descent can find the globally optimal parameters for logistic loss." } }
     ],
     correctIds: ["a", "b", "c", "d"],
