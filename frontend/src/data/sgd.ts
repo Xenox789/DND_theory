@@ -3,164 +3,192 @@ import type { Lesson, Question } from "../types";
 export const sgdLesson: Lesson = {
   id: "sgd-minibatches",
   title: {
-    hu: "Batch Gradient Descent, SGD és Mini-batches",
+    hu: "Batch gradienscsökkentés, SGD és mini-batch-ek",
     en: "Batch Gradient Descent, SGD, and Mini-batches"
   },
   subtitle: {
-    hu: "Full-dataset gradient, approximate mini-batch gradient, variance–compute trade-off és learning rate",
-    en: "Full-dataset gradients, approximate mini-batch gradients, the variance–compute trade-off, and learning rate"
+    hu: "Miért nem mindig az egész tanítóhalmazon számolunk gradienst, és hogyan cserélünk pontosságot számítási költségre?",
+    en: "Why gradients are not always computed on the full training set and how accuracy is traded against computational cost"
   },
   source: "Lectures 5–6",
   sections: [
     {
       id: "batch-gradient-descent",
       title: {
-        hu: "Batch Gradient Descent",
-        en: "Batch Gradient Descent"
+        hu: "Batch gradienscsökkentés: minden példa egy frissítéshez",
+        en: "Batch gradient descent: every example for one update"
       },
       body: {
-        hu: "Batch gradient descent esetén a loss-t és a gradientet a teljes training set alapján számoljuk egy parameter update előtt. A lecture szerint ez pontos full-dataset gradientet ad, de nagy datasetnél egyetlen step is nagyon drága lehet.",
-        en: "In batch gradient descent, the loss and gradient are computed over the entire training set before one parameter update. According to the lecture, this gives the full-dataset gradient, but for a large dataset even one step can be very expensive."
+        hu: "Batch gradienscsökkentésnél (batch gradient descent) egy paraméterfrissítés előtt a teljes tanítóhalmaz minden példáját felhasználjuk a veszteség és a gradiens kiszámításához. Ez a teljes adathalmaz alapján számított gradiens (full-dataset gradient), ezért nem mintavételi becslés.",
+        en: "In batch gradient descent, the entire training set is used to compute the loss and gradient before each parameter update. This produces the full-dataset gradient rather than a sampled estimate."
       },
+      why: {
+        hu: "Előnye, hogy az adott paraméterállapothoz pontosan azt a gradienst kapjuk, amelyet a teljes tanítóhalmaz definiál. Hátránya, hogy nagy adathalmaznál egyetlen frissítés is drága lehet időben és memóriában.",
+        en: "Its advantage is that the gradient exactly matches the full training objective at the current parameter state. Its disadvantage is that one update can be expensive for large datasets."
+      },
+      formula: {
+        hu: "g_full = (1/m) · Σⱼ ∇L_j(θ)",
+        en: "g_full = (1/m) · Σⱼ ∇L_j(θ)"
+      },
+      formulaTerms: [
+        { symbol: "m", hu: "A tanítási példák teljes száma.", en: "Total number of training examples." },
+        { symbol: "L_j", hu: "A j-edik példához tartozó veszteség.", en: "Loss for example j." },
+        { symbol: "∇L_j", hu: "A j-edik példa hozzájárulása a gradienshez.", en: "Gradient contribution of example j." },
+        { symbol: "g_full", hu: "A teljes tanítóhalmazon számított gradiens.", en: "Gradient computed over the full training set." }
+      ],
       intuition: {
-        hu: "Mintha minden egyes update előtt az összes training example véleményét kikérnénk.",
-        en: "It is like consulting every training example before every single update."
+        hu: "Minden frissítés előtt „megkérdezzük” az összes tanítópontot, merre lenne érdemes mozdítani a paramétereket.",
+        en: "Before every update, we effectively ask every training example which direction the parameters should move."
       },
       examTrap: {
-        hu: "A 'batch gradient descent' itt a teljes training setet használja egy update gradientjéhez, nem egy kisebb mini-batch-et.",
-        en: "Here, 'batch gradient descent' uses the entire training set for one update gradient, not a smaller mini-batch."
+        hu: "Ebben a kurzusban a batch gradient descent kifejezés a teljes tanítóhalmazt használó frissítést jelenti.",
+        en: "In this course, batch gradient descent means using the full training set for an update."
       },
       keyTerms: [
-        { term: "batch gradient descent" },
-        { term: "full-dataset gradient" }
+        { term: "batch gradient descent", hu: "batch gradienscsökkentés" },
+        { term: "full-dataset gradient", hu: "teljes adathalmazon számított gradiens" }
       ]
     },
     {
       id: "why-sgd",
       title: {
-        hu: "Miért használunk SGD-t?",
-        en: "Why use SGD?"
+        hu: "SGD: becsült gradiens kisebb mintából",
+        en: "SGD: estimating the gradient from a smaller sample"
       },
       body: {
-        hu: "A lecture SGD esetén véletlenszerűen kiválaszt egy training-data sub-sample-t, vagyis mini-batch-et, és csak ezen számolja a következő update gradientjét. Ez approximate gradient, de általában sokkal gyorsabban számolható.",
-        en: "For SGD, the lecture randomly selects a sub-sample of the training data—a mini-batch—and computes the gradient for the next update using only that subset. This is an approximate gradient, but it is usually much faster to compute."
+        hu: "A tananyag az SGD-t (Stochastic Gradient Descent) úgy mutatja be, hogy véletlenszerűen kiválasztunk egy kisebb részhalmazt a tanítóhalmazból, vagyis mini-batch-et, és csak ezen számoljuk ki a következő frissítéshez szükséges gradienst. Ez közelítő gradiens (approximate gradient), mert nem az összes példát használja.",
+        en: "The course presents Stochastic Gradient Descent (SGD) by randomly selecting a smaller subset of the training set—a mini-batch—and computing the next update gradient only on that subset. This is an approximate gradient because it does not use every example."
       },
-      intuition: {
-        hu: "Nem kérdezzük meg az egész datasetet minden lépésnél; egy kisebb, véletlen mintából becsüljük meg, merre kellene menni.",
-        en: "Instead of consulting the whole dataset every step, we estimate the direction using a smaller random sample."
+      why: {
+        hu: "A kisebb minta sokkal gyorsabban feldolgozható, így ugyanannyi idő alatt több paraméterfrissítés végezhető. Ez különösen fontos nagy adathalmazok és nagy neurális hálózatok esetén.",
+        en: "A smaller sample is much faster to process, allowing more parameter updates in the same amount of time. This is especially important for large datasets and neural networks."
+      },
+      formula: {
+        hu: "g_batch ≈ g_full    →    θ := θ − α·g_batch",
+        en: "g_batch ≈ g_full    →    θ := θ − α·g_batch"
+      },
+      formulaTerms: [
+        { symbol: "g_batch", hu: "A kiválasztott mini-batch alapján becsült gradiens.", en: "Gradient estimate computed from the selected mini-batch." },
+        { symbol: "g_full", hu: "A teljes tanítóhalmaz gradiensének értéke.", en: "Full-training-set gradient." },
+        { symbol: "α", hu: "Tanulási ráta (learning rate).", en: "Learning rate." },
+        { symbol: "θ", hu: "A modell paraméterei.", en: "Model parameters." }
+      ],
+      workedExample: {
+        hu: "Szemléltető példa: ha egymillió tanítóképünk van, nem feltétlenül akarunk minden egyes súlyfrissítéshez mind az egymillió képet feldolgozni. Ehelyett például 128 képet választunk, kiszámoljuk rajtuk a gradienst, majd frissítjük a paramétereket.",
+        en: "Illustrative example: with one million training images, processing all one million before every update is impractical. Instead, choose a mini-batch such as 128 images, compute the gradient, and update the parameters."
       },
       examTrap: {
-        hu: "A course SGD framingje mini-batch-et használ; nem szükséges, hogy minden update pontosan egyetlen training example-ból számolódjon.",
-        en: "The course frames SGD using mini-batches; an update does not have to be computed from exactly one training example."
+        hu: "A kurzus terminológiájában az SGD gyakorlati változata mini-batch-eket használhat. Ezért a „SGD mindig pontosan egyetlen tanítási példán számol gradienst” állítás a tárgy megfogalmazása szerint nem szükségszerűen igaz.",
+        en: "In the course terminology, practical SGD may use mini-batches. Therefore the statement 'SGD always computes the gradient from exactly one training example' is not necessarily true in this course framing."
       },
       keyTerms: [
         { term: "Stochastic Gradient Descent (SGD)" },
         { term: "mini-batch" },
-        { term: "approximate gradient" }
+        { term: "approximate gradient", hu: "közelítő gradiens" }
       ]
     },
     {
-      id: "small-batch",
+      id: "batch-size-tradeoff",
       title: {
-        hu: "Kisebb mini-batch: nagyobb variance",
-        en: "Smaller mini-batch: higher variance"
+        hu: "Mini-batch méret: zajosság kontra számítási költség",
+        en: "Mini-batch size: noise versus computational cost"
       },
       body: {
-        hu: "A lecture explicit állítása: minél kisebb a selected mini-batch, annál nagyobb az esélye, hogy a parameter update 'rossz irányba' indul, mert a gradient estimate variance-e nő.",
-        en: "The lecture explicitly states that the smaller the selected mini-batch, the more likely the parameter update is to move in the 'wrong direction', because the variance of the gradient estimate increases."
+        hu: "A mini-batch mérete (batch size) meghatározza, hány példából becsüljük a gradienst egy frissítéshez. Kisebb mini-batch esetén a becslés varianciája (variance) nagyobb: különböző véletlen minták jobban eltérő gradienseket adhatnak. Nagyobb mini-batch esetén a becslés stabilabb lehet, viszont több számításra és memóriára van szükség.",
+        en: "Batch size determines how many examples are used to estimate the gradient for one update. Smaller mini-batches have higher gradient-estimate variance, so different random subsets can produce more different directions. Larger mini-batches can be more stable but require more computation and memory."
       },
+      why: {
+        hu: "Ez az egyik alapvető optimalizálási kompromisszum: a kisebb batch gyors és olcsó, de zajosabb; a nagyobb batch pontosabban közelíti a teljes gradienst, de drágább.",
+        en: "This is a core optimization trade-off: small batches are cheap and fast but noisy, while larger batches approximate the full gradient more closely at greater cost."
+      },
+      formula: {
+        hu: "kisebb batch → nagyobb gradiensvariancia    |    nagyobb batch → több számítás + több memória",
+        en: "smaller batch → higher gradient variance    |    larger batch → more compute + more memory"
+      },
+      formulaTerms: [
+        { symbol: "batch size", hu: "Az egy frissítéshez felhasznált példák száma.", en: "Number of examples used for one update." },
+        { symbol: "variance", hu: "A különböző mini-batch-ekből kapott gradiensbecslések szóródása.", en: "Variability of gradient estimates from different mini-batches." }
+      ],
       intuition: {
-        hu: "Egy nagyon kicsi random sample könnyebben lehet nem reprezentatív. Emiatt az update-ek zajosabbak és cikk-cakkosabbak lehetnek.",
-        en: "A very small random sample is more likely to be unrepresentative. Therefore updates can be noisier and more zig-zagged."
+        hu: "Ha csak egy-két példából próbáljuk megmondani, merre van a teljes adathalmaz szerinti „lejtő”, könnyebben tévedünk. Sok példából a becslés stabilabb lesz.",
+        en: "If only one or two examples are used to estimate the full-dataset downhill direction, the estimate is easier to get wrong. More examples generally make it more stable."
       },
       examTrap: {
-        hu: "Kisebb batch nem pontosabb gradientet jelent. A lecture szerint éppen a variance nő.",
-        en: "A smaller batch does not mean a more accurate gradient. According to the lecture, variance increases."
-      },
-      keyTerms: [
-        { term: "gradient variance" },
-        { term: "noisy update" }
-      ]
+        hu: "A kisebb batch nem jelent pontosabb gradienst. A lecture szerint éppen a gradiensbecslés varianciája nő, és nagyobb az esélye, hogy egy frissítés rossz irányba mutat.",
+        en: "A smaller batch does not mean a more accurate gradient. The lecture explicitly says gradient-estimate variance increases and wrong-direction updates become more likely."
+      }
     },
     {
-      id: "large-batch",
+      id: "learning-rate-batch",
       title: {
-        hu: "Nagyobb mini-batch: nagyobb compute és memory",
-        en: "Larger mini-batch: higher compute and memory cost"
+        hu: "Miért függhet a tanulási ráta a batch méretétől?",
+        en: "Why can learning rate depend on batch size?"
       },
       body: {
-        hu: "Nagyobb mini-batch több example-t használ az update-hez, ezért a gradient estimate kevésbé zajos lehet. Ugyanakkor a lecture szerint nő a computing és memory requirement.",
-        en: "A larger mini-batch uses more examples for an update, so the gradient estimate can be less noisy. At the same time, the lecture states that computing and memory requirements increase."
+        hu: "A Lecture 5 külön kiemeli, hogy ha csak kis mini-batch használható, a konvergenciához szükség lehet a tanulási ráta (learning rate) csökkentésére. Ennek oka, hogy a kisebb batch zajosabb gradiensbecslést ad.",
+        en: "Lecture 5 explicitly notes that if only a small mini-batch can be used, the learning rate may need to be reduced to achieve convergence, because smaller batches produce noisier gradient estimates."
       },
-      intuition: {
-        hu: "Több example egyszerre stabilabb becslést adhat, de több adatot és intermediate activationt kell egyszerre memóriában tartani és feldolgozni.",
-        en: "More examples at once can give a more stable estimate, but more data and intermediate activations must be stored and processed simultaneously."
+      why: {
+        hu: "Ha a gradiens iránya eleve bizonytalanabb, egy túl nagy α ezt a bizonytalanságot nagy paraméterugrásokká nagyíthatja. Kisebb lépéssel a modell kevésbé reagál túl egy-egy zajos mini-batchre.",
+        en: "When the gradient direction is already noisy, a large α can amplify that noise into large parameter jumps. A smaller step reduces the effect of any single noisy mini-batch."
       },
+      formula: {
+        hu: "θ := θ − α·g_batch",
+        en: "θ := θ − α·g_batch"
+      },
+      formulaTerms: [
+        { symbol: "α", hu: "A frissítés lépésméretét szabályozó tanulási ráta.", en: "Learning rate controlling update size." },
+        { symbol: "g_batch", hu: "A mini-batchből becsült, zajosabb gradiens.", en: "Noisier gradient estimated from a mini-batch." }
+      ],
       examTrap: {
-        hu: "Nagyobb batch nem 'ingyen' csökkenti a variance-t: compute és memory ára van.",
-        en: "A larger batch does not reduce variance for free: it comes with compute and memory cost."
-      },
-      keyTerms: [
-        { term: "batch size" },
-        { term: "memory requirement" },
-        { term: "computational cost" }
-      ]
+        hu: "A course nem azt állítja, hogy kisebb batch esetén mindig növelni kell α-t. Éppen azt emeli ki, hogy szükség lehet kisebb tanulási rátára.",
+        en: "The course does not say that α should always be increased for small batches. It explicitly notes that a smaller learning rate may be required."
+      }
     },
     {
       id: "gpu-memory",
       title: {
-        hu: "Batch size a gyakorlatban",
-        en: "Batch size in practice"
+        hu: "Batch méret a gyakorlatban: GPU-memória",
+        en: "Batch size in practice: GPU memory"
       },
       body: {
-        hu: "A lecture nagy neural networköknél gyakorlati szabályként azt említi, hogy efficiency considerations gyakran a GPU memory alapján határozzák meg a mini-batch size-t: annyi example egyszerre, amennyi még befér.",
-        en: "For large neural networks, the lecture notes a practical rule: efficiency considerations often determine mini-batch size based on GPU memory—use as many examples at once as fit."
+        hu: "Nagy neurális hálózatoknál a lecture gyakorlati szempontként említi, hogy a mini-batch méretét gyakran a rendelkezésre álló GPU-memória korlátozza. Egy batch minden példájához köztes aktivációkat és egyéb adatokat kell tárolni, ezért a batch méretének növelése memóriaigényes.",
+        en: "For large neural networks, the lecture notes that mini-batch size is often constrained by available GPU memory. Intermediate activations and other data must be stored for examples in the batch, so larger batches require more memory."
+      },
+      why: {
+        hu: "A batch méret ezért nem pusztán elméleti hiperparaméter. Hardveres korlátok is megszabhatják, mi fér el egyszerre.",
+        en: "Batch size is therefore not purely a theoretical hyperparameter; hardware limits can determine what fits at once."
+      },
+      realWorld: {
+        hu: "Szemléltető példa: nagy képek vagy nagy modell esetén lehet, hogy batch=128 nem fér a GPU memóriájába, miközben batch=16 igen. Ilyenkor a tanulási rátát és más beállításokat is ehhez kellhet igazítani.",
+        en: "Illustrative example: with large images or a large model, batch=128 may not fit in GPU memory while batch=16 does. Learning rate and other settings may then need adjustment."
       },
       examTrap: {
-        hu: "Ez gyakorlati heuristic a lecture-ben, nem matematikai optimum garantált batch size.",
-        en: "This is a practical heuristic from the lecture, not a mathematically guaranteed optimal batch size."
-      },
-      keyTerms: [
-        { term: "GPU memory" },
-        { term: "efficiency" }
-      ]
-    },
-    {
-      id: "small-batch-lr",
-      title: {
-        hu: "Kis mini-batch és learning rate",
-        en: "Small mini-batches and learning rate"
-      },
-      body: {
-        hu: "A lecture külön kiemeli: ha csak kis mini-batch size használható, a convergence eléréséhez csökkenteni kellhet a learning rate-et.",
-        en: "The lecture explicitly notes that if only a small mini-batch size can be used, the learning rate may need to be reduced to achieve convergence."
-      },
-      intuition: {
-        hu: "Ha a gradient estimate eleve zajosabb, túl nagy step size mellett ez a zaj túl nagy parameter ugrásokat okozhat.",
-        en: "If the gradient estimate is already noisier, a large step size can turn that noise into overly large parameter jumps."
-      },
-      examTrap: {
-        hu: "A course állítása nem az, hogy kis batch esetén növeljük a learning rate-et, hanem hogy szükség lehet annak csökkentésére.",
-        en: "The course does not say to increase the learning rate for a small batch; it says the learning rate may need to be reduced."
-      },
-      keyTerms: [
-        { term: "learning rate" },
-        { term: "convergence" }
-      ]
+        hu: "A „használjunk annyi példát, amennyi befér a GPU-ba” a lecture gyakorlati hatékonysági megfontolása, nem matematikailag bizonyított univerzális optimális batch méret.",
+        en: "Using as many examples as fit in GPU memory is presented as a practical efficiency consideration, not a universally optimal mathematical batch size."
+      }
     },
     {
       id: "sgd-variants",
       title: {
-        hu: "SGD variants",
-        en: "SGD variants"
+        hu: "SGD-változatok és optimalizálók",
+        en: "SGD variants and optimizers"
       },
       body: {
-        hu: "A lecture példaként felsorolja: SGD with Momentum, AdaGrad, Adam, Adamax és RMSprop. Ezeket a Theory Test szempontjából elsősorban névként és SGD/optimization contextben érdemes felismerni.",
-        en: "The lecture lists SGD with Momentum, AdaGrad, Adam, Adamax, and RMSprop as examples. For the Theory Test, the main point here is recognizing them as optimization / SGD-related variants."
+        hu: "A lecture példaként felsorolja az SGD with Momentum, AdaGrad, Adam, Adamax és RMSprop módszereket. Ezek mind gradiensalapú optimalizálási családhoz kapcsolódnak, de az adott Theory Test-anyag ezen a ponton nem vezeti le részletesen a frissítési képleteiket.",
+        en: "The lecture lists SGD with Momentum, AdaGrad, Adam, Adamax, and RMSprop as examples of gradient-based optimization variants. The tested material at this point does not derive their update equations in detail."
+      },
+      why: {
+        hu: "A fontos kapcsolat az, hogy a backpropagation kiszámítja a gradienseket, az optimalizáló pedig eldönti, hogyan használjuk fel őket a paraméterek módosítására.",
+        en: "The important connection is that backpropagation computes gradients, while the optimizer determines how those gradients are used to change parameters."
+      },
+      connections: {
+        hu: "A következő fejezetben a visszaterjesztés (backpropagation) azt mutatja meg, hogyan jutunk el ∂J/∂w és ∂J/∂b értékekhez. Az SGD vagy más optimalizáló ezután ezekből készít paraméterfrissítést.",
+        en: "The next chapter explains how backpropagation obtains ∂J/∂w and ∂J/∂b. SGD or another optimizer then turns those gradients into parameter updates."
       },
       examTrap: {
-        hu: "A slide ezen a ponton nem ad részletes update formulákat ezekhez, ezért az app sem talál ki hozzájuk vizsgaképleteket.",
-        en: "The slide does not provide detailed update formulas for these methods here, so the app does not invent exam formulas for them."
+        hu: "Ne tanulj ki nem adott Adam/RMSprop képleteket vizsgaszabályként ebből a blokkból. A slide ezen a ponton név szerint sorolja fel a változatokat.",
+        en: "Do not invent detailed Adam/RMSprop formulas as exam rules from this block. The slide lists these variants by name."
       },
       keyTerms: [
         { term: "Momentum" },
