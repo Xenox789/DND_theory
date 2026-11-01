@@ -296,7 +296,7 @@ export const mlpQuestions: Question[] = [
     topics: ["artificial-neuron"],
     prompt: { hu: "Mely állítások igazak egy mesterséges neuronra (artificial neuron)?", en: "Which statements are true about an artificial neuron?" },
     choices: [
-      { id: "a", text: { hu: "Súlyozott összeget (weighted sum) képez az bemenetekből (inputs).", en: "It forms a weighted sum of its inputs." } },
+      { id: "a", text: { hu: "Súlyozott összeget (weighted sum) képez a bemenetekből (inputs).", en: "It forms a weighted sum of its inputs." } },
       { id: "b", text: { hu: "aktiváció (activation) függvényt (function) alkalmazhat a súlyozott összegre (weighted sum).", en: "It can apply an activation function to the weighted sum." } },
       { id: "c", text: { hu: "Sigmoid g esetén többváltozós logisztikus regressziónak (multivariate logistic regression) felel meg.", en: "With sigmoid g, it corresponds to multivariate logistic regression." } },
       { id: "d", text: { hu: "Mindig ReLU activationt kell használnia.", en: "It must always use ReLU activation." } }
@@ -336,7 +336,7 @@ export const mlpQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "W_k: (S_k, S_(k−1)).", en: "W_k: (S_k, S_(k−1))." } },
       { id: "b", text: { hu: "b_k: (S_k,).", en: "b_k: (S_k,)." } },
-      { id: "c", text: { hu: "S₀ az bemenet (input) változó (variable)s száma.", en: "S₀ is the number of input variables." } },
+      { id: "c", text: { hu: "S₀ a bemeneti változók száma (input variables).", en: "S₀ is the number of input variables." } },
       { id: "d", text: { hu: "b_k shape-je mindig ugyanaz, mint W_k.", en: "b_k always has the same shape as W_k." } }
     ],
     correctIds: ["a","b","c"],
