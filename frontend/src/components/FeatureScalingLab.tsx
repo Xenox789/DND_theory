@@ -103,10 +103,10 @@ export function FeatureScalingLab({ language }: Props) {
         </label>
 
         <div className="formula-card">
-          min-max: (x−min)/(max−min)
+          {language === "hu" ? "minimum–maximum skálázás (min-max): (x−min)/(max−min)" : "min-max: (x−min)/(max−min)"}
         </div>
         <div className="formula-card">
-          standardization: (x−μ)/σ
+          {language === "hu" ? "standardizálás (standardization): (x−μ)/σ" : "standardization: (x−μ)/σ"}
         </div>
       </div>
 
