@@ -7,279 +7,336 @@ export const numpyLesson: Lesson = {
     en: "NumPy for the Theory Test"
   },
   subtitle: {
-    hu: "ndarray attributes, indexing, broadcasting, reductions, reshape, views/copies és gyakori NumPy műveletek",
-    en: "ndarray attributes, indexing, broadcasting, reductions, reshape, views/copies, and common NumPy operations"
+    hu: "Tömbök alakja, indexelés, broadcasting, redukciók és view/copy viselkedés – a weeks 3–6 videók alapján",
+    en: "Array shapes, indexing, broadcasting, reductions, and view/copy behavior from the weeks 3–6 video materials"
   },
   source: "Practice video materials • Weeks 3–6",
   sections: [
     {
       id: "numpy-array-programming",
-      title: { hu: "Array programming és vectorization", en: "Array programming and vectorization" },
+      title: { hu: "Miért használunk NumPy-t?", en: "Why do we use NumPy?" },
       body: {
-        hu: "A practice material a NumPy-t array-programming eszközként vezeti be. A cél, hogy sok scalar Python operation helyett kevés, nagy array-eken végzett vectorized NumPy operationt használjunk. A NumPy ndarray elemei általában fix dtype-pal, natív értékként tárolódnak.",
-        en: "The practice material introduces NumPy as an array-programming tool. The goal is to replace many scalar Python operations with a small number of vectorized NumPy operations over large arrays. NumPy ndarray elements normally use a fixed dtype and native-value storage."
+        hu: "A NumPy az array programming megközelítést támogatja: sok egyedi Python-művelet és ciklus helyett teljes tömbökön (arrays) végzünk vektorizált műveleteket (vectorized operations). A numpy.ndarray többdimenziós, homogén adattípust használó tömb. Az elemek típusa általában közös dtype, és a NumPy natív, tömör tárolást használ.",
+        en: "NumPy supports array programming: instead of many scalar Python operations and loops, vectorized operations are applied to whole arrays. numpy.ndarray is a multidimensional homogeneous array with a common dtype and compact native storage."
+      },
+      why: {
+        hu: "Ez azért fontos a deep learninghez, mert a modellek bemenetei, súlyai, aktivációi és gradiensei mind nagy, többdimenziós tömbökként jelennek meg. A PyTorch tensor szemlélete nagyon hasonló.",
+        en: "This matters for deep learning because model inputs, weights, activations, and gradients are all represented as large multidimensional arrays. PyTorch tensors follow a very similar model."
       },
       intuition: {
-        hu: "Ahelyett, hogy Python loopban egyenként növelnél egymillió számot, egyetlen array operation dolgozza fel az egész tömböt.",
-        en: "Instead of incrementing a million values one by one in a Python loop, one array operation processes the whole array."
+        hu: "Ha egymillió számhoz 1-et akarunk adni, Pythonban írhatnánk egymillió iterációs ciklust. NumPyban egyetlen array + 1 kifejezés írja le ugyanazt a műveletet.",
+        en: "If one million values must be incremented by one, a Python loop could perform one million scalar operations. In NumPy, array + 1 expresses the entire vectorized operation."
+      },
+      connections: {
+        hu: "A neurális hálózatok mátrixszorzásai, batch-műveletei és broadcasting szabályai közvetlenül erre a tömbszemléletre épülnek.",
+        en: "Neural-network matrix multiplication, batching, and broadcasting build directly on this array-based way of thinking."
       },
       examTrap: {
-        hu: "A Python list tartalmazhat mixed types elemeket; egy ndarray elemeinek dtype-ja egységes. dtype=object kivételként Python-object reference-eket tárolhat.",
-        en: "A Python list can contain mixed element types; ndarray elements have a common dtype. dtype=object is an exception that can store Python-object references."
+        hu: "A Python-lista tartalmazhat vegyes típusú elemeket. Egy normál ndarray elemei közös dtype szerint tárolódnak. A dtype=object különleges kivétel, amely Python-object referenciákat tárolhat.",
+        en: "A Python list can contain mixed types. A normal ndarray uses one common dtype. dtype=object is a special exception that may store Python-object references."
       },
       keyTerms: [
-        { term: "array programming" },
-        { term: "vectorized operation" },
-        { term: "numpy.ndarray" },
-        { term: "dtype" }
+        { term: "array programming", hu: "tömbprogramozás" },
+        { term: "vectorized operation", hu: "vektorizált művelet" },
+        { term: "ndarray", hu: "NumPy-tömb" }
       ]
     },
     {
       id: "numpy-attributes",
-      title: { hu: "ndarray: shape, ndim, size, dtype", en: "ndarray: shape, ndim, size, dtype" },
+      title: { hu: "Az ndarray legfontosabb tulajdonságai", en: "The most important ndarray attributes" },
       body: {
-        hu: "A vizsgán különösen fontos attributes: size = elemek száma; ndim = tengelyek/dimenziók száma; shape = axis lengths tuple formában; dtype = az elemek NumPy datatype-ja; itemsize = egy elem byte-mérete. A type(array) és array.dtype nem ugyanaz.",
-        en: "Especially important attributes are: size = number of elements; ndim = number of axes/dimensions; shape = axis lengths as a tuple; dtype = NumPy datatype of elements; itemsize = bytes per element. type(array) and array.dtype are not the same thing."
+        hu: "A Theory Testben különösen fontos a shape, ndim, size és dtype. A shape az egyes tengelyek (axes) hosszait tartalmazó tuple. Az ndim a tengelyek száma. A size az összes elem száma. A dtype az elemek NumPy-adattípusa. Az itemsize egy elem byte-ban mért mérete.",
+        en: "The Theory Test focuses especially on shape, ndim, size, and dtype. shape is the tuple of axis lengths, ndim the number of axes, size the total number of elements, dtype the NumPy datatype of the elements, and itemsize the number of bytes per element."
       },
-      intuition: {
-        hu: "shape=(32,5) azt jelenti: 2 axis, az első hossza 32, a másodiké 5. Így ndim=2 és size=32·5=160.",
-        en: "shape=(32,5) means there are 2 axes, with lengths 32 and 5. Therefore ndim=2 and size=32·5=160."
-      },
-      examTrap: {
-        hu: "shape mindig tuple, például (5,), nem egyszerűen 5. size és ndim scalar integer értékek, nem tuple-ök.",
-        en: "shape is a tuple, for example (5,), not simply 5. size and ndim are scalar integer values, not tuples."
+      why: {
+        hu: "A legtöbb NumPy-kérdés valójában alak-követés. Ha pontosan tudod, hány tengely van, melyik milyen hosszú, és egy művelet mely tengelyt tartja meg vagy tünteti el, akkor a result shape-ek nagy része levezethető.",
+        en: "Most NumPy questions are really shape-tracking questions. If you know how many axes exist, their lengths, and which operation keeps or removes which axis, most result shapes can be derived."
       },
       formula: {
-        hu: "size = shape axis-lengthjeinek szorzata;   ndim = len(shape)",
-        en: "size = product of axis lengths in shape;   ndim = len(shape)"
+        hu: "ndim = len(shape)    |    size = shape elemeinek szorzata",
+        en: "ndim = len(shape)    |    size = product of shape entries"
       },
-      keyTerms: [
-        { term: "shape" },
-        { term: "ndim" },
-        { term: "size" },
-        { term: "dtype" },
-        { term: "itemsize" }
-      ]
-    },
-    {
-      id: "numpy-shapes",
-      title: { hu: "Valid shape-ek és zero-length axes", en: "Valid shapes and zero-length axes" },
-      body: {
-        hu: "NumPy array shape-je tuple lehet bármennyi axis-szal, és axis length lehet 0 is. A practice példában np.zeros((2,0,3)) teljesen valid shape (2,0,3) értékkel. Ilyenkor size=0.",
-        en: "A NumPy array shape can be a tuple with any number of axes, and an axis length can be 0. The practice example np.zeros((2,0,3)) is valid with shape (2,0,3). Its size is 0."
+      formulaTerms: [
+        { symbol: "shape", hu: "Az egyes tengelyek hosszainak tuple-je, például (32,5).", en: "Tuple of axis lengths, for example (32,5)." },
+        { symbol: "ndim", hu: "A dimenziók / tengelyek száma.", en: "Number of dimensions / axes." },
+        { symbol: "size", hu: "Az array összes elemének száma.", en: "Total number of elements in the array." },
+        { symbol: "dtype", hu: "Az elemek adattípusa, például int64 vagy float32.", en: "Element datatype, such as int64 or float32." },
+        { symbol: "itemsize", hu: "Egyetlen elem mérete byte-ban.", en: "Size of one element in bytes." }
+      ],
+      workedExample: {
+        hu: "Ha a.shape == (32,5), akkor két tengely van, ezért a.ndim == 2. Összesen 32·5=160 elem van, ezért a.size == 160.",
+        en: "If a.shape == (32,5), there are two axes so a.ndim == 2. There are 32·5=160 elements, so a.size == 160."
       },
       examTrap: {
-        hu: "shape = 12 nem valid ndarray.shape érték; (12,) igen. A (0,1,0) shape is valid.",
-        en: "shape = 12 is not a valid ndarray.shape value; (12,) is. Shape (0,1,0) is valid."
+        hu: "A shape tuple. Egy 1D, öt elemű array shape-je (5,), nem 5. A size és az ndim ezzel szemben skalár egész szám.",
+        en: "shape is a tuple. A one-dimensional five-element array has shape (5,), not 5. size and ndim are scalar integers."
+      }
+    },
+    {
+      id: "numpy-zero-shapes",
+      title: { hu: "Nulla hosszúságú tengely is lehet érvényes", en: "Zero-length axes are valid" },
+      body: {
+        hu: "A NumPy shape tengelyhosszai között 0 is szerepelhet. Például a forrásban np.zeros((2,0,3)) érvényes array, amelynek shape-je (2,0,3). Mivel az egyik tengely hossza 0, az összes elemszám (size) is 0.",
+        en: "A NumPy shape may contain an axis of length zero. The source uses np.zeros((2,0,3)) as a valid example. Because one axis length is zero, the total size is also zero."
       },
-      keyTerms: [
-        { term: "axis" },
-        { term: "zero-length axis" }
-      ]
+      why: {
+        hu: "Ez azért lehet meglepő, mert az arraynek három tengelye van (ndim=3), miközben egyetlen konkrét adatértéket sem tartalmaz (size=0). A dimenziószám és az elemszám tehát külön fogalom.",
+        en: "This can be surprising: the array has three axes (ndim=3) while containing no actual data elements (size=0). Dimensionality and element count are different concepts."
+      },
+      examTrap: {
+        hu: "A (0,1,0) shape érvényes lehet. A shape == 12 viszont nem megfelelő, mert a shape tuple.",
+        en: "A shape such as (0,1,0) can be valid. shape == 12 is not the appropriate form because shape is a tuple."
+      }
     },
     {
       id: "numpy-creation-reshape",
-      title: { hu: "Array creation és reshape", en: "Array creation and reshape" },
+      title: { hu: "Array létrehozás és reshape", en: "Array creation and reshape" },
       body: {
-        hu: "A forrás több creation methodot használ: np.array, np.arange, np.zeros, np.ones, np.full, valamint _like változatok. reshape ugyanazokat az elemeket új shape-ben értelmezi; egyetlen axis length -1 lehet, ekkor NumPy automatikusan kiszámolja azt.",
-        en: "The source uses creation methods including np.array, np.arange, np.zeros, np.ones, np.full, and their _like variants. reshape interprets the same elements using a new shape; one axis length may be -1, in which case NumPy infers it automatically."
+        hu: "A practice anyag több létrehozófüggvényt használ: np.array, np.arange, np.zeros, np.ones, np.full és ezek _like változatai. A reshape ugyanazokat az elemeket új tengelystruktúrában értelmezi. Az elemszámnak változatlannak kell maradnia.",
+        en: "The practice material uses creation functions such as np.array, np.arange, np.zeros, np.ones, np.full, and _like variants. reshape interprets the same elements using a new axis structure while preserving the element count."
       },
-      intuition: {
-        hu: "np.arange(6).reshape(2,3) nem változtatja meg a hat értéket, csak 2×3 elrendezést ad nekik.",
-        en: "np.arange(6).reshape(2,3) does not change the six values; it only arranges them as 2×3."
+      why: {
+        hu: "Deep learningben gyakran ugyanazt az adatot más alakban kell a következő művelethez előkészíteni. A reshape nem matematikai tartalmat változtat, hanem azt, hogyan csoportosítjuk az elemeket tengelyekbe.",
+        en: "In deep learning the same values often need to be presented in a different shape for the next operation. Reshape changes the axis organization, not the mathematical values."
+      },
+      formula: { hu: "np.arange(4).reshape(2,-1) → shape (2,2)", en: "np.arange(4).reshape(2,-1) → shape (2,2)" },
+      formulaTerms: [
+        { symbol: "-1", hu: "Egyetlen tengely helyén használható; NumPy az elemszámból automatikusan kiszámítja a szükséges hosszt.", en: "May be used for one axis; NumPy infers the required length from the element count." },
+        { symbol: "reshape", hu: "Új shape-et kér ugyanazokhoz az elemekhez.", en: "Requests a new shape for the same elements." }
+      ],
+      workedExample: {
+        hu: "np.arange(4) értékei [0,1,2,3]. Ha két sort kérünk reshape(2,-1) formában, akkor soronként 2 elem kell, ezért a -1 értéke 2 lesz, és az eredmény [[0,1],[2,3]].",
+        en: "np.arange(4) contains [0,1,2,3]. Requesting two rows with reshape(2,-1) forces the inferred axis to length 2, producing [[0,1],[2,3]]."
       },
       examTrap: {
-        hu: "Az új shape element countjának egyeznie kell. -1 csak egy axis hosszának automatikus következtetésére szolgál.",
-        en: "The new shape must preserve the number of elements. -1 is used to infer the length of one axis."
-      },
-      keyTerms: [
-        { term: "np.arange" },
-        { term: "reshape" },
-        { term: "-1 inferred axis" }
-      ]
+        hu: "A -1 nem valódi negatív tengelyhossz. Azt jelenti: ezt a méretet számítsd ki helyettem. Egynél több -1 nem használható ugyanabban a reshape-ben.",
+        en: "-1 is not a literal negative axis length. It means infer this dimension. More than one inferred axis cannot be used in the same reshape."
+      }
     },
     {
       id: "numpy-indexing-types",
-      title: { hu: "Három indexing kategória", en: "Three indexing categories" },
+      title: { hu: "Három indexelési kategória", en: "Three indexing categories" },
       body: {
-        hu: "A multidimensional practice anyag három kategóriát különít el. Individual element indexing: minden axis integer indexet kap → scalar. Basic indexing: integer index + slice kombináció, legalább egy slice → array, jellemzően view. Advanced indexing: integer sequence vagy boolean mask legalább egyszer szerepel → új array, a kiválasztott elemek másolatával.",
-        en: "The multidimensional practice material separates three categories. Individual element indexing: every axis gets an integer index → scalar. Basic indexing: a combination of integer indices and slices with at least one slice → array, typically a view. Advanced indexing: an integer sequence or boolean mask appears at least once → a new array containing copied selected elements."
+        hu: "A multidimenziós practice anyag három fontos esetet különít el. Egyedi elem indexelésnél (individual element indexing) minden tengelyhez egész indexet adunk, így skalárt kapunk. Alap indexelésnél (basic indexing) egész indexeket és slice-okat kombinálunk, legalább egy slice mellett; az eredmény array és jellemzően view. Haladó indexelésnél (advanced indexing) legalább egy egész indexsorozat/lista/array vagy boolean mask szerepel; az eredmény új array.",
+        en: "The multidimensional practice material distinguishes three cases. Individual element indexing uses an integer for every axis and returns a scalar. Basic indexing combines integer indices and slices with at least one slice, returning an array and typically a view. Advanced indexing uses at least one integer sequence/array or boolean mask and returns a new array."
       },
-      intuition: {
-        hu: "a[1,2] egy cella. a[1,:] egy row-slice. a[[1,0],:] arbitrary rows kiválasztása, ezért advanced indexing.",
-        en: "a[1,2] is one cell. a[1,:] is a row slice. a[[1,0],:] selects arbitrary rows, so it is advanced indexing."
+      why: {
+        hu: "Ez a felosztás egyszerre mondja meg, milyen lesz az eredmény alakja és azt is, hogy megoszthat-e memóriát az eredeti arrayjel. Emiatt a Theory Testben a shape és a view/copy kérdések összekapcsolódnak.",
+        en: "This classification helps determine both result shape and memory-sharing behavior, which is why shape and view/copy questions are closely connected in the Theory Test."
       },
+      formula: {
+        hu: "a[1,2] → egyedi elem    |    a[1,:] → basic indexing    |    a[[1,0],:] → advanced indexing",
+        en: "a[1,2] → individual element    |    a[1,:] → basic indexing    |    a[[1,0],:] → advanced indexing"
+      },
+      formulaTerms: [
+        { symbol: "integer index", hu: "Egy konkrét pozíciót választ az adott tengelyen, és basic indexingben eltünteti azt a tengelyt.", en: "Selects one position on an axis and collapses that axis under basic indexing." },
+        { symbol: "slice", hu: "Tartományt választ, és megtartja a tengelyt.", en: "Selects a range and retains the axis." },
+        { symbol: "integer sequence", hu: "Tetszőleges pozíciók listája; advanced indexinget indít.", en: "Sequence of arbitrary positions; triggers advanced indexing." },
+        { symbol: "boolean mask", hu: "Igaz/hamis kiválasztási maszk; advanced indexinget indít.", en: "True/false selection mask; triggers advanced indexing." }
+      ],
       examTrap: {
-        hu: "Az a[[0], :] megtartja az első axis-t length 1-gyel, míg a[0, :] collapse-olja azt.",
-        en: "a[[0], :] keeps the first axis with length 1, while a[0, :] collapses that axis."
-      },
-      keyTerms: [
-        { term: "individual indexing" },
-        { term: "basic indexing" },
-        { term: "advanced indexing" }
-      ]
+        hu: "Az a[0,:] és a[[0],:] nem ugyanaz. Az első basic indexing: a 0. tengely összeomlik. A második advanced indexing: a kiválasztott sor egy (1,...) hosszúságú tengelyként megmarad.",
+        en: "a[0,:] and a[[0],:] are not the same. The first is basic indexing and collapses axis 0; the second is advanced indexing and retains a length-1 result axis."
+      }
     },
     {
       id: "numpy-basic-indexing",
-      title: { hu: "Basic indexing és axis collapse", en: "Basic indexing and axis collapse" },
+      title: { hu: "Basic indexing: mely tengely marad meg?", en: "Basic indexing: which axes remain?" },
       body: {
-        hu: "Basic indexingnél minden integer-indexelt axis eltűnik a result shape-ből; minden slice-olt axis megmarad. Például (32,5) arraynél a[:,1] → (32,), a[1,:] → (5,), a[1:,:] → (31,5), a[0,:-1] → (4,).",
-        en: "With basic indexing, every integer-indexed axis disappears from the result shape while every sliced axis is retained. For a (32,5) array, a[:,1] → (32,), a[1,:] → (5,), a[1:,:] → (31,5), and a[0,:-1] → (4,)."
+        hu: "Basic indexingnél egy egyszerű shape-szabály használható: az egész számmal indexelt tengely eltűnik, a slice-szal indexelt tengely megmarad. Ez akkor is igaz, ha a slice csak egyetlen elemet választ.",
+        en: "With basic indexing, a simple shape rule applies: an integer-indexed axis disappears, while a sliced axis remains. This is true even if a slice selects only one element."
+      },
+      workedExample: {
+        hu: "Ha a.shape == (32,5), akkor a[:,1] shape-je (32,), mert a második tengely egész indexet kap. a[1,:] shape-je (5,). a[1:,:] shape-je (31,5). a[0,:-1] shape-je (4,).",
+        en: "If a.shape == (32,5), then a[:,1] has shape (32,), a[1,:] has shape (5,), a[1:,:] has shape (31,5), and a[0,:-1] has shape (4,)."
+      },
+      why: {
+        hu: "A tengelyek tudatos követése sokkal megbízhatóbb, mint a shape ránézésre történő megtippelése.",
+        en: "Explicitly tracking axes is more reliable than guessing result shapes by inspection."
       },
       examTrap: {
-        hu: "Slice akkor is megtartja az axis-t, ha csak egy element marad: a[1:2,-1] shape-je (1,), nem scalar.",
-        en: "A slice retains the axis even when only one element remains: a[1:2,-1] has shape (1,), not a scalar."
-      },
-      keyTerms: [
-        { term: "slice" },
-        { term: "axis collapse" }
-      ]
+        hu: "Az a[1:2,-1] eredménye (1,) alakú array: az első tengely slice miatt megmarad, még ha csak egy elemet választ is.",
+        en: "a[1:2,-1] returns an array of shape (1,): the first axis remains because it was sliced, even though only one element was selected."
+      }
     },
     {
       id: "numpy-advanced-indexing",
-      title: { hu: "Advanced indexing és boolean masks", en: "Advanced indexing and boolean masks" },
+      title: { hu: "Advanced indexing és boolean mask", en: "Advanced indexing and boolean masks" },
       body: {
-        hu: "Integer-list/array indexing és boolean-mask indexing advanced indexing. Ezek arbitrary elements kiválasztására alkalmasak, és a source szerint új arrayt adnak. Boolean comparison, például a<0, az eredeti shape-pel azonos boolean arrayt készít; a[a<0] a True helyeken lévő elemeket választja ki.",
-        en: "Integer-list/array indexing and boolean-mask indexing are advanced indexing. They select arbitrary elements and, according to the source, return a new array. A boolean comparison such as a<0 creates a boolean array with the same shape; a[a<0] selects elements where the mask is True."
+        hu: "Advanced indexing esetén egész indexsorozattal vagy boolean maskkal tetszőleges elemeket választhatunk. A week 6 anyag explicit szabálya: advanced indexing soha nem ad view-t; új array készül a kiválasztott elemek másolatával.",
+        en: "Advanced indexing selects arbitrary elements using integer sequences or boolean masks. Week 6 states explicitly that advanced indexing never produces a view; it creates a new array containing copies of the selected values."
+      },
+      why: {
+        hu: "Tetszőleges, nem összefüggő memóriahelyek kiválasztását nem lehet egyszerűen ugyanannak a memóriának egy új nézeteként kezelni, ezért NumPy új result arrayt állít elő.",
+        en: "Arbitrary non-contiguous selections cannot generally be represented as a simple view of the same memory, so NumPy creates a new result array."
+      },
+      formula: {
+        hu: "a[[1,2]] → integer-array indexing → copy    |    a[a<0] → boolean-mask indexing → copy",
+        en: "a[[1,2]] → integer-array indexing → copy    |    a[a<0] → boolean-mask indexing → copy"
+      },
+      formulaTerms: [
+        { symbol: "a < 0", hu: "Elemről elemre végzett összehasonlítás, amely a shape-jével azonos boolean arrayt ad.", en: "Element-wise comparison producing a boolean array with the same shape as a." },
+        { symbol: "a[a < 0]", hu: "A mask True helyein található értékeket választja ki; tipikusan 1D resultot ad.", en: "Selects values where the mask is True; typically returns a 1D result." }
+      ],
+      workedExample: {
+        hu: "Ha a=np.arange(4).reshape(2,2), akkor a>0 egy (2,2) boolean array. Az a[a>0] viszont három értéket választ: [1,2,3], ezért shape-je (3,).",
+        en: "If a=np.arange(4).reshape(2,2), a>0 is a (2,2) boolean array, while a[a>0] selects [1,2,3] and therefore has shape (3,)."
       },
       examTrap: {
-        hu: "A mask létrehozása és a maskkal indexing két külön dolog: (a<0).shape == a.shape, de a[a<0] tipikusan 1D array a kiválasztott elements számával.",
-        en: "Creating a mask and indexing with it are different operations: (a<0).shape == a.shape, while a[a<0] is typically a 1D array containing the selected elements."
-      },
-      keyTerms: [
-        { term: "boolean mask" },
-        { term: "integer-array indexing" }
-      ]
+        hu: "A mask létrehozása és a maskkal történő indexelés külön művelet. (a<0).shape megegyezik a.shape értékével, de a[a<0] shape-je a kiválasztott elemek számától függ.",
+        en: "Creating a mask and indexing with it are different operations. (a<0).shape matches a.shape, while a[a<0] depends on how many elements were selected."
+      }
     },
     {
       id: "numpy-broadcasting",
-      title: { hu: "Broadcasting szabályok", en: "Broadcasting rules" },
+      title: { hu: "Broadcasting: hogyan illeszt össze különböző shape-eket a NumPy?", en: "Broadcasting: how NumPy matches different shapes" },
       body: {
-        hu: "A source shape-matching algoritmusa: először a rövidebb shape elé length-1 axes kerülnek, amíg ndim egyezik. Ezután positionönként a dimensions kompatibilisek, ha egyenlők, vagy legalább az egyik 1. Ha egyik sem 1 és eltérnek, broadcasting fails.",
-        en: "The source's shape-matching algorithm first adds leading length-1 axes to the shorter shape until the numbers of dimensions match. Then dimensions at matching positions are compatible if they are equal or at least one is 1. If they differ and neither is 1, broadcasting fails."
+        hu: "A broadcasting lehetővé teszi, hogy kompatibilis, de nem azonos shape-jű arrayeken element-wise műveletet végezzünk anélkül, hogy fizikailag lemásolnánk az adatot. A forrás algoritmusa szerint először a rövidebb shape elé 1-es hosszúságú tengelyeket képzelünk, amíg az ndim egyezik. Ezután tengelyenként a méretek akkor kompatibilisek, ha egyenlők vagy legalább az egyik 1.",
+        en: "Broadcasting allows element-wise operations on compatible arrays with different shapes without physically copying data. The source's algorithm first prepends length-1 axes to the shorter shape until dimensionality matches, then requires each pair of dimensions to be equal or one of them to be 1."
       },
-      intuition: {
-        hu: "(2,3) + (3,): (3,) → (1,3) → (2,3) működik. (2,3) + (2,): (2,) → (1,2), az utolsó axis 3 vs 2 → fail.",
-        en: "(2,3) + (3,): (3,) → (1,3) → (2,3) works. (2,3) + (2,): (2,) → (1,2), and the final axes are 3 vs 2 → fail."
+      why: {
+        hu: "A length-1 tengely virtuálisan megismételhető a másik array megfelelő tengelyének hosszára. Ez teszi lehetővé például, hogy ugyanazt a bias-vektort egy egész batch minden példájára alkalmazzuk.",
+        en: "A length-1 axis can be virtually repeated to match the other array. This makes operations such as applying the same bias vector to every example in a batch possible."
+      },
+      formula: { hu: "kompatibilis tengelypár: a=b vagy a=1 vagy b=1", en: "compatible dimension pair: a=b or a=1 or b=1" },
+      formulaTerms: [
+        { symbol: "(2,3)+(3,)", hu: "A (3,) logikailag (1,3) lesz, majd az 1-es tengely 2-re broadcastolódik → (2,3).", en: "(3,) is treated as (1,3), then the length-1 axis broadcasts to 2 → (2,3)." },
+        { symbol: "(2,3)+(2,)", hu: "A (2,) logikailag (1,2); az utolsó tengelyen 3 és 2 nem egyenlő, egyik sem 1 → hiba.", en: "(2,) becomes (1,2); final dimensions 3 and 2 are unequal and neither is 1 → error." }
+      ],
+      workedExample: {
+        hu: "A hivatalos mintában (32,5)+(32,) hibás, mert (32,) → (1,32), és az utolsó tengelyen 5 vs 32 inkompatibilis. (32,5)+(32,1) viszont működik: a második array 1-es tengelye 5-re ismételhető.",
+        en: "In the official example (32,5)+(32,) fails because (32,) becomes (1,32) and 5 vs 32 is incompatible. (32,5)+(32,1) works because the length-1 axis can expand to 5."
       },
       examTrap: {
-        hu: "Broadcasting a trailing dimensions felől illeszkedik, amit a source leading 1 axes hozzáadásával fogalmaz meg. Ezért (32,5)+(32,) fail, de (32,5)+(32,1) működik.",
-        en: "Broadcasting aligns trailing dimensions, expressed in the source as adding leading 1 axes. Therefore (32,5)+(32,) fails, but (32,5)+(32,1) works."
-      },
-      keyTerms: [
-        { term: "broadcasting" },
-        { term: "compatible shapes" }
-      ]
+        hu: "A broadcasting a trailing dimensions, vagyis a shape jobb oldala felől illeszkedik. Az, hogy két array első dimenziója azonos, önmagában nem elég.",
+        en: "Broadcasting aligns trailing dimensions, i.e. from the right side of the shape. Matching first dimensions alone is not sufficient."
+      }
     },
     {
       id: "numpy-newaxis",
-      title: { hu: "None / np.newaxis", en: "None / np.newaxis" },
+      title: { hu: "None / np.newaxis: új tengely beszúrása", en: "None / np.newaxis: inserting a new axis" },
       body: {
-        hu: "None indexing contextben np.newaxis alias: új length-1 axis-t szúr be. (32,) vectornál a[:,None] → (32,1), a[None,:] → (1,32). Ez gyakran broadcasting shape-ek előkészítésére szolgál.",
-        en: "In indexing context, None is an alias for np.newaxis: it inserts a new length-1 axis. For a (32,) vector, a[:,None] → (32,1) and a[None,:] → (1,32). This is commonly used to prepare shapes for broadcasting."
+        hu: "Indexelésben a None az np.newaxis aliasa. Egy új, 1 hosszúságú tengelyt szúr be a megadott pozícióba. Ez különösen hasznos broadcasting előtt, amikor egy 1D vektort sor- vagy oszlopszerű alakra kell hozni.",
+        en: "In indexing, None is an alias for np.newaxis. It inserts a new axis of length 1 at the specified position, particularly useful for preparing vectors for broadcasting."
+      },
+      formula: { hu: "v.shape=(32,) → v[:,None].shape=(32,1)    |    v[None,:].shape=(1,32)", en: "v.shape=(32,) → v[:,None].shape=(32,1)    |    v[None,:].shape=(1,32)" },
+      why: {
+        hu: "Az új tengely nem ad hozzá új adatértékeket. Csak megváltoztatja az alakot úgy, hogy a broadcasting szabályai megfelelően tudjanak működni.",
+        en: "The new axis does not add new data values. It only changes shape so broadcasting rules can work as intended."
       },
       realWorld: {
-        hu: "Ha (32,5) matrix minden rowjához külön scalar offseted van (32,) vectorban, offset[:,None] shape (32,1), ami row-onként broadcastolható az 5 columnra.",
-        en: "If a (32,5) matrix has one scalar offset per row stored in a (32,) vector, offset[:,None] has shape (32,1), which broadcasts across the 5 columns."
-      },
-      keyTerms: [
-        { term: "np.newaxis" },
-        { term: "None indexing" }
-      ]
+        hu: "Szemléltető példa: ha 32 példához van egy-egy skalár offsetünk (32,), és egy (32,5) mátrix minden sorához szeretnénk hozzáadni, offset[:,None] (32,1) alakot ad, amely az 5 oszlopra broadcastolható.",
+        en: "Illustrative example: if 32 examples each have one scalar offset stored as (32,), offset[:,None] gives shape (32,1), which can broadcast across 5 columns of a (32,5) matrix."
+      }
     },
     {
       id: "numpy-reductions",
-      title: { hu: "Collapse / reduction operations és axis", en: "Collapse / reduction operations and axis" },
+      title: { hu: "Redukciók: mit jelent az axis paraméter?", en: "Reductions: what does the axis parameter mean?" },
       body: {
-        hu: "Reduction nélkül axis parameter nélkül az összes axis collapse-olható scalarra, például np.sum(a). Axis megadásával csak a kijelölt axis tűnik el. (32,5) esetén mean(axis=0) → (5,), mean(axis=1) → (32,).",
-        en: "Without an axis parameter, a reduction can collapse all axes into a scalar, for example np.sum(a). With an axis argument, only the selected axis is collapsed. For shape (32,5), mean(axis=0) → (5,) and mean(axis=1) → (32,)."
+        hu: "A redukciós műveletek (reduction / collapse operations), például sum, mean, any, all vagy argmax, több elemből kevesebb eredményt készítenek. Ha megadunk egy axis értéket, azon a tengelyen aggregálunk, ezért az a tengely eltűnik az eredmény shape-jéből. Axis nélkül minden tengely összeomolhat egyetlen skalárrá.",
+        en: "Reduction / collapse operations such as sum, mean, any, all, and argmax combine many elements into fewer outputs. Specifying an axis collapses that axis; without an axis, all axes may collapse into one scalar."
       },
-      intuition: {
-        hu: "axis=0 azt jelenti, hogy a 0. axis mentén aggregálunk, ezért az eltűnik. Ami megmarad, annak shape-je (5,).",
-        en: "axis=0 means aggregation along axis 0, so that axis disappears. What remains has shape (5,)."
+      why: {
+        hu: "Az axis jelentését legegyszerűbben úgy lehet olvasni: ezen a tengelyen haladva összesítek, ezért ezt a tengelyt eltüntetem.",
+        en: "A useful way to read axis is: aggregate along this axis, so this axis disappears."
+      },
+      formula: { hu: "a.shape=(32,5) → mean(axis=0) shape (5,); mean(axis=1) shape (32,); sum() → skalár", en: "a.shape=(32,5) → mean(axis=0) shape (5,); mean(axis=1) shape (32,); sum() → scalar" },
+      formulaTerms: [
+        { symbol: "axis=0", hu: "A 0. tengelyt aggregáljuk; az első dimension eltűnik.", en: "Aggregate along axis 0; the first dimension disappears." },
+        { symbol: "axis=1", hu: "Az 1. tengelyt aggregáljuk; a második dimension eltűnik.", en: "Aggregate along axis 1; the second dimension disappears." }
+      ],
+      workedExample: {
+        hu: "Egy (32,5) arrayt tekinthetsz 32 példának és 5 jellemzőnek. mean(axis=0) minden jellemző átlagát adja a 32 példán keresztül → 5 szám. mean(axis=1) minden példa 5 jellemzőjének átlagát adja → 32 szám.",
+        en: "Think of (32,5) as 32 examples and 5 features. mean(axis=0) gives one mean per feature → 5 values. mean(axis=1) gives one mean per example → 32 values."
       },
       examTrap: {
-        hu: "np.sum(a,axis=0) ndarray lehet, míg np.sum(a) minden axis collapse után NumPy scalar, nem ndarray.",
-        en: "np.sum(a,axis=0) can be an ndarray, while np.sum(a) collapses all axes and returns a NumPy scalar, not an ndarray."
-      },
-      keyTerms: [
-        { term: "reduction" },
-        { term: "axis" },
-        { term: "np.mean" },
-        { term: "np.sum" }
-      ]
+        hu: "np.sum(a,axis=0) arrayt adhat, mert marad tengely. np.sum(a) minden tengelyt redukál, ezért NumPy-skalár eredményt ad.",
+        en: "np.sum(a,axis=0) can return an array because an axis remains. np.sum(a) reduces all axes and returns a NumPy scalar."
+      }
     },
     {
       id: "numpy-transpose",
-      title: { hu: "Transpose és axis swapping", en: "Transpose and axis swapping" },
+      title: { hu: "Transzponálás és tengelycsere", en: "Transpose and axis swapping" },
       body: {
-        hu: "2D-ben a.T, np.transpose(a) és np.swapaxes(a,0,1) ugyanazt az axis-order cserét adhatja. (32,5).T → (5,32), majd .T.T → (32,5). 1D arraynél .T nem változtatja meg a (n,) shape-et.",
-        en: "In 2D, a.T, np.transpose(a), and np.swapaxes(a,0,1) can perform the same axis-order swap. (32,5).T → (5,32), then .T.T → (32,5). For a 1D array, .T does not change shape (n,)."
+        hu: "Kétdimenziós arraynél a transzponálás (transpose) felcseréli a két tengely sorrendjét: (32,5) → (5,32). A forrásban a.T, np.transpose(a) és np.swapaxes(a,0,1) 2D esetben ugyanilyen tengelycserét eredményezhet.",
+        en: "For a 2D array, transpose swaps the two axes: (32,5) → (5,32). In the source, a.T, np.transpose(a), and np.swapaxes(a,0,1) can perform the same axis swap in 2D."
       },
-      keyTerms: [
-        { term: "transpose" },
-        { term: "swapaxes" }
-      ]
+      why: {
+        hu: "A transzponálás nem az elemek értékét módosítja, hanem azt, melyik tengely milyen szerepet tölt be.",
+        en: "Transpose does not change element values; it changes how axes are ordered."
+      },
+      formula: { hu: "a.shape=(32,5) → a.T.shape=(5,32) → a.T.T.shape=(32,5)", en: "a.shape=(32,5) → a.T.shape=(5,32) → a.T.T.shape=(32,5)" },
+      examTrap: {
+        hu: "1D arraynél nincs két külön tengely, amit fel lehetne cserélni, ezért (n,) array .T után is (n,) marad. A .T önmagában nem csinál belőle (n,1) oszlopvektort.",
+        en: "A 1D array has no two axes to swap, so (n,) remains (n,) after .T. .T alone does not turn it into an (n,1) column vector."
+      }
     },
     {
       id: "numpy-views-copies",
-      title: { hu: "Views vs copies", en: "Views vs copies" },
+      title: { hu: "View és copy: ugyanazt a memóriát nézzük, vagy új adatot kaptunk?", en: "Views and copies: shared memory or independent data?" },
       body: {
-        hu: "View arrays ugyanazt az underlying memory-t osztják meg, ezért a view módosítása az eredetit is érintheti. A source view-producing műveletként tárgyalja a reshape-et, transpose/axis swappinget, basic indexinget és broadcastinget. Advanced indexing soha nem ad view-t; új array készül.",
-        en: "View arrays share the same underlying memory, so modifying a view can affect the original array. The source discusses reshape, transpose/axis swapping, basic indexing, and broadcasting as view-producing operations. Advanced indexing never produces a view; it creates a new array."
+        hu: "A view olyan array, amely ugyanazt az underlying memóriát osztja meg egy másik arrayjel. Emiatt a view-n keresztül végzett módosítás az eredeti arrayben is megjelenhet. A copy ezzel szemben önálló adatot tartalmaz. A week 6 anyag view-ként tárgyalja többek között az egyszerű reshape, transpose és basic indexing eseteket; advanced indexing viszont új arrayt ad.",
+        en: "A view shares underlying memory with another array, so modifying the view may change the original. A copy owns independent data. Week 6 discusses simple reshape, transpose, and basic-indexing cases as views, while advanced indexing creates a new array."
       },
-      intuition: {
-        hu: "x=np.arange(4); y=x[1:2]; y[:]=99 módosítja x[1] értékét. y=x[[1,2]] esetén viszont y copy, így x nem változik.",
-        en: "x=np.arange(4); y=x[1:2]; y[:]=99 modifies x[1]. With y=x[[1,2]], however, y is a copy and x does not change."
+      why: {
+        hu: "Ez nemcsak teljesítménykérdés. Ugyanaz a kód teljesen más eredményt adhat attól függően, hogy a módosított array view vagy copy.",
+        en: "This is not only about performance. Mutating an array can produce completely different behavior depending on whether it is a view or a copy."
+      },
+      formula: { hu: "y=x[1:2] → view → y[:]=99 módosíthatja x-et    |    y=x[[1,2]] → copy → x nem változik", en: "y=x[1:2] → view → y[:]=99 may modify x    |    y=x[[1,2]] → copy → x unchanged" },
+      workedExample: {
+        hu: "A hivatalos példákban x=np.arange(4). Ha y=x[1:2], majd y[:]=99, akkor x [0,99,2,3] lesz. Ha viszont y=x[[1,2]], majd y-t módosítjuk, x változatlan marad, mert az integer-array indexing advanced indexing.",
+        en: "In the official examples, x=np.arange(4). With y=x[1:2], setting y[:]=99 changes x to [0,99,2,3]. With y=x[[1,2]], modifying y leaves x unchanged because integer-array indexing is advanced indexing."
+      },
+      connections: {
+        hu: "A view/copy fogalom a PyTorchban is fontos lesz, mert ott is számít, hogy tensorok milyen memóriát osztanak meg és milyen művelet készít új adatot.",
+        en: "The view/copy idea remains important in PyTorch because tensor memory sharing and allocation behavior also matter there."
       },
       examTrap: {
-        hu: "A source megjegyzi, hogy view-producing operations bizonyos kombinációi végül mégis copy-t igényelhetnek. A Theory Test official examples egyszerű, egyértelmű eseteket használnak.",
-        en: "The source notes that some combinations of view-producing operations may still require a copy. The official Theory Test examples use straightforward cases."
+        hu: "A forrás megjegyzi, hogy view-képes műveletek kombinációja bizonyos helyzetekben mégis másolást igényelhet. A Theory Test hivatalos példái egyszerű, egyértelmű eseteket használnak. A strides belső mechanizmusát nem kell ehhez megtanulni.",
+        en: "The source notes that combinations of view-capable operations can sometimes require a copy. The official Theory Test examples use straightforward cases, and the internal stride mechanism is excluded."
       },
       keyTerms: [
-        { term: "view" },
-        { term: "copy" },
-        { term: "shared memory" }
+        { term: "view", hu: "memóriát megosztó nézet" },
+        { term: "copy", hu: "másolat" },
+        { term: "shared memory", hu: "megosztott memória" }
       ]
     },
     {
       id: "numpy-common-functions",
-      title: { hu: "Gyakori result-kérdések", en: "Common result questions" },
+      title: { hu: "Gyakori függvények, amelyekre konkrét eredményt kérdezhetnek", en: "Common functions with result-based exam questions" },
       body: {
-        hu: "A hivatalos example-question dokumentum külön kérdez np.count_nonzero, np.any, np.all, np.unique, np.bincount, np.sort, np.argsort és boolean filtering eredményekre. Ezeknél nem csak a function nevét, hanem a konkrét outputot kell tudni követni.",
-        en: "The official example-question document explicitly asks about results of np.count_nonzero, np.any, np.all, np.unique, np.bincount, np.sort, np.argsort, and boolean filtering. You need to reason about the actual output, not merely recognize the function name."
+        hu: "A hivatalos mintakérdések konkrét kódok eredményére is rákérdeznek. Fontos a np.count_nonzero, np.any, np.all, np.unique, np.bincount, np.sort, np.argsort és a boolean filtering működése. Ezeknél nem elég a függvény nevét felismerni; az outputot is le kell tudni vezetni.",
+        en: "The official example questions ask for concrete outputs of code using np.count_nonzero, np.any, np.all, np.unique, np.bincount, np.sort, np.argsort, and boolean filtering. Recognizing the function name is not enough; the output must be derived."
       },
-      intuition: {
-        hu: "argsort nem a sorted values értékeket adja, hanem azokat az indices értékeket, amelyek sorted orderbe rendeznék az arrayt.",
-        en: "argsort does not return sorted values; it returns the indices that would arrange the array in sorted order."
-      },
+      formula: { hu: "a=[3,1,2] → unique(a)=[1,2,3], bincount(a)=[0,1,1,1], argsort(a)=[1,2,0]", en: "a=[3,1,2] → unique(a)=[1,2,3], bincount(a)=[0,1,1,1], argsort(a)=[1,2,0]" },
+      formulaTerms: [
+        { symbol: "np.unique", hu: "A különböző értékeket adja vissza rendezett sorrendben.", en: "Returns distinct values in sorted order." },
+        { symbol: "np.bincount", hu: "Nemnegatív egész értékek előfordulásszámát adja; a result indexe maga az érték.", en: "Counts occurrences of non-negative integers, using each value as the result index." },
+        { symbol: "np.sort", hu: "Az értékeket rendezi.", en: "Sorts the values." },
+        { symbol: "np.argsort", hu: "Azokat az indexeket adja, amelyek rendezett sorrendbe állítanák az arrayt.", en: "Returns indices that would sort the array." },
+        { symbol: "np.any", hu: "Igaz, ha legalább egy vizsgált érték True.", en: "True if at least one considered value is True." },
+        { symbol: "np.all", hu: "Igaz, ha minden vizsgált érték True.", en: "True if all considered values are True." }
+      ],
       examTrap: {
-        hu: "np.unique sorted unique values-t ad; np.bincount([3,1,2]) → [0,1,1,1], mert az index maga a non-negative integer value.",
-        en: "np.unique returns sorted unique values; np.bincount([3,1,2]) → [0,1,1,1], because each index represents the corresponding non-negative integer value."
-      },
-      keyTerms: [
-        { term: "np.unique" },
-        { term: "np.bincount" },
-        { term: "np.sort" },
-        { term: "np.argsort" },
-        { term: "np.any" },
-        { term: "np.all" }
-      ]
+        hu: "Az argsort nem a rendezett értékeket adja vissza, hanem indexeket. A bincount([3,1,2]) resultjának 0. eleme 0, mert a 0 érték egyszer sem fordul elő.",
+        en: "argsort returns indices, not sorted values. In bincount([3,1,2]), element 0 is zero because value 0 does not occur."
+      }
     },
     {
       id: "numpy-scope",
-      title: { hu: "Theory Test scope: mi nincs benne?", en: "Theory Test scope: what is excluded?" },
+      title: { hu: "Pontosan mi tartozik a Theory Test 1 NumPy-részébe?", en: "Exactly what is in scope for NumPy on Theory Test 1?" },
       body: {
-        hu: "A hivatalos example document explicit scope-ja: weeks 3–6 Video to watch before practice NumPy content. ndarray.strides és stride tricks nem lesznek a Theory Test 1-ben.",
-        en: "The official example document explicitly defines the scope as NumPy content from the weeks 3–6 Video to watch before practice materials. ndarray.strides and stride tricks are excluded from Theory Test 1."
+        hu: "A hivatalos example document szerint a NumPy-kérdések a 3–6. hét Video to watch before practice anyagaira épülnek. Az ndarray.strides és a stride tricks explicit ki vannak zárva a Theory Test 1-ből.",
+        en: "According to the official example document, NumPy questions are based on the weeks 3–6 Video to watch before practice materials. ndarray.strides and stride tricks are explicitly excluded from Theory Test 1."
+      },
+      why: {
+        hu: "A view/copy viselkedés ettől még tesztanyag. Azt kell tudni, mely magas szintű műveletek adnak view-t vagy új arrayt; nem kell a stride-mechanizmus belső részleteit levezetni.",
+        en: "View/copy behavior is still testable. You need to know which high-level operations return views or new arrays, but not derive the internal stride mechanism."
       },
       examTrap: {
-        hu: "A view/copy fogalom továbbra is tesztelhető, még akkor is, ha a strides belső mechanizmusa nincs benne a tesztben.",
-        en: "The view/copy concept can still be tested even though the internal stride mechanism is excluded."
-      },
-      keyTerms: [
-        { term: "Theory Test scope" }
-      ]
+        hu: "Ne hagyd ki a view/copy témát csak azért, mert a strides nincs benne. A hivatalos mintakérdések több konkrét view/copy módosítási példát tartalmaznak.",
+        en: "Do not skip views/copies just because strides are excluded. The official example questions contain several concrete view/copy mutation cases."
+      }
     }
   ]
 };
