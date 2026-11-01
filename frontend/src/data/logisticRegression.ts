@@ -290,7 +290,7 @@ export const logisticRegressionQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "Egy bemeneti változó (input variable) esetén a döntési határ (decision boundary) egy pont lehet az x tengelyen.", en: "With one input variable, the decision boundary can be a point on the x-axis." } },
       { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a kétváltozós döntési határ (decision boundary) egy egyenes (line) a bemeneti síkban (input plane).", en: "With two input variables, the bivariate decision boundary is a line in the input plane." } },
-      { id: "c", text: { hu: "A boundary azokból az bemenetekből (inputs) áll, ahol h=0.5.", en: "The boundary consists of inputs where h=0.5." } },
+      { id: "c", text: { hu: "A boundary azokból a bemenetekből (inputs) áll, ahol h=0.5.", en: "The boundary consists of inputs where h=0.5." } },
       { id: "d", text: { hu: "A döntési határ (decision boundary) a veszteség (loss) minimumának 3D görbéje.", en: "The decision boundary is a 3D curve of loss minima." } }
     ],
     correctIds: ["a", "b", "c"],
