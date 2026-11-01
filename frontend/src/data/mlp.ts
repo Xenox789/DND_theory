@@ -309,10 +309,10 @@ export const mlpQuestions: Question[] = [
     topics: ["artificial-neuron","expressive-power"],
     prompt: { hu: "Mit tud egyetlen sigmoid neuron (neuron) osztályozásnál (classification)?", en: "What can a single sigmoid neuron represent in classification?" },
     choices: [
-      { id: "a", text: { hu: "Egyetlen lineáris döntési felület (linear decision surface)-t.", en: "A single linear decision surface." } },
-      { id: "b", text: { hu: "Két inputnál egy egyenes döntési határ (line decision boundary)-t.", en: "With two inputs, a line decision boundary." } },
+      { id: "a", text: { hu: "Egyetlen lineáris döntési felületet (linear decision surface).", en: "A single linear decision surface." } },
+      { id: "b", text: { hu: "Két inputnál egy egyenes döntési határt (line decision boundary).", en: "With two inputs, a line decision boundary." } },
       { id: "c", text: { hu: "Általánosan lineárisan szeparálható (linearly separable) problémákra alkalmas.", en: "It is suitable for linearly separable problems in general." } },
-      { id: "d", text: { hu: "Bármilyen XOR-szerű döntési határ (XOR-like boundary)-t egyedül is reprezentál.", en: "It can represent any XOR-like boundary by itself." } }
+      { id: "d", text: { hu: "Bármilyen XOR-szerű döntési határt (XOR-like boundary) egyedül is reprezentál.", en: "It can represent any XOR-like boundary by itself." } }
     ],
     correctIds: ["a","b","c"],
     explanation: { hu: "Az előadás (lecture) szerint egyetlen neuron (single neuron) csak lineárisan szeparálható (linearly separable) problémákat tud megoldani; XOR nem ilyen.", en: "According to the lecture, a single neuron can only solve linearly separable problems; XOR is not one." }
@@ -391,7 +391,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "MSE megfelelő veszteség (loss).", en: "MSE is an appropriate loss." } }
     ],
     correctIds: ["a","b","d"],
-    explanation: { hu: "rejtett nemlinearitás (hidden nonlinearity) kell kifejezőerőhöz (expressive power); tetszőleges folytonos (arbitrary continuous) (continuous) outputnál végső (final) identitásfüggvény (identity) és MSE illeszkedik az előadás (lecture)-höz.", en: "Hidden nonlinearity is needed for expressive power; for arbitrary continuous output, final identity and MSE match the lecture." }
+    explanation: { hu: "rejtett nemlinearitás (hidden nonlinearity) kell kifejezőerőhöz (expressive power); tetszőleges folytonos (arbitrary continuous) outputnál végső (final) identitásfüggvény (identity) és MSE illeszkedik az előadáshoz (lecture).", en: "Hidden nonlinearity is needed for expressive power; for arbitrary continuous output, final identity and MSE match the lecture." }
   },
   {
     id: "mlp-q9",
@@ -446,7 +446,7 @@ export const mlpQuestions: Question[] = [
   {
     id: "mlp-q13",
     topics: ["binary-classification","output-layer"],
-    prompt: { hu: "egyetlen (single)-címke (label) bináris osztályozás (binary classification) MLP kimeneti réteg (output layer)éhez mely párosítások illeszkednek a kurzushoz (course)?", en: "Which choices match the course for the output layer of a single-label binary-classification MLP?" },
+    prompt: { hu: "egyetlen címkés (single-label) bináris osztályozás (binary classification) MLP kimeneti réteg (output layer)éhez mely párosítások illeszkednek a kurzushoz (course)?", en: "Which choices match the course for the output layer of a single-label binary-classification MLP?" },
     choices: [
       { id: "a", text: { hu: "1 kimenet (output) neuron (neuron).", en: "1 output neuron." } },
       { id: "b", text: { hu: "Sigmoid végső (final) aktiváció (activation).", en: "Sigmoid final activation." } },
@@ -454,7 +454,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "identitásfüggvény (identity) végső (final) aktiváció (activation) + MSE az alapértelmezett választás.", en: "Identity final activation + MSE is the default choice." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A bináris felállás (binary setup) a logisztikus regresszió (logistic regression) valószínűség (probability)-kimenet (output) logikáját követi.", en: "The binary setup follows the logistic-regression probability-output logic." }
+    explanation: { hu: "A bináris felállás (binary setup) a logisztikus regresszió (logistic regression) valószínűségi kimenet (probability output) logikáját követi.", en: "The binary setup follows the logistic-regression probability-output logic." }
   },
   {
     id: "mlp-q14",
@@ -467,7 +467,7 @@ export const mlpQuestions: Question[] = [
       { id: "d", text: { hu: "Egyetlen sigmoid skalár (scalar) szükségszerűen elegendő.", en: "A single sigmoid scalar is necessarily sufficient." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Az előadás (lecture) multiclass esetben category-nként valószínűség (probability)-t becsül softmaxszal.", en: "For multiclass classification, the lecture estimates one probability per category using softmax." }
+    explanation: { hu: "Az előadás (lecture) multiclass esetben kategóriánként (category) valószínűséget (probability) becsül softmaxszal.", en: "For multiclass classification, the lecture estimates one probability per category using softmax." }
   },
   {
     id: "mlp-q15",
@@ -502,7 +502,7 @@ export const mlpQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "y és ŷ vektor (vector) lehet.", en: "y and ŷ can be vectors." } },
       { id: "b", text: { hu: "végső (final) aktiváció (activation) tipikusan identitásfüggvény (identity).", en: "The final activation is typically identity." } },
-      { id: "c", text: { hu: "MSE a címke (label)-vektor (vector) elemein is átlagolható.", en: "MSE can also be averaged over elements of the label vector." } },
+      { id: "c", text: { hu: "MSE a címkevektor (label vector) elemein is átlagolható.", en: "MSE can also be averaged over elements of the label vector." } },
       { id: "d", text: { hu: "Softmax kötelező, mert több kimenet (output) van.", en: "Softmax is required simply because there are multiple outputs." } }
     ],
     correctIds: ["a","b","c"],
@@ -541,10 +541,10 @@ export const mlpQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "Θ az összes súlyok (weights) és biases halmaza.", en: "Θ is the set of all weights and biases." } },
       { id: "b", text: { hu: "A veszteség (loss) gradientjét minden paraméter (parameter) szerint számítjuk.", en: "The gradient of the loss is computed with respect to every parameter." } },
-      { id: "c", text: { hu: "gradiens (gradient)-descent-based tanítás használható.", en: "Gradient-descent-based training can be used." } },
+      { id: "c", text: { hu: "gradienscsökkentés-alapú (gradient-descent-based) tanítás használható.", en: "Gradient-descent-based training can be used." } },
       { id: "d", text: { hu: "A súlyok (weights) nem tanulható paraméterek (parameters).", en: "Weights are not learnable parameters." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Az előadás (lecture) Θ-t az összes súly (weight)-mátrix (matrix) és eltolás (bias)-vektor (vector) elemeiként definiálja, és ezek szerint számít gradientet.", en: "The lecture defines Θ as all elements of weight matrices and bias vectors and computes gradients with respect to them." }
+    explanation: { hu: "Az előadás (lecture) Θ-t az összes súlymátrix (weight matrix) és eltolásvektor (bias vector) elemeiként definiálja, és ezek szerint számít gradienst (gradient).", en: "The lecture defines Θ as all elements of weight matrices and bias vectors and computes gradients with respect to them." }
   }
 ];
