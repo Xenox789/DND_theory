@@ -1168,3 +1168,130 @@ main { min-width: 0; }
     text-align: left;
   }
 }
+
+
+.simulation-guide {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #2a4261;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(22, 42, 66, 0.74), rgba(10, 24, 40, 0.9));
+}
+
+.simulation-guide-header {
+  margin-bottom: 16px;
+}
+
+.simulation-guide-header h2 {
+  margin: 5px 0 0;
+  color: #f1f6fc;
+  font-size: 19px;
+}
+
+.simulation-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.guide-section {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #203754;
+  border-radius: 12px;
+  background: rgba(9, 24, 40, 0.72);
+}
+
+.guide-section-wide {
+  grid-column: 1 / -1;
+}
+
+.guide-section h3 {
+  margin: 0 0 11px;
+  color: #76bdf4;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.guide-list,
+.guide-formulas {
+  display: grid;
+  gap: 8px;
+}
+
+.guide-row,
+.guide-formula {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.42fr) 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(37, 58, 85, 0.7);
+}
+
+.guide-row:last-child,
+.guide-formula:last-child {
+  border-bottom: 0;
+}
+
+.guide-row code,
+.guide-formula code {
+  color: #9bd5ff;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.guide-row span,
+.guide-formula span,
+.guide-real-world p,
+.simulation-guide-note {
+  color: #a7b9cc;
+  line-height: 1.58;
+  font-size: 13px;
+}
+
+.guide-real-world {
+  border-color: #265143;
+  background: rgba(13, 40, 33, 0.7);
+}
+
+.guide-real-world h3 {
+  color: #5bd6ab;
+}
+
+.guide-real-world p {
+  margin: 0 0 8px;
+}
+
+.guide-real-world small {
+  color: #6f9688;
+  line-height: 1.5;
+}
+
+.simulation-guide-note {
+  margin-top: 12px;
+  padding: 11px 13px;
+  border-left: 3px solid #4f7fb7;
+  background: #0c1c2e;
+  border-radius: 0 9px 9px 0;
+}
+
+@media (max-width: 980px) {
+  .simulation-guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-section-wide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 650px) {
+  .guide-row,
+  .guide-formula {
+    grid-template-columns: 1fr;
+  }
+}
