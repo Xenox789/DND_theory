@@ -13,7 +13,7 @@ export const numpyExampleQuestions: Question[] = [
       { id: "e", text: { hu: "my_array.size == 12", en: "my_array.size == 12" } }
     ],
     correctIds: ["a","b","c","e"],
-    explanation: { hu: "shape tuple; zero-length axes validak. size scalar integer lehet 12.", en: "shape is a tuple and zero-length axes are valid. size can be scalar integer 12." }
+    explanation: { hu: "shape tuple; zero-length axes validak. size skalár (scalar) integer lehet 12.", en: "shape is a tuple and zero-length axes are valid. size can be scalar integer 12." }
   },
   {
     id: "np-q32",
@@ -26,7 +26,7 @@ export const numpyExampleQuestions: Question[] = [
       { id: "d", text: { hu: "my_array.size == 12", en: "my_array.size == 12" } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "dtype datatype descriptor, size és ndim scalar integer; (5,6) shape-szerű tuple.", en: "dtype is a datatype descriptor, while size and ndim are scalar integers; (5,6) is shape-like." }
+    explanation: { hu: "dtype datatype descriptor, size és ndim skalár (scalar) integer; (5,6) shape-szerű tuple.", en: "dtype is a datatype descriptor, while size and ndim are scalar integers; (5,6) is shape-like." }
   },
   {
     id: "np-q33",
@@ -65,7 +65,7 @@ export const numpyExampleQuestions: Question[] = [
       { id: "d", text: { hu: "my_array1 + 1", en: "my_array1 + 1" } }
     ],
     correctIds: ["a","c"],
-    explanation: { hu: "(32,5)+(32,) → (32,5)+(1,32), fail. (32,1) broadcastolható az 5 columnra; scalar is működik.", en: "(32,5)+(32,) becomes (32,5)+(1,32), which fails. (32,1) broadcasts across 5 columns, and a scalar also works." }
+    explanation: { hu: "(32,5)+(32,) → (32,5)+(1,32), fail. (32,1) broadcastolható az 5 columnra; skalár (scalar) is működik.", en: "(32,5)+(32,) becomes (32,5)+(1,32), which fails. (32,1) broadcasts across 5 columns, and a scalar also works." }
   },
   {
     id: "np-q36",
@@ -95,11 +95,11 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q38",
     topics: ["numpy","official-example","reductions"],
-    prompt: { hu: "my_array.shape=(32,5). Mely mean result shape-ek helyesek?", en: "my_array.shape=(32,5). Which mean result shapes are correct?" },
+    prompt: { hu: "my_array.shape=(32,5). Mely átlag (mean) result shape-ek helyesek?", en: "my_array.shape=(32,5). Which mean result shapes are correct?" },
     choices: [
-      { id: "a", text: { hu: "np.mean(my_array,axis=0) → (5,)", en: "np.mean(my_array,axis=0) → (5,)" } },
-      { id: "b", text: { hu: "np.mean(my_array,axis=1) → (32,)", en: "np.mean(my_array,axis=1) → (32,)" } },
-      { id: "c", text: { hu: "np.mean(my_array,axis=0) → (32,)", en: "np.mean(my_array,axis=0) → (32,)" } }
+      { id: "a", text: { hu: "np.átlag (mean)(my_array,axis=0) → (5,)", en: "np.mean(my_array,axis=0) → (5,)" } },
+      { id: "b", text: { hu: "np.átlag (mean)(my_array,axis=1) → (32,)", en: "np.mean(my_array,axis=1) → (32,)" } },
+      { id: "c", text: { hu: "np.átlag (mean)(my_array,axis=0) → (32,)", en: "np.mean(my_array,axis=0) → (32,)" } }
     ],
     correctIds: ["a","b"],
     explanation: { hu: "A megadott axis collapse-ol.", en: "The specified axis is collapsed." }
@@ -111,10 +111,10 @@ export const numpyExampleQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "np.sum(my_array,axis=0) resultja numpy.ndarray.", en: "np.sum(my_array,axis=0) returns a numpy.ndarray." } },
       { id: "b", text: { hu: "np.sum(my_array) resultja numpy.ndarray.", en: "np.sum(my_array) returns a numpy.ndarray." } },
-      { id: "c", text: { hu: "np.sum(my_array) minden axis collapse-ja miatt scalar NumPy value.", en: "np.sum(my_array) is a scalar NumPy value because all axes are collapsed." } }
+      { id: "c", text: { hu: "np.sum(my_array) minden axis collapse-ja miatt skalár (scalar) NumPy value.", en: "np.sum(my_array) is a scalar NumPy value because all axes are collapsed." } }
     ],
     correctIds: ["a","c"],
-    explanation: { hu: "axis=0 után marad egy axis; axis nélkül scalar result.", en: "With axis=0 one axis remains; without axis the result is scalar." }
+    explanation: { hu: "axis=0 után marad egy axis; axis nélkül skalár (scalar) result.", en: "With axis=0 one axis remains; without axis the result is scalar." }
   },
   {
     id: "np-q40",
@@ -139,7 +139,7 @@ export const numpyExampleQuestions: Question[] = [
       { id: "c", text: { hu: "Shape-je (2,2).", en: "Its shape is (2,2)." } }
     ],
     correctIds: ["a","c"],
-    explanation: { hu: "Mindkét operation element-wise, scalar broadcastinggal.", en: "Both operations are element-wise with scalar broadcasting." }
+    explanation: { hu: "Mindkét operation element-wise, skalár (scalar) broadcastinggal.", en: "Both operations are element-wise with scalar broadcasting." }
   },
   {
     id: "np-q42",
@@ -186,7 +186,7 @@ export const numpyExampleQuestions: Question[] = [
       { id: "b", text: { hu: "Nem, reshape mindig copy.", en: "No, reshape always makes a copy." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "Ebben a contiguous official example-ben reshape view és shared memory.", en: "In this contiguous official example, reshape is a view and shares memory." }
+    explanation: { hu: "Ebben a contiguous official példa (example)-ben reshape view és shared memory.", en: "In this contiguous official example, reshape is a view and shares memory." }
   },
   {
     id: "np-q46",
