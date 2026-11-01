@@ -59,22 +59,22 @@ export function BackpropLab({ language }: Props) {
 
       <div className="mlp-controls">
         <label>
-          <div><strong>x</strong><span>{x.toFixed(1)}</span></div>
+          <div><strong>{language === "hu" ? "x — bemenet (input)" : "x — input"}</strong><span>{x.toFixed(1)}</span></div>
           <input type="range" min="-5" max="5" step="0.5" value={x}
             onChange={(event) => setX(Number(event.target.value))} />
         </label>
         <label>
-          <div><strong>w</strong><span>{w.toFixed(1)}</span></div>
+          <div><strong>{language === "hu" ? "w — súly (weight)" : "w — weight"}</strong><span>{w.toFixed(1)}</span></div>
           <input type="range" min="-5" max="5" step="0.5" value={w}
             onChange={(event) => setW(Number(event.target.value))} />
         </label>
         <label>
-          <div><strong>b</strong><span>{b.toFixed(1)}</span></div>
+          <div><strong>{language === "hu" ? "b — eltolás (bias)" : "b — bias"}</strong><span>{b.toFixed(1)}</span></div>
           <input type="range" min="-5" max="5" step="0.5" value={b}
             onChange={(event) => setB(Number(event.target.value))} />
         </label>
         <label>
-          <div><strong>y</strong><span>{y.toFixed(1)}</span></div>
+          <div><strong>{language === "hu" ? "y — valódi célérték (label)" : "y — true target / label"}</strong><span>{y.toFixed(1)}</span></div>
           <input type="range" min="-10" max="10" step="0.5" value={y}
             onChange={(event) => setY(Number(event.target.value))} />
         </label>
@@ -93,54 +93,54 @@ export function BackpropLab({ language }: Props) {
       </div>
 
       <div className="plot-card">
-        <h2>{language === "hu" ? "Computational graph" : "Computational graph"}</h2>
+        <h2>{language === "hu" ? "Számítási gráf (computational graph)" : "Computational graph"}</h2>
         <div className="backprop-graph">
-          <div className="graph-node input"><span>w</span><strong>{w.toFixed(2)}</strong>{showBackward && <small>∂J/∂w={dJdw.toFixed(2)}</small>}</div>
-          <div className="graph-node input"><span>x</span><strong>{x.toFixed(2)}</strong>{showBackward && <small>∂J/∂x={dJdx.toFixed(2)}</small>}</div>
+          <div className="graph-node input"><span>{language === "hu" ? "w — súly" : "w — weight"}</span><strong>{w.toFixed(2)}</strong>{showBackward && <small>∂J/∂w={dJdw.toFixed(2)}</small>}</div>
+          <div className="graph-node input"><span>{language === "hu" ? "x — bemenet" : "x — input"}</span><strong>{x.toFixed(2)}</strong>{showBackward && <small>∂J/∂x={dJdx.toFixed(2)}</small>}</div>
           <div className="graph-op">×</div>
-          <div className="graph-node intermediate"><span>q=wx</span><strong>{q.toFixed(2)}</strong>{showBackward && <small>∂J/∂q={dJdq.toFixed(2)}</small>}</div>
-          <div className="graph-node input"><span>b</span><strong>{b.toFixed(2)}</strong>{showBackward && <small>∂J/∂b={dJdb.toFixed(2)}</small>}</div>
+          <div className="graph-node intermediate"><span>{language === "hu" ? "q=wx — súlyozott rész" : "q=wx — weighted term"}</span><strong>{q.toFixed(2)}</strong>{showBackward && <small>∂J/∂q={dJdq.toFixed(2)}</small>}</div>
+          <div className="graph-node input"><span>{language === "hu" ? "b — eltolás" : "b — bias"}</span><strong>{b.toFixed(2)}</strong>{showBackward && <small>∂J/∂b={dJdb.toFixed(2)}</small>}</div>
           <div className="graph-op">+</div>
-          <div className="graph-node intermediate"><span>ŷ=q+b</span><strong>{yHat.toFixed(2)}</strong>{showBackward && <small>∂J/∂ŷ={dJdyHat.toFixed(2)}</small>}</div>
-          <div className="graph-node input"><span>y</span><strong>{y.toFixed(2)}</strong>{showBackward && <small>∂J/∂y={dJdy.toFixed(2)}</small>}</div>
+          <div className="graph-node intermediate"><span>{language === "hu" ? "ŷ=q+b — becslés" : "ŷ=q+b — prediction"}</span><strong>{yHat.toFixed(2)}</strong>{showBackward && <small>∂J/∂ŷ={dJdyHat.toFixed(2)}</small>}</div>
+          <div className="graph-node input"><span>{language === "hu" ? "y — valódi érték" : "y — true target"}</span><strong>{y.toFixed(2)}</strong>{showBackward && <small>∂J/∂y={dJdy.toFixed(2)}</small>}</div>
           <div className="graph-op">−</div>
-          <div className="graph-node intermediate"><span>z=y−ŷ</span><strong>{z.toFixed(2)}</strong>{showBackward && <small>∂J/∂z={dJdz.toFixed(2)}</small>}</div>
+          <div className="graph-node intermediate"><span>{language === "hu" ? "z=y−ŷ — előjeles hiba" : "z=y−ŷ — signed error"}</span><strong>{z.toFixed(2)}</strong>{showBackward && <small>∂J/∂z={dJdz.toFixed(2)}</small>}</div>
           <div className="graph-op">²</div>
-          <div className="graph-node loss"><span>J=z²</span><strong>{loss.toFixed(2)}</strong>{showBackward && <small>∂J/∂J={dJdJ}</small>}</div>
+          <div className="graph-node loss"><span>{language === "hu" ? "J=z² — veszteség" : "J=z² — loss"}</span><strong>{loss.toFixed(2)}</strong>{showBackward && <small>∂J/∂J={dJdJ}</small>}</div>
         </div>
       </div>
 
       <SimulationGuide
         language={language}
         terms={[
-          { label: "x", meaning: language === "hu" ? "input feature a Lecture 6 scalar example-jében" : "input feature in the scalar Lecture 6 example" },
-          { label: "w", meaning: language === "hu" ? "learnable weight parameter" : "learnable weight parameter" },
-          { label: "b", meaning: language === "hu" ? "learnable bias parameter" : "learnable bias parameter" },
-          { label: "q=wx", meaning: language === "hu" ? "első intermediate result" : "first intermediate result" },
-          { label: "ŷ=q+b", meaning: language === "hu" ? "model prediction" : "model prediction" },
-          { label: "y", meaning: language === "hu" ? "true target / label" : "true target / label" },
-          { label: "z=y−ŷ", meaning: language === "hu" ? "signed prediction error a lecture választott előjellel" : "signed prediction error using the lecture's chosen sign convention" },
-          { label: "J=z²", meaning: language === "hu" ? "squared error loss ebben az egyszerű example-ben" : "squared-error loss in this simple example" },
-          { label: "∂J/∂w", meaning: language === "hu" ? "megmutatja, hogyan változna J egy kicsi w-változtatásra" : "shows how J would change for a small change in w" }
+          { label: "x", meaning: language === "hu" ? "Bemeneti jellemző (input feature) a Lecture 6 skalár példájában." : "input feature in the scalar Lecture 6 example" },
+          { label: "w", meaning: language === "hu" ? "Tanulható súlyparaméter (weight parameter)." : "learnable weight parameter" },
+          { label: "b", meaning: language === "hu" ? "Tanulható eltolási paraméter (bias parameter)." : "learnable bias parameter" },
+          { label: "q=wx", meaning: language === "hu" ? "Az első köztes eredmény (intermediate result)." : "first intermediate result" },
+          { label: "ŷ=q+b", meaning: language === "hu" ? "A modell becslése (prediction)." : "model prediction" },
+          { label: "y", meaning: language === "hu" ? "A valódi célérték vagy címke (label)." : "true target / label" },
+          { label: "z=y−ŷ", meaning: language === "hu" ? "Előjeles becslési hiba a lecture által használt előjel-konvencióval." : "signed prediction error using the lecture's chosen sign convention" },
+          { label: "J=z²", meaning: language === "hu" ? "Négyzetes hiba alapú veszteség (squared-error loss) ebben az egyszerű példában." : "squared-error loss in this simple example" },
+          { label: "∂J/∂w", meaning: language === "hu" ? "Megmutatja, hogyan változna J egy kismértékű w-változtatás hatására." : "shows how J would change for a small change in w" }
         ]}
         formulas={[
           {
             expression: "grad_input = grad_output · local_derivative",
-            meaning: language === "hu" ? "A chain rule backprop formája: minden node visszafelé továbbítja az incoming gradientet a saját local derivative-jével szorozva." : "Backprop form of the chain rule: each node passes the incoming gradient backward multiplied by its local derivative."
+            meaning: language === "hu" ? "A láncszabály (chain rule) backpropagation alakja: minden csomópont a bejövő gradienst (incoming gradient) megszorozza a saját lokális deriváltjával (local derivative)." : "Backprop form of the chain rule: each node passes the incoming gradient backward multiplied by its local derivative."
           },
           {
             expression: "w := w − α·∂J/∂w",
-            meaning: language === "hu" ? "Backprop kiszámolja a gradientet; az optimizer ezután használja parameter update-re." : "Backprop computes the gradient; the optimizer then uses it for the parameter update."
+            meaning: language === "hu" ? "A visszaterjesztés (backpropagation) kiszámolja a gradienst; az optimalizáló (optimizer) ezután használja paraméterfrissítésre." : "Backprop computes the gradient; the optimizer then uses it for the parameter update."
           }
         ]}
         realWorld={
           language === "hu"
-            ? "Egy valódi neural networkben ugyanez a mechanizmus fut végig sok layeren és rengeteg weighten. A graph itt csak egyetlen linear modellel mutatja meg azt a chain-rule logikát, amit a frameworkek automatikusan alkalmaznak."
+            ? "Egy valódi neurális hálózatban (neural network) ugyanez a mechanizmus sok rétegen (layers) és rengeteg súlyon (weights) halad végig. A gráf itt egyetlen lineáris modellel szemlélteti azt a láncszabály-logikát, amelyet a keretrendszerek automatikusan alkalmaznak."
             : "In a real neural network, the same mechanism propagates through many layers and large numbers of weights. This graph uses one linear model only to expose the chain-rule logic that frameworks automate."
         }
         note={
           language === "hu"
-            ? "A computational graph node-jaiban látható kék ∂J/∂... értékek sensitivity/gradient értékek, nem új inputok."
+            ? "A számítási gráf csomópontjaiban látható kék ∂J/∂... értékek gradiens- vagy érzékenységi értékek; nem új bemenetek."
             : "The blue ∂J/∂... values shown inside graph nodes are sensitivities/gradients, not additional inputs."
         }
       />
