@@ -30,7 +30,7 @@ export function SimulationGuide({
   return (
     <div className="simulation-guide">
       <div className="simulation-guide-header">
-        <span className="eyebrow">SIMULATION GUIDE</span>
+        <span className="eyebrow">{language === "hu" ? "SZIMULÁCIÓ MAGYARÁZAT" : "SIMULATION GUIDE"}</span>
         <h2>{language === "hu" ? "Hogyan olvasd ezt a szimulációt?" : "How to read this simulation"}</h2>
       </div>
 
@@ -83,7 +83,7 @@ export function SimulationGuide({
             <p>{realWorld}</p>
             <small>
               {language === "hu"
-                ? "Ez a példa szemléltető megfeleltetés; nem része a course hivatalos numerikus példájának, hacsak külön nincs jelezve."
+                ? "Ez szemléltető példa. Nem része a kurzus hivatalos numerikus példájának, hacsak ezt külön nem jelezzük."
                 : "This is an illustrative mapping and is not part of the course's official numerical example unless explicitly stated."}
             </small>
           </section>
