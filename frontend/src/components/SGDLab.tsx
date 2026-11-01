@@ -98,7 +98,7 @@ export function SGDLab({ language }: Props) {
 
       <div className="mlp-controls">
         <label>
-          <div><strong>mini-batch size</strong><span>{batchSize}</span></div>
+          <div><strong>{language === "hu" ? "mini-batch méret (batch size)" : "mini-batch size"}</strong><span>{batchSize}</span></div>
           <input
             type="range"
             min="1"
@@ -131,7 +131,7 @@ export function SGDLab({ language }: Props) {
           />
         </label>
         <label>
-          <div><strong>α</strong><span>{learningRate.toFixed(3)}</span></div>
+          <div><strong>{language === "hu" ? "α — tanulási ráta (learning rate)" : "α — learning rate"}</strong><span>{learningRate.toFixed(3)}</span></div>
           <input
             type="range"
             min="0.005"
@@ -145,7 +145,7 @@ export function SGDLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Dataset + egy mini-batch update" : "Dataset + one mini-batch update"}</h2>
+          <h2>{language === "hu" ? "Tanítóadatok és egy mini-batch frissítés" : "Dataset + one mini-batch update"}</h2>\n          <p className="plot-description">{language === "hu" ? "A pontok tanítási példák. A két egyenes ugyanazt a modellt mutatja a mini-batchből számolt paraméterfrissítés előtt és után." : "Points are training examples. The two lines show the same model before and after one mini-batch update."}</p>
           <Plot
             data={[
               {
@@ -195,7 +195,7 @@ export function SGDLab({ language }: Props) {
         </div>
 
         <div className="plot-card">
-          <h2>{language === "hu" ? "Mini-batch gradients vs full gradient" : "Mini-batch gradients vs full gradient"}</h2>
+          <h2>{language === "hu" ? "Mini-batch gradiensek a teljes gradienshez képest" : "Mini-batch gradients vs full gradient"}</h2>\n          <p className="plot-description">{language === "hu" ? "Ez nem adattér, hanem gradiens-tér. Egy pont azt mutatja, hogy egy adott mini-batch milyen ∂J/∂θ₀ és ∂J/∂θ₁ gradienskomponenseket becsült." : "This is gradient space, not data space. Each point shows the ∂J/∂θ₀ and ∂J/∂θ₁ components estimated by one mini-batch."}</p>
           <Plot
             data={[
               {
