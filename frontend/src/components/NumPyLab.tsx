@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { Language } from "../types";
+import { SimulationGuide } from "./SimulationGuide";
 
 type Props = {
   language: Language;
@@ -268,6 +269,38 @@ export function NumPyLab({ language }: Props) {
           </p>
         </div>
       </div>
+
+      <SimulationGuide
+        language={language}
+        terms={[
+          { label: "shape", meaning: language === "hu" ? "Az axes hosszainak tuple-je. Például (32,5): 32 row és 5 column-szerű második axis." : "Tuple containing axis lengths. For example (32,5): 32 rows and a second axis of length 5." },
+          { label: "axis 0", meaning: language === "hu" ? "Az első dimension. Egy (32,5) matrixnál length 32." : "The first dimension. For a (32,5) matrix its length is 32." },
+          { label: "axis 1", meaning: language === "hu" ? "A második dimension. Egy (32,5) matrixnál length 5." : "The second dimension. For a (32,5) matrix its length is 5." },
+          { label: ":", meaning: language === "hu" ? "slice: megtart egy axis-t, és basic indexing része lehet" : "slice: retains an axis and can be part of basic indexing" },
+          { label: "None / np.newaxis", meaning: language === "hu" ? "Új length-1 axis beszúrása, gyakran broadcasting előkészítésére." : "Insert a new length-1 axis, often to prepare broadcasting." },
+          { label: "view", meaning: language === "hu" ? "Másik arrayjel shared underlying memory." : "Shares underlying memory with another array." },
+          { label: "copy", meaning: language === "hu" ? "Önálló array storage; későbbi mutation nem ír vissza az originalba." : "Independent array storage; later mutation does not write back to the original." }
+        ]}
+        formulas={[
+          {
+            expression: "a[:, 1]",
+            meaning: language === "hu" ? "Minden element axis 0 mentén, de csak az 1-es index axis 1 mentén; az integer-indexelt axis collapse-ol." : "All elements along axis 0, but only index 1 along axis 1; the integer-indexed axis collapses."
+          },
+          {
+            expression: "(32,5) + (32,1) → (32,5)",
+            meaning: language === "hu" ? "A második array length-1 axis-a virtuálisan 5-re ismétlődik broadcasting során." : "The second array's length-1 axis is virtually repeated to length 5 during broadcasting."
+          },
+          {
+            expression: "np.mean(a, axis=0)",
+            meaning: language === "hu" ? "Axis 0 mentén aggregálunk, ezért axis 0 eltűnik a result shape-ből." : "Aggregate along axis 0, so axis 0 disappears from the result shape."
+          }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Deep learningben egy array shape lehet például (batch_size, n_features) egy fully connected layer inputjánál, vagy (batch_size, height, width, channels) képadatoknál. Indexinggel részhalmazokat választunk, broadcastinggal pedig például ugyanazt a bias vectort alkalmazhatjuk egy teljes batchre."
+            : "In deep learning, an array can have shape (batch_size, n_features) at a fully connected layer input, or (batch_size, height, width, channels) for image data. Indexing selects subsets, while broadcasting can apply the same bias vector across an entire batch."
+        }
+      />
 
       <div className="hero-card compact lab-section-hero">
         <div>
