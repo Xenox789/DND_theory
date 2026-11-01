@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Language } from "../types";
+import { SimulationGuide } from "./SimulationGuide";
 
 type Props = {
   language: Language;
@@ -108,6 +109,41 @@ export function BackpropLab({ language }: Props) {
           <div className="graph-node loss"><span>J=z²</span><strong>{loss.toFixed(2)}</strong>{showBackward && <small>∂J/∂J={dJdJ}</small>}</div>
         </div>
       </div>
+
+      <SimulationGuide
+        language={language}
+        terms={[
+          { label: "x", meaning: language === "hu" ? "input feature a Lecture 6 scalar example-jében" : "input feature in the scalar Lecture 6 example" },
+          { label: "w", meaning: language === "hu" ? "learnable weight parameter" : "learnable weight parameter" },
+          { label: "b", meaning: language === "hu" ? "learnable bias parameter" : "learnable bias parameter" },
+          { label: "q=wx", meaning: language === "hu" ? "első intermediate result" : "first intermediate result" },
+          { label: "ŷ=q+b", meaning: language === "hu" ? "model prediction" : "model prediction" },
+          { label: "y", meaning: language === "hu" ? "true target / label" : "true target / label" },
+          { label: "z=y−ŷ", meaning: language === "hu" ? "signed prediction error a lecture választott előjellel" : "signed prediction error using the lecture's chosen sign convention" },
+          { label: "J=z²", meaning: language === "hu" ? "squared error loss ebben az egyszerű example-ben" : "squared-error loss in this simple example" },
+          { label: "∂J/∂w", meaning: language === "hu" ? "megmutatja, hogyan változna J egy kicsi w-változtatásra" : "shows how J would change for a small change in w" }
+        ]}
+        formulas={[
+          {
+            expression: "grad_input = grad_output · local_derivative",
+            meaning: language === "hu" ? "A chain rule backprop formája: minden node visszafelé továbbítja az incoming gradientet a saját local derivative-jével szorozva." : "Backprop form of the chain rule: each node passes the incoming gradient backward multiplied by its local derivative."
+          },
+          {
+            expression: "w := w − α·∂J/∂w",
+            meaning: language === "hu" ? "Backprop kiszámolja a gradientet; az optimizer ezután használja parameter update-re." : "Backprop computes the gradient; the optimizer then uses it for the parameter update."
+          }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Egy valódi neural networkben ugyanez a mechanizmus fut végig sok layeren és rengeteg weighten. A graph itt csak egyetlen linear modellel mutatja meg azt a chain-rule logikát, amit a frameworkek automatikusan alkalmaznak."
+            : "In a real neural network, the same mechanism propagates through many layers and large numbers of weights. This graph uses one linear model only to expose the chain-rule logic that frameworks automate."
+        }
+        note={
+          language === "hu"
+            ? "A computational graph node-jaiban látható kék ∂J/∂... értékek sensitivity/gradient értékek, nem új inputok."
+            : "The blue ∂J/∂... values shown inside graph nodes are sensitivities/gradients, not additional inputs."
+        }
+      />
 
       {showBackward && (
         <>
