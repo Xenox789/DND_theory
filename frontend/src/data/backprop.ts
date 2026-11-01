@@ -35,7 +35,7 @@ export const backpropLesson: Lesson = {
         en: "Backpropagation is not the optimizer itself. Backprop computes gradients; SGD, Adam, or another optimizer uses those gradients to update parameters."
       },
       examTrap: {
-        hu: "A „backpropagation” és a „gradienscsökkentés (gradiens (gradient) descent) frissítés (update)” nem ugyanaz a lépés. Előbb kiszámítjuk a gradienseket, utána frissítjük velük a paramétereket.",
+        hu: "A „backpropagation” és a „gradienscsökkentés (gradient descent) frissítés (update)” nem ugyanaz a lépés. Előbb kiszámítjuk a gradienseket, utána frissítjük velük a paramétereket.",
         en: "Backpropagation and the gradient-descent update are not the same step. Gradients are computed first, then parameters are updated."
       },
       keyTerms: [
@@ -76,7 +76,7 @@ export const backpropLesson: Lesson = {
         en: "Chain rule: the core of backpropagation"
       },
       body: {
-        hu: "Ha egy változó csak más köztes változókon keresztül hat a veszteségre, akkor a deriváltat a láncszabály (chain rule) segítségével kapjuk meg. Egy csomópont visszafelé megkap egy bejövő gradienst (incoming gradiens (gradient)), majd megszorozza a saját lokális deriváltjával (local derivative).",
+        hu: "Ha egy változó csak más köztes változókon keresztül hat a veszteségre, akkor a deriváltat a láncszabály (chain rule) segítségével kapjuk meg. Egy csomópont visszafelé megkap egy bejövő gradienst (bejövő gradiens incoming gradient), majd megszorozza a saját lokális deriváltjával (local derivative).",
         en: "If a variable influences the loss through intermediate variables, its derivative is obtained using the chain rule. A node receives an incoming gradient during the backward pass and multiplies it by its local derivative."
       },
       formula: {
@@ -113,7 +113,7 @@ export const backpropLesson: Lesson = {
         en: "The official Theory Test examples explicitly target square and addition nodes, and the Lecture 6 example also uses multiplication. The full backward pass is built from these simple local derivatives."
       },
       formula: {
-        hu: "c=b² → grad_b=grad_c·2b    |    c=a+b → grad_a=grad_c, grad_b=grad_c    |    c=a·b → grad_a=grad_c·b, grad_b=grad_c·a",
+        hu: "c=b² → grad_b=grad_c·2b | c=a+b → grad_a=grad_c, grad_b=grad_c | c=a·b → grad_a=grad_c·b, grad_b=grad_c·a",
         en: "c=b² → grad_b=grad_c·2b    |    c=a+b → grad_a=grad_c, grad_b=grad_c    |    c=a·b → grad_a=grad_c·b, grad_b=grad_c·a"
       },
       formulaTerms: [
@@ -138,7 +138,7 @@ export const backpropLesson: Lesson = {
         en: "Lecture 6 example: forward pass"
       },
       body: {
-        hu: "A Lecture 6 egy egyszerű, egydimenziós lineáris regressziós példán mutatja be a számítási gráfot. A képletet q=wx, ŷ=q+b, z=y−ŷ, J=z² lépésekre bontja. A példában x=2, w=3, b=4 és y=5.",
+        hu: "A Lecture 6 egy egyszerű, egydimenziós egyenesáris regressziós példán mutatja be a számítási gráfot. A képletet q=wx, ŷ=q+b, z=y−ŷ, J=z² lépésekre bontja. A példában x=2, w=3, b=4 és y=5.",
         en: "Lecture 6 demonstrates the computational graph using a simple one-dimensional linear-regression example. It decomposes the expression into q=wx, ŷ=q+b, z=y−ŷ, J=z² with x=2, w=3, b=4, and y=5."
       },
       formula: {
@@ -151,7 +151,7 @@ export const backpropLesson: Lesson = {
         { symbol: "b", hu: "Tanulható eltolás (bias).", en: "Learnable bias." },
         { symbol: "q=wx", hu: "A szorzás köztes eredménye.", en: "Intermediate result of multiplication." },
         { symbol: "ŷ=q+b", hu: "A modell becslése.", en: "Model prediction." },
-        { symbol: "y", hu: "Valódi célérték (target / címke (label)).", en: "True target / label." },
+        { symbol: "y", hu: "Valódi célérték (target / címke label).", en: "True target / label." },
         { symbol: "z=y−ŷ", hu: "Előjeles hiba a lecture választott előjellel.", en: "Signed error using the lecture's chosen convention." },
         { symbol: "J=z²", hu: "Négyzetes veszteség ebben az egyetlen példában.", en: "Squared loss for this single example." }
       ],
@@ -203,7 +203,7 @@ export const backpropLesson: Lesson = {
         en: "Backpropagation outputs gradients with respect to parameters. An optimizer then uses them. With simple gradient descent: w:=w−α·∂J/∂w and b:=b−α·∂J/∂b."
       },
       formula: {
-        hu: "α=0,1 esetén: w=3−0,1·20=1,   b=4−0,1·10=3",
+        hu: "α=0,1 esetén: w=3−0,1·20=1, b=4−0,1·10=3",
         en: "with α=0.1: w=3−0.1·20=1,   b=4−0.1·10=3"
       },
       formulaTerms: [
@@ -319,7 +319,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q5",
     topics: ["multiplication-node"],
-    prompt: { hu: "c=a·b és grad_c incoming gradiens (gradient) esetén mely propagáció helyes?", en: "For c=a·b with incoming gradient grad_c, which propagation is correct?" },
+    prompt: { hu: "c=a·b és grad_c bejövő gradiens (incoming gradient) esetén mely propagáció helyes?", en: "For c=a·b with incoming gradient grad_c, which propagation is correct?" },
     choices: [
       { id: "a", text: { hu: "grad_a=grad_c·b.", en: "grad_a=grad_c·b." } },
       { id: "b", text: { hu: "grad_b=grad_c·a.", en: "grad_b=grad_c·a." } },
@@ -393,7 +393,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q11",
     topics: ["backprop-vs-update"],
-    prompt: { hu: "Mely állítások igazak backpropagation és paraméterfrissítés (paraméter (parameter) frissítés (update)) kapcsolatára?", en: "Which statements are true about the relationship between backpropagation and parameter updating?" },
+    prompt: { hu: "Mely állítások igazak backpropagation és paraméterfrissítés (parameter update) kapcsolatára?", en: "Which statements are true about the relationship between backpropagation and parameter updating?" },
     choices: [
       { id: "a", text: { hu: "Backpropagation gradients értékeket számol.", en: "Backpropagation computes gradient values." } },
       { id: "b", text: { hu: "Az optimizer/frissítés (update) ezután használja a gradients értékeket a paraméterek (parameters) módosítására.", en: "The optimizer/update then uses gradients to modify parameters." } },
@@ -405,13 +405,13 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q12",
     topics: ["training-cycle"],
-    prompt: { hu: "Mely lépések szerepelnek a Lecture 6 backprop training cycle-ban?", en: "Which steps appear in the Lecture 6 backpropagation training cycle?" },
+    prompt: { hu: "Mely lépések szerepelnek a Lecture 6 backprop tanítás cycle-ban?", en: "Which steps appear in the Lecture 6 backpropagation training cycle?" },
     choices: [
       { id: "a", text: { hu: "paraméter (parameter) initialization.", en: "Parameter initialization." } },
       { id: "b", text: { hu: "Example vagy mini-batch választása.", en: "Choosing an example or mini-batch." } },
       { id: "c", text: { hu: "Feed forward.", en: "Feed forward." } },
       { id: "d", text: { hu: "Backpropagation.", en: "Backpropagation." } },
-      { id: "e", text: { hu: "paraméterfrissítés (paraméter (parameter) frissítés (update)).", en: "Parameter update." } }
+      { id: "e", text: { hu: "paraméterfrissítés (parameter update).", en: "Parameter update." } }
     ],
     correctIds: ["a","b","c","d","e"],
     explanation: { hu: "A lecture summary ezeket mind explicit felsorolja.", en: "The lecture summary explicitly lists all of these." }
