@@ -102,7 +102,7 @@ export function GeneralizationLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Loss vs model complexity" : "Loss vs model complexity"}</h2>
+          <h2>{language === "hu" ? "Veszteség (loss) a modell összetettségének függvényében" : "Loss vs model complexity"}</h2>\n          <p className="plot-description">{language === "hu" ? "Vízszintes tengely: a modell szemléltető összetettségi szintje. Függőleges: veszteség. A tanítási és validációs görbe eltérése mutatja, mikor kezd romlani az általánosítás." : "Horizontal axis: illustrative model complexity. Vertical axis: loss. The gap between training and validation curves shows when generalization starts to worsen."}</p>
           <Plot
             data={[
               {
@@ -230,7 +230,7 @@ export function GeneralizationLab({ language }: Props) {
       </div>
 
       <div className="plot-card">
-        <h2>Training vs validation loss</h2>
+        <h2>{language === "hu" ? "Tanítási és validációs veszteség" : "Training vs validation loss"}</h2>\n        <p className="plot-description">{language === "hu" ? "Vízszintes tengely: tanítási epoch. Függőleges: veszteség. Ha a J_train tovább csökken, de a J_val emelkedni kezd, az túlillesztésre utal." : "Horizontal axis: training epoch. Vertical axis: loss. If J_train keeps falling while J_val rises, overfitting is worsening."}</p>
         <Plot
           data={[
             {
