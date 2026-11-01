@@ -32,7 +32,7 @@ export const questionBank: Question[] = [
     },
     choices: [
       { id: "a", text: { hu: "bemenet (input)–címke (label) párokból állhat.", en: "It can consist of input–label pairs." } },
-      { id: "b", text: { hu: "Az x jelöli az bemenetet.", en: "x denotes the input." } },
+      { id: "b", text: { hu: "Az x jelöli a bemenetet.", en: "x denotes the input." } },
       { id: "c", text: { hu: "Az y jelöli a modellparaméterek (model parameters) értékeit.", en: "y denotes the model parameters." } },
       { id: "d", text: { hu: "Az y jelölheti a valódi címkét.", en: "y can denote the true label." } }
     ],
@@ -57,7 +57,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A hipotézisfüggvény (hypothesis function) az bemenet (input) és a paraméterek (parameters) alapján becslést ad. Az optimalizálás (optimization) célja nem X minimalizálása.",
+      hu: "A hipotézisfüggvény (hypothesis function) a bemenet (input) és a paraméterek (parameters) alapján becslést ad. Az optimalizálás (optimization) célja nem X minimalizálása.",
       en: "The hypothesis function produces a prediction using the input and parameters. Optimization does not minimize X."
     }
   },
@@ -152,7 +152,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["b", "d"],
     explanation: {
-      hu: "A paraméterek (parameters) értékeit azért változtatjuk, hogy J(θ) csökkenjen. Nem az bemenet (input) adatokat vagy a adathalmaz (dataset) méretét minimalizáljuk.",
+      hu: "A paraméterek (parameters) értékeit azért változtatjuk, hogy J(θ) csökkenjen. Nem a bemenet (input) adatokat vagy az adathalmaz (dataset) méretét minimalizáljuk.",
       en: "We change parameter values so that J(θ) decreases. We do not minimize the input data or dataset size."
     }
   },
