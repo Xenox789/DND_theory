@@ -250,14 +250,14 @@ export const logisticRegressionQuestions: Question[] = [
       en: "Which statements are true about the logistic-regression hypothesis?"
     },
     choices: [
-      { id: "a", text: { hu: "Előbb egyenesáris pontszám (linear score)-t számolunk.", en: "A linear score is computed first." } },
-      { id: "b", text: { hu: "A egyenesáris pontszám (linear score)-ra sigmoid kerül.", en: "A sigmoid is applied to the linear score." } },
+      { id: "a", text: { hu: "Előbb lineáris pontszámot (linear score) számolunk.", en: "A linear score is computed first." } },
+      { id: "b", text: { hu: "A lineáris pontszámra (linear score) sigmoid kerül.", en: "A sigmoid is applied to the linear score." } },
       { id: "c", text: { hu: "Multivariate formában h=g(Xθ).", en: "In multivariate form h=g(Xθ)." } },
-      { id: "d", text: { hu: "A hipotézis (hypothesis) maga tisztán egyenesáris függvény (function).", en: "The hypothesis itself is purely linear." } }
+      { id: "d", text: { hu: "A hipotézis (hypothesis) maga tisztán lineáris függvény (function).", en: "The hypothesis itself is purely linear." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A kurzus (course) megfogalmazása: logisztikus regresszió (logistic regression) hipotézis (hypothesis) = Sigmoid ∘ egyenesáris regresszió (linear regression). Emiatt maga a teljes hipotézis (hypothesis) nem egyenesáris.",
+      hu: "A kurzus (course) megfogalmazása: logisztikus regresszió (logistic regression) hipotézis (hypothesis) = Sigmoid ∘ lineáris regresszió (linear regression). Emiatt maga a teljes hipotézis (hypothesis) nem lineáris.",
       en: "The course states: Logistic regression hypothesis = Sigmoid ∘ Linear regression. Therefore, the complete hypothesis itself is not linear."
     }
   },
@@ -289,7 +289,7 @@ export const logisticRegressionQuestions: Question[] = [
     },
     choices: [
       { id: "a", text: { hu: "Egy bemeneti változó (input variable) esetén a döntési határ (decision boundary) egy pont lehet az x tengelyen.", en: "With one input variable, the decision boundary can be a point on the x-axis." } },
-      { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a kétváltozós döntési határ (decision boundary) egy egyenes (line) az bemeneti sík (input plane)-ben.", en: "With two input variables, the bivariate decision boundary is a line in the input plane." } },
+      { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a kétváltozós döntési határ (decision boundary) egy egyenes (line) a bemeneti síkban (input plane).", en: "With two input variables, the bivariate decision boundary is a line in the input plane." } },
       { id: "c", text: { hu: "A boundary azokból az inputokból áll, ahol h=0.5.", en: "The boundary consists of inputs where h=0.5." } },
       { id: "d", text: { hu: "A döntési határ (decision boundary) a veszteség (loss) minimumának 3D görbéje.", en: "The decision boundary is a 3D curve of loss minima." } }
     ],
