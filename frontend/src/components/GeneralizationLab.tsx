@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
+import { SimulationGuide } from "./SimulationGuide";
 
 type Props = {
   language: Language;
@@ -170,6 +171,26 @@ export function GeneralizationLab({ language }: Props) {
         </div>
       </div>
 
+      <SimulationGuide
+        language={language}
+        axes={[
+          { label: "x-axis: model complexity", meaning: language === "hu" ? "Szemléltető scale arra, mennyire nagy/flexible a model capacity." : "Illustrative scale for how large/flexible the model capacity is." },
+          { label: "y-axis: loss", meaning: language === "hu" ? "Prediction error összefoglaló értéke; alacsonyabb jobb." : "Aggregate prediction-error value; lower is better." },
+          { label: "J_train", meaning: language === "hu" ? "Loss a training seten." : "Loss on the training set." },
+          { label: "J_val", meaning: language === "hu" ? "Loss a validation seten, model selectionhez." : "Loss on the validation set, used for model selection." }
+        ]}
+        terms={[
+          { label: "capacity", meaning: language === "hu" ? "A model képessége komplex mappings megtanulására; ez a slider csak szemléltető index." : "The model's ability to learn complex mappings; this slider is only an illustrative index." },
+          { label: "underfitting", meaning: language === "hu" ? "A model túl egyszerű; training loss is magas." : "The model is too simple; even training loss remains high." },
+          { label: "overfitting", meaning: language === "hu" ? "Training performance javul, de unseen/validation performance romlik." : "Training performance improves while unseen/validation performance worsens." }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Képosztályozásnál a capacity nőhet például több layerrel vagy neuronnal. Túl kis network nem tanulja meg a mintát; túl nagy network kevés data mellett a training set sajátosságaira specializálódhat."
+            : "In image classification, capacity can increase with more layers or neurons. A network that is too small may miss the pattern; one that is too large relative to the data may specialize to the training set."
+        }
+      />
+
       <div className="hero-card compact lab-section-hero">
         <div>
           <span className="eyebrow">EARLY STOPPING</span>
@@ -256,6 +277,24 @@ export function GeneralizationLab({ language }: Props) {
           style={{ width: "100%", height: "430px" }}
         />
       </div>
+
+      <SimulationGuide
+        language={language}
+        axes={[
+          { label: "x-axis: epoch", meaning: language === "hu" ? "Hányszor haladt végig a training process a training data-n; itt szemléltető training-time index." : "How far training has progressed; here it acts as an illustrative training-time index." },
+          { label: "y-axis: loss", meaning: language === "hu" ? "Training vagy validation error." : "Training or validation error." }
+        ]}
+        terms={[
+          { label: "best epoch", meaning: language === "hu" ? "Az epoch, ahol J_val a legalacsonyabb ebben a szintetikus példában." : "The epoch where J_val is lowest in this synthetic example." },
+          { label: "early stopping", meaning: language === "hu" ? "Training megállítása validation signal alapján, mielőtt a generalization romlik." : "Stopping training according to the validation signal before generalization degrades." },
+          { label: "J_test", meaning: language === "hu" ? "Final, független evaluationhoz tartjuk fenn; nem early stoppinghoz." : "Reserved for final independent evaluation, not early stopping." }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Egy neural network trainingnél gyakori, hogy J_train tovább csökken, miközben J_val egy pont után emelkedik. Ilyenkor a validation minimum környéki model checkpointot érdemes megtartani."
+            : "During neural-network training, J_train can continue falling while J_val starts increasing. A checkpoint near the validation minimum is then the useful model-selection point."
+        }
+      />
 
       <div className="lab-explanation-grid">
         <div className="callout intuition">
