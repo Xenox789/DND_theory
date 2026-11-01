@@ -1295,3 +1295,61 @@ main { min-width: 0; }
     grid-template-columns: 1fr;
   }
 }
+
+
+.concept-why {
+  background: #171d32;
+  border: 1px solid #303c69;
+}
+.concept-why strong { color: #a5b7ff; }
+
+.worked-example {
+  background: #161f2a;
+  border: 1px solid #334a61;
+}
+.worked-example strong { color: #9bc8f4; }
+
+.connections {
+  background: #1d1830;
+  border: 1px solid #46366b;
+}
+.connections strong { color: #c5a9ff; }
+
+.formula-term-grid {
+  display: grid;
+  gap: 7px;
+  margin: -5px 0 14px;
+  padding: 12px 14px;
+  border: 1px solid #263f5e;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+  background: #0d1928;
+}
+
+.formula-term-row {
+  display: grid;
+  grid-template-columns: minmax(72px, 0.22fr) 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(39, 59, 84, 0.62);
+}
+
+.formula-term-row:last-child { border-bottom: 0; }
+
+.formula-term-row code {
+  color: #91d1ff;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.formula-term-row span {
+  color: #a8bbcf;
+  line-height: 1.55;
+  font-size: 13px;
+}
+
+@media (max-width: 650px) {
+  .formula-term-row { grid-template-columns: 1fr; }
+}
