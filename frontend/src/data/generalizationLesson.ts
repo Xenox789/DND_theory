@@ -54,7 +54,7 @@ export const generalizationLesson: Lesson = {
         en: "Model complexity requires a balance. Too little capacity cannot represent the required relationship, while excessive capacity relative to the amount of data makes it easier to fit noise and individual details."
       },
       workedExample: {
-        hu: "A lecture polinomos görbékkel szemlélteti a jelenséget: túl alacsony fokszámnál a görbe nem követi az adat trendjét, túl magas fokszámnál pedig az egyes pontokhoz túl erősen igazodik. A polinomiális regresszió képletei itt szemléltetésre szolgálnak; a Lecture 4 összefoglalója szerint maga a polinomiális regresszió/interpoláció nem tesztanyag.",
+        hu: "Az előadás (lecture) polinomos görbékkel szemlélteti a jelenséget: túl alacsony fokszámnál a görbe nem követi az adat trendjét, túl magas fokszámnál pedig az egyes pontokhoz túl erősen igazodik. A polinomiális regresszió képletei itt szemléltetésre szolgálnak; a Lecture 4 összefoglalója szerint maga a polinomiális regresszió/interpoláció nem tesztanyag.",
         en: "The lecture illustrates this using polynomial curves: a low-degree curve misses the data trend, while a high-degree curve bends too closely around individual points. Polynomial regression/interpolation itself is marked as excluded from the test; it is used here as visual context."
       },
       examTrap: {
@@ -101,7 +101,7 @@ export const generalizationLesson: Lesson = {
         en: "If the test set is repeatedly used to make decisions, the model-selection process becomes indirectly adapted to it. The test set would no longer provide an independent measurement."
       },
       formula: {
-        hu: "TRAIN → modellparaméterek θ    |    VALIDATION → hiperparaméterek Ψ    |    TEST → végső értékelés",
+        hu: "TANÍTÁS (TRAIN) → modellparaméterek θ    |    VALIDÁCIÓ (VALIDATION) → hiperparaméterek Ψ    |    TESZT (TEST) → végső értékelés",
         en: "TRAIN → model parameters θ    |    VALIDATION → hyperparameters Ψ    |    TEST → final evaluation"
       },
       formulaTerms: [
@@ -109,7 +109,7 @@ export const generalizationLesson: Lesson = {
         { symbol: "Ψ", hu: "A hiperparaméter-konfiguráció, például tanulási ráta, hálózati architektúra vagy iterációszám.", en: "Hyperparameter configuration, such as learning rate, architecture, or iteration count." }
       ],
       workedExample: {
-        hu: "A Lecture 5 modellválasztási eljárása: választunk egy Ψ hiperparaméter-konfigurációt, ezzel a tanítóhalmazon optimalizáljuk θ-t, majd a validációs halmazon értékelünk. Több Ψ kipróbálása után a legjobb validációs teljesítményű konfigurációt választjuk, és csak ezután mérünk a teszthalmazon.",
+        hu: "Az 5. előadás (Lecture 5) modellválasztási eljárása: választunk egy Ψ hiperparaméter-konfigurációt, ezzel a tanítóhalmazon optimalizáljuk θ-t, majd a validációs halmazon értékelünk. Több Ψ kipróbálása után a legjobb validációs teljesítményű konfigurációt választjuk, és csak ezután mérünk a teszthalmazon.",
         en: "Lecture 5 procedure: choose a hyperparameter configuration Ψ, optimize θ on the training set, evaluate on the validation set, repeat for multiple Ψ values, then choose the best validation configuration and only afterward evaluate on the test set."
       },
       examTrap: {
@@ -129,7 +129,7 @@ export const generalizationLesson: Lesson = {
         en: "Parameters and hyperparameters are different"
       },
       body: {
-        hu: "A modellparaméterek (model parameters), például a lineáris modell θ értékei vagy egy neurális hálózat súlyai és eltolásai, közvetlenül a tanítás során tanulhatók. A hiperparaméterek (hyperparameters) a tanítás vagy a modell felépítésének beállításai. A lecture példái közé tartozik a tanulási ráta (learning rate), a polinom foka vagy a neurális hálózat architektúrája, valamint a gradiensmódszer iterációinak száma.",
+        hu: "A modellparaméterek (model parameters), például a lineáris modell θ értékei vagy egy neurális hálózat súlyai és eltolásai, közvetlenül a tanítás során tanulhatók. A hiperparaméterek (hyperparameters) a tanítás vagy a modell felépítésének beállításai. Az előadás (lecture) példái közé tartozik a tanulási ráta (learning rate), a polinom foka vagy a neurális hálózat architektúrája, valamint a gradiensmódszer iterációinak száma.",
         en: "Model parameters, such as θ in a linear model or weights and biases in a neural network, are learned directly during training. Hyperparameters configure the model or training procedure. Lecture examples include learning rate, polynomial degree or neural-network architecture, and number of gradient-method iterations."
       },
       why: {
@@ -157,7 +157,7 @@ export const generalizationLesson: Lesson = {
         en: "L2 regularization: fit the data without excessively large weights"
       },
       body: {
-        hu: "Az L2-regularizáció (L2 regularization) a predikciós veszteség mellé olyan büntetőtagot ad, amely a nagy súlyokat bünteti. A course példájában a regularizációs tag λΣθᵢ². A konstans eltolást, θ₀-t a bemutatott képlet nem bünteti.",
+        hu: "Az L2-regularizáció (L2 regularization) a predikciós veszteség mellé olyan büntetőtagot ad, amely a nagy súlyokat bünteti. A kurzus (course) példájában a regularizációs tag λΣθᵢ². A konstans eltolást, θ₀-t a bemutatott képlet nem bünteti.",
         en: "L2 regularization adds a penalty for large weights to the prediction loss. In the course example the penalty is λΣθᵢ², while θ₀, the constant bias term, is not penalized."
       },
       why: {
@@ -201,7 +201,7 @@ export const generalizationLesson: Lesson = {
         en: "Training loss alone does not reveal when overfitting begins because it may keep decreasing during overfitting. Validation loss provides a signal from data not used to fit the parameters."
       },
       workedExample: {
-        hu: "Fontos a slide-ok sorrendje: a Lecture 4 először szándékosan bemutatja a J_test figyelését, majd megkérdezi, mi a probléma ezzel. Ezután vezeti be a helyes változatot: a korai leállításhoz J_val-t figyelünk. A Lecture 5 összefoglalója is ezt ismétli.",
+        hu: "Fontos a diák (slides) sorrendje: a 4. előadás (Lecture 4) először szándékosan bemutatja a J_test figyelését, majd megkérdezi, mi a probléma ezzel. Ezután vezeti be a helyes változatot: a korai leállításhoz J_val-t figyelünk. Az 5. előadás (Lecture 5) összefoglalója is ezt ismétli.",
         en: "The slide sequence matters: Lecture 4 first deliberately shows monitoring J_test and asks what is wrong with it. It then introduces the correct version: monitor J_val for early stopping. Lecture 5 repeats this corrected procedure."
       },
       formula: {
@@ -229,7 +229,7 @@ export const generalizationLesson: Lesson = {
         en: "Handling overfitting: four main approaches"
       },
       body: {
-        hu: "A Lecture 4 négy fő megoldást sorol fel: egyszerűbb modell használata, több tanítóadat gyűjtése, regularizációs módszerek – például L2 – alkalmazása, illetve korai leállítás. Ezek különböző módon ugyanazt a problémát célozzák: ne engedjük, hogy a modell túlságosan a tanítóhalmaz egyedi részleteihez igazodjon.",
+        hu: "A 4. előadás (Lecture 4) négy fő megoldást sorol fel: egyszerűbb modell használata, több tanítóadat gyűjtése, regularizációs módszerek – például L2 – alkalmazása, illetve korai leállítás. Ezek különböző módon ugyanazt a problémát célozzák: ne engedjük, hogy a modell túlságosan a tanítóhalmaz egyedi részleteihez igazodjon.",
         en: "Lecture 4 lists four main approaches: use a simpler model, obtain more training data, apply regularization methods such as L2, and use early stopping. They all aim to prevent excessive specialization to training-set details."
       },
       connections: {
