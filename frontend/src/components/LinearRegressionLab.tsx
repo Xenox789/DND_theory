@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
+import { SimulationGuide } from "./SimulationGuide";
 
 type Props = {
   language: Language;
@@ -171,6 +172,65 @@ export function LinearRegressionLab({ language }: Props) {
           />
         </div>
       </div>
+
+      <SimulationGuide
+        language={language}
+        axes={[
+          {
+            label: language === "hu" ? "Bal plot x-axis: x" : "Left plot x-axis: x",
+            meaning: language === "hu"
+              ? "Az input feature értéke. A szintetikus adatokban ez 20–80 közötti szám; a képletben ezt adjuk a modellnek bemenetként."
+              : "The input-feature value. In the synthetic data it ranges from 20 to 80; this is what the model receives as input."
+          },
+          {
+            label: language === "hu" ? "Bal plot y-axis: y / ŷ" : "Left plot y-axis: y / ŷ",
+            meaning: language === "hu"
+              ? "A pontoknál y a true label, az egyenesnél ŷ a model prediction."
+              : "For the points, y is the true label; for the line, ŷ is the model prediction."
+          },
+          {
+            label: "3D x-axis: θ₀",
+            meaning: language === "hu" ? "Bias / intercept parameter." : "Bias / intercept parameter."
+          },
+          {
+            label: "3D y-axis: θ₁",
+            meaning: language === "hu" ? "Slope / weight parameter." : "Slope / weight parameter."
+          },
+          {
+            label: "3D z-axis: J",
+            meaning: language === "hu"
+              ? "A loss: mennyire rosszul illeszkedik az adott θ₀, θ₁ parameter pair a training data pontokra."
+              : "The loss: how poorly the selected θ₀, θ₁ parameter pair fits the training data."
+          }
+        ]}
+        terms={[
+          { label: "x", meaning: language === "hu" ? "input feature" : "input feature" },
+          { label: "y", meaning: language === "hu" ? "true label / valódi célérték" : "true label / target value" },
+          { label: "ŷ", meaning: language === "hu" ? "prediction, vagyis a modell becslése" : "prediction produced by the model" },
+          { label: "θ₀", meaning: language === "hu" ? "bias / intercept: függőleges eltolás" : "bias / intercept: vertical offset" },
+          { label: "θ₁", meaning: language === "hu" ? "slope / weight: az egyenes meredeksége" : "slope / weight: the line's steepness" },
+          { label: "J(θ)", meaning: language === "hu" ? "loss function értéke az aktuális parameters mellett" : "loss-function value for the current parameters" }
+        ]}
+        formulas={[
+          {
+            expression: "ŷ = θ₁x + θ₀",
+            meaning: language === "hu"
+              ? "A linear hypothesis: inputból predictiont készít a slope és bias segítségével."
+              : "The linear hypothesis: it turns an input into a prediction using slope and bias."
+          },
+          {
+            expression: "J = 1/(2m) · Σ(ŷ − y)²",
+            meaning: language === "hu"
+              ? "A course least-squares loss: minden training example hibáját négyzetre emeljük, majd összesítjük."
+              : "The course least-squares loss: square each training-example error and aggregate them."
+          }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Lakásár-becslésnél x lehet például az alapterület, y a tényleges ár, ŷ pedig a modell becsült ára. θ₁ azt mondja meg, mennyit változik a becslés egységnyi x-változásra, θ₀ pedig az alapeltolás."
+            : "For apartment-price prediction, x could be floor area, y the actual price, and ŷ the predicted price. θ₁ controls the change in prediction per unit of x, while θ₀ is the baseline offset."
+        }
+      />
 
       <div className="callout exam-trap lab-note">
         <strong>{language === "hu" ? "Mit figyelj meg?" : "What should you observe?"}</strong>
