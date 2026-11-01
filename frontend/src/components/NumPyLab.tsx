@@ -273,31 +273,31 @@ export function NumPyLab({ language }: Props) {
       <SimulationGuide
         language={language}
         terms={[
-          { label: "shape", meaning: language === "hu" ? "Az axes hosszainak tuple-je. Például (32,5): 32 row és 5 column-szerű második axis." : "Tuple containing axis lengths. For example (32,5): 32 rows and a second axis of length 5." },
-          { label: "axis 0", meaning: language === "hu" ? "Az első dimension. Egy (32,5) matrixnál length 32." : "The first dimension. For a (32,5) matrix its length is 32." },
-          { label: "axis 1", meaning: language === "hu" ? "A második dimension. Egy (32,5) matrixnál length 5." : "The second dimension. For a (32,5) matrix its length is 5." },
-          { label: ":", meaning: language === "hu" ? "slice: megtart egy axis-t, és basic indexing része lehet" : "slice: retains an axis and can be part of basic indexing" },
-          { label: "None / np.newaxis", meaning: language === "hu" ? "Új length-1 axis beszúrása, gyakran broadcasting előkészítésére." : "Insert a new length-1 axis, often to prepare broadcasting." },
-          { label: "view", meaning: language === "hu" ? "Másik arrayjel shared underlying memory." : "Shares underlying memory with another array." },
-          { label: "copy", meaning: language === "hu" ? "Önálló array storage; későbbi mutation nem ír vissza az originalba." : "Independent array storage; later mutation does not write back to the original." }
+          { label: "shape", meaning: language === "hu" ? "A tengelyek (axes) hosszait tartalmazó tuple. Például (32,5): az első tengely hossza 32, a másodiké 5." : "Tuple containing axis lengths. For example (32,5): 32 rows and a second axis of length 5." },
+          { label: "axis 0", meaning: language === "hu" ? "Az első dimenzió (dimension). Egy (32,5) mátrixnál a hossza 32." : "The first dimension. For a (32,5) matrix its length is 32." },
+          { label: "axis 1", meaning: language === "hu" ? "A második dimenzió. Egy (32,5) mátrixnál a hossza 5." : "The second dimension. For a (32,5) matrix its length is 5." },
+          { label: ":", meaning: language === "hu" ? "Szeletelés (slice): megtartja az adott tengelyt, és az alap indexelés (basic indexing) része lehet." : "slice: retains an axis and can be part of basic indexing" },
+          { label: "None / np.newaxis", meaning: language === "hu" ? "Új, 1 hosszúságú tengely beszúrása, gyakran broadcasting előkészítésére." : "Insert a new length-1 axis, often to prepare broadcasting." },
+          { label: "view", meaning: language === "hu" ? "Másik tömbbel (array) közös memóriaterületet használ." : "Shares underlying memory with another array." },
+          { label: "copy", meaning: language === "hu" ? "Önálló másolat; későbbi módosítása nem ír vissza az eredeti tömbbe." : "Independent array storage; later mutation does not write back to the original." }
         ]}
         formulas={[
           {
             expression: "a[:, 1]",
-            meaning: language === "hu" ? "Minden element axis 0 mentén, de csak az 1-es index axis 1 mentén; az integer-indexelt axis collapse-ol." : "All elements along axis 0, but only index 1 along axis 1; the integer-indexed axis collapses."
+            meaning: language === "hu" ? "A 0. tengely minden elemét megtartjuk, az 1. tengelyből viszont csak az 1-es indexet választjuk. Az egész számmal indexelt tengely eltűnik." : "All elements along axis 0, but only index 1 along axis 1; the integer-indexed axis collapses."
           },
           {
             expression: "(32,5) + (32,1) → (32,5)",
-            meaning: language === "hu" ? "A második array length-1 axis-a virtuálisan 5-re ismétlődik broadcasting során." : "The second array's length-1 axis is virtually repeated to length 5 during broadcasting."
+            meaning: language === "hu" ? "A második tömb 1 hosszúságú tengelye broadcasting során virtuálisan 5 hosszúságúra ismétlődik." : "The second array's length-1 axis is virtually repeated to length 5 during broadcasting."
           },
           {
             expression: "np.mean(a, axis=0)",
-            meaning: language === "hu" ? "Axis 0 mentén aggregálunk, ezért axis 0 eltűnik a result shape-ből." : "Aggregate along axis 0, so axis 0 disappears from the result shape."
+            meaning: language === "hu" ? "A 0. tengely mentén aggregálunk, ezért ez a tengely eltűnik az eredmény alakjából." : "Aggregate along axis 0, so axis 0 disappears from the result shape."
           }
         ]}
         realWorld={
           language === "hu"
-            ? "Deep learningben egy array shape lehet például (batch_size, n_features) egy fully connected layer inputjánál, vagy (batch_size, height, width, channels) képadatoknál. Indexinggel részhalmazokat választunk, broadcastinggal pedig például ugyanazt a bias vectort alkalmazhatjuk egy teljes batchre."
+            ? "Deep learningben egy tömb (array) alakja lehet például (batch_size, n_features) egy teljesen összekötött réteg (fully connected layer) bemeneténél, vagy (batch_size, height, width, channels) képadatoknál. Indexeléssel részhalmazokat választunk, broadcastinggal pedig például ugyanazt az eltolásvektort (bias vector) alkalmazhatjuk egy teljes batchre."
             : "In deep learning, an array can have shape (batch_size, n_features) at a fully connected layer input, or (batch_size, height, width, channels) for image data. Indexing selects subsets, while broadcasting can apply the same bias vector across an entire batch."
         }
       />
@@ -311,7 +311,7 @@ export function NumPyLab({ language }: Props) {
 
       <div className="numpy-selector">
         <label>
-          <span>{language === "hu" ? "Expression" : "Expression"}</span>
+          <span>{language === "hu" ? "Kifejezés (expression)" : "Expression"}</span>
           <select value={exampleIndex} onChange={(event) => setExampleIndex(Number(event.target.value))}>
             {indexExamples.map((example, index) => (
               <option key={example.expression} value={index}>
@@ -324,7 +324,7 @@ export function NumPyLab({ language }: Props) {
 
       <div className="numpy-result-grid">
         <div className="metric-card">
-          <span>{language === "hu" ? "Result type" : "Result type"}</span>
+          <span>{language === "hu" ? "Eredmény típusa (result type)" : "Result type"}</span>
           <strong>{current.result}</strong>
         </div>
         <div className="metric-card">
@@ -332,7 +332,7 @@ export function NumPyLab({ language }: Props) {
           <strong>{current.shape}</strong>
         </div>
         <div className="metric-card">
-          <span>{language === "hu" ? "Mechanism" : "Mechanism"}</span>
+          <span>{language === "hu" ? "Művelet típusa" : "Mechanism"}</span>
           <strong>{current.kind}</strong>
         </div>
       </div>
@@ -346,10 +346,10 @@ export function NumPyLab({ language }: Props) {
       <div className="hero-card compact lab-section-hero">
         <div>
           <span className="eyebrow">BROADCASTING SOLVER</span>
-          <h1>{language === "hu" ? "Írj be két shape-et" : "Enter two shapes"}</h1>
+          <h1>{language === "hu" ? "Adj meg két alakot (shape)" : "Enter two shapes"}</h1>
           <p>
             {language === "hu"
-              ? "Ugyanazt az algoritmust követi, amit a week 5 slide: leading 1 axes hozzáadása, majd axis-onként equal-or-one ellenőrzés."
+              ? "A week 5 algoritmusát követi: a rövidebb shape elé 1-es hosszúságú tengelyeket teszünk, majd tengelyenként ellenőrizzük, hogy a méretek egyenlők-e, vagy valamelyik 1."
               : "This follows the same algorithm shown in week 5: add leading 1 axes, then check equal-or-one compatibility axis by axis."}
           </p>
         </div>
@@ -357,33 +357,33 @@ export function NumPyLab({ language }: Props) {
 
       <div className="broadcast-input-grid">
         <label>
-          <span>shape A</span>
+          <span>{language === "hu" ? "A alakja (shape A)" : "shape A"}</span>
           <input value={shapeA} onChange={(event) => setShapeA(event.target.value)} />
         </label>
         <label>
-          <span>shape B</span>
+          <span>{language === "hu" ? "B alakja (shape B)" : "shape B"}</span>
           <input value={shapeB} onChange={(event) => setShapeB(event.target.value)} />
         </label>
       </div>
 
       {broadcasting === null ? (
         <div className="callout exam-trap">
-          <strong>{language === "hu" ? "Invalid shape input" : "Invalid shape input"}</strong>
+          <strong>{language === "hu" ? "Érvénytelen shape-formátum" : "Invalid shape input"}</strong>
           <span>{language === "hu" ? "Használj például (32,5) formátumot." : "Use a format such as (32,5)."}</span>
         </div>
       ) : (
         <>
           <div className="broadcast-normalized">
             <div>
-              <span>A normalized</span>
+              <span>{language === "hu" ? "A normalizált alakja" : "A normalized"}</span>
               <strong>({broadcasting.normalizedA.join(", ")})</strong>
             </div>
             <div>
-              <span>B normalized</span>
+              <span>{language === "hu" ? "B normalizált alakja" : "B normalized"}</span>
               <strong>({broadcasting.normalizedB.join(", ")})</strong>
             </div>
             <div>
-              <span>{language === "hu" ? "Result" : "Result"}</span>
+              <span>{language === "hu" ? "Eredmény (result)" : "Result"}</span>
               <strong>
                 {broadcasting.ok && broadcasting.result
                   ? "(" + broadcasting.result.join(", ") + ")"
@@ -395,7 +395,7 @@ export function NumPyLab({ language }: Props) {
           <div className="broadcast-steps">
             {broadcasting.steps.map((step, index) => (
               <div key={index}>
-                <span>axis {index}</span>
+                <span>{language === "hu" ? "tengely " : "axis "}{index}</span>
                 <strong>{step}</strong>
               </div>
             ))}
@@ -421,7 +421,7 @@ export function NumPyLab({ language }: Props) {
       <div className="hero-card compact lab-section-hero">
         <div>
           <span className="eyebrow">VIEW VS COPY</span>
-          <h1>{language === "hu" ? "Mi változik, ha y-t felülírjuk?" : "What changes when we overwrite y?"}</h1>
+          <h1>{language === "hu" ? "Mi történik az eredeti tömbbel, ha y-t módosítjuk?" : "What changes when we overwrite y?"}</h1>
         </div>
       </div>
 
@@ -440,23 +440,23 @@ export function NumPyLab({ language }: Props) {
 
       <div className="view-flow">
         <div className="view-step">
-          <span>1. base</span>
+          <span>{language === "hu" ? "1. eredeti tömb" : "1. base"}</span>
           <strong>{currentView.before}</strong>
         </div>
         <div className="flow-arrow">→</div>
         <div className="view-step">
-          <span>2. derived</span>
+          <span>{language === "hu" ? "2. létrehozott y" : "2. derived"}</span>
           <strong>{currentView.operation}</strong>
           <small>{currentView.resultKind}</small>
         </div>
         <div className="flow-arrow">→</div>
         <div className="view-step">
-          <span>3. mutation</span>
+          <span>{language === "hu" ? "3. y módosítása" : "3. mutation"}</span>
           <strong>{currentView.afterDerived}</strong>
         </div>
         <div className="flow-arrow">→</div>
         <div className="view-step">
-          <span>4. base after</span>
+          <span>{language === "hu" ? "4. eredeti tömb ezután" : "4. base after"}</span>
           <strong>{currentView.afterBase}</strong>
         </div>
       </div>
