@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
+import { SimulationGuide } from "./SimulationGuide";
 
 type Props = {
   language: Language;
@@ -228,6 +229,33 @@ export function SGDLab({ language }: Props) {
           />
         </div>
       </div>
+
+      <SimulationGuide
+        language={language}
+        axes={[
+          { label: "Left x-axis: x", meaning: language === "hu" ? "Input feature a szintetikus regression datasetben." : "Input feature in the synthetic regression dataset." },
+          { label: "Left y-axis: y", meaning: language === "hu" ? "True target value; a két line a model prediction update előtt és után." : "True target value; the two lines are model predictions before and after the update." },
+          { label: "Right x-axis: ∂J/∂θ₀", meaning: language === "hu" ? "Az adott mini-batch gradient bias-komponense." : "Bias component of the mini-batch gradient." },
+          { label: "Right y-axis: ∂J/∂θ₁", meaning: language === "hu" ? "Az adott mini-batch gradient slope-komponense." : "Slope component of the mini-batch gradient." }
+        ]}
+        terms={[
+          { label: "mini-batch", meaning: language === "hu" ? "A training setből egy update-hez kiválasztott kisebb sample." : "A smaller sample of the training set used for one update." },
+          { label: "full gradient", meaning: language === "hu" ? "Az egész demonstrációs datasetből számolt gradient." : "Gradient computed from the entire demonstration dataset." },
+          { label: "gradient spread", meaning: language === "hu" ? "Itt szemléltető mérőszám: milyen messze szóródnak a mini-batch gradients a full gradient körül." : "An illustrative measure here: how far mini-batch gradients spread around the full gradient." },
+          { label: "α", meaning: language === "hu" ? "learning rate az egyetlen bemutatott update-hez" : "learning rate for the displayed update" }
+        ]}
+        formulas={[
+          {
+            expression: "θ := θ − α · gradient(mini-batch)",
+            meaning: language === "hu" ? "SGD-ben az update directiont nem feltétlenül a teljes dataset, hanem a kiválasztott mini-batch becsüli." : "In SGD, the update direction is estimated from the selected mini-batch rather than necessarily the full dataset."
+          }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Nagy image datasetnél nem praktikus minden parameter update előtt az összes képet feldolgozni. Például 128 image-ből álló mini-batch alapján számolunk gradientet, majd frissítjük a network weights értékeit."
+            : "With a large image dataset, processing every image before every parameter update is impractical. For example, compute a gradient from a mini-batch of 128 images and then update the network weights."
+        }
+      />
 
       <div className="metric-grid">
         <div className="metric-card">
