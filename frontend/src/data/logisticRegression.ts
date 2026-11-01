@@ -290,12 +290,12 @@ export const logisticRegressionQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "Egy bemeneti változó (input variable) esetén a döntési határ (decision boundary) egy pont lehet az x tengelyen.", en: "With one input variable, the decision boundary can be a point on the x-axis." } },
       { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a kétváltozós döntési határ (decision boundary) egy egyenes (line) a bemeneti síkban (input plane).", en: "With two input variables, the bivariate decision boundary is a line in the input plane." } },
-      { id: "c", text: { hu: "A boundary azokból az inputokból áll, ahol h=0.5.", en: "The boundary consists of inputs where h=0.5." } },
+      { id: "c", text: { hu: "A boundary azokból az bemenetekből (inputs) áll, ahol h=0.5.", en: "The boundary consists of inputs where h=0.5." } },
       { id: "d", text: { hu: "A döntési határ (decision boundary) a veszteség (loss) minimumának 3D görbéje.", en: "The decision boundary is a 3D curve of loss minima." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A döntési határ (decision boundary) bemeneti tér (input space)-beli fogalom: {x | h(x)=0.5}. Egy jellemző (feature) esetén pont, két jellemző (feature) esetén a kurzus (course) ábráján egyenes (line).",
+      hu: "A döntési határ (decision boundary) bemeneti térbeli (input space) fogalom: {x | h(x)=0.5}. Egy jellemző (feature) esetén pont, két jellemző (feature) esetén a kurzus (course) ábráján egyenes (line).",
       en: "The decision boundary is defined in input space: {x | h(x)=0.5}. With one feature it is a point; with two features the course shows a line."
     }
   },
@@ -403,7 +403,7 @@ export const logisticRegressionQuestions: Question[] = [
       en: "What do we minimize during logistic-regression training?"
     },
     choices: [
-      { id: "a", text: { hu: "A logisztikus/BCE-veszteség (logistic/BCE loss) (loss) J(θ) értékét.", en: "The logistic/BCE loss J(θ)." } },
+      { id: "a", text: { hu: "A logisztikus/BCE-veszteség (logistic/BCE loss) J(θ) értékét.", en: "The logistic/BCE loss J(θ)." } },
       { id: "b", text: { hu: "X-et.", en: "X." } },
       { id: "c", text: { hu: "A sigmoid függvény (function) g-t.", en: "The sigmoid function g." } },
       { id: "d", text: { hu: "θ numerikus értékét önmagában.", en: "The numerical value of θ itself." } }
@@ -437,18 +437,18 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q13",
     topics: ["logistic-regression", "convexity"],
     prompt: {
-      hu: "Mely állítások igazak a kurzus (course) veszteség (loss)-választási magyarázatára?",
+      hu: "Mely állítások igazak a kurzus (course) veszteségválasztási (loss-selection) magyarázatára?",
       en: "Which statements are true about the course explanation for choosing the loss?"
     },
     choices: [
       { id: "a", text: { hu: "Szigmoid hipotézis (sigmoid hypothesis) + MSE esetén a veszteségnek (loss) több lokális minimuma (local minima) is lehet.", en: "With a sigmoid hypothesis + MSE, the loss may have multiple local minima." } },
-      { id: "b", text: { hu: "A logisztikus/BCE-veszteség (logistic/BCE loss) (loss) a logisztikus hipotézis (logistic hypothesis) (hypothesis)-szel konvex (convex).", en: "Logistic/BCE loss with the logistic hypothesis is convex." } },
+      { id: "b", text: { hu: "A logisztikus/BCE-veszteség (logistic/BCE loss) a logisztikus hipotézissel (logistic hypothesis) konvex (convex).", en: "Logistic/BCE loss with the logistic hypothesis is convex." } },
       { id: "c", text: { hu: "A konvex logisztikus veszteségnek (convex logistic loss) egy lokális/globális minimuma (local/global minimum) van.", en: "The convex logistic loss has a local/global minimum." } },
       { id: "d", text: { hu: "Ezért gradienscsökkentés (gradient descent) a logisztikus veszteségnél (logistic loss) megtalálhatja a globálisan (globally) optimális (optimal) paraméterek (parameters) értékeket.", en: "Therefore gradient descent can find the globally optimal parameters for logistic loss." } }
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "Pontosan ez az előadás (lecture) érvelése: az MSE+sigmoid problémás nem konvex (non-convex) célfüggvény (objective)-et adhat; a logisztikus/BCE-veszteség (logistic/BCE loss) (loss) konvex (convex), ezért gradienscsökkentés (gradient descent) számára megfelelőbb.",
+      hu: "Pontosan ez az előadás (lecture) érvelése: az MSE+sigmoid problémás nem konvex (non-convex) célfüggvényt (objective) adhat; a logisztikus/BCE-veszteség (logistic/BCE loss) konvex (convex), ezért gradienscsökkentés (gradient descent) számára megfelelőbb.",
       en: "This is exactly the lecture's argument: MSE + sigmoid can create a problematic non-convex objective; logistic/BCE loss is convex and therefore better suited to gradient descent."
     }
   },
@@ -462,7 +462,7 @@ export const logisticRegressionQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "0.82 a valószínűség (probability) becslés.", en: "0.82 is a probability estimate." } },
       { id: "b", text: { hu: "A becsült osztály (predicted class) címke (label) 1.", en: "The predicted class label is 1." } },
-      { id: "c", text: { hu: "A hipotézis (hypothesis) outputja ezen az példa (example)-on skalár (scalar).", en: "The hypothesis output for this example is a scalar." } },
+      { id: "c", text: { hu: "A hipotézis (hypothesis) kimenete (output) ezen az példán (example) skalár (scalar).", en: "The hypothesis output for this example is a scalar." } },
       { id: "d", text: { hu: "A becsült osztály (predicted class) címke (label) 0.82.", en: "The predicted class label is 0.82." } }
     ],
     correctIds: ["a", "b", "c"],
