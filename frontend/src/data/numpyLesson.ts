@@ -195,7 +195,7 @@ export const numpyLesson: Lesson = {
         en: "Broadcasting allows element-wise operations on compatible arrays with different shapes without physically copying data. The source's algorithm first prepends length-1 axes to the shorter shape until dimensionality matches, then requires each pair of dimensions to be equal or one of them to be 1."
       },
       why: {
-        hu: "A length-1 tengely virtuálisan megismételhető a másik array megfelelő tengelyének hosszára. Ez teszi lehetővé például, hogy ugyanazt a bias-vektort egy egész batch minden példájára alkalmazzuk.",
+        hu: "Az 1 hosszúságú tengely (length-1 axis) virtuálisan megismételhető a másik tömb (array) megfelelő tengelyének hosszára. Ez teszi lehetővé például, hogy ugyanazt a eltolásvektort (bias vector) egy teljes batch minden példájára alkalmazzuk.",
         en: "A length-1 axis can be virtually repeated to match the other array. This makes operations such as applying the same bias vector to every example in a batch possible."
       },
       formula: { hu: "kompatibilis tengelypár: a=b vagy a=1 vagy b=1", en: "compatible dimension pair: a=b or a=1 or b=1" },
@@ -326,8 +326,8 @@ export const numpyLesson: Lesson = {
       id: "numpy-scope",
       title: { hu: "Pontosan mi tartozik a Theory Test 1 NumPy-részébe?", en: "Exactly what is in scope for NumPy on Theory Test 1?" },
       body: {
-        hu: "A hivatalos example document szerint a NumPy-kérdések a 3–6. hét Video to watch before practice anyagaira épülnek. Az ndarray.strides és a stride tricks explicit ki vannak zárva a Theory Test 1-ből.",
-        en: "According to the official example document, NumPy questions are based on the weeks 3–6 Video to watch before practice materials. ndarray.strides and stride tricks are explicitly excluded from Theory Test 1."
+        hu: "A hivatalos mintakérdés-dokumentum (example document) szerint a NumPy-kérdések a 3–6. hét „Video to watch before practice” anyagaira épülnek. Az ndarray.strides és a stride tricks explicit ki vannak zárva a Theory Test 1-ből.",
+        en: "According to the official example document, NumPy questions are based on the weeks 3–6 „Video to watch before practice” materials. ndarray.strides and stride tricks are explicitly excluded from Theory Test 1."
       },
       why: {
         hu: "A view/copy viselkedés ettől még tesztanyag. Azt kell tudni, mely magas szintű műveletek adnak view-t vagy új arrayt; nem kell a stride-mechanizmus belső részleteit levezetni.",
