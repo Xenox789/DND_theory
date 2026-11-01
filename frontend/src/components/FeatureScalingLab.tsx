@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
+import { SimulationGuide } from "./SimulationGuide";
 
 type Props = {
   language: Language;
@@ -133,6 +134,40 @@ export function FeatureScalingLab({ language }: Props) {
           <strong>{sigma.toFixed(2)}</strong>
         </div>
       </div>
+
+      <SimulationGuide
+        language={language}
+        axes={[
+          {
+            label: language === "hu" ? "x-axis mindhárom ploton" : "x-axis on all three plots",
+            meaning: language === "hu"
+              ? "Ugyanannak a feature-nek az értéke különböző reprezentációban: raw, min-max scaled vagy standardized. A függőleges axis itt nem hordoz adatjelentést."
+              : "The same feature value under different representations: raw, min-max scaled, or standardized. The vertical axis has no data meaning here."
+          }
+        ]}
+        terms={[
+          { label: "x", meaning: language === "hu" ? "egy konkrét feature value" : "one concrete feature value" },
+          { label: "min", meaning: language === "hu" ? "a feature minimuma a scalinghez használt adatokban" : "minimum feature value in the data used for scaling" },
+          { label: "max", meaning: language === "hu" ? "a feature maximuma a scalinghez használt adatokban" : "maximum feature value in the data used for scaling" },
+          { label: "μ", meaning: language === "hu" ? "mean / átlag" : "mean / average" },
+          { label: "σ", meaning: language === "hu" ? "standard deviation / szórás" : "standard deviation" }
+        ]}
+        formulas={[
+          {
+            expression: "(x − min) / (max − min)",
+            meaning: language === "hu" ? "Min-max scaling: a minimumot 0-ra, a maximumot 1-re képezi." : "Min-max scaling maps the minimum to 0 and maximum to 1."
+          },
+          {
+            expression: "(x − μ) / σ",
+            meaning: language === "hu" ? "Standardization: azt méri, hány standard deviationre van x az átlagtól." : "Standardization measures how many standard deviations x is from the mean."
+          }
+        ]}
+        realWorld={
+          language === "hu"
+            ? "Ha egy modell egyszerre kap például age=25 és yearly_income=8 000 000 jellegű feature-öket, a nagyon eltérő numeric scale megnehezítheti az optimizationt. Scalinggel a feature-ök összehasonlíthatóbb tartományba kerülnek."
+            : "If a model receives features such as age=25 and yearly_income=8,000,000, their very different numeric scales can make optimization harder. Scaling brings features to more comparable ranges."
+        }
+      />
 
       <div className="lab-explanation-grid">
         <div className="callout intuition">
