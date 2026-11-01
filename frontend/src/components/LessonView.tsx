@@ -24,9 +24,27 @@ export function LessonView({ lesson, language }: Props) {
             <h2>{section.title[language]}</h2>
             <p>{section.body[language]}</p>
 
+            {section.why && (
+              <div className="callout concept-why">
+                <strong>{language === "hu" ? "Miért fontos?" : "Why does it matter?"}</strong>
+                <span>{section.why[language]}</span>
+              </div>
+            )}
+
             {section.formula && (
               <div className="formula-block">
                 {section.formula[language]}
+              </div>
+            )}
+
+            {section.formulaTerms && (
+              <div className="formula-term-grid">
+                {section.formulaTerms.map((item) => (
+                  <div className="formula-term-row" key={item.symbol}>
+                    <code>{item.symbol}</code>
+                    <span>{language === "hu" ? item.hu : item.en}</span>
+                  </div>
+                ))}
               </div>
             )}
 
@@ -34,6 +52,20 @@ export function LessonView({ lesson, language }: Props) {
               <div className="callout intuition">
                 <strong>{language === "hu" ? "Intuíció" : "Intuition"}</strong>
                 <span>{section.intuition[language]}</span>
+              </div>
+            )}
+
+            {section.workedExample && (
+              <div className="callout worked-example">
+                <strong>{language === "hu" ? "Lépésenkénti példa" : "Worked example"}</strong>
+                <span>{section.workedExample[language]}</span>
+              </div>
+            )}
+
+            {section.connections && (
+              <div className="callout connections">
+                <strong>{language === "hu" ? "Kapcsolat más fogalmakkal" : "Connections"}</strong>
+                <span>{section.connections[language]}</span>
               </div>
             )}
 
