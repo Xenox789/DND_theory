@@ -269,7 +269,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q1",
     topics: ["computational-graph"],
-    prompt: { hu: "Mely állítások igazak számítási gráfra (computational graph) az előadás (lecture) 6 szerint?", en: "Which statements are true about a computational graph according to Lecture 6?" },
+    prompt: { hu: "Mely állítások igazak számítási gráfra (computational graph) az 6. előadás (Lecture 6) szerint?", en: "Which statements are true about a computational graph according to Lecture 6?" },
     choices: [
       { id: "a", text: { hu: "Összetett kifejezést (expression) elemi műveletek láncolataként reprezentál.", en: "It represents a complicated expression as chained elementary operations." } },
       { id: "b", text: { hu: "Csomópontok (nodes) elemi műveletek lehetnek.", en: "Nodes can be elementary operations." } },
@@ -314,7 +314,7 @@ export const backpropQuestions: Question[] = [
       { id: "c", text: { hu: "grad_a=grad_b=0.", en: "grad_a=grad_b=0." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "összeadás (addition) lokális derivált (local derivative)-je mindkét bemenet (input) szerint 1.", en: "The local derivative of addition with respect to either input is 1." }
+    explanation: { hu: "összeadás (addition) lokális deriváltja (local derivative) mindkét bemenet (input) szerint 1.", en: "The local derivative of addition with respect to either input is 1." }
   },
   {
     id: "bp-q5",
@@ -343,7 +343,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q7",
     topics: ["lecture-example","forward-pass"],
-    prompt: { hu: "Az előadás (lecture) 6 példájában x=2,w=3,b=4,y=5 és q=wx, ŷ=q+b, z=y−ŷ, J=z². Mely értékek helyesek?", en: "In the Lecture 6 example x=2,w=3,b=4,y=5 with q=wx, ŷ=q+b, z=y−ŷ, J=z², which values are correct?" },
+    prompt: { hu: "Az 6. előadás (Lecture 6) példájában x=2,w=3,b=4,y=5 és q=wx, ŷ=q+b, z=y−ŷ, J=z². Mely értékek helyesek?", en: "In the Lecture 6 example x=2,w=3,b=4,y=5 with q=wx, ŷ=q+b, z=y−ŷ, J=z², which values are correct?" },
     choices: [
       { id: "a", text: { hu: "q=6.", en: "q=6." } },
       { id: "b", text: { hu: "ŷ=10.", en: "ŷ=10." } },
@@ -356,7 +356,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q8",
     topics: ["lecture-example","backward-pass"],
-    prompt: { hu: "Ugyanebben az előadás (lecture) 6 példában mely gradients helyesek?", en: "In the same Lecture 6 example, which gradients are correct?" },
+    prompt: { hu: "Ugyanebben az 6. előadás (Lecture 6) példában mely gradients helyesek?", en: "In the same Lecture 6 example, which gradients are correct?" },
     choices: [
       { id: "a", text: { hu: "∂J/∂z = −10.", en: "∂J/∂z = −10." } },
       { id: "b", text: { hu: "∂J/∂ŷ = 10.", en: "∂J/∂ŷ = 10." } },
@@ -369,7 +369,7 @@ export const backpropQuestions: Question[] = [
   {
     id: "bp-q9",
     topics: ["lecture-example","signs"],
-    prompt: { hu: "Miért lesz ∂J/∂ŷ pozitív 10, miközben ∂J/∂z=−10 az előadás (lecture) 6 példában?", en: "Why is ∂J/∂ŷ positive 10 while ∂J/∂z=−10 in the Lecture 6 example?" },
+    prompt: { hu: "Miért lesz ∂J/∂ŷ pozitív 10, miközben ∂J/∂z=−10 az 6. előadás (Lecture 6) példában?", en: "Why is ∂J/∂ŷ positive 10 while ∂J/∂z=−10 in the Lecture 6 example?" },
     choices: [
       { id: "a", text: { hu: "Mert z=y−ŷ, így ∂z/∂ŷ=−1.", en: "Because z=y−ŷ, so ∂z/∂ŷ=−1." } },
       { id: "b", text: { hu: "(−10)·(−1)=10.", en: "(−10)·(−1)=10." } },
@@ -400,12 +400,12 @@ export const backpropQuestions: Question[] = [
       { id: "c", text: { hu: "Backpropagation önmagában ugyanaz, mint θ := θ−αgrad.", en: "Backpropagation itself is identical to θ := θ−αgrad." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A visszafelé számítás (backward pass) gradientet számol; a paraméter (parameter)-frissítés (update) külön következő lépés.", en: "The backward pass computes gradients; parameter updating is a separate next step." }
+    explanation: { hu: "A visszafelé számítás (backward pass) gradienst (gradient) számol; a paraméterfrissítés (parameter update) külön következő lépés.", en: "The backward pass computes gradients; parameter updating is a separate next step." }
   },
   {
     id: "bp-q12",
     topics: ["training-cycle"],
-    prompt: { hu: "Mely lépések szerepelnek az előadás (lecture) 6 visszaterjesztés (backprop) tanítási ciklus (training cycle)-ban?", en: "Which steps appear in the Lecture 6 backpropagation training cycle?" },
+    prompt: { hu: "Mely lépések szerepelnek az 6. előadás (Lecture 6) visszaterjesztés (backprop) tanítási ciklusában (training cycle)?", en: "Which steps appear in the Lecture 6 backpropagation training cycle?" },
     choices: [
       { id: "a", text: { hu: "paraméter (parameter) initialization.", en: "Parameter initialization." } },
       { id: "b", text: { hu: "példa (example) vagy mini-batch választása.", en: "Choosing an example or mini-batch." } },
