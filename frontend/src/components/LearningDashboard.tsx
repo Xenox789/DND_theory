@@ -1,4 +1,5 @@
 import type { Language, Lesson } from "../types";
+import { InterleavedCompare } from "./InterleavedCompare";
 import {
   getSectionProgress,
   isReviewDue,
@@ -93,6 +94,8 @@ export function LearningDashboard({
           </div>
         </section>
       )}
+
+      <InterleavedCompare language={language} />
 
       <section>
         <div className="dashboard-section-title">
