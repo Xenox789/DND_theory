@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
 import { SimulationGuide } from "./SimulationGuide";
+import { PlotAxisKey } from "./PlotAxisKey";
 
 type Props = {
   language: Language;
@@ -58,7 +59,7 @@ export function LinearRegressionLab({ language }: Props) {
           </p>
         </div>
         <div className="score-box">
-          <span>J(θ)</span>
+          <span>J(θ₀, θ₁)</span>
           <strong>{currentLoss.toFixed(2)}</strong>
         </div>
       </div>
@@ -135,7 +136,16 @@ export function LinearRegressionLab({ language }: Props) {
         </div>
 
         <div className="plot-card">
-          <h2>{language === "hu" ? "3D veszteségfelület (loss surface)" : "3D Loss Surface — J(θ₀, θ₁)"}</h2>\n          <p className="plot-description">{language === "hu" ? "Minden pont egy θ₀, θ₁ paraméterbeállítás. A függőleges J érték mutatja, mennyire rosszul illeszkedik ez a beállítás az adatokra." : "Each point represents one θ₀, θ₁ parameter setting. Vertical J shows how poorly that setting fits the data."}</p>
+          <h2>{language === "hu" ? "3D veszteségfelület (loss surface)" : "3D Loss Surface — J(θ₀, θ₁)"}</h2>\n          <p className="plot-description">{language === "hu" ? "Minden pont egy θ₀, θ₁ paraméterbeállítás. A Z tengely és a színskála ugyanazt az értéket mutatja: J(θ₀,θ₁), vagyis az adott paraméterpár veszteségét." : "Each point represents one θ₀, θ₁ parameter setting. The Z axis and the color scale show the same quantity: J(θ₀,θ₁), the loss for that parameter pair."}</p>
+          <PlotAxisKey
+            language={language}
+            items={[
+              { axis: "X", symbol: "θ₀", meaning: language === "hu" ? "eltolás (bias / intercept)" : "bias / intercept" },
+              { axis: "Y", symbol: "θ₁", meaning: language === "hu" ? "meredekség / súly (slope / weight)" : "slope / weight" },
+              { axis: "Z", symbol: "J(θ₀,θ₁)", meaning: language === "hu" ? "veszteség (loss); kisebb érték = jobb illeszkedés" : "loss; lower value = better fit" },
+              { axis: language === "hu" ? "SZÍN" : "COLOR", symbol: "J(θ₀,θ₁)", meaning: language === "hu" ? "ugyanaz a veszteségérték színnel kódolva" : "the same loss value encoded by color" }
+            ]}
+          />
           <Plot
             data={[
               {
@@ -143,7 +153,8 @@ export function LinearRegressionLab({ language }: Props) {
                 y: theta1Values,
                 z,
                 type: "surface",
-                name: "J"
+                name: "J(θ₀, θ₁)",
+                colorbar: { title: { text: language === "hu" ? "J(θ₀,θ₁) — veszteség" : "J(θ₀,θ₁) — loss" } }
               },
               {
                 x: [theta0],
@@ -161,9 +172,9 @@ export function LinearRegressionLab({ language }: Props) {
               font: { color: "#d8e3f4" },
               margin: { l: 10, r: 10, b: 10, t: 10 },
               scene: {
-                xaxis: { title: "θ₀" },
-                yaxis: { title: "θ₁" },
-                zaxis: { title: "J" },
+                xaxis: { title: language === "hu" ? "θ₀ — eltolás" : "θ₀ — bias" },
+                yaxis: { title: language === "hu" ? "θ₁ — meredekség / súly" : "θ₁ — slope / weight" },
+                zaxis: { title: language === "hu" ? "J(θ₀,θ₁) — veszteség" : "J(θ₀,θ₁) — loss" },
                 bgcolor: "rgba(0,0,0,0)"
               }
             }}
@@ -189,18 +200,18 @@ export function LinearRegressionLab({ language }: Props) {
               : "For the points, y is the true label; for the line, ŷ is the model prediction."
           },
           {
-            label: "3D x-axis: θ₀",
-            meaning: language === "hu" ? "Bias / intercept parameter." : "Bias / intercept parameter."
+            label: language === "hu" ? "3D X tengely: θ₀" : "3D X-axis: θ₀",
+            meaning: language === "hu" ? "Eltolás (bias / intercept)." : "Bias / intercept."
           },
           {
-            label: "3D y-axis: θ₁",
-            meaning: language === "hu" ? "Slope / weight parameter." : "Slope / weight parameter."
+            label: language === "hu" ? "3D Y tengely: θ₁" : "3D Y-axis: θ₁",
+            meaning: language === "hu" ? "Meredekség / súly (slope / weight)." : "Slope / weight."
           },
           {
-            label: "3D z-axis: J",
+            label: language === "hu" ? "3D Z tengely: J(θ₀,θ₁)" : "3D Z-axis: J(θ₀,θ₁)",
             meaning: language === "hu"
-              ? "A loss: mennyire rosszul illeszkedik az adott θ₀, θ₁ parameter pair a training data pontokra."
-              : "The loss: how poorly the selected θ₀, θ₁ parameter pair fits the training data."
+              ? "A veszteség (loss) az adott θ₀, θ₁ paraméterpárnál. A színskála is pontosan ezt az értéket mutatja."
+              : "The loss for the selected θ₀, θ₁ parameter pair. The color scale shows exactly the same quantity."
           }
         ]}
         terms={[
@@ -209,7 +220,7 @@ export function LinearRegressionLab({ language }: Props) {
           { label: "ŷ", meaning: language === "hu" ? "prediction, vagyis a modell becslése" : "prediction produced by the model" },
           { label: "θ₀", meaning: language === "hu" ? "bias / intercept: függőleges eltolás" : "bias / intercept: vertical offset" },
           { label: "θ₁", meaning: language === "hu" ? "slope / weight: az egyenes meredeksége" : "slope / weight: the line's steepness" },
-          { label: "J(θ)", meaning: language === "hu" ? "loss function értéke az aktuális parameters mellett" : "loss-function value for the current parameters" }
+          { label: "J(θ₀,θ₁)", meaning: language === "hu" ? "A veszteségfüggvény (loss function) értéke az aktuális két paraméter mellett." : "Loss-function value for the current two parameters." }
         ]}
         formulas={[
           {
