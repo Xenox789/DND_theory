@@ -3,7 +3,8 @@ import { FeatureScalingLab } from "./components/FeatureScalingLab";
 import { GradientDescentLab } from "./components/GradientDescentLab";
 import { GeneralizationLab } from "./components/GeneralizationLab";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
-import { LessonView } from "./components/LessonView";
+import { GuidedLessonView } from "./components/GuidedLessonView";
+import { LearningDashboard } from "./components/LearningDashboard";
 import { LinearRegressionLab } from "./components/LinearRegressionLab";
 import { LogisticRegressionLab } from "./components/LogisticRegressionLab";
 import { MLPLab } from "./components/MLPLab";
@@ -12,19 +13,73 @@ import { BackpropLab } from "./components/BackpropLab";
 import { NumPyLab } from "./components/NumPyLab";
 import { QuizView } from "./components/QuizView";
 import { lessons, questionBank } from "./data/course";
+import { loadStudyProgress, saveStudyProgress, type StudyProgress } from "./study/progress";
 import type { Language } from "./types";
 
 type View = "learn" | "quiz" | "lab";
+type LearnScreen = "dashboard" | "chapter";
 type LabId = "linear-regression" | "gradient-descent" | "feature-scaling" | "logistic-regression" | "generalization" | "mlp" | "sgd" | "backprop" | "numpy";
 
 export default function App() {
   const [view, setView] = useState<View>("learn");
+  const [learnScreen, setLearnScreen] = useState<LearnScreen>("dashboard");
+  const [initialSectionId, setInitialSectionId] = useState<string | undefined>();
+  const [studyProgress, setStudyProgress] = useState<StudyProgress>(() => loadStudyProgress());
   const [learningLanguage, setLearningLanguage] = useState<Language>("hu");
   const [examLanguage, setExamLanguage] = useState<Language>("en");
   const [lessonId, setLessonId] = useState(lessons[0].id);
   const [labId, setLabId] = useState<LabId>("linear-regression");
 
   const selectedLesson = lessons.find((lesson) => lesson.id === lessonId) ?? lessons[0];
+
+  const questionsForSelectedLesson = useMemo(() => {
+    const prefixes: Record<string, string> = {
+      "ml-fundamentals": "q",
+      "linear-regression": "lr-q",
+      "logistic-regression": "log-q",
+      "generalization-overfitting": "gen-q",
+      "artificial-neuron-mlp": "mlp-q",
+      "sgd-minibatches": "sgd-q",
+      "backprop-computational-graphs": "bp-q",
+      "numpy-theory": "np-q"
+    };
+
+    const prefix = prefixes[selectedLesson.id];
+    if (!prefix) return [];
+    if (prefix === "q") {
+      return questionBank.filter((question) => /^q\d+$/.test(question.id));
+    }
+    return questionBank.filter((question) => question.id.startsWith(prefix));
+  }, [selectedLesson]);
+
+  const lessonLabMap: Partial<Record<string, LabId>> = {
+    "linear-regression": "linear-regression",
+    "logistic-regression": "logistic-regression",
+    "generalization-overfitting": "generalization",
+    "artificial-neuron-mlp": "mlp",
+    "sgd-minibatches": "sgd",
+    "backprop-computational-graphs": "backprop",
+    "numpy-theory": "numpy"
+  };
+
+  const openLesson = (targetLessonId: string, sectionId?: string) => {
+    setLessonId(targetLessonId);
+    setInitialSectionId(sectionId);
+    setLearnScreen("chapter");
+    setView("learn");
+  };
+
+  const updateStudyProgress = (next: StudyProgress) => {
+    setStudyProgress(next);
+    saveStudyProgress(next);
+  };
+
+  const openRelatedLab = () => {
+    const target = lessonLabMap[selectedLesson.id];
+    if (!target) return;
+    setLabId(target);
+    setView("lab");
+  };
 
   const ui = useMemo(
     () =>
@@ -66,7 +121,7 @@ export default function App() {
         </div>
 
         <nav>
-          <button className={view === "learn" ? "active" : ""} onClick={() => setView("learn")}>
+          <button className={view === "learn" ? "active" : ""} onClick={() => { setView("learn"); setLearnScreen("dashboard"); }}>
             <span>01</span>{ui.learn}
           </button>
           <button className={view === "quiz" ? "active" : ""} onClick={() => setView("quiz")}>
@@ -89,7 +144,7 @@ export default function App() {
         <header className="topbar">
           <div className="status">
             <span className="status-dot" />
-            <span>Study Lab v0.9</span>
+            <span>Study Lab v1.0</span>
           </div>
           <div className="language-row">
             <LanguageSwitcher
@@ -107,24 +162,28 @@ export default function App() {
 
         <div className="content">
           {view === "learn" && (
-            <>
-              <div className="section-toolbar">
-                <span>{ui.lessons}</span>
-                <div className="subnav">
-                  {lessons.map((lesson, index) => (
-                    <button
-                      key={lesson.id}
-                      className={lesson.id === selectedLesson.id ? "active" : ""}
-                      onClick={() => setLessonId(lesson.id)}
-                    >
-                      <small>{String(index + 1).padStart(2, "0")}</small>
-                      {lesson.title[learningLanguage]}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <LessonView lesson={selectedLesson} language={learningLanguage} />
-            </>
+            learnScreen === "dashboard" ? (
+              <LearningDashboard
+                lessons={lessons}
+                language={learningLanguage}
+                progress={studyProgress}
+                onOpenLesson={openLesson}
+              />
+            ) : (
+              <GuidedLessonView
+                lesson={selectedLesson}
+                language={learningLanguage}
+                questions={questionsForSelectedLesson}
+                progress={studyProgress}
+                initialSectionId={initialSectionId}
+                onProgressChange={updateStudyProgress}
+                onBack={() => {
+                  setInitialSectionId(undefined);
+                  setLearnScreen("dashboard");
+                }}
+                onOpenLab={lessonLabMap[selectedLesson.id] ? openRelatedLab : undefined}
+              />
+            )
           )}
 
           {view === "quiz" && (
