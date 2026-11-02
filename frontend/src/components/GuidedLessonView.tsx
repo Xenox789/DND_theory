@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Language, Lesson, Question } from "../types";
 import {
   getSectionProgress,
@@ -7,6 +7,7 @@ import {
   type StudyProgress
 } from "../study/progress";
 import { RecallCheckpoint } from "./RecallCheckpoint";
+import { checkpointForSection } from "../study/checkpoints";
 
 type Props = {
   lesson: Lesson;
@@ -65,10 +66,7 @@ export function GuidedLessonView({
   const sectionProgress = getSectionProgress(progress, lesson.id, section.id);
   const nextReview = formatReviewDate(sectionProgress.nextReview, language);
 
-  const checkpoint = useMemo(() => {
-    if (questions.length === 0) return null;
-    return questions[activeIndex % questions.length];
-  }, [activeIndex, questions]);
+  const checkpoint = checkpointForSection(questions, section.id);
 
   const hasUnderstanding = Boolean(
     section.why ||
