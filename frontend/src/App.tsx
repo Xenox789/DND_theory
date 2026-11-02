@@ -52,14 +52,66 @@ export default function App() {
     return questionBank.filter((question) => question.id.startsWith(prefix));
   }, [selectedLesson]);
 
-  const lessonLabMap: Partial<Record<string, LabId>> = {
-    "linear-regression": "linear-regression",
-    "logistic-regression": "logistic-regression",
-    "generalization-overfitting": "generalization",
-    "artificial-neuron-mlp": "mlp",
-    "sgd-minibatches": "sgd",
-    "backprop-computational-graphs": "backprop",
-    "numpy-theory": "numpy"
+  const sectionLabMap: Partial<Record<string, LabId>> = {
+    "regression-linear-hypothesis": "linear-regression",
+    "multivariate-geometry": "linear-regression",
+    "matrix-form": "linear-regression",
+    "least-squares": "linear-regression",
+    "gradient": "gradient-descent",
+    "gradient-descent": "gradient-descent",
+    "feature-scaling": "feature-scaling",
+    "binary-classification": "logistic-regression",
+    "sigmoid": "logistic-regression",
+    "logistic-hypothesis": "logistic-regression",
+    "decision-boundary": "logistic-regression",
+    "binary-cross-entropy": "logistic-regression",
+    "convex-logistic": "logistic-regression",
+    "generalization": "generalization",
+    "underfit-overfit": "generalization",
+    "risk-factors": "generalization",
+    "three-way-split": "generalization",
+    "hyperparameters": "generalization",
+    "l2": "generalization",
+    "early-stopping": "generalization",
+    "solutions-summary": "generalization",
+    "artificial-neuron": "mlp",
+    "single-neuron-limit": "mlp",
+    "fully-connected": "mlp",
+    "parameter-count": "mlp",
+    "two-layer-hypothesis": "mlp",
+    "activation-functions": "mlp",
+    "output-by-task": "mlp",
+    "softmax": "mlp",
+    "nonconvex": "mlp",
+    "batch-gradient-descent": "sgd",
+    "why-sgd": "sgd",
+    "batch-size-tradeoff": "sgd",
+    "learning-rate-batch": "sgd",
+    "gpu-memory": "sgd",
+    "sgd-variants": "sgd",
+    "why-backprop": "backprop",
+    "computational-graph": "backprop",
+    "chain-rule": "backprop",
+    "local-rules": "backprop",
+    "forward-example": "backprop",
+    "backward-example": "backprop",
+    "parameter-update": "backprop",
+    "training-cycle": "backprop",
+    "autograd": "backprop",
+    "numpy-array-programming": "numpy",
+    "numpy-attributes": "numpy",
+    "numpy-zero-shapes": "numpy",
+    "numpy-creation-reshape": "numpy",
+    "numpy-indexing-types": "numpy",
+    "numpy-basic-indexing": "numpy",
+    "numpy-advanced-indexing": "numpy",
+    "numpy-broadcasting": "numpy",
+    "numpy-newaxis": "numpy",
+    "numpy-reductions": "numpy",
+    "numpy-transpose": "numpy",
+    "numpy-views-copies": "numpy",
+    "numpy-common-functions": "numpy",
+    "numpy-scope": "numpy"
   };
 
   const openLesson = (targetLessonId: string, sectionId?: string) => {
@@ -74,8 +126,8 @@ export default function App() {
     saveStudyProgress(next);
   };
 
-  const openRelatedLab = () => {
-    const target = lessonLabMap[selectedLesson.id];
+  const openRelatedLab = (sectionId: string) => {
+    const target = sectionLabMap[sectionId];
     if (!target) return;
     setLabId(target);
     setView("lab");
@@ -181,7 +233,7 @@ export default function App() {
                   setInitialSectionId(undefined);
                   setLearnScreen("dashboard");
                 }}
-                onOpenLab={lessonLabMap[selectedLesson.id] ? openRelatedLab : undefined}
+                onOpenLab={openRelatedLab}
               />
             )
           )}
