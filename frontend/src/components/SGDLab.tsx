@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
 import { SimulationGuide } from "./SimulationGuide";
+import { PlotAxisKey } from "./PlotAxisKey";
 
 type Props = {
   language: Language;
@@ -145,7 +146,14 @@ export function SGDLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Tanítóadatok és egy mini-batch frissítés" : "Dataset + one mini-batch update"}</h2>\n          <p className="plot-description">{language === "hu" ? "A pontok tanítási példák. A két egyenes ugyanazt a modellt mutatja a mini-batchből számolt paraméterfrissítés előtt és után." : "Points are training examples. The two lines show the same model before and after one mini-batch update."}</p>
+          <h2>{language === "hu" ? "Tanítóadatok és egy mini-batch frissítés" : "Dataset + one mini-batch update"}</h2>\n          <p className="plot-description">{language === "hu" ? "Az X tengely a bemenet x. Az Y tengelyen a valódi célértékek y és a modell becslései ŷ láthatók a mini-batch frissítés előtt és után." : "X is input x. Y shows true targets y and model predictions ŷ before and after the mini-batch update."}</p>
+          <PlotAxisKey
+            language={language}
+            items={[
+              { axis: "X", symbol: "x", meaning: language === "hu" ? "bemeneti jellemző (input feature)" : "input feature" },
+              { axis: "Y", symbol: "y / ŷ", meaning: language === "hu" ? "valódi célérték / modellbecslés" : "true target / model prediction" }
+            ]}
+          />
           <Plot
             data={[
               {
@@ -186,8 +194,8 @@ export function SGDLab({ language }: Props) {
               plot_bgcolor: "rgba(0,0,0,0)",
               font: { color: "#d8e3f4" },
               margin: { l: 50, r: 20, b: 45, t: 10 },
-              xaxis: { title: "x", gridcolor: "#22314a" },
-              yaxis: { title: "y", gridcolor: "#22314a" }
+              xaxis: { title: language === "hu" ? "x — bemeneti jellemző" : "x — input feature", gridcolor: "#22314a" },
+              yaxis: { title: language === "hu" ? "y / ŷ — célérték / becslés" : "y / ŷ — target / prediction", gridcolor: "#22314a" }
             }}
             config={{ responsive: true, displaylogo: false }}
             style={{ width: "100%", height: "420px" }}
@@ -195,7 +203,14 @@ export function SGDLab({ language }: Props) {
         </div>
 
         <div className="plot-card">
-          <h2>{language === "hu" ? "Mini-batch gradiensek a teljes gradienshez képest" : "Mini-batch gradients vs full gradient"}</h2>\n          <p className="plot-description">{language === "hu" ? "Ez nem adattér, hanem gradiens-tér. Egy pont azt mutatja, hogy egy adott mini-batch milyen ∂J/∂θ₀ és ∂J/∂θ₁ gradienskomponenseket becsült." : "This is gradient space, not data space. Each point shows the ∂J/∂θ₀ and ∂J/∂θ₁ components estimated by one mini-batch."}</p>
+          <h2>{language === "hu" ? "Mini-batch gradiensek a teljes gradienshez képest" : "Mini-batch gradients vs full gradient"}</h2>\n          <p className="plot-description">{language === "hu" ? "Ez gradiens-tér: minden pont egy mini-batch gradiensbecslése. Az X komponens ∂J/∂θ₀, az Y komponens ∂J/∂θ₁." : "This is gradient space: each point is a mini-batch gradient estimate. X is ∂J/∂θ₀ and Y is ∂J/∂θ₁."}</p>
+          <PlotAxisKey
+            language={language}
+            items={[
+              { axis: "X", symbol: "∂J/∂θ₀", meaning: language === "hu" ? "a veszteség gradiense az eltolás szerint" : "loss gradient with respect to the bias" },
+              { axis: "Y", symbol: "∂J/∂θ₁", meaning: language === "hu" ? "a veszteség gradiense a meredekség / súly szerint" : "loss gradient with respect to slope / weight" }
+            ]}
+          />
           <Plot
             data={[
               {
@@ -221,8 +236,8 @@ export function SGDLab({ language }: Props) {
               plot_bgcolor: "rgba(0,0,0,0)",
               font: { color: "#d8e3f4" },
               margin: { l: 55, r: 20, b: 50, t: 10 },
-              xaxis: { title: "∂J/∂θ₀", gridcolor: "#22314a" },
-              yaxis: { title: "∂J/∂θ₁", gridcolor: "#22314a" }
+              xaxis: { title: language === "hu" ? "∂J/∂θ₀ — eltolás gradiens" : "∂J/∂θ₀ — bias gradient", gridcolor: "#22314a" },
+              yaxis: { title: language === "hu" ? "∂J/∂θ₁ — súly gradiens" : "∂J/∂θ₁ — weight gradient", gridcolor: "#22314a" }
             }}
             config={{ responsive: true, displaylogo: false }}
             style={{ width: "100%", height: "420px" }}
@@ -233,10 +248,10 @@ export function SGDLab({ language }: Props) {
       <SimulationGuide
         language={language}
         axes={[
-          { label: "Left x-axis: x", meaning: language === "hu" ? "Input feature a szintetikus regression datasetben." : "Input feature in the synthetic regression dataset." },
-          { label: "Left y-axis: y", meaning: language === "hu" ? "True target value; a két line a model prediction update előtt és után." : "True target value; the two lines are model predictions before and after the update." },
-          { label: "Right x-axis: ∂J/∂θ₀", meaning: language === "hu" ? "Az adott mini-batch gradient bias-komponense." : "Bias component of the mini-batch gradient." },
-          { label: "Right y-axis: ∂J/∂θ₁", meaning: language === "hu" ? "Az adott mini-batch gradient slope-komponense." : "Slope component of the mini-batch gradient." }
+          { label: language === "hu" ? "Bal diagram X tengely: x" : "Left plot X-axis: x", meaning: language === "hu" ? "Bemeneti jellemző (input feature) a szintetikus regressziós adathalmazban." : "Input feature in the synthetic regression dataset." },
+          { label: language === "hu" ? "Bal diagram Y tengely: y / ŷ" : "Left plot Y-axis: y / ŷ", meaning: language === "hu" ? "Valódi célértékek (y) és modellbecslések (ŷ) a frissítés előtt és után." : "True targets y and model predictions ŷ before and after the update." },
+          { label: language === "hu" ? "Jobb diagram X tengely: ∂J/∂θ₀" : "Right plot X-axis: ∂J/∂θ₀", meaning: language === "hu" ? "A mini-batch gradiens eltolás (bias) szerinti komponense." : "Bias component of the mini-batch gradient." },
+          { label: language === "hu" ? "Jobb diagram Y tengely: ∂J/∂θ₁" : "Right plot Y-axis: ∂J/∂θ₁", meaning: language === "hu" ? "A mini-batch gradiens meredekség / súly szerinti komponense." : "Slope / weight component of the mini-batch gradient." }
         ]}
         terms={[
           { label: "mini-batch", meaning: language === "hu" ? "A training setből egy update-hez kiválasztott kisebb sample." : "A smaller sample of the training set used for one update." },
