@@ -217,8 +217,14 @@ export function LinearRegressionLab({ language }: Props) {
           {
             label: language === "hu" ? "3D Z tengely: J(θ₀,θ₁)" : "3D Z-axis: J(θ₀,θ₁)",
             meaning: language === "hu"
-              ? "A veszteség (loss) az adott θ₀, θ₁ paraméterpárnál. A színskála is pontosan ezt az értéket mutatja."
-              : "The loss for the selected θ₀, θ₁ parameter pair. The color scale shows exactly the same quantity."
+              ? "A veszteség (loss) az adott θ₀, θ₁ paraméterpárnál."
+              : "The loss for the selected θ₀, θ₁ parameter pair."
+          },
+          {
+            label: language === "hu" ? "Színskála: J(θ₀,θ₁)" : "Color scale: J(θ₀,θ₁)",
+            meaning: language === "hu"
+              ? "A jobb oldali, például 0–2000 közötti skála ugyanazt a veszteséget mutatja színnel. Nem külön változó és nem negyedik tengely."
+              : "The color bar, for example the 0–2000 scale, encodes the same loss by color. It is not a separate variable or a fourth axis."
           }
         ]}
         terms={[
