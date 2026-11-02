@@ -284,8 +284,8 @@ export const pedagogyProfiles: Record<string, PedagogyProfile> = {
       "A feature scaling célja a címkék y átskálázása ugyanarra a nagyságrendre.",
       "The purpose of feature scaling is to rescale labels y to the same order of magnitude.",
       false,
-      "A bemeneti változókat skálázzuk, egymástól függetlenül, hogy a gradienscsökkentés kedvezőbb veszteségfelületen haladjon.",
-      "The input variables are scaled independently to give gradient descent a better-conditioned loss surface."
+      "A bemeneti változókat skálázzuk, egymástól függetlenül. A kurzus szerint a nagyon eltérő nagyságrend rendkívül megnyújtott veszteségfelületet és nagyon lassú konvergenciát okozhat.",
+      "The input variables are scaled independently. According to the course, very different magnitudes can produce an extremely elongated loss surface and very slow convergence."
     ]
   ),
 
@@ -410,15 +410,15 @@ export const pedagogyProfiles: Record<string, PedagogyProfile> = {
   ),
 
   "convex-logistic": p(
-    "logisztikus regresszió optimalizálási tulajdonsága a tananyagban",
-    "optimization property of logistic regression in the course",
+    "4. előadás — logistic loss konvexitása",
+    "Lecture 4 — convexity of logistic loss",
     "Miért fontos külön kezelni a logisztikus veszteséget és a sigmoid + MSE kombinációt?",
     "Why is it important to distinguish logistic loss from a sigmoid + MSE combination?",
     [
       "Milyen optimumgarancia különbözteti meg a kurzusban a konvex lineáris/logisztikus eseteket az MLP-től?",
       "What optimum guarantee distinguishes the convex linear/logistic cases from an MLP in the course?",
-      "A konvex célfüggvényeknél megfelelő optimalizálási feltételek mellett nem a rossz lokális minimumok jelentik a fő problémát; MLP-nél a Theory Test nem ad globális optimumgaranciát.",
-      "For convex objectives under suitable optimization conditions, bad local minima are not the issue; for an MLP the Theory Test gives no global-optimum guarantee."
+      "A 4. előadás szerint a logistic loss konvex, egyetlen lokális (és globális) minimummal, és a gradient descent megtalálja a globálisan optimális paramétereket. Az MLP-re a Theory Test nem ad ilyen globális optimumgaranciát.",
+      "Lecture 4 states that logistic loss is convex, has a single local (and global) minimum, and gradient descent finds the globally optimal parameters. The Theory Test gives no such global-optimum guarantee for an MLP."
     ]
   ),
 
@@ -732,8 +732,8 @@ export const pedagogyProfiles: Record<string, PedagogyProfile> = {
   ),
 
   "learning-rate-batch": p(
-    "SGD tananyag — batch size és learning rate",
-    "SGD material — batch size and learning rate",
+    "5. előadás — batch size és learning rate",
+    "Lecture 5 — batch size and learning rate",
     "Miért lehet problémás ugyanazt a nagy learning rate-et megtartani, ha a gradiensbecslés sokkal zajosabb lesz?",
     "Why can keeping the same large learning rate be problematic when gradient estimates become much noisier?",
     [
@@ -745,8 +745,8 @@ export const pedagogyProfiles: Record<string, PedagogyProfile> = {
   ),
 
   "gpu-memory": p(
-    "SGD tananyag — batch size gyakorlati korlátja",
-    "SGD material — practical batch-size constraint",
+    "5. előadás — batch size és GPU-memória",
+    "Lecture 5 — batch size and GPU memory",
     "Miért nem választhatunk tetszőlegesen nagy batch méretet egy nagy neurális hálózatnál?",
     "Why can we not choose an arbitrarily large batch size for a large neural network?",
     [
