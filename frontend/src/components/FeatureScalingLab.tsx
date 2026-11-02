@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
 import { SimulationGuide } from "./SimulationGuide";
+import { PlotAxisKey } from "./PlotAxisKey";
 
 type Props = {
   language: Language;
@@ -34,9 +35,16 @@ export function FeatureScalingLab({ language }: Props) {
   const minMax = raw.map((value) => (value - minimum) / (maximum - minimum));
   const standardized = raw.map((value) => (value - mu) / sigma);
 
-  const miniPlot = (values: number[], title: string, range?: [number, number]) => (
+  const miniPlot = (values: number[], title: string, symbol: string, meaning: string, range?: [number, number]) => (
     <div className="plot-card scaling-plot">
       <h2>{title}</h2>
+      <PlotAxisKey
+        language={language}
+        items={[
+          { axis: "X", symbol, meaning },
+          { axis: "Y", symbol: "—", meaning: language === "hu" ? "nincs adatjelentése; csak a pontok vizuális elhelyezésére szolgál" : "no data meaning; only used to place the markers visually" }
+        ]}
+      />
       <Plot
         data={[
           {
@@ -58,6 +66,7 @@ export function FeatureScalingLab({ language }: Props) {
           font: { color: "#d8e3f4" },
           margin: { l: 25, r: 20, b: 45, t: 10 },
           xaxis: {
+            title: symbol,
             range,
             gridcolor: "#22314a",
             zerolinecolor: "#38506f"
@@ -111,9 +120,9 @@ export function FeatureScalingLab({ language }: Props) {
       </div>
 
       <div className="scaling-grid">
-        {miniPlot(raw, language === "hu" ? "Eredeti feature" : "Raw feature")}
-        {miniPlot(minMax, "Min-max [0,1]", [-0.1, 1.1])}
-        {miniPlot(standardized, "Standardization")}
+        {miniPlot(raw, language === "hu" ? "Eredeti jellemző" : "Raw feature", "x", language === "hu" ? "eredeti jellemzőérték" : "raw feature value")}
+        {miniPlot(minMax, "Min-max [0,1]", "x_minmax", language === "hu" ? "minimum–maximum skálázott érték" : "min-max scaled value", [-0.1, 1.1])}
+        {miniPlot(standardized, language === "hu" ? "Standardizálás" : "Standardization", "x_std", language === "hu" ? "standardizált érték" : "standardized value")}
       </div>
 
       <div className="metric-grid">
@@ -139,7 +148,7 @@ export function FeatureScalingLab({ language }: Props) {
         language={language}
         axes={[
           {
-            label: language === "hu" ? "x-axis mindhárom ploton" : "x-axis on all three plots",
+            label: language === "hu" ? "X tengely mindhárom diagramon" : "X-axis on all three plots",
             meaning: language === "hu"
               ? "Ugyanannak a feature-nek az értéke különböző reprezentációban: raw, min-max scaled vagy standardized. A függőleges axis itt nem hordoz adatjelentést."
               : "The same feature value under different representations: raw, min-max scaled, or standardized. The vertical axis has no data meaning here."
