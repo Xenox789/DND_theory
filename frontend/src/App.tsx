@@ -234,6 +234,7 @@ export default function App() {
                   setLearnScreen("dashboard");
                 }}
                 onOpenLab={openRelatedLab}
+                hasRelatedLab={(sectionId) => Boolean(sectionLabMap[sectionId])}
               />
             )
           )}
