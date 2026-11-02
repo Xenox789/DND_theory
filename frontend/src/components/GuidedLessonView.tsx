@@ -18,7 +18,7 @@ type Props = {
   initialSectionId?: string;
   onProgressChange: (progress: StudyProgress) => void;
   onBack: () => void;
-  onOpenLab?: () => void;
+  onOpenLab?: (sectionId: string) => void;
 };
 
 function formatReviewDate(value: string | null, language: Language) {
@@ -119,8 +119,8 @@ export function GuidedLessonView({
           <strong>{activeIndex + 1} / {lesson.sections.length}</strong>
         </div>
 
-        {onOpenLab && (
-          <button className="secondary-button inline" onClick={onOpenLab}>
+        {onOpenLab && pedagogy && (
+          <button className="secondary-button inline" onClick={() => onOpenLab(section.id)}>
             {language === "hu" ? "Kapcsolódó szimuláció →" : "Open related lab →"}
           </button>
         )}
