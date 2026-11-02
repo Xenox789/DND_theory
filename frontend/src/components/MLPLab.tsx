@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
 import { SimulationGuide } from "./SimulationGuide";
+import { PlotAxisKey } from "./PlotAxisKey";
 
 type Props = {
   language: Language;
@@ -329,7 +330,14 @@ export function MLPLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Gyakori aktivációs függvények" : "Popular activation functions"}</h2>\n          <p className="plot-description">{language === "hu" ? "Vízszintes tengely: z, vagyis a neuron aktiváció előtti lineáris pontszáma. Függőleges tengely: g(z), az aktivációs függvény kimenete." : "Horizontal axis: pre-activation z. Vertical axis: activation output g(z)."}</p>
+          <h2>{language === "hu" ? "Gyakori aktivációs függvények" : "Popular activation functions"}</h2>\n          <p className="plot-description">{language === "hu" ? "Az X tengely z, a neuron preaktivációja. Az Y tengely g(z), vagyis az aktivációs függvény kimenete." : "X is pre-activation z. Y is g(z), the activation-function output."}</p>
+          <PlotAxisKey
+            language={language}
+            items={[
+              { axis: "X", symbol: "z", meaning: language === "hu" ? "preaktiváció (pre-activation)" : "pre-activation" },
+              { axis: "Y", symbol: "g(z)", meaning: language === "hu" ? "aktiváció utáni kimenet" : "activation output" }
+            ]}
+          />
           <Plot
             data={activationCurves}
             layout={{
