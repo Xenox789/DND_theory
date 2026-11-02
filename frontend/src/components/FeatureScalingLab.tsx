@@ -51,7 +51,7 @@ export function FeatureScalingLab({ language }: Props) {
             x: values,
             y: values.map(() => 0),
             type: "scatter",
-            mode: "markers+text",
+            mode: "text+markers",
             text: values.map((value) => value.toFixed(2)),
             textposition: "top center",
             marker: { size: 11 },
