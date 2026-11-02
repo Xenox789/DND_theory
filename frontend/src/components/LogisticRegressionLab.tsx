@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
 import { SimulationGuide } from "./SimulationGuide";
+import { PlotAxisKey } from "./PlotAxisKey";
 
 type Props = {
   language: Language;
@@ -347,7 +348,16 @@ export function LogisticRegressionLab({ language }: Props) {
         </div>
 
         <div className="plot-card">
-          <h2>{language === "hu" ? "3D valószínűségi felület" : "3D probability surface"}</h2>\n          <p className="plot-description">{language === "hu" ? "A két vízszintes tengely a két bemeneti jellemző, a magasság pedig az 1-es osztály becsült valószínűsége." : "The horizontal axes are the two input features and height is the predicted probability of class 1."}</p>
+          <h2>{language === "hu" ? "3D valószínűségi felület" : "3D probability surface"}</h2>\n          <p className="plot-description">{language === "hu" ? "Az X és Y tengely a két bemeneti jellemző. A Z tengely és a színskála ugyanazt mutatja: hθ(x₁,x₂), vagyis az 1-es osztály becsült valószínűségét." : "X and Y are the two input features. The Z axis and color scale both show hθ(x₁,x₂), the predicted probability of class 1."}</p>
+          <PlotAxisKey
+            language={language}
+            items={[
+              { axis: "X", symbol: "x₁", meaning: language === "hu" ? "első bemeneti jellemző (feature)" : "first input feature" },
+              { axis: "Y", symbol: "x₂", meaning: language === "hu" ? "második bemeneti jellemző (feature)" : "second input feature" },
+              { axis: "Z", symbol: "hθ(x₁,x₂)", meaning: language === "hu" ? "az 1-es osztály becsült valószínűsége" : "predicted probability of class 1" },
+              { axis: language === "hu" ? "SZÍN" : "COLOR", symbol: "hθ(x₁,x₂)", meaning: language === "hu" ? "ugyanaz a valószínűség színnel kódolva" : "the same probability encoded by color" }
+            ]}
+          />
           <Plot
             data={[
               {
@@ -355,7 +365,8 @@ export function LogisticRegressionLab({ language }: Props) {
                 y: grid,
                 z: surface,
                 type: "surface",
-                name: "hθ(x₁,x₂)"
+                name: "hθ(x₁,x₂)",
+                colorbar: { title: { text: language === "hu" ? "hθ(x₁,x₂) — valószínűség" : "hθ(x₁,x₂) — probability" } }
               }
             ]}
             layout={{
@@ -364,9 +375,9 @@ export function LogisticRegressionLab({ language }: Props) {
               font: { color: "#d8e3f4" },
               margin: { l: 10, r: 10, b: 10, t: 10 },
               scene: {
-                xaxis: { title: "x₁" },
-                yaxis: { title: "x₂" },
-                zaxis: { title: "h", range: [0, 1] },
+                xaxis: { title: language === "hu" ? "x₁ — 1. jellemző" : "x₁ — feature 1" },
+                yaxis: { title: language === "hu" ? "x₂ — 2. jellemző" : "x₂ — feature 2" },
+                zaxis: { title: language === "hu" ? "hθ(x₁,x₂) — becsült valószínűség" : "hθ(x₁,x₂) — predicted probability", range: [0, 1] },
                 bgcolor: "rgba(0,0,0,0)"
               }
             }}
@@ -382,7 +393,7 @@ export function LogisticRegressionLab({ language }: Props) {
           { label: "2D x-axis: x₁", meaning: language === "hu" ? "Az első input feature." : "The first input feature." },
           { label: "2D y-axis: x₂", meaning: language === "hu" ? "A második input feature." : "The second input feature." },
           { label: "3D x/y axes: x₁,x₂", meaning: language === "hu" ? "Ugyanaz a két-feature-es input space." : "The same two-feature input space." },
-          { label: "3D z-axis: hθ(x₁,x₂)", meaning: language === "hu" ? "Az adott feature-párhoz becsült class-1 probability." : "Predicted class-1 probability for that feature pair." }
+          { label: language === "hu" ? "3D Z tengely: hθ(x₁,x₂)" : "3D Z-axis: hθ(x₁,x₂)", meaning: language === "hu" ? "Az adott jellemzőpárhoz tartozó, 1-es osztályra becsült valószínűség. A színskála ugyanezt az értéket mutatja." : "Predicted class-1 probability for that feature pair. The color scale shows the same quantity." }
         ]}
         terms={[
           { label: "decision boundary", meaning: language === "hu" ? "Az inputok halmaza, ahol hθ(x)=0.5." : "The set of inputs where hθ(x)=0.5." },
