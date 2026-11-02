@@ -148,10 +148,20 @@ export function FeatureScalingLab({ language }: Props) {
         language={language}
         axes={[
           {
-            label: language === "hu" ? "X tengely mindhárom diagramon" : "X-axis on all three plots",
-            meaning: language === "hu"
-              ? "Ugyanannak a feature-nek az értéke különböző reprezentációban: raw, min-max scaled vagy standardized. A függőleges axis itt nem hordoz adatjelentést."
-              : "The same feature value under different representations: raw, min-max scaled, or standardized. The vertical axis has no data meaning here."
+            label: language === "hu" ? "1. X tengely: x" : "1st X-axis: x",
+            meaning: language === "hu" ? "Az eredeti jellemzőérték (raw feature value)." : "The raw feature value."
+          },
+          {
+            label: language === "hu" ? "2. X tengely: x_minmax" : "2nd X-axis: x_minmax",
+            meaning: language === "hu" ? "Ugyanaz az érték minimum–maximum skálázás után." : "The same value after min-max scaling."
+          },
+          {
+            label: language === "hu" ? "3. X tengely: x_std" : "3rd X-axis: x_std",
+            meaning: language === "hu" ? "Ugyanaz az érték standardizálás után." : "The same value after standardization."
+          },
+          {
+            label: language === "hu" ? "Y tengely mindhárom diagramon" : "Y-axis on all three plots",
+            meaning: language === "hu" ? "Nincs adatjelentése; minden pont y=0 helyre kerül, hogy az X értékek egy vonalon összehasonlíthatók legyenek." : "It has no data meaning; all points are placed at y=0 so the X values can be compared on one line."
           }
         ]}
         terms={[
