@@ -2219,3 +2219,117 @@ main { min-width: 0; }
     text-align: center;
   }
 }
+
+
+/* Pedagogical learning-step refinements */
+
+.source-focus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+  margin: 2px 0 14px;
+  color: #7890aa;
+  font-size: 11px;
+}
+
+.source-focus strong {
+  color: #a7bad0;
+}
+
+.active-task-card,
+.misconception-card {
+  border: 1px solid #304867;
+  border-radius: 15px;
+  padding: 18px;
+  background: #0c1929;
+}
+
+.active-task-card {
+  border-color: #34546f;
+  background: linear-gradient(145deg, rgba(16, 36, 53, 0.86), #0c1929);
+}
+
+.misconception-card {
+  border-color: #5c4830;
+  background: linear-gradient(145deg, rgba(42, 31, 20, 0.72), #0c1929);
+}
+
+.layer-badge.practice {
+  background: #173d4e;
+  color: #77d9ef;
+}
+
+.layer-badge.misconception {
+  background: #49331d;
+  color: #ffc879;
+}
+
+.active-task-card h3,
+.misconception-card h3 {
+  margin: 12px 0 14px;
+  color: #eef5ff;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.active-task-answer,
+.misconception-result {
+  margin-top: 13px;
+  padding: 13px 14px;
+  border: 1px solid #2c4964;
+  border-radius: 11px;
+  background: #0d2232;
+  color: #acbfd2;
+  line-height: 1.6;
+}
+
+.active-task-answer strong {
+  color: #7fd8ee;
+}
+
+.active-task-answer p,
+.misconception-result p {
+  margin: 5px 0 0;
+}
+
+.misconception-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.misconception-actions > button:not(.secondary-button) {
+  min-width: 82px;
+  padding: 8px 12px;
+  border: 1px solid #3d4b60;
+  border-radius: 9px;
+  background: #111f31;
+  color: #9fb1c7;
+  font-weight: 800;
+}
+
+.misconception-actions > button:not(.secondary-button).selected {
+  border-color: #d69a4f;
+  background: #2e2417;
+  color: #ffd18a;
+}
+
+.misconception-result.correct {
+  border-color: #2e705a;
+  background: #10271f;
+}
+
+.misconception-result.correct strong {
+  color: #72dcb4;
+}
+
+.misconception-result.incorrect {
+  border-color: #7d454c;
+  background: #2b181c;
+}
+
+.misconception-result.incorrect strong {
+  color: #ff9fa8;
+}
