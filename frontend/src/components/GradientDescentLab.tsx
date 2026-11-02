@@ -224,6 +224,7 @@ export function GradientDescentLab({ language }: Props) {
           { label: language === "hu" ? "X tengely: θ₀" : "X-axis: θ₀", meaning: language === "hu" ? "Az eltolás (bias / intercept) lehetséges értékei." : "Possible values of the bias / intercept." },
           { label: language === "hu" ? "Y tengely: θ₁" : "Y-axis: θ₁", meaning: language === "hu" ? "A meredekség / súly (slope / weight) lehetséges értékei." : "Possible values of the slope / weight." },
           { label: language === "hu" ? "Z tengely: J(θ₀,θ₁)" : "Z-axis: J(θ₀,θ₁)", meaning: language === "hu" ? "Az adott paraméterpárhoz tartozó veszteség (loss). Alacsonyabb érték = jobb illeszkedés." : "Loss for that parameter pair. Lower values mean a better fit." },
+          { label: language === "hu" ? "Színskála: J(θ₀,θ₁)" : "Color scale: J(θ₀,θ₁)", meaning: language === "hu" ? "A felület színe ugyanazt a J veszteségértéket kódolja, mint a Z tengely." : "Surface color encodes the same J loss as the Z axis." },
           { label: language === "hu" ? "Trajectory" : "Trajectory", meaning: language === "hu" ? "A successive gradient-descent update-ek útvonala a loss surface-en." : "The path of successive gradient-descent updates across the loss surface." }
         ]}
         terms={[
