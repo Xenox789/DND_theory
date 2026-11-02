@@ -141,7 +141,14 @@ export function LogisticRegressionLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Egydimenziós logisztikus hipotézis" : "Univariate sigmoid hypothesis"}</h2>\n          <p className="plot-description">{language === "hu" ? "Vízszintes tengely: bemeneti jellemző (x). Függőleges tengely: az 1-es osztály becsült valószínűsége hθ(x)." : "Horizontal axis: input feature x. Vertical axis: estimated probability hθ(x) of class 1."}</p>
+          <h2>{language === "hu" ? "Egydimenziós logisztikus hipotézis" : "Univariate sigmoid hypothesis"}</h2>\n          <p className="plot-description">{language === "hu" ? "Az X tengely a bemeneti jellemző x. Az Y tengely hθ(x), vagyis az 1-es osztály becsült valószínűsége." : "X is the input feature x. Y is hθ(x), the predicted probability of class 1."}</p>
+          <PlotAxisKey
+            language={language}
+            items={[
+              { axis: "X", symbol: "x", meaning: language === "hu" ? "bemeneti jellemző (input feature)" : "input feature" },
+              { axis: "Y", symbol: "hθ(x)", meaning: language === "hu" ? "az 1-es osztály becsült valószínűsége" : "predicted probability of class 1" }
+            ]}
+          />
           <Plot
             data={[
               {
@@ -306,7 +313,15 @@ export function LogisticRegressionLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Bemeneti sík és döntési határ" : "Input plane + boundary"}</h2>\n          <p className="plot-description">{language === "hu" ? "Minden pont egy két jellemzőből álló adatpont. A vonal azokat a bemeneteket jelöli, amelyeknél a modell 0,5 valószínűséget ad." : "Each point is one example with two features. The line contains inputs for which the model predicts probability 0.5."}</p>
+          <h2>{language === "hu" ? "Bemeneti sík és döntési határ" : "Input plane + boundary"}</h2>\n          <p className="plot-description">{language === "hu" ? "Minden pont egy (x₁,x₂) bemenet. A döntési határ azokat a pontokat köti össze, amelyeknél hθ(x₁,x₂)=0,5." : "Each point is an (x₁,x₂) input. The decision boundary contains points where hθ(x₁,x₂)=0.5."}</p>
+          <PlotAxisKey
+            language={language}
+            items={[
+              { axis: "X", symbol: "x₁", meaning: language === "hu" ? "első bemeneti jellemző" : "first input feature" },
+              { axis: "Y", symbol: "x₂", meaning: language === "hu" ? "második bemeneti jellemző" : "second input feature" },
+              { axis: language === "hu" ? "VONAL" : "LINE", symbol: "hθ(x₁,x₂)=0,5", meaning: language === "hu" ? "döntési határ (decision boundary)" : "decision boundary" }
+            ]}
+          />
           <Plot
             data={[
               {
@@ -339,8 +354,8 @@ export function LogisticRegressionLab({ language }: Props) {
               plot_bgcolor: "rgba(0,0,0,0)",
               font: { color: "#d8e3f4" },
               margin: { l: 45, r: 20, b: 45, t: 10 },
-              xaxis: { title: "x₁", range: [-4, 4], gridcolor: "#22314a" },
-              yaxis: { title: "x₂", range: [-4, 4], gridcolor: "#22314a" }
+              xaxis: { title: language === "hu" ? "x₁ — 1. jellemző" : "x₁ — feature 1", range: [-4, 4], gridcolor: "#22314a" },
+              yaxis: { title: language === "hu" ? "x₂ — 2. jellemző" : "x₂ — feature 2", range: [-4, 4], gridcolor: "#22314a" }
             }}
             config={{ responsive: true, displaylogo: false }}
             style={{ width: "100%", height: "420px" }}
@@ -390,9 +405,9 @@ export function LogisticRegressionLab({ language }: Props) {
       <SimulationGuide
         language={language}
         axes={[
-          { label: "2D x-axis: x₁", meaning: language === "hu" ? "Az első input feature." : "The first input feature." },
-          { label: "2D y-axis: x₂", meaning: language === "hu" ? "A második input feature." : "The second input feature." },
-          { label: "3D x/y axes: x₁,x₂", meaning: language === "hu" ? "Ugyanaz a két-feature-es input space." : "The same two-feature input space." },
+          { label: language === "hu" ? "2D X tengely: x₁" : "2D X-axis: x₁", meaning: language === "hu" ? "Az első bemeneti jellemző (input feature)." : "The first input feature." },
+          { label: language === "hu" ? "2D Y tengely: x₂" : "2D Y-axis: x₂", meaning: language === "hu" ? "A második bemeneti jellemző (input feature)." : "The second input feature." },
+          { label: language === "hu" ? "3D X/Y tengely: x₁, x₂" : "3D X/Y axes: x₁, x₂", meaning: language === "hu" ? "Ugyanaz a két jellemzőből álló bemeneti tér (input space)." : "The same two-feature input space." },
           { label: language === "hu" ? "3D Z tengely: hθ(x₁,x₂)" : "3D Z-axis: hθ(x₁,x₂)", meaning: language === "hu" ? "Az adott jellemzőpárhoz tartozó, 1-es osztályra becsült valószínűség. A színskála ugyanezt az értéket mutatja." : "Predicted class-1 probability for that feature pair. The color scale shows the same quantity." }
         ]}
         terms={[
