@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
 import { SimulationGuide } from "./SimulationGuide";
+import { PlotAxisKey } from "./PlotAxisKey";
 
 type Props = {
   language: Language;
@@ -102,7 +103,14 @@ export function GeneralizationLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Veszteség (loss) a modell összetettségének függvényében" : "Loss vs model complexity"}</h2>\n          <p className="plot-description">{language === "hu" ? "Vízszintes tengely: a modell szemléltető összetettségi szintje. Függőleges: veszteség. A tanítási és validációs görbe eltérése mutatja, mikor kezd romlani az általánosítás." : "Horizontal axis: illustrative model complexity. Vertical axis: loss. The gap between training and validation curves shows when generalization starts to worsen."}</p>
+          <h2>{language === "hu" ? "Veszteség (loss) a modell összetettségének függvényében" : "Loss vs model complexity"}</h2>\n          <p className="plot-description">{language === "hu" ? "Az X tengely egy szemléltető modellösszetettségi skála. Az Y tengelyen J_train és J_val vesztesége látható; a két görbe eltérése jelzi az általánosítás romlását." : "X is an illustrative model-complexity scale. Y shows J_train and J_val losses; the gap indicates worsening generalization."}</p>
+          <PlotAxisKey
+            language={language}
+            items={[
+              { axis: "X", symbol: language === "hu" ? "modellösszetettség" : "model complexity", meaning: language === "hu" ? "szemléltető komplexitási index" : "illustrative complexity index" },
+              { axis: "Y", symbol: "J_train / J_val", meaning: language === "hu" ? "tanítási / validációs veszteség" : "training / validation loss" }
+            ]}
+          />
           <Plot
             data={[
               {
@@ -134,8 +142,8 @@ export function GeneralizationLab({ language }: Props) {
               plot_bgcolor: "rgba(0,0,0,0)",
               font: { color: "#d8e3f4" },
               margin: { l: 50, r: 20, b: 45, t: 10 },
-              xaxis: { title: "model complexity", gridcolor: "#22314a" },
-              yaxis: { title: "loss", gridcolor: "#22314a" }
+              xaxis: { title: language === "hu" ? "modellösszetettség (model complexity)" : "model complexity", gridcolor: "#22314a" },
+              yaxis: { title: "J_train / J_val", gridcolor: "#22314a" }
             }}
             config={{ responsive: true, displaylogo: false }}
             style={{ width: "100%", height: "390px" }}
@@ -174,8 +182,8 @@ export function GeneralizationLab({ language }: Props) {
       <SimulationGuide
         language={language}
         axes={[
-          { label: "x-axis: model complexity", meaning: language === "hu" ? "Szemléltető scale arra, mennyire nagy/flexible a model capacity." : "Illustrative scale for how large/flexible the model capacity is." },
-          { label: "y-axis: loss", meaning: language === "hu" ? "Prediction error összefoglaló értéke; alacsonyabb jobb." : "Aggregate prediction-error value; lower is better." },
+          { label: language === "hu" ? "X tengely: modellösszetettség" : "X-axis: model complexity", meaning: language === "hu" ? "Szemléltető skála arra, mekkora a modell kapacitása (model capacity)." : "Illustrative scale for model capacity." },
+          { label: language === "hu" ? "Y tengely: J_train / J_val" : "Y-axis: J_train / J_val", meaning: language === "hu" ? "Tanítási és validációs veszteség; alacsonyabb érték jobb." : "Training and validation loss; lower is better." },
           { label: "J_train", meaning: language === "hu" ? "Loss a training seten." : "Loss on the training set." },
           { label: "J_val", meaning: language === "hu" ? "Loss a validation seten, model selectionhez." : "Loss on the validation set, used for model selection." }
         ]}
@@ -230,7 +238,14 @@ export function GeneralizationLab({ language }: Props) {
       </div>
 
       <div className="plot-card">
-        <h2>{language === "hu" ? "Tanítási és validációs veszteség" : "Training vs validation loss"}</h2>\n        <p className="plot-description">{language === "hu" ? "Vízszintes tengely: tanítási epoch. Függőleges: veszteség. Ha a J_train tovább csökken, de a J_val emelkedni kezd, az túlillesztésre utal." : "Horizontal axis: training epoch. Vertical axis: loss. If J_train keeps falling while J_val rises, overfitting is worsening."}</p>
+        <h2>{language === "hu" ? "Tanítási és validációs veszteség" : "Training vs validation loss"}</h2>\n        <p className="plot-description">{language === "hu" ? "Az X tengely a tanítási epoch. Az Y tengelyen J_train és J_val látható. Ha J_train csökken, miközben J_val nő, a modell egyre inkább túlilleszt." : "X is training epoch. Y shows J_train and J_val. If J_train falls while J_val rises, overfitting is worsening."}</p>
+        <PlotAxisKey
+          language={language}
+          items={[
+            { axis: "X", symbol: "epoch", meaning: language === "hu" ? "tanítási kör / időindex" : "training iteration index" },
+            { axis: "Y", symbol: "J_train / J_val", meaning: language === "hu" ? "tanítási / validációs veszteség" : "training / validation loss" }
+          ]}
+        />
         <Plot
           data={[
             {
@@ -270,8 +285,8 @@ export function GeneralizationLab({ language }: Props) {
             plot_bgcolor: "rgba(0,0,0,0)",
             font: { color: "#d8e3f4" },
             margin: { l: 50, r: 20, b: 45, t: 10 },
-            xaxis: { title: "epoch", gridcolor: "#22314a" },
-            yaxis: { title: "loss", gridcolor: "#22314a" }
+            xaxis: { title: language === "hu" ? "epoch — tanítási kör" : "epoch", gridcolor: "#22314a" },
+            yaxis: { title: "J_train / J_val", gridcolor: "#22314a" }
           }}
           config={{ responsive: true, displaylogo: false }}
           style={{ width: "100%", height: "430px" }}
@@ -281,8 +296,8 @@ export function GeneralizationLab({ language }: Props) {
       <SimulationGuide
         language={language}
         axes={[
-          { label: "x-axis: epoch", meaning: language === "hu" ? "Hányszor haladt végig a training process a training data-n; itt szemléltető training-time index." : "How far training has progressed; here it acts as an illustrative training-time index." },
-          { label: "y-axis: loss", meaning: language === "hu" ? "Training vagy validation error." : "Training or validation error." }
+          { label: language === "hu" ? "X tengely: epoch" : "X-axis: epoch", meaning: language === "hu" ? "A tanítás előrehaladásának szemléltető időindexe." : "Illustrative training-progress index." },
+          { label: language === "hu" ? "Y tengely: J_train / J_val" : "Y-axis: J_train / J_val", meaning: language === "hu" ? "A tanítási vagy validációs veszteség értéke." : "Training or validation loss." }
         ]}
         terms={[
           { label: "best epoch", meaning: language === "hu" ? "Az epoch, ahol J_val a legalacsonyabb ebben a szintetikus példában." : "The epoch where J_val is lowest in this synthetic example." },
