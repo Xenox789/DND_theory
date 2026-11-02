@@ -19,6 +19,7 @@ type Props = {
   onProgressChange: (progress: StudyProgress) => void;
   onBack: () => void;
   onOpenLab?: (sectionId: string) => void;
+  hasRelatedLab?: (sectionId: string) => boolean;
 };
 
 function formatReviewDate(value: string | null, language: Language) {
@@ -40,7 +41,8 @@ export function GuidedLessonView({
   initialSectionId,
   onProgressChange,
   onBack,
-  onOpenLab
+  onOpenLab,
+  hasRelatedLab
 }: Props) {
   const initialIndex = Math.max(
     0,
@@ -119,7 +121,7 @@ export function GuidedLessonView({
           <strong>{activeIndex + 1} / {lesson.sections.length}</strong>
         </div>
 
-        {onOpenLab && pedagogy && (
+        {onOpenLab && hasRelatedLab?.(section.id) && (
           <button className="secondary-button inline" onClick={() => onOpenLab(section.id)}>
             {language === "hu" ? "Kapcsolódó szimuláció →" : "Open related lab →"}
           </button>
