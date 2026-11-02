@@ -102,7 +102,14 @@ export function LinearRegressionLab({ language }: Props) {
 
       <div className="plot-grid">
         <div className="plot-card">
-          <h2>{language === "hu" ? "Tanítóadatok és lineáris becslés" : "Training data and linear hypothesis"}</h2>\n          <p className="plot-description">{language === "hu" ? "Vízszintes tengely: bemenet (x). Függőleges tengely: valódi címke (y) és a modell becslése (ŷ)." : "Horizontal axis: input x. Vertical axis: true label y and model prediction ŷ."}</p>
+          <h2>{language === "hu" ? "Tanítóadatok és lineáris becslés" : "Training data and linear hypothesis"}</h2>\n          <p className="plot-description">{language === "hu" ? "Az X tengely a bemeneti jellemző x. Az Y tengelyen a pontok valódi címkéi y és a lineáris modell becslései ŷ jelennek meg." : "X is the input feature x. On Y, the points are true labels y and the line shows predictions ŷ."}</p>
+          <PlotAxisKey
+            language={language}
+            items={[
+              { axis: "X", symbol: "x", meaning: language === "hu" ? "bemeneti jellemző (input feature)" : "input feature" },
+              { axis: "Y", symbol: "y / ŷ", meaning: language === "hu" ? "valódi címke / modellbecslés" : "true label / model prediction" }
+            ]}
+          />
           <Plot
             data={[
               {
@@ -188,13 +195,13 @@ export function LinearRegressionLab({ language }: Props) {
         language={language}
         axes={[
           {
-            label: language === "hu" ? "Bal plot x-axis: x" : "Left plot x-axis: x",
+            label: language === "hu" ? "Bal diagram X tengely: x" : "Left plot X-axis: x",
             meaning: language === "hu"
               ? "Az input feature értéke. A szintetikus adatokban ez 20–80 közötti szám; a képletben ezt adjuk a modellnek bemenetként."
               : "The input-feature value. In the synthetic data it ranges from 20 to 80; this is what the model receives as input."
           },
           {
-            label: language === "hu" ? "Bal plot y-axis: y / ŷ" : "Left plot y-axis: y / ŷ",
+            label: language === "hu" ? "Bal diagram Y tengely: y / ŷ" : "Left plot Y-axis: y / ŷ",
             meaning: language === "hu"
               ? "A pontoknál y a true label, az egyenesnél ŷ a model prediction."
               : "For the points, y is the true label; for the line, ŷ is the model prediction."
