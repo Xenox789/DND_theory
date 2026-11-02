@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Plot from "react-plotly.js";
 import type { Language } from "../types";
 import { SimulationGuide } from "./SimulationGuide";
+import { PlotAxisKey } from "./PlotAxisKey";
 
 type Props = {
   language: Language;
@@ -168,7 +169,16 @@ export function GradientDescentLab({ language }: Props) {
       </div>
 
       <div className="plot-card">
-        <h2>{language === "hu" ? "3D veszteségfelület és a gradienscsökkentés útvonala" : "3D Loss Surface + Gradient Descent trajectory"}</h2>\n        <p className="plot-description">{language === "hu" ? "A vízszintes két tengely a modell két paramétere. A magasság a veszteség. A pontsor azt mutatja, hogyan változnak a paraméterek minden frissítés után." : "The two horizontal axes are the model parameters and height is loss. The path shows how the parameters change after each update."}</p>
+        <h2>{language === "hu" ? "3D veszteségfelület és a gradienscsökkentés útvonala" : "3D Loss Surface + Gradient Descent trajectory"}</h2>\n        <p className="plot-description">{language === "hu" ? "Az X és Y tengely a két modellparaméter, a Z tengely pedig J(θ₀,θ₁), vagyis a veszteség. A felület színskálája ugyanazt a J értéket kódolja." : "X and Y are the model parameters; Z is J(θ₀,θ₁), the loss. The surface color scale encodes the same J value."}</p>
+        <PlotAxisKey
+          language={language}
+          items={[
+            { axis: "X", symbol: "θ₀", meaning: language === "hu" ? "eltolás (bias / intercept)" : "bias / intercept" },
+            { axis: "Y", symbol: "θ₁", meaning: language === "hu" ? "meredekség / súly (slope / weight)" : "slope / weight" },
+            { axis: "Z", symbol: "J(θ₀,θ₁)", meaning: language === "hu" ? "veszteség (loss)" : "loss" },
+            { axis: language === "hu" ? "SZÍN" : "COLOR", symbol: "J(θ₀,θ₁)", meaning: language === "hu" ? "ugyanaz a veszteségérték színnel kódolva" : "the same loss value encoded by color" }
+          ]}
+        />
         <Plot
           data={[
             {
@@ -177,7 +187,8 @@ export function GradientDescentLab({ language }: Props) {
               z: surface,
               type: "surface",
               opacity: 0.82,
-              name: "J(θ₀, θ₁)"
+              name: "J(θ₀, θ₁)",
+              colorbar: { title: { text: language === "hu" ? "J(θ₀,θ₁) — veszteség" : "J(θ₀,θ₁) — loss" } }
             },
             {
               x: history.map((point) => point.theta0),
@@ -196,9 +207,9 @@ export function GradientDescentLab({ language }: Props) {
             font: { color: "#d8e3f4" },
             margin: { l: 10, r: 10, b: 10, t: 10 },
             scene: {
-              xaxis: { title: "θ₀" },
-              yaxis: { title: "θ₁" },
-              zaxis: { title: "J" },
+              xaxis: { title: language === "hu" ? "θ₀ — eltolás" : "θ₀ — bias" },
+              yaxis: { title: language === "hu" ? "θ₁ — meredekség / súly" : "θ₁ — slope / weight" },
+              zaxis: { title: language === "hu" ? "J(θ₀,θ₁) — veszteség" : "J(θ₀,θ₁) — loss" },
               bgcolor: "rgba(0,0,0,0)"
             }
           }}
@@ -210,9 +221,9 @@ export function GradientDescentLab({ language }: Props) {
       <SimulationGuide
         language={language}
         axes={[
-          { label: "x-axis: θ₀", meaning: language === "hu" ? "A bias / intercept parameter lehetséges értékei." : "Possible values of the bias / intercept parameter." },
-          { label: "y-axis: θ₁", meaning: language === "hu" ? "A slope / weight parameter lehetséges értékei." : "Possible values of the slope / weight parameter." },
-          { label: "z-axis: J(θ₀,θ₁)", meaning: language === "hu" ? "Az adott parameter pairhez tartozó loss. Alacsonyabb pont = jobb fit." : "Loss for that parameter pair. Lower points mean a better fit." },
+          { label: language === "hu" ? "X tengely: θ₀" : "X-axis: θ₀", meaning: language === "hu" ? "Az eltolás (bias / intercept) lehetséges értékei." : "Possible values of the bias / intercept." },
+          { label: language === "hu" ? "Y tengely: θ₁" : "Y-axis: θ₁", meaning: language === "hu" ? "A meredekség / súly (slope / weight) lehetséges értékei." : "Possible values of the slope / weight." },
+          { label: language === "hu" ? "Z tengely: J(θ₀,θ₁)" : "Z-axis: J(θ₀,θ₁)", meaning: language === "hu" ? "Az adott paraméterpárhoz tartozó veszteség (loss). Alacsonyabb érték = jobb illeszkedés." : "Loss for that parameter pair. Lower values mean a better fit." },
           { label: language === "hu" ? "Trajectory" : "Trajectory", meaning: language === "hu" ? "A successive gradient-descent update-ek útvonala a loss surface-en." : "The path of successive gradient-descent updates across the loss surface." }
         ]}
         terms={[
