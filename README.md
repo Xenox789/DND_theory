@@ -2,7 +2,7 @@
 
 Interactive bilingual (HU/EN) study application for ELTE Deep Network Development – Theory Test 1.
 
-## Current status — v0.9
+## Current status — v1.0
 
 Implemented and pushed to `main`:
 
@@ -132,3 +132,26 @@ Planned next:
 1. expand the question bank further toward 200–250 questions
 2. weak-topic tracking and mock-exam mode
 3. topic filters and dedicated Theory Test simulation mode
+
+## Guided learning v1.0
+
+The Learn area is no longer a passive two-column note page. It now uses a step-based guided-learning flow.
+
+Each concept is presented in separate pedagogical layers:
+
+- **COURSE** — source-grounded course / Theory Test material.
+- **UNDERSTANDING** — intuition, why the concept matters, worked examples, and conceptual connections that help understanding.
+- **DEEP DIVE** — clearly marked illustrative/application context that is not presented as a separate exam requirement.
+
+The learning flow combines:
+
+- think-first prompts before revealing explanations;
+- formula-symbol reveal instead of showing every definition immediately;
+- self-explanation prompts;
+- source-grounded retrieval checkpoints mapped to the current concept;
+- simple local spaced-review scheduling (Again / Hard / Good);
+- chapter mastery / due-review tracking stored in browser localStorage;
+- interleaved comparison exercises for commonly confused concepts;
+- one-click navigation to related interactive labs.
+
+The review scheduler is intentionally simple and adaptive. Its intervals are a study aid, not claimed to be a uniquely optimal scientific scheduling algorithm.
