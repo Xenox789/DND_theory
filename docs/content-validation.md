@@ -803,3 +803,22 @@ If extracted PDF text omits a formula, diagram label, matrix dimension, or other
 3. only then add the content to the app.
 
 Do not infer exam-specific notation from generic ML conventions when the course uses its own convention.
+
+### Guided-learning pedagogy validation
+
+Learning-step prompts must be validated separately from the lesson prose.
+
+Rules:
+
+- Every lesson section must have exactly one pedagogy profile.
+- Prediction prompts should ask a source-supported distinction, calculation, or interpretation rather than a generic reflection question when possible.
+- ACTIVE PRACTICE answers must be derivable from the course material or the official Theory Test examples.
+- MISCONCEPTION CHECK statements must target distinctions explicitly supported by the course/example questions.
+- Extra intuition belongs in UNDERSTANDING; application context not required by the exam belongs in DEEP DIVE.
+- Do not silently replace course conventions with textbook/library conventions. Example: this course uses J(theta)=1/(2m)*sum(error^2) and calls it MSE loss.
+- Keep parameter/data distinctions explicit: X/x are data; theta contains learned model parameters.
+- Keep model-parameter and hyperparameter optimization separate.
+- Keep backpropagation (gradient computation) separate from the optimizer parameter update.
+- For NumPy, preserve the official scope exclusion: ndarray.strides and stride tricks are not part of Theory Test 1.
+
+The frontend build runs scripts/check-pedagogy-consistency.mjs to verify section/profile coverage and retrieval-question references.
