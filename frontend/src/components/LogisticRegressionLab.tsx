@@ -408,7 +408,8 @@ export function LogisticRegressionLab({ language }: Props) {
           { label: language === "hu" ? "2D X tengely: x₁" : "2D X-axis: x₁", meaning: language === "hu" ? "Az első bemeneti jellemző (input feature)." : "The first input feature." },
           { label: language === "hu" ? "2D Y tengely: x₂" : "2D Y-axis: x₂", meaning: language === "hu" ? "A második bemeneti jellemző (input feature)." : "The second input feature." },
           { label: language === "hu" ? "3D X/Y tengely: x₁, x₂" : "3D X/Y axes: x₁, x₂", meaning: language === "hu" ? "Ugyanaz a két jellemzőből álló bemeneti tér (input space)." : "The same two-feature input space." },
-          { label: language === "hu" ? "3D Z tengely: hθ(x₁,x₂)" : "3D Z-axis: hθ(x₁,x₂)", meaning: language === "hu" ? "Az adott jellemzőpárhoz tartozó, 1-es osztályra becsült valószínűség. A színskála ugyanezt az értéket mutatja." : "Predicted class-1 probability for that feature pair. The color scale shows the same quantity." }
+          { label: language === "hu" ? "3D Z tengely: hθ(x₁,x₂)" : "3D Z-axis: hθ(x₁,x₂)", meaning: language === "hu" ? "Az adott jellemzőpárhoz tartozó, 1-es osztályra becsült valószínűség." : "Predicted class-1 probability for that feature pair." },
+          { label: language === "hu" ? "Színskála: hθ(x₁,x₂)" : "Color scale: hθ(x₁,x₂)", meaning: language === "hu" ? "A felület színe ugyanazt a 0–1 közötti valószínűséget kódolja, mint a Z tengely." : "Surface color encodes the same 0–1 probability as the Z axis." }
         ]}
         terms={[
           { label: "decision boundary", meaning: language === "hu" ? "Az inputok halmaza, ahol hθ(x)=0.5." : "The set of inputs where hθ(x)=0.5." },
