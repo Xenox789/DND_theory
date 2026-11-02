@@ -8,6 +8,7 @@ import {
 } from "../study/progress";
 import { RecallCheckpoint } from "./RecallCheckpoint";
 import { checkpointForSection } from "../study/checkpoints";
+import { pedagogyForSection } from "../study/pedagogy";
 
 type Props = {
   lesson: Lesson;
@@ -55,6 +56,9 @@ export function GuidedLessonView({
   const [deepDiveVisible, setDeepDiveVisible] = useState(false);
   const [selfExplanation, setSelfExplanation] = useState("");
   const [compareVisible, setCompareVisible] = useState(false);
+  const [activeTaskVisible, setActiveTaskVisible] = useState(false);
+  const [misconceptionChoice, setMisconceptionChoice] = useState<boolean | null>(null);
+  const [misconceptionChecked, setMisconceptionChecked] = useState(false);
 
   useEffect(() => {
     if (!initialSectionId) return;
@@ -65,6 +69,7 @@ export function GuidedLessonView({
   const section = lesson.sections[activeIndex];
   const sectionProgress = getSectionProgress(progress, lesson.id, section.id);
   const nextReview = formatReviewDate(sectionProgress.nextReview, language);
+  const pedagogy = pedagogyForSection(section.id);
 
   const checkpoint = checkpointForSection(questions, section.id);
 
@@ -83,6 +88,9 @@ export function GuidedLessonView({
     setDeepDiveVisible(false);
     setSelfExplanation("");
     setCompareVisible(false);
+    setActiveTaskVisible(false);
+    setMisconceptionChoice(null);
+    setMisconceptionChecked(false);
   };
 
   const goTo = (index: number) => {
@@ -191,14 +199,18 @@ export function GuidedLessonView({
                 </span>
               </div>
               <h3>
-                {language === "hu"
-                  ? section.formula
-                    ? "Mielőtt felfeded: mire szolgálhat ez a fogalom, és a jelölések közül mit tudnál már most megnevezni?"
-                    : "Mielőtt felfeded: egy mondatban mondd el, milyen problémát oldhat meg ez a fogalom."
-                  : section.formula
-                    ? "Before revealing: what might this concept do, and which symbols can you already identify?"
-                    : "Before revealing: explain in one sentence what problem this concept might solve."}
+                {pedagogy
+                  ? pedagogy.prediction[language]
+                  : language === "hu"
+                    ? "Mielőtt felfeded: fogalmazd meg saját szavaiddal, mit vársz ettől a fogalomtól."
+                    : "Before revealing: explain in your own words what you expect this concept to mean."}
               </h3>
+              {pedagogy && (
+                <div className="source-focus">
+                  <strong>{language === "hu" ? "Forrásfókusz" : "Source focus"}</strong>
+                  <span>{pedagogy.sourceFocus[language]}</span>
+                </div>
+              )}
               {!courseVisible && (
                 <button className="primary-button" onClick={() => setCourseVisible(true)}>
                   {language === "hu" ? "Kurzusmagyarázat felfedése" : "Reveal course explanation"}
@@ -266,6 +278,87 @@ export function GuidedLessonView({
                           : term.term}
                       </span>
                     ))}
+                  </div>
+                )}
+              </section>
+            )}
+
+
+            {courseVisible && pedagogy?.activeTask && (
+              <section className="active-task-card">
+                <div className="learning-layer-header">
+                  <span className="layer-badge practice">ACTIVE PRACTICE</span>
+                  <span>
+                    {language === "hu"
+                      ? "Előbb számold/mondd végig, utána fedd fel."
+                      : "Work it out first, then reveal the answer."}
+                  </span>
+                </div>
+                <h3>{pedagogy.activeTask.prompt[language]}</h3>
+                <button
+                  className="secondary-button inline"
+                  onClick={() => setActiveTaskVisible((value) => !value)}
+                >
+                  {activeTaskVisible
+                    ? language === "hu" ? "Megoldás elrejtése" : "Hide answer"
+                    : language === "hu" ? "Megoldás felfedése" : "Reveal answer"}
+                </button>
+                {activeTaskVisible && (
+                  <div className="active-task-answer">
+                    <strong>{language === "hu" ? "Ellenőrzés" : "Check"}</strong>
+                    <p>{pedagogy.activeTask.answer[language]}</p>
+                  </div>
+                )}
+              </section>
+            )}
+
+            {courseVisible && pedagogy?.misconception && (
+              <section className="misconception-card">
+                <div className="learning-layer-header">
+                  <span className="layer-badge misconception">MISCONCEPTION CHECK</span>
+                  <span>
+                    {language === "hu"
+                      ? "Igaz vagy hamis? Dönts a magyarázat felfedése előtt."
+                      : "True or false? Decide before revealing the explanation."}
+                  </span>
+                </div>
+                <h3>{pedagogy.misconception.statement[language]}</h3>
+                <div className="misconception-actions">
+                  <button
+                    className={misconceptionChoice === true ? "selected" : ""}
+                    onClick={() => {
+                      if (!misconceptionChecked) setMisconceptionChoice(true);
+                    }}
+                  >
+                    {language === "hu" ? "Igaz" : "True"}
+                  </button>
+                  <button
+                    className={misconceptionChoice === false ? "selected" : ""}
+                    onClick={() => {
+                      if (!misconceptionChecked) setMisconceptionChoice(false);
+                    }}
+                  >
+                    {language === "hu" ? "Hamis" : "False"}
+                  </button>
+                  <button
+                    className="secondary-button inline"
+                    disabled={misconceptionChoice === null}
+                    onClick={() => setMisconceptionChecked(true)}
+                  >
+                    {language === "hu" ? "Ellenőrzés" : "Check"}
+                  </button>
+                </div>
+                {misconceptionChecked && (
+                  <div className={
+                    "misconception-result " +
+                    (misconceptionChoice === pedagogy.misconception.isTrue ? "correct" : "incorrect")
+                  }>
+                    <strong>
+                      {misconceptionChoice === pedagogy.misconception.isTrue
+                        ? language === "hu" ? "Helyes." : "Correct."
+                        : language === "hu" ? "Nem ez a helyes értelmezés." : "That is not the correct interpretation."}
+                    </strong>
+                    <p>{pedagogy.misconception.explanation[language]}</p>
                   </div>
                 )}
               </section>
