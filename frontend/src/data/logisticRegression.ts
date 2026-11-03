@@ -219,7 +219,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Az előadás szerint logisztikus regresszió (logistic regression) bináris osztályozás (binary classification) módszer (method). A sigmoid miatt valószínűség (probability) becslést állít elő 0 és 1 között.",
+      hu: "Az előadás (lecture) szerint logisztikus regresszió (logistic regression) bináris osztályozás (binary classification) módszer (method). A sigmoid miatt valószínűség (probability) becslést állít elő 0 és 1 között.",
       en: "According to the lecture, logistic regression is a binary-classification method. The sigmoid produces a probability estimate between 0 and 1."
     }
   },
@@ -257,7 +257,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A kurzus megfogalmazása: logisztikus regresszió (logistic regression) hipotézis (hypothesis) = Sigmoid ∘ lineáris regresszió (linear regression). Emiatt maga a teljes hipotézis (hypothesis) nem lineáris.",
+      hu: "A kurzus (course) megfogalmazása: logisztikus regresszió (logistic regression) hipotézis (hypothesis) = Sigmoid ∘ lineáris regresszió (linear regression). Emiatt maga a teljes hipotézis (hypothesis) nem lineáris.",
       en: "The course states: Logistic regression hypothesis = Sigmoid ∘ Linear regression. Therefore, the complete hypothesis itself is not linear."
     }
   },
@@ -265,7 +265,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q4",
     topics: ["decision-boundary"],
     prompt: {
-      hu: "A kurzus 0.5 thresholdja mellett mely állítások igazak?",
+      hu: "A kurzus (course) 0.5 thresholdja mellett mely állítások igazak?",
       en: "With the course's 0.5 threshold, which statements are true?"
     },
     choices: [
@@ -284,18 +284,18 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q5",
     topics: ["decision-boundary", "geometry"],
     prompt: {
-      hu: "Mely geometriai állítások igazak a kurzus logisztikus regresszió (logistic regression) (regression) példáiban?",
+      hu: "Mely geometriai állítások igazak a kurzus (course) logisztikus regresszió (logistic regression) (regression) példáiban?",
       en: "Which geometric statements are true in the course logistic-regression examples?"
     },
     choices: [
-      { id: "a", text: { hu: "Egy bemeneti változó (bemeneti változó) esetén a döntési határ (decision boundary) egy pont lehet az x tengelyen.", en: "With one bemeneti változó, the decision boundary can be a point on the x-axis." } },
-      { id: "b", text: { hu: "Két bemeneti változó (bemeneti változó) esetén a kétváltozós döntési határ (decision boundary) egy egyenes (line) a bemeneti síkban (input plane).", en: "With two bemeneti változók, the bivariate decision boundary is a line in the input plane." } },
+      { id: "a", text: { hu: "Egy bemeneti változó (input variable) esetén a döntési határ (decision boundary) egy pont lehet az x tengelyen.", en: "With one input variable, the decision boundary can be a point on the x-axis." } },
+      { id: "b", text: { hu: "Két bemeneti változó (input variable) esetén a kétváltozós döntési határ (decision boundary) egy egyenes (line) a bemeneti síkban (input plane).", en: "With two input variables, the bivariate decision boundary is a line in the input plane." } },
       { id: "c", text: { hu: "A boundary azokból a bemenetekből (inputs) áll, ahol h=0.5.", en: "The boundary consists of inputs where h=0.5." } },
-      { id: "d", text: { hu: "A döntési határ (decision boundary) a veszteség minimumának 3D görbéje.", en: "The decision boundary is a 3D curve of loss minima." } }
+      { id: "d", text: { hu: "A döntési határ (decision boundary) a veszteség (loss) minimumának 3D görbéje.", en: "The decision boundary is a 3D curve of loss minima." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A döntési határ (decision boundary) bemeneti térbeli (input space) fogalom: {x | h(x)=0.5}. Egy jellemző (feature) esetén pont, két jellemző (feature) esetén a kurzus ábráján egyenes (line).",
+      hu: "A döntési határ (decision boundary) bemeneti térbeli (input space) fogalom: {x | h(x)=0.5}. Egy jellemző (feature) esetén pont, két jellemző (feature) esetén a kurzus (course) ábráján egyenes (line).",
       en: "The decision boundary is defined in input space: {x | h(x)=0.5}. With one feature it is a point; with two features the course shows a line."
     }
   },
@@ -307,15 +307,15 @@ export const logisticRegressionQuestions: Question[] = [
       en: "With 100 patients, 2 blood-test features, and an x₀=1 intercept column, which statements are true?"
     },
     choices: [
-      { id: "a", text: { hu: "X alakja (shape) (100,3).", en: "X has shape (100,3)." } },
-      { id: "b", text: { hu: "θ alakja (shape) (3,).", en: "θ has shape (3,)." } },
-      { id: "c", text: { hu: "Xθ alakja (shape) (100,).", en: "Xθ has shape (100,)." } },
-      { id: "d", text: { hu: "g(Xθ) alakja (shape) (100,).", en: "g(Xθ) has shape (100,)." } },
-      { id: "e", text: { hu: "Két jellemző (feature) miatt pontosan 2 paraméter van.", en: "There are exactly 2 parameters because there are two features." } }
+      { id: "a", text: { hu: "X shape-je (100,3).", en: "X has shape (100,3)." } },
+      { id: "b", text: { hu: "θ shape-je (3,).", en: "θ has shape (3,)." } },
+      { id: "c", text: { hu: "Xθ shape-je (100,).", en: "Xθ has shape (100,)." } },
+      { id: "d", text: { hu: "g(Xθ) shape-je (100,).", en: "g(Xθ) has shape (100,)." } },
+      { id: "e", text: { hu: "Két jellemző (feature) miatt pontosan 2 paraméter (parameter) van.", en: "There are exactly 2 parameters because there are two features." } }
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "2 jellemző (feature) + tengelymetszet / eltolás (intercept) = 3 paraméter és 3 X-oszlop. Mind Xθ, mind az elemenkénti (element-wise) szigmoid kimenete (sigmoid output) egy 100 elemű vektor (vector).",
+      hu: "2 jellemző (feature) + tengelymetszet / eltolás (intercept) = 3 paraméter (parameter) és 3 X-oszlop. Mind Xθ, mind az elemenkénti (element-wise) szigmoid kimenete (sigmoid output) egy 100 elemű vektor (vector).",
       en: "Two features plus the intercept give 3 parameters and 3 columns in X. Both Xθ and its elementwise sigmoid output are 100-element vectors."
     }
   },
@@ -329,12 +329,12 @@ export const logisticRegressionQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "A laborvizsgálati (blood-test) values X-ben vannak.", en: "The blood-test values are in X." } },
       { id: "b", text: { hu: "A disease/healthy címkék (labels) y-ban vannak.", en: "The disease/healthy labels are in y." } },
-      { id: "c", text: { hu: "θ a megtanulandó modellparaméterek vektor (vector).", en: "θ is the learnable model-parameter vector." } },
+      { id: "c", text: { hu: "θ a megtanulandó modellparaméterek (model parameters) vektor (vector).", en: "θ is the learnable model-parameter vector." } },
       { id: "d", text: { hu: "A laborvizsgálati (blood-test) values θ-ban vannak.", en: "The blood-test values are in θ." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "X a jellemző (feature) mátrix (matrix), y a címke (label) vektor (vector), θ pedig a modellparaméterek vektor (vector).",
+      hu: "X a jellemző (feature) mátrix (matrix), y a címke (label) vektor (vector), θ pedig a modellparaméterek (model parameters) vektor (vector).",
       en: "X is the feature matrix, y the label vector, and θ the model-parameter vector."
     }
   },
@@ -346,14 +346,14 @@ export const logisticRegressionQuestions: Question[] = [
       en: "Which statements are true about logistic loss / binary cross-entropy loss?"
     },
     choices: [
-      { id: "a", text: { hu: "Binary classificationhöz alkalmas veszteség.", en: "It is a suitable loss for binary classification." } },
+      { id: "a", text: { hu: "Binary classificationhöz alkalmas veszteség (loss).", en: "It is a suitable loss for binary classification." } },
       { id: "b", text: { hu: "A teljes J(θ) skalár (scalar).", en: "The overall J(θ) is a scalar." } },
       { id: "c", text: { hu: "A képlet (formula) log(h) és log(1−h) tagokat tartalmaz.", en: "The formula contains log(h) and log(1−h) terms." } },
-      { id: "d", text: { hu: "A kurzus logisztikus regresszióhoz (logistic regression) MSE-t választ végső megfelelő veszteségként (loss).", en: "The course ultimately chooses MSE as the appropriate loss for logistic regression." } }
+      { id: "d", text: { hu: "A kurzus (course) logisztikus regresszióhoz (logistic regression) MSE-t választ végső megfelelő veszteségként (loss).", en: "The course ultimately chooses MSE as the appropriate loss for logistic regression." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A kurzus logisztikus regresszióhoz (logistic regression) logisztikus veszteség (logistic loss) / BCE-t használ. A veszteség példák felett átlagolt skalár (scalar) célfüggvény (objective).",
+      hu: "A kurzus (course) logisztikus regresszióhoz (logistic regression) logisztikus veszteség (logistic loss) / BCE-t használ. A veszteség (loss) példák (examples) felett átlagolt skalár (scalar) célfüggvény (objective).",
       en: "The course uses logistic loss / BCE for logistic regression. It is a scalar objective averaged over examples."
     }
   },
@@ -361,7 +361,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q9",
     topics: ["bce"],
     prompt: {
-      hu: "Egyetlen példa BCE tagjánál, ha y=1, mely állítások igazak?",
+      hu: "Egyetlen példa (example) BCE tagjánál, ha y=1, mely állítások igazak?",
       en: "For one BCE example term, if y=1, which statements are true?"
     },
     choices: [
@@ -380,7 +380,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q10",
     topics: ["bce"],
     prompt: {
-      hu: "Egyetlen példa BCE tagjánál, ha y=0, mely állítások igazak?",
+      hu: "Egyetlen példa (example) BCE tagjánál, ha y=0, mely állítások igazak?",
       en: "For one BCE example term, if y=0, which statements are true?"
     },
     choices: [
@@ -410,7 +410,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a"],
     explanation: {
-      hu: "A modellparaméterek azért változnak, hogy a logisztikus/BCE-célfüggvény (logistic/BCE objective) (objective) J(θ) csökkenjen.",
+      hu: "A modellparaméterek (model parameters) azért változnak, hogy a logisztikus/BCE-célfüggvény (logistic/BCE objective) (objective) J(θ) csökkenjen.",
       en: "Model parameters are changed so that the logistic/BCE objective J(θ) decreases."
     }
   },
@@ -418,18 +418,18 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q12",
     topics: ["logistic-regression", "gradient"],
     prompt: {
-      hu: "Az előadás 4 NumPy recap alapján mely állítások igazak logisztikus regresszió (logistic regression) gradienscsökkentés (gradient descent)nél?",
+      hu: "Az előadás (lecture) 4 NumPy recap alapján mely állítások igazak logisztikus regresszió (logistic regression) gradiens (gradient) descentnél?",
       en: "According to the Lecture 4 NumPy recap, which statements are true for logistic-regression gradient descent?"
     },
     choices: [
       { id: "a", text: { hu: "h = sigmoid(Xθ).", en: "h = sigmoid(Xθ)." } },
       { id: "b", text: { hu: "gradiens (gradient) = Xᵀ(h−y)/m.", en: "gradient = Xᵀ(h−y)/m." } },
       { id: "c", text: { hu: "θ := θ − α·gradiens (gradient).", en: "θ := θ − α·gradient." } },
-      { id: "d", text: { hu: "A sigmoid miatt a gradiens (gradient) vektor (vector) alakja (shape) ugyanaz, mint X alakja (shape).", en: "Because of the sigmoid, the gradient vector has the same shape as X." } }
+      { id: "d", text: { hu: "A sigmoid miatt a gradiens (gradient) vektor (vector) shape-je ugyanaz, mint X shape-je.", en: "Because of the sigmoid, the gradient vector has the same shape as X." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A gradiens (gradient) θ-val kompatibilis vektor (vector), nem X-szel azonos shape-jű mátrix (matrix). A kurzus kódja: X.T @ (h-y) / y.size.",
+      hu: "A gradiens (gradient) θ-val kompatibilis vektor (vector), nem X-szel azonos shape-jű mátrix (matrix). A kurzus (course) kódja: X.T @ (h-y) / y.size.",
       en: "The gradient is a vector compatible with θ, not a matrix with the same shape as X. The course code uses X.T @ (h-y) / y.size."
     }
   },
@@ -437,18 +437,18 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q13",
     topics: ["logistic-regression", "convexity"],
     prompt: {
-      hu: "Mely állítások igazak a kurzus veszteségválasztási (loss-selection) magyarázatára?",
+      hu: "Mely állítások igazak a kurzus (course) veszteségválasztási (loss-selection) magyarázatára?",
       en: "Which statements are true about the course explanation for choosing the loss?"
     },
     choices: [
       { id: "a", text: { hu: "Szigmoid hipotézis (sigmoid hypothesis) + MSE esetén a veszteségnek (loss) több lokális minimuma (local minima) is lehet.", en: "With a sigmoid hypothesis + MSE, the loss may have multiple local minima." } },
       { id: "b", text: { hu: "A logisztikus/BCE-veszteség (logistic/BCE loss) a logisztikus hipotézissel (logistic hypothesis) konvex (convex).", en: "Logistic/BCE loss with the logistic hypothesis is convex." } },
       { id: "c", text: { hu: "A konvex logisztikus veszteségnek (convex logistic loss) egy lokális/globális minimuma (local/global minimum) van.", en: "The convex logistic loss has a local/global minimum." } },
-      { id: "d", text: { hu: "Ezért gradienscsökkentés (gradient descent) a logisztikus veszteségnél (logistic loss) megtalálhatja a globálisan (globally) optimális (optimal) paraméterek értékeket.", en: "Therefore gradient descent can find the globally optimal parameters for logistic loss." } }
+      { id: "d", text: { hu: "Ezért gradienscsökkentés (gradient descent) a logisztikus veszteségnél (logistic loss) megtalálhatja a globálisan (globally) optimális (optimal) paraméterek (parameters) értékeket.", en: "Therefore gradient descent can find the globally optimal parameters for logistic loss." } }
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "Pontosan ez az előadás érvelése: az MSE+sigmoid problémás nem konvex (non-convex) célfüggvényt (objective) adhat; a logisztikus/BCE-veszteség (logistic/BCE loss) konvex (convex), ezért gradienscsökkentés (gradient descent) számára megfelelőbb.",
+      hu: "Pontosan ez az előadás (lecture) érvelése: az MSE+sigmoid problémás nem konvex (non-convex) célfüggvényt (objective) adhat; a logisztikus/BCE-veszteség (logistic/BCE loss) konvex (convex), ezért gradienscsökkentés (gradient descent) számára megfelelőbb.",
       en: "This is exactly the lecture's argument: MSE + sigmoid can create a problematic non-convex objective; logistic/BCE loss is convex and therefore better suited to gradient descent."
     }
   },
@@ -456,7 +456,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q14",
     topics: ["logistic-regression", "prediction"],
     prompt: {
-      hu: "Egyetlen betegre a logisztikus regresszió (logistic regression) kimenet (output) hθ(x)=0.82. A kurzus 0.5 küszöbét használva mely állítások igazak?",
+      hu: "Egyetlen betegre a logisztikus regresszió (logistic regression) kimenet (output) hθ(x)=0.82. A kurzus (course) 0.5 küszöbét használva mely állítások igazak?",
       en: "For one patient, logistic regression outputs hθ(x)=0.82. Using the course's 0.5 threshold, which statements are true?"
     },
     choices: [
