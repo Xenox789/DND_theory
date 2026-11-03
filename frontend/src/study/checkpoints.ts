@@ -5,7 +5,11 @@ const sectionQuestionMap: Record<string, string[]> = {
   "data-point": ["q1", "q8"],
   "hypothesis": ["q2", "q8"],
   "loss": ["q3", "q7"],
-  "three-groups": ["q4"],
+  "three-groups": ["q4", "q12"],
+  "supervised-paradigm": ["q9", "q1"],
+  "unsupervised-paradigm": ["q10", "q12"],
+  "reinforcement-paradigm": ["q11", "q12"],
+  "compare-paradigms": ["q12", "q9", "q11"],
   "tasks": ["q5", "q6"],
 
   "regression-linear-hypothesis": ["lr-q14", "lr-q2", "lr-q1"],
