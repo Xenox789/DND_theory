@@ -28,17 +28,26 @@ function scoreQuestion(question: Question, selected: string[]) {
 
 export function QuizView({ questions, language }: Props) {
   const [answers, setAnswers] = useState<Record<string, AnswerState>>({});
+  const [mode, setMode] = useState<"official" | "extended">("official");
+
+  const visibleQuestions = useMemo(
+    () =>
+      mode === "official"
+        ? questions.filter((question) => question.topics.includes("official-example"))
+        : questions,
+    [mode, questions]
+  );
 
   const totalScore = useMemo(
     () =>
-      questions.reduce((sum, q) => {
+      visibleQuestions.reduce((sum, q) => {
         const state = answers[q.id];
         return sum + (state?.checked ? scoreQuestion(q, state.selected) : 0);
       }, 0),
-    [answers, questions]
+    [answers, visibleQuestions]
   );
 
-  const checkedCount = questions.filter((q) => answers[q.id]?.checked).length;
+  const checkedCount = visibleQuestions.filter((q) => answers[q.id]?.checked).length;
 
   const toggle = (questionId: string, choiceId: string) => {
     setAnswers((current) => {
@@ -69,18 +78,45 @@ export function QuizView({ questions, language }: Props) {
           <h1>{language === "hu" ? "Gyakorló teszt" : "Practice Test"}</h1>
           <p>
             {language === "hu"
-              ? "Több helyes válasz is lehet. Teljes pont: minden helyes és csak a helyes válaszok. Pontosan egy hiba: fél pont."
-              : "More than one answer may be correct. Full score requires selecting all and only the correct options. Exactly one mistake gives half credit."}
+              ? mode === "official"
+                ? "Vizsgaközeli mód: az official Theory Test példadokumentum témái és megfogalmazása alapján. Több helyes válasz is lehet; pontosan egy eltérés fél pont."
+                : "Bővített gyakorlás: a teljes kérdésbank. Több helyes válasz is lehet; pontosan egy eltérés fél pont."
+              : mode === "official"
+                ? "Exam-close mode: based on the official Theory Test example document and its wording. Multiple answers may be correct; exactly one mismatch gives half credit."
+                : "Extended practice: the full question bank. Multiple answers may be correct; exactly one mismatch gives half credit."}
           </p>
         </div>
         <div className="score-box">
-          <strong>{totalScore.toFixed(1)} / {questions.length}</strong>
-          <span>{checkedCount}/{questions.length} {language === "hu" ? "ellenőrizve" : "checked"}</span>
+          <strong>{totalScore.toFixed(1)} / {visibleQuestions.length}</strong>
+          <span>{checkedCount}/{visibleQuestions.length} {language === "hu" ? "ellenőrizve" : "checked"}</span>
         </div>
       </div>
 
+      <div className="quiz-mode-switch">
+        <button
+          className={mode === "official" ? "active" : ""}
+          onClick={() => {
+            setMode("official");
+            setAnswers({});
+          }}
+        >
+          <strong>{language === "hu" ? "Vizsgaközeli" : "Exam-close"}</strong>
+          <span>{language === "hu" ? "Official example kérdések" : "Official example questions"}</span>
+        </button>
+        <button
+          className={mode === "extended" ? "active" : ""}
+          onClick={() => {
+            setMode("extended");
+            setAnswers({});
+          }}
+        >
+          <strong>{language === "hu" ? "Bővített gyakorlás" : "Extended practice"}</strong>
+          <span>{language === "hu" ? "Teljes kérdésbank" : "Full question bank"}</span>
+        </button>
+      </div>
+
       <div className="question-list">
-        {questions.map((question, index) => {
+        {visibleQuestions.map((question, index) => {
           const state = answers[question.id] ?? { selected: [], checked: false };
           const score = state.checked ? scoreQuestion(question, state.selected) : null;
 
@@ -88,6 +124,11 @@ export function QuizView({ questions, language }: Props) {
             <article className="question-card" key={question.id}>
               <div className="question-header">
                 <span>Q{index + 1}</span>
+                {question.topics.includes("official-example") && (
+                  <span className="official-question-badge">
+                    {language === "hu" ? "OFFICIAL EXAMPLE" : "OFFICIAL EXAMPLE"}
+                  </span>
+                )}
                 {score !== null && (
                   <span className={`score-pill score-${String(score).replace(".", "-")}`}>
                     {score.toFixed(1)} pt
