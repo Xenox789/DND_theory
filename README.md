@@ -1,6 +1,6 @@
 # DND Theory Study Lab
 
-Interactive bilingual (HU/EN) study application for ELTE Deep Network Development – Theory Test 1.
+Interactive bilingual (HU/EN) study application for Deep Network Development – Theory Test.
 
 ## Current status — v1.0
 
