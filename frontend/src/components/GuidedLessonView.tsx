@@ -146,7 +146,7 @@ export function GuidedLessonView({
                   <span className={"step-state " + (
                     itemProgress.streak >= 3 && itemProgress.quizPassed
                       ? "mastered"
-                      : itemProgress.visits > 0
+                      : (itemProgress.visits > 0 || (itemProgress.quizAttempts ?? 0) > 0)
                         ? "learning"
                         : "new"
                   )}>
@@ -171,19 +171,19 @@ export function GuidedLessonView({
               <div className={"mastery-status " + (
                 sectionProgress.streak >= 3 && sectionProgress.quizPassed
                   ? "mastered"
-                  : sectionProgress.visits > 0
+                  : (sectionProgress.visits > 0 || (sectionProgress.quizAttempts ?? 0) > 0)
                     ? "learning"
                     : "new"
               )}>
                 {language === "hu"
                   ? sectionProgress.streak >= 3 && sectionProgress.quizPassed
                     ? "Stabil"
-                    : sectionProgress.visits > 0
+                    : (sectionProgress.visits > 0 || (sectionProgress.quizAttempts ?? 0) > 0)
                       ? "Tanulás alatt"
                       : "Új"
                   : sectionProgress.streak >= 3 && sectionProgress.quizPassed
                     ? "Mastered"
-                    : sectionProgress.visits > 0
+                    : (sectionProgress.visits > 0 || (sectionProgress.quizAttempts ?? 0) > 0)
                       ? "Learning"
                       : "New"}
               </div>
