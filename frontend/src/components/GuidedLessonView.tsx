@@ -6,8 +6,9 @@ import {
   type ReviewRating,
   type StudyProgress
 } from "../study/progress";
-import { RecallCheckpoint } from "./RecallCheckpoint";
-import { checkpointForSection } from "../study/checkpoints";
+import { ConceptCheck } from "./ConceptCheck";
+import { ChapterSummaryPractice } from "./ChapterSummaryPractice";
+import { checkpointsForSection } from "../study/checkpoints";
 import { pedagogyForSection } from "../study/pedagogy";
 
 type Props = {
@@ -56,11 +57,6 @@ export function GuidedLessonView({
   const [symbolsVisible, setSymbolsVisible] = useState(false);
   const [understandingVisible, setUnderstandingVisible] = useState(false);
   const [deepDiveVisible, setDeepDiveVisible] = useState(false);
-  const [selfExplanation, setSelfExplanation] = useState("");
-  const [compareVisible, setCompareVisible] = useState(false);
-  const [activeTaskVisible, setActiveTaskVisible] = useState(false);
-  const [misconceptionChoice, setMisconceptionChoice] = useState<boolean | null>(null);
-  const [misconceptionChecked, setMisconceptionChecked] = useState(false);
 
   useEffect(() => {
     if (!initialSectionId) return;
@@ -73,7 +69,7 @@ export function GuidedLessonView({
   const nextReview = formatReviewDate(sectionProgress.nextReview, language);
   const pedagogy = pedagogyForSection(section.id);
 
-  const checkpoint = checkpointForSection(questions, section.id);
+  const conceptChecks = checkpointsForSection(questions, section.id, 3);
 
   const hasUnderstanding = Boolean(
     section.why ||
@@ -88,11 +84,6 @@ export function GuidedLessonView({
     setSymbolsVisible(false);
     setUnderstandingVisible(false);
     setDeepDiveVisible(false);
-    setSelfExplanation("");
-    setCompareVisible(false);
-    setActiveTaskVisible(false);
-    setMisconceptionChoice(null);
-    setMisconceptionChecked(false);
   };
 
   const goTo = (index: number) => {
@@ -286,84 +277,12 @@ export function GuidedLessonView({
             )}
 
 
-            {courseVisible && pedagogy?.activeTask && (
-              <section className="active-task-card">
-                <div className="learning-layer-header">
-                  <span className="layer-badge practice">ACTIVE PRACTICE</span>
-                  <span>
-                    {language === "hu"
-                      ? "Előbb számold/mondd végig, utána fedd fel."
-                      : "Work it out first, then reveal the answer."}
-                  </span>
-                </div>
-                <h3>{pedagogy.activeTask.prompt[language]}</h3>
-                <button
-                  className="secondary-button inline"
-                  onClick={() => setActiveTaskVisible((value) => !value)}
-                >
-                  {activeTaskVisible
-                    ? language === "hu" ? "Megoldás elrejtése" : "Hide answer"
-                    : language === "hu" ? "Megoldás felfedése" : "Reveal answer"}
-                </button>
-                {activeTaskVisible && (
-                  <div className="active-task-answer">
-                    <strong>{language === "hu" ? "Ellenőrzés" : "Check"}</strong>
-                    <p>{pedagogy.activeTask.answer[language]}</p>
-                  </div>
-                )}
-              </section>
-            )}
-
-            {courseVisible && pedagogy?.misconception && (
-              <section className="misconception-card">
-                <div className="learning-layer-header">
-                  <span className="layer-badge misconception">MISCONCEPTION CHECK</span>
-                  <span>
-                    {language === "hu"
-                      ? "Igaz vagy hamis? Dönts a magyarázat felfedése előtt."
-                      : "True or false? Decide before revealing the explanation."}
-                  </span>
-                </div>
-                <h3>{pedagogy.misconception.statement[language]}</h3>
-                <div className="misconception-actions">
-                  <button
-                    className={misconceptionChoice === true ? "selected" : ""}
-                    onClick={() => {
-                      if (!misconceptionChecked) setMisconceptionChoice(true);
-                    }}
-                  >
-                    {language === "hu" ? "Igaz" : "True"}
-                  </button>
-                  <button
-                    className={misconceptionChoice === false ? "selected" : ""}
-                    onClick={() => {
-                      if (!misconceptionChecked) setMisconceptionChoice(false);
-                    }}
-                  >
-                    {language === "hu" ? "Hamis" : "False"}
-                  </button>
-                  <button
-                    className="secondary-button inline"
-                    disabled={misconceptionChoice === null}
-                    onClick={() => setMisconceptionChecked(true)}
-                  >
-                    {language === "hu" ? "Ellenőrzés" : "Check"}
-                  </button>
-                </div>
-                {misconceptionChecked && (
-                  <div className={
-                    "misconception-result " +
-                    (misconceptionChoice === pedagogy.misconception.isTrue ? "correct" : "incorrect")
-                  }>
-                    <strong>
-                      {misconceptionChoice === pedagogy.misconception.isTrue
-                        ? language === "hu" ? "Helyes." : "Correct."
-                        : language === "hu" ? "Nem ez a helyes értelmezés." : "That is not the correct interpretation."}
-                    </strong>
-                    <p>{pedagogy.misconception.explanation[language]}</p>
-                  </div>
-                )}
-              </section>
+            {courseVisible && conceptChecks.length > 0 && (
+              <ConceptCheck
+                key={lesson.id + "::" + section.id}
+                questions={conceptChecks}
+                language={language}
+              />
             )}
 
             {courseVisible && hasUnderstanding && (
@@ -439,55 +358,6 @@ export function GuidedLessonView({
             )}
 
             {courseVisible && (
-              <section className="self-explanation-card">
-                <div className="learning-layer-header">
-                  <span className="layer-badge explain">SELF-EXPLAIN</span>
-                  <span>
-                    {language === "hu"
-                      ? "A megfogalmazás fontosabb, mint hogy szó szerint egyezzen."
-                      : "Your explanation does not need to match word for word."}
-                  </span>
-                </div>
-                <h3>
-                  {language === "hu"
-                    ? "Írd le 1–3 mondatban saját szavaiddal: mi ez, és miért van rá szükség?"
-                    : "In 1–3 sentences, explain in your own words what this is and why it is needed."}
-                </h3>
-                <textarea
-                  value={selfExplanation}
-                  onChange={(event) => setSelfExplanation(event.target.value)}
-                  placeholder={language === "hu" ? "Saját magyarázatod…" : "Your explanation…"}
-                />
-                <button
-                  className="secondary-button inline"
-                  disabled={selfExplanation.trim().length === 0}
-                  onClick={() => setCompareVisible((value) => !value)}
-                >
-                  {compareVisible
-                    ? language === "hu" ? "Összehasonlítás elrejtése" : "Hide comparison"
-                    : language === "hu" ? "Összevetés a kulcsgondolattal" : "Compare with key idea"}
-                </button>
-
-                {compareVisible && (
-                  <div className="self-explanation-reference">
-                    <strong>{language === "hu" ? "Kulcsgondolat" : "Key idea"}</strong>
-                    <p>{section.body[language]}</p>
-                    {section.why && <p>{section.why[language]}</p>}
-                  </div>
-                )}
-              </section>
-            )}
-
-            {courseVisible && checkpoint && (
-              <RecallCheckpoint
-                key={lesson.id + "::" + section.id + "::" + checkpoint.id}
-                question={checkpoint}
-                language={language}
-                compact
-              />
-            )}
-
-            {courseVisible && (
               <section className="review-rating-card">
                 <div>
                   <span className="eyebrow">SPACED REVIEW</span>
@@ -521,6 +391,10 @@ export function GuidedLessonView({
               </section>
             )}
           </article>
+
+          {activeIndex === lesson.sections.length - 1 && (
+            <ChapterSummaryPractice lesson={lesson} language={language} />
+          )}
 
           <div className="guided-nav">
             <button
