@@ -13,6 +13,9 @@ check(checkpoints.includes('"why-ml": ["q13"]'), "Why-ML must use its dedicated 
 check(quiz.includes("onComplete(points, questions.length)"), "Mini-test must report scored completion.");
 check(progress.includes("normalized >= 0.8"), "Mini-test pass threshold must be enforced.");
 check(progress.includes("item.streak >= 3 && item.quizPassed"), "Self-rating alone must not grant mastery.");
+check(progress.includes("...current,"), "Review must preserve mini-test results.");
+check(progress.includes("!due && rating"), "Reviews must respect next-due date.");
+check(guided.includes("disabled={!reviewReady}"), "Buttons must respect review schedule.");
 const iUnderstanding = guided.indexOf("{courseVisible && hasUnderstanding");
 const iQuiz = guided.indexOf("{courseVisible && conceptChecks.length");
 check(iUnderstanding !== -1 && iQuiz > iUnderstanding, "Understanding should precede the mini-test.");
