@@ -125,7 +125,7 @@ export const sgdLesson: Lesson = {
         en: "Why can learning rate depend on batch size?"
       },
       body: {
-        hu: "Az 5. előadás (Lecture 5) külön kiemeli, hogy ha csak kis mini-batch használható, a konvergenciához szükség lehet a tanulási ráta (learning rate) csökkentésére. Ennek oka, hogy a kisebb batch zajosabb gradiensbecslést ad.",
+        hu: "Az 5. előadás külön kiemeli, hogy ha csak kis mini-batch használható, a konvergenciához szükség lehet a tanulási ráta (learning rate) csökkentésére. Ennek oka, hogy a kisebb batch zajosabb gradiensbecslést ad.",
         en: "Lecture 5 explicitly notes that if only a small mini-batch can be used, the learning rate may need to be reduced to achieve convergence, because smaller batches produce noisier gradient estimates."
       },
       why: {
@@ -175,11 +175,11 @@ export const sgdLesson: Lesson = {
         en: "SGD variants and optimizers"
       },
       body: {
-        hu: "Az előadás példaként felsorolja az momentumos SGD (SGD with Momentum), AdaGrad, Adam, Adamax és RMSprop módszereket. Ezek mind gradiensalapú optimalizálási családhoz kapcsolódnak, de az adott Theory Test-anyag ezen a ponton nem vezeti le részletesen a frissítési képleteiket.",
+        hu: "Az előadás példaként felsorolja a momentumos SGD (SGD with Momentum), AdaGrad, Adam, Adamax és RMSprop módszereket. Ezek mind gradiensalapú optimalizálási családhoz kapcsolódnak, de az adott Theory Test-anyag ezen a ponton nem vezeti le részletesen a frissítési képleteiket.",
         en: "The lecture lists momentumos SGD (SGD with Momentum), AdaGrad, Adam, Adamax, and RMSprop as examples of gradient-based optimization variants. The tested material at this point does not derive their update equations in detail."
       },
       why: {
-        hu: "A fontos kapcsolat az, hogy a backpropagation kiszámítja a gradienseket, az optimalizáló pedig eldönti, hogyan használjuk fel őket a paraméterek módosítására.",
+        hu: "A fontos kapcsolat az, hogy a visszaterjesztés (backpropagation) kiszámítja a gradienseket, az optimalizáló pedig eldönti, hogyan használjuk fel őket a paraméterek módosítására.",
         en: "The important connection is that backpropagation computes gradients, while the optimizer determines how those gradients are used to change parameters."
       },
       connections: {
@@ -187,7 +187,7 @@ export const sgdLesson: Lesson = {
         en: "The next chapter explains how backpropagation obtains ∂J/∂w and ∂J/∂b. SGD or another optimizer then turns those gradients into parameter updates."
       },
       examTrap: {
-        hu: "Ne tanulj ki nem adott Adam/RMSprop képleteket vizsgaszabályként ebből a blokkból. A dia (slide) ezen a ponton név szerint sorolja fel a változatokat.",
+        hu: "Ne tanulj ki nem adott Adam/RMSprop képleteket vizsgaszabályként ebből a blokkból. A dia ezen a ponton név szerint sorolja fel a változatokat.",
         en: "Do not invent detailed Adam/RMSprop formulas as exam rules from this block. The slide lists these variants by name."
       },
       keyTerms: [
