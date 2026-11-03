@@ -13,7 +13,7 @@ export const numpyExampleQuestions: Question[] = [
       { id: "e", text: { hu: "my_array.size == 12", en: "my_array.size == 12" } }
     ],
     correctIds: ["a","b","c","e"],
-    explanation: { hu: "A shape tuple; a nulla hosszúságú tengelyek (zero-length axes) érvényesek. A size skalár egész szám (scalar integer) lehet, például 12.", en: "shape is a tuple and zero-length axes are valid. size can be scalar integer 12." }
+    explanation: { hu: "A shape tuple; a nulla hosszúságú tengelyek (zero-length axes) érvényesek. A size skalár egész szám (scalar integer) lehet, például 12.", en: "shape is a tuple and zero-length axes are érvényes. size can be scalar integer 12." }
   },
   {
     id: "np-q32",
@@ -31,7 +31,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q33",
     topics: ["numpy","official-example","indexing"],
-    prompt: { hu: "my_array.shape=(32,5). Mely result shape-ek helyesek?", en: "my_array.shape=(32,5). Which result shapes are correct?" },
+    prompt: { hu: "my_array.shape=(32,5). Mely eredmény alakok (shapes) helyesek?", en: "my_array.shape=(32,5). Which eredmény alakja (eredmény shape)s are correct?" },
     choices: [
       { id: "a", text: { hu: "my_array[:,:] → (32,5)", en: "my_array[:,:] → (32,5)" } },
       { id: "b", text: { hu: "my_array[:,1] → (32,)", en: "my_array[:,1] → (32,)" } },
@@ -44,7 +44,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q34",
     topics: ["numpy","official-example","indexing"],
-    prompt: { hu: "my_array.shape=(32,5). Mely result shape-ek helyesek?", en: "my_array.shape=(32,5). Which result shapes are correct?" },
+    prompt: { hu: "my_array.shape=(32,5). Mely eredmény alakok (shapes) helyesek?", en: "my_array.shape=(32,5). Which eredmény alakja (eredmény shape)s are correct?" },
     choices: [
       { id: "a", text: { hu: "my_array[0,:-1] → (4,)", en: "my_array[0,:-1] → (4,)" } },
       { id: "b", text: { hu: "my_array[[0],:] → (1,5)", en: "my_array[[0],:] → (1,5)" } },
@@ -52,7 +52,7 @@ export const numpyExampleQuestions: Question[] = [
       { id: "d", text: { hu: "my_array[[0],:] → (5,)", en: "my_array[[0],:] → (5,)" } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "[[0]] advanced indexing megtart egy length-1 result axis-t; két row index két elemet választ.", en: "[[0]] advanced indexing retains a length-1 result axis; two row indices select two elements." }
+    explanation: { hu: "[[0]] haladó indexelés (advanced indexing) megtart egy length-1 eredmény axis-t; két row index két elemet választ.", en: "[[0]] haladó indexelés (advanced indexing) retains a length-1 eredmény axis; two row indices select two elements." }
   },
   {
     id: "np-q35",
@@ -70,7 +70,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q36",
     topics: ["numpy","official-example","shapes"],
-    prompt: { hu: "my_array.shape=(32,5). Mely result shape-ek helyesek?", en: "my_array.shape=(32,5). Which result shapes are correct?" },
+    prompt: { hu: "my_array.shape=(32,5). Mely eredmény alakok (shapes) helyesek?", en: "my_array.shape=(32,5). Which eredmény alakja (eredmény shape)s are correct?" },
     choices: [
       { id: "a", text: { hu: "(my_array < 0).shape = (32,5)", en: "(my_array < 0).shape = (32,5)" } },
       { id: "b", text: { hu: "my_array.T.shape = (5,32)", en: "my_array.T.shape = (5,32)" } },
@@ -83,7 +83,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q37",
     topics: ["numpy","official-example","broadcasting"],
-    prompt: { hu: "my_array.shape=(32,5). Mi a shape-je my_array + my_array[:,None,:] expressionnek?", en: "my_array.shape=(32,5). What is the shape of my_array + my_array[:,None,:]?" },
+    prompt: { hu: "my_array.shape=(32,5). Mi a alakja (shape) my_array + my_array[:,None,:] expressionnek?", en: "my_array.shape=(32,5). What is the shape of my_array + my_array[:,None,:]?" },
     choices: [
       { id: "a", text: { hu: "(32,32,5)", en: "(32,32,5)" } },
       { id: "b", text: { hu: "(32,5)", en: "(32,5)" } },
@@ -95,7 +95,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q38",
     topics: ["numpy","official-example","reductions"],
-    prompt: { hu: "my_array.shape=(32,5). Mely mean result shape-ek helyesek?", en: "my_array.shape=(32,5). Which mean result shapes are correct?" },
+    prompt: { hu: "my_array.shape=(32,5). Mely mean eredmény alakok (shapes) helyesek?", en: "my_array.shape=(32,5). Which mean eredmény alakja (eredmény shape)s are correct?" },
     choices: [
       { id: "a", text: { hu: "np.mean(my_array,axis=0) → (5,)", en: "np.mean(my_array,axis=0) → (5,)" } },
       { id: "b", text: { hu: "np.mean(my_array,axis=1) → (32,)", en: "np.mean(my_array,axis=1) → (32,)" } },
@@ -109,12 +109,12 @@ export const numpyExampleQuestions: Question[] = [
     topics: ["numpy","official-example","reductions"],
     prompt: { hu: "my_array.shape=(32,5), numeric dtype. Mely type-állítások igazak?", en: "my_array.shape=(32,5), numeric dtype. Which type statements are true?" },
     choices: [
-      { id: "a", text: { hu: "np.sum(my_array,axis=0) resultja numpy.ndarray.", en: "np.sum(my_array,axis=0) returns a numpy.ndarray." } },
-      { id: "b", text: { hu: "np.sum(my_array) resultja numpy.ndarray.", en: "np.sum(my_array) returns a numpy.ndarray." } },
+      { id: "a", text: { hu: "np.sum(my_array,axis=0) eredménye numpy.ndarray.", en: "np.sum(my_array,axis=0) returns a numpy.ndarray." } },
+      { id: "b", text: { hu: "np.sum(my_array) eredménye numpy.ndarray.", en: "np.sum(my_array) returns a numpy.ndarray." } },
       { id: "c", text: { hu: "np.sum(my_array) minden tengely (axis) redukciója miatt skalár NumPy-érték (scalar NumPy value).", en: "np.sum(my_array) is a scalar NumPy value because all axes are collapsed." } }
     ],
     correctIds: ["a","c"],
-    explanation: { hu: "axis=0 után marad egy tengely (axis); axis nélkül skalár eredmény (scalar result).", en: "With axis=0 one axis remains; without axis the result is scalar." }
+    explanation: { hu: "axis=0 után marad egy tengely (axis); axis nélkül skalár eredmény (scalar eredmény).", en: "With axis=0 one axis remains; without axis the eredmény is scalar." }
   },
   {
     id: "np-q40",
@@ -127,31 +127,31 @@ export const numpyExampleQuestions: Question[] = [
       { id: "d", text: { hu: "my_array.shape == (4,)", en: "my_array.shape == (4,)" } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "4 elementet két rowba rendezve a második dimension 2.", en: "Four elements arranged into two rows require a second dimension of 2." }
+    explanation: { hu: "4 elementet két rowba rendezve a második dimenzió 2.", en: "Four elements arranged into two rows require a second dimenzió of 2." }
   },
   {
     id: "np-q41",
     topics: ["numpy","official-example","elementwise"],
-    prompt: { hu: "my_array=[[0,1],[2,3]]. Mi my_array*2+1 eredménye?", en: "my_array=[[0,1],[2,3]]. What is the result of my_array*2+1?" },
+    prompt: { hu: "my_array=[[0,1],[2,3]]. Mi my_array*2+1 eredménye?", en: "my_array=[[0,1],[2,3]]. What is the eredmény of my_array*2+1?" },
     choices: [
       { id: "a", text: { hu: "[[1,3],[5,7]]", en: "[[1,3],[5,7]]" } },
       { id: "b", text: { hu: "[[1,2],[3,4]]", en: "[[1,2],[3,4]]" } },
       { id: "c", text: { hu: "Shape-je (2,2).", en: "Its shape is (2,2)." } }
     ],
     correctIds: ["a","c"],
-    explanation: { hu: "Mindkét művelet (operation) elemenkénti (element-wise), skalár broadcastinggal.", en: "Both operations are element-wise with scalar broadcasting." }
+    explanation: { hu: "Mindkét művelet (művelet) elemenkénti (element-wise), skalár broadcastinggal.", en: "Both műveletek are element-wise with scalar broadcasting." }
   },
   {
     id: "np-q42",
     topics: ["numpy","official-example","boolean-indexing"],
-    prompt: { hu: "my_array=np.arange(4).reshape(2,-1). Mi my_array[my_array>0] shape-je?", en: "my_array=np.arange(4).reshape(2,-1). What is the shape of my_array[my_array>0]?" },
+    prompt: { hu: "my_array=np.arange(4).reshape(2,-1). Mi my_array[my_array>0] alakja (shape)?", en: "my_array=np.arange(4).reshape(2,-1). What is the shape of my_array[my_array>0]?" },
     choices: [
       { id: "a", text: { hu: "(3,)", en: "(3,)" } },
       { id: "b", text: { hu: "(2,2)", en: "(2,2)" } },
       { id: "c", text: { hu: "(1,3)", en: "(1,3)" } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "Az értékek 0,1,2,3; a >0 mask három elementet választ, advanced indexing result 1D.", en: "Values are 0,1,2,3; the >0 mask selects three elements, giving a 1D advanced-indexing result." }
+    explanation: { hu: "Az értékek 0,1,2,3; a >0 mask három elementet választ, haladó indexelés (advanced indexing) eredmény 1D.", en: "Values are 0,1,2,3; the >0 mask selects three elements, giving a 1D advanced-indexing eredmény." }
   },
   {
     id: "np-q43",
@@ -168,7 +168,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q44",
     topics: ["numpy","official-example","broadcasting"],
-    prompt: { hu: "my_array=np.arange(4).reshape(2,-1). Mi a shape-je my_array * my_array.reshape(2,2,-1) expressionnek?", en: "my_array=np.arange(4).reshape(2,-1). What is the shape of my_array * my_array.reshape(2,2,-1)?" },
+    prompt: { hu: "my_array=np.arange(4).reshape(2,-1). Mi a alakja (shape) my_array * my_array.reshape(2,2,-1) expressionnek?", en: "my_array=np.arange(4).reshape(2,-1). What is the shape of my_array * my_array.reshape(2,2,-1)?" },
     choices: [
       { id: "a", text: { hu: "(2,2,2)", en: "(2,2,2)" } },
       { id: "b", text: { hu: "(2,2,1)", en: "(2,2,1)" } },
@@ -186,7 +186,7 @@ export const numpyExampleQuestions: Question[] = [
       { id: "b", text: { hu: "Nem, reshape mindig copy.", en: "No, reshape always makes a copy." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "Ebben a folytonos memóriájú hivatalos példában (contiguous official example) a reshape view-t ad és megosztott memóriát (shared memory) használ.", en: "In this contiguous official example, reshape is a view and shares memory." }
+    explanation: { hu: "Ebben a folytonos memóriájú hivatalos példában (contiguous official example) a reshape view-t ad és megosztott memóriát (megosztott memória (shared memory)) használ.", en: "In this contiguous official example, reshape is a view and shares memory." }
   },
   {
     id: "np-q46",
@@ -195,10 +195,10 @@ export const numpyExampleQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "Igen.", en: "Yes." } },
       { id: "b", text: { hu: "Nem.", en: "No." } },
-      { id: "c", text: { hu: "1D-ben .T shape-je továbbra is (4,).", en: "For a 1D array, .T still has shape (4,)." } }
+      { id: "c", text: { hu: "1D-ben .T alakja (shape) továbbra is (4,).", en: "For a 1D array, .T still has shape (4,)." } }
     ],
     correctIds: ["a","c"],
-    explanation: { hu: "1D transpose nem változtat shape-et, és view/share-memory behavior marad.", en: "A 1D transpose does not change shape and retains shared-memory/view behavior." }
+    explanation: { hu: "1D transpose nem változtat alakot (shape), és view/share-memory behavior marad.", en: "A 1D transpose does not change shape and retains shared-memory/view behavior." }
   },
   {
     id: "np-q47",
@@ -209,7 +209,7 @@ export const numpyExampleQuestions: Question[] = [
       { id: "b", text: { hu: "Igen.", en: "Yes." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "append új arrayt készít; nincs shared memory az originallel.", en: "append creates a new array; it does not share memory with the original." }
+    explanation: { hu: "append új tömböt készít; nincs megosztott memória (shared memory) az originallel.", en: "append creates a new array; it does not share memory with the original." }
   },
   {
     id: "np-q48",
@@ -217,7 +217,7 @@ export const numpyExampleQuestions: Question[] = [
     prompt: { hu: "my_array=np.arange(4); my_array2=my_array[1:2]; majd my_array2[:]=99. Mi történik?", en: "my_array=np.arange(4); my_array2=my_array[1:2]; then my_array2[:]=99. What happens?" },
     choices: [
       { id: "a", text: { hu: "my_array [0,99,2,3] lesz.", en: "my_array becomes [0,99,2,3]." } },
-      { id: "b", text: { hu: "A slice basic indexing view.", en: "The slice is a basic-indexing view." } },
+      { id: "b", text: { hu: "A slice alap indexelés (basic indexing) view.", en: "The slice is a basic-indexing view." } },
       { id: "c", text: { hu: "my_array nem változik.", en: "my_array does not change." } }
     ],
     correctIds: ["a","b"],
@@ -228,8 +228,8 @@ export const numpyExampleQuestions: Question[] = [
     topics: ["numpy","official-example","copies","advanced-indexing"],
     prompt: { hu: "my_array=np.arange(4); my_array2=my_array[[1,2]]; majd my_array2[:]=99. Módosul my_array?", en: "my_array=np.arange(4); my_array2=my_array[[1,2]]; then my_array2[:]=99. Is my_array modified?" },
     choices: [
-      { id: "a", text: { hu: "Nem, integer-array advanced indexing copy-t ad.", en: "No, integer-array advanced indexing returns a copy." } },
-      { id: "b", text: { hu: "Igen, mert minden indexing view.", en: "Yes, because every indexing operation returns a view." } }
+      { id: "a", text: { hu: "Nem, integer-array haladó indexelés (advanced indexing) copy-t ad.", en: "No, integer-array haladó indexelés (advanced indexing) returns a copy." } },
+      { id: "b", text: { hu: "Igen, mert minden indexing view.", en: "Yes, because every indexing művelet returns a view." } }
     ],
     correctIds: ["a"],
     explanation: { hu: "Advanced indexing új array.", en: "Advanced indexing creates a new array." }
@@ -239,22 +239,22 @@ export const numpyExampleQuestions: Question[] = [
     topics: ["numpy","official-example","copies","boolean-indexing"],
     prompt: { hu: "my_array=np.arange(4); my_array2=my_array[my_array<2]; majd my_array2[:]=99. Módosul my_array?", en: "my_array=np.arange(4); my_array2=my_array[my_array<2]; then my_array2[:]=99. Is my_array modified?" },
     choices: [
-      { id: "a", text: { hu: "Nem, boolean-mask advanced indexing új arrayt ad.", en: "No, boolean-mask advanced indexing creates a new array." } },
+      { id: "a", text: { hu: "Nem, boolean-mask haladó indexelés (advanced indexing) új tömböt ad.", en: "No, boolean-mask haladó indexelés (advanced indexing) creates a new array." } },
       { id: "b", text: { hu: "Igen, [99,99,2,3] lesz.", en: "Yes, it becomes [99,99,2,3]." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "Mask indexing advanced indexing.", en: "Mask indexing is advanced indexing." }
+    explanation: { hu: "Mask indexing haladó indexelés (advanced indexing).", en: "Mask indexing is haladó indexelés (advanced indexing)." }
   },
   {
     id: "np-q51",
     topics: ["numpy","official-example","copies","elementwise"],
     prompt: { hu: "my_array=np.arange(4); my_array2=my_array+my_array; majd my_array2[:]=99. Módosul my_array?", en: "my_array=np.arange(4); my_array2=my_array+my_array; then my_array2[:]=99. Is my_array modified?" },
     choices: [
-      { id: "a", text: { hu: "Nem, az arithmetic operation resultja külön array.", en: "No, the arithmetic-operation result is a separate array." } },
-      { id: "b", text: { hu: "Igen, mert element-wise operation view-t ad.", en: "Yes, because an element-wise operation returns a view." } }
+      { id: "a", text: { hu: "Nem, az arithmetic művelet eredménye külön array.", en: "No, the arithmetic-művelet eredmény is a separate array." } },
+      { id: "b", text: { hu: "Igen, mert element-wise művelet view-t ad.", en: "Yes, because an element-wise művelet returns a view." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "A számított result nem shared-memory view az operand arrayre.", en: "The computed result is not a shared-memory view of the operand array." }
+    explanation: { hu: "A számított eredmény nem shared-memory view az operand tömbre.", en: "The computed eredmény is not a shared-memory view of the operand array." }
   },
   {
     id: "np-q52",
@@ -343,15 +343,15 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q59",
     topics: ["numpy","advanced-indexing","shape"],
-    prompt: { hu: "a=np.array([[0,1,2],[10,11,12]]). Mely official-practice resultok helyesek?", en: "a=np.array([[0,1,2],[10,11,12]]). Which practice results are correct?" },
+    prompt: { hu: "a=np.array([[0,1,2],[10,11,12]]). Mely official-gyakorlati eredmények helyesek?", en: "a=np.array([[0,1,2],[10,11,12]]). Which gyakorlati results are correct?" },
     choices: [
       { id: "a", text: { hu: "a[1,[2,0]] → [12,10], shape (2,)", en: "a[1,[2,0]] → [12,10], shape (2,)" } },
       { id: "b", text: { hu: "a[[1,1,0],[0,2,2]] → [10,12,2], shape (3,)", en: "a[[1,1,0],[0,2,2]] → [10,12,2], shape (3,)" } },
       { id: "c", text: { hu: "a[a%2==0] → [0,2,10,12], shape (4,)", en: "a[a%2==0] → [0,2,10,12], shape (4,)" } },
-      { id: "d", text: { hu: "Mindhárom advanced indexing.", en: "All three use advanced indexing." } }
+      { id: "d", text: { hu: "Mindhárom haladó indexelés (advanced indexing).", en: "All three use haladó indexelés (advanced indexing)." } }
     ],
     correctIds: ["a","b","c","d"],
-    explanation: { hu: "Integer sequence vagy mask jelenléte advanced indexinget triggerel.", en: "The presence of an integer sequence or mask triggers advanced indexing." }
+    explanation: { hu: "Integer sequence vagy mask jelenléte advanced indexinget triggerel.", en: "The presence of an integer sequence or mask triggers haladó indexelés (advanced indexing)." }
   },
   {
     id: "np-q60",
@@ -364,6 +364,6 @@ export const numpyExampleQuestions: Question[] = [
       { id: "d", text: { hu: "Broadcasting assignment előtt is történhet.", en: "Broadcasting can occur before assignment." } }
     ],
     correctIds: ["a","b","c","d"],
-    explanation: { hu: "A week 5 source ezt explicit broadcasting-assignment példaként mutatja.", en: "Week 5 explicitly presents this as a broadcasting-before-assignment example." }
+    explanation: { hu: "A week 5 forrás ezt explicit broadcasting-assignment példaként mutatja.", en: "Week 5 explicitly presents this as a broadcasting-before-assignment example." }
   }
 ];
