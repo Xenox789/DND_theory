@@ -1,4 +1,5 @@
 import type { Lesson, Question } from "../types";
+import { enrichLesson } from "./lessonEnrichment";
 import { mlFundamentalsLesson } from "./mlFundamentals";
 import { linearRegressionLesson, linearRegressionQuestions } from "./linearRegression";
 import { logisticRegressionLesson, logisticRegressionQuestions } from "./logisticRegression";
@@ -21,7 +22,7 @@ export const lessons: Lesson[] = [
   sgdLesson,
   backpropLesson,
   numpyLesson
-];
+].map(enrichLesson);
 
 export const questionBank: Question[] = [
   ...officialTheoryQuestions,
@@ -251,6 +252,63 @@ export const questionBank: Question[] = [
     explanation: {
       hu: "A címke hiánya önmagában nem elég az unsupervised besoroláshoz. RL-ben sincs minden állapothoz y címke, de van agent–environment interakció és reward.",
       en: "The absence of y alone is not enough to classify a task as unsupervised. RL also lacks y for every state but includes agent-environment interaction and reward."
+    }
+  },
+  {
+    id: "q13",
+    topics: ["why-ml", "ml-types"],
+    prompt: {
+      hu: "Mely helyzetekben lehet indokolt gépi tanulást használni kézzel megírt szabályok helyett?",
+      en: "In which situations can machine learning be preferable to hand-written rules?"
+    },
+    choices: [
+      { id: "a", text: { hu: "Amikor sok, változatos példából könnyebb megtanulni egy szabályt, mint kézzel felsorolni az összes esetet.", en: "When many varied examples make learning a rule easier than enumerating all cases manually." } },
+      { id: "b", text: { hu: "Amikor nem ismerünk megfelelő explicit algoritmust, de rendelkezünk tanítóadatokkal.", en: "When no suitable explicit algorithm is known, but training data is available." } },
+      { id: "c", text: { hu: "Amikor egy egyszerű számsor összegét kell pontosan kiszámolni, amire ismert hatékony algoritmusunk van.", en: "When we only need to compute the exact sum of a list, for which an efficient algorithm is already known." } },
+      { id: "d", text: { hu: "Amikor az elvárt viselkedést egyszerűbb sok példán keresztül megadni.", en: "When the desired behavior is more easily specified through examples." } }
+    ],
+    correctIds: ["a", "b", "d"],
+    explanation: {
+      hu: "A gépi tanulás elsősorban akkor hasznos, ha az explicit szabályozás nehéz vagy túlságosan összetett. Egyszerű, pontosan megoldható feladatra nem feltétlenül kell modellt tanítani.",
+      en: "ML is useful when explicit rules are difficult or too complex. A simple task with a known exact algorithm does not necessarily need a learned model."
+    }
+  },
+  {
+    id: "q14",
+    topics: ["label-format", "prediction"],
+    prompt: {
+      hu: "Milyen alakú lehet egyetlen tanítási példa y címkéje (label)?",
+      en: "Which shapes can the label y of a single training example have?"
+    },
+    choices: [
+      { id: "a", text: { hu: "Skalár, például egy lakás ára.", en: "Scalar, e.g. a house price." } },
+      { id: "b", text: { hu: "Vektor, például három folytonos mérési célérték.", en: "Vector, e.g. three continuous target measurements." } },
+      { id: "c", text: { hu: "Mátrix, például egy kép pixelszintű szegmentációs maszkja.", en: "Matrix, e.g. a pixel-wise segmentation mask of an image." } },
+      { id: "d", text: { hu: "Mindig skalár, mert a veszteségfüggvény eredménye is skalár.", en: "Always scalar because the final loss value is scalar." } }
+    ],
+    correctIds: ["a", "b", "c"],
+    explanation: {
+      hu: "A címke alakja a feladattól függ. A teljes optimalizálási cél általában skalár, de a modell kimenete és a hozzá tartozó címke lehet skalár, vektor vagy mátrix is.",
+      en: "Target shape depends on the task. The training objective is usually scalar, but labels and predictions can be scalar, vector, or matrix shaped."
+    }
+  },
+  {
+    id: "q15",
+    topics: ["loss", "optimization"],
+    prompt: {
+      hu: "Két tanítási példán a becslési hibák +2 és −2. Mely állítások helyesek a J=1/(2m)·Σ(error²) veszteségre?",
+      en: "Prediction errors for two examples are +2 and −2. Which statements about J=1/(2m)·Σ(error²) are correct?"
+    },
+    choices: [
+      { id: "a", text: { hu: "A hibák egyszerű összege nulla, ezért nem megfelelő önmagában a hiba mérésére.", en: "The signed errors add up to zero, making their raw sum unsuitable as a loss." } },
+      { id: "b", text: { hu: "A két négyzetes hiba 4 és 4.", en: "The two squared errors are 4 and 4." } },
+      { id: "c", text: { hu: "A kurzus 1/(2m) konvenciójával J=2, egyetlen skalár érték.", en: "With the course's 1/(2m) convention, J=2, a scalar." } },
+      { id: "d", text: { hu: "A veszteség értéke a [+2,−2] vektor marad.", en: "The final loss remains the [+2,−2] vector." } }
+    ],
+    correctIds: ["a", "b", "c"],
+    explanation: {
+      hu: "m=2, ezért J=(4+4)/(2·2)=2. A négyzetek elkerülik az előjelek kioltását; a teljes veszteség skalár.",
+      en: "With m=2, J=(4+4)/(2·2)=2. Squaring prevents cancellation; the aggregate loss is scalar."
     }
   },
   ...linearRegressionQuestions,

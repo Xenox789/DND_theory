@@ -79,10 +79,10 @@ export function QuizView({ questions, language }: Props) {
           <p>
             {language === "hu"
               ? mode === "official"
-                ? "Vizsgaközeli mód: az official Theory Test példadokumentum témái és megfogalmazása alapján. Több helyes válasz is lehet; pontosan egy eltérés fél pont."
+                ? "Vizsgaközeli gyakorlás a hivatalos példatémák alapján készített kérdésekkel (nem eredeti vizsgakérdések). Több helyes válasz lehet; egyetlen eltérés fél pont."
                 : "Bővített gyakorlás: a teljes kérdésbank. Több helyes válasz is lehet; pontosan egy eltérés fél pont."
               : mode === "official"
-                ? "Exam-close mode: based on the official Theory Test example document and its wording. Multiple answers may be correct; exactly one mismatch gives half credit."
+                ? "Exam-style practice with questions written from official example topics (not actual exam questions). Multiple answers may be correct; one mismatch gives half credit."
                 : "Extended practice: the full question bank. Multiple answers may be correct; exactly one mismatch gives half credit."}
           </p>
         </div>
@@ -101,7 +101,7 @@ export function QuizView({ questions, language }: Props) {
           }}
         >
           <strong>{language === "hu" ? "Vizsgaközeli" : "Exam-close"}</strong>
-          <span>{language === "hu" ? "Official example kérdések" : "Official example questions"}</span>
+          <span>{language === "hu" ? "Hivatalos témákból készült kérdések" : "Official topic-based questions"}</span>
         </button>
         <button
           className={mode === "extended" ? "active" : ""}
@@ -126,7 +126,7 @@ export function QuizView({ questions, language }: Props) {
                 <span>Q{index + 1}</span>
                 {question.topics.includes("official-example") && (
                   <span className="official-question-badge">
-                    {language === "hu" ? "OFFICIAL EXAMPLE" : "OFFICIAL EXAMPLE"}
+                    {language === "hu" ? "HIVATALOS TÉMA ALAPJÁN" : "OFFICIAL TOPIC-BASED"}
                   </span>
                 )}
                 {score !== null && (

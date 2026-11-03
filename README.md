@@ -2,7 +2,7 @@
 
 Interactive bilingual (HU/EN) study application for Deep Network Development – Theory Test.
 
-## Current status — v1.0
+## Current status — v1.2
 
 Implemented and pushed to `main`:
 
@@ -18,7 +18,7 @@ Implemented and pushed to `main`:
 - SGD & Mini-batch Optimization chapter
 - Computational Graph & Backpropagation chapter
 - NumPy Theory Test chapter
-- 157 bilingual practice questions
+- 193 bilingual practice questions
 - interactive Linear Regression Lab
 - interactive 3D loss surface
 - step-by-step Gradient Descent trajectory lab
@@ -51,6 +51,7 @@ Implemented and pushed to `main`:
 - expanded lesson schema: what it is, why it matters, formula-term glossary, worked examples, connections, real-world use, and exam traps
 - clearly marked illustrative real-world mappings for the simulated concepts
 - source-validation notes for exam-specific conventions
+- 70 concept steps with additional bilingual worked examples and conceptual bridges
 
 ## Theory Test 1 scope
 
@@ -165,3 +166,16 @@ The review scheduler is intentionally simple and adaptive. Its intervals are a s
 - Official Theory Test example topics are kept separate from the paraphrased Learn questions.
 - Hungarian learning text is being normalized to natural Hungarian prose, with important English technical terms retained in parentheses.
 - The pedagogy CI check validates all learning-step question mappings and the dedicated official theory bank.
+
+## Guided learning v1.2 — pedagogy audit
+
+- Expanded **all 70 concept steps in 8 chapters** with lecture-consistent explanations and concrete examples, preserving the source-derived core.
+- Added a few missing direct-application questions for why to use ML, label shapes, and scalar loss calculation.
+- Corrected the Linear Regression checkpoint filter and selected cross-chapter question references.
+- Expanded the Understanding layer by default and placed the mini-test after explanation and examples.
+- Mini-tests are scored automatically with course-compatible partial credit. A section becomes **Mastered** only after a score of at least 80% on its mini-test **and** three spaced successful reviews.
+- Progress records preserve mini-test results across review events; Good and Hard cannot be repeatedly clicked before their scheduled next-review times.
+- Dashboard progress uses quiz-aware mastery and aggregates chapter state consistently across HU and EN.
+- Exam-style questions based on official topics are clearly identified as **practice questions**, not originals from an actual examination.
+- CI now checks source-to-checkpoint mapping, pedagogical enrichment coverage, learning flow, plot consistency and TypeScript build.
+- Note: "Mastered" is a learning-app indicator, not a guarantee of exam performance. Worked examples may extend beyond the official exam's exact wording to make the underlying concepts clear.

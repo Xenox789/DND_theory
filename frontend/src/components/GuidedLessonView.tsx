@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Language, Lesson, Question } from "../types";
 import {
   getSectionProgress,
+  recordMiniTestResult,
   reviewSection,
   type ReviewRating,
   type StudyProgress
@@ -55,7 +56,7 @@ export function GuidedLessonView({
   const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [courseVisible, setCourseVisible] = useState(false);
   const [symbolsVisible, setSymbolsVisible] = useState(false);
-  const [understandingVisible, setUnderstandingVisible] = useState(false);
+  const [understandingVisible, setUnderstandingVisible] = useState(true);
   const [deepDiveVisible, setDeepDiveVisible] = useState(false);
 
   useEffect(() => {
@@ -67,9 +68,10 @@ export function GuidedLessonView({
   const section = lesson.sections[activeIndex];
   const sectionProgress = getSectionProgress(progress, lesson.id, section.id);
   const nextReview = formatReviewDate(sectionProgress.nextReview, language);
+  const reviewReady = !sectionProgress.nextReview || new Date(sectionProgress.nextReview).getTime() <= Date.now();
   const pedagogy = pedagogyForSection(section.id);
 
-  const conceptChecks = checkpointsForSection(questions, section.id, 3);
+  const conceptChecks = useMemo(() => checkpointsForSection(questions, section.id, 3), [questions, section.id]);
 
   const hasUnderstanding = Boolean(
     section.why ||
@@ -82,7 +84,7 @@ export function GuidedLessonView({
   const resetLearningState = () => {
     setCourseVisible(false);
     setSymbolsVisible(false);
-    setUnderstandingVisible(false);
+    setUnderstandingVisible(true);
     setDeepDiveVisible(false);
   };
 
@@ -91,6 +93,11 @@ export function GuidedLessonView({
     setActiveIndex(bounded);
     resetLearningState();
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const completeMiniTest = (score: number, maximum: number) => {
+    const next = recordMiniTestResult(progress, lesson.id, section.id, score, maximum);
+    onProgressChange(next);
   };
 
   const rate = (rating: ReviewRating) => {
@@ -137,13 +144,13 @@ export function GuidedLessonView({
                   onClick={() => goTo(index)}
                 >
                   <span className={"step-state " + (
-                    itemProgress.streak >= 3
+                    itemProgress.streak >= 3 && itemProgress.quizPassed
                       ? "mastered"
-                      : itemProgress.visits > 0
+                      : (itemProgress.visits > 0 || (itemProgress.quizAttempts ?? 0) > 0)
                         ? "learning"
                         : "new"
                   )}>
-                    {itemProgress.streak >= 3 ? "✓" : String(index + 1).padStart(2, "0")}
+                    {itemProgress.streak >= 3 && itemProgress.quizPassed ? "✓" : String(index + 1).padStart(2, "0")}
                   </span>
                   <span>{item.title[language]}</span>
                 </button>
@@ -162,21 +169,21 @@ export function GuidedLessonView({
                 <h1>{section.title[language]}</h1>
               </div>
               <div className={"mastery-status " + (
-                sectionProgress.streak >= 3
+                sectionProgress.streak >= 3 && sectionProgress.quizPassed
                   ? "mastered"
-                  : sectionProgress.visits > 0
+                  : (sectionProgress.visits > 0 || (sectionProgress.quizAttempts ?? 0) > 0)
                     ? "learning"
                     : "new"
               )}>
                 {language === "hu"
-                  ? sectionProgress.streak >= 3
+                  ? sectionProgress.streak >= 3 && sectionProgress.quizPassed
                     ? "Stabil"
-                    : sectionProgress.visits > 0
+                    : (sectionProgress.visits > 0 || (sectionProgress.quizAttempts ?? 0) > 0)
                       ? "Tanulás alatt"
                       : "Új"
-                  : sectionProgress.streak >= 3
+                  : sectionProgress.streak >= 3 && sectionProgress.quizPassed
                     ? "Mastered"
-                    : sectionProgress.visits > 0
+                    : (sectionProgress.visits > 0 || (sectionProgress.quizAttempts ?? 0) > 0)
                       ? "Learning"
                       : "New"}
               </div>
@@ -277,13 +284,6 @@ export function GuidedLessonView({
             )}
 
 
-            {courseVisible && conceptChecks.length > 0 && (
-              <ConceptCheck
-                key={lesson.id + "::" + section.id}
-                questions={conceptChecks}
-                language={language}
-              />
-            )}
 
             {courseVisible && hasUnderstanding && (
               <section className={"learning-layer understanding-layer" + (understandingVisible ? " open" : "")}>
@@ -329,6 +329,16 @@ export function GuidedLessonView({
               </section>
             )}
 
+            {courseVisible && conceptChecks.length > 0 && (
+              <ConceptCheck
+                key={lesson.id + "::" + section.id}
+                questions={conceptChecks}
+                language={language}
+                onComplete={completeMiniTest}
+              />
+            )}
+
+
             {courseVisible && hasDeepDive && (
               <section className={"learning-layer deep-dive-layer" + (deepDiveVisible ? " open" : "")}>
                 <button
@@ -362,6 +372,13 @@ export function GuidedLessonView({
                 <div>
                   <span className="eyebrow">SPACED REVIEW</span>
                   <h3>{language === "hu" ? "Mennyire ment emlékezetből?" : "How well could you recall it?"}</h3>
+                  <p>{language === "hu"
+                    ? sectionProgress.quizPassed
+                      ? "Mini-teszt teljesítve; a stabil állapothoz ismétlés is szükséges."
+                      : "A stabil állapothoz legalább 80%-os mini-teszt és három sikeres önértékelés szükséges."
+                    : sectionProgress.quizPassed
+                      ? "Mini-test passed; review is still needed for mastery."
+                      : "Mastery requires at least 80% on the mini-test and three successful reviews."}</p>
                   {nextReview && (
                     <p>
                       {language === "hu" ? "Következő ismétlés: " : "Next review: "}
@@ -374,11 +391,11 @@ export function GuidedLessonView({
                     {language === "hu" ? "Újra" : "Again"}
                     <small>~20 min</small>
                   </button>
-                  <button className="rating-hard" onClick={() => rate("hard")}>
+                  <button className="rating-hard" disabled={!reviewReady} onClick={() => rate("hard")}>
                     {language === "hu" ? "Nehéz" : "Hard"}
                     <small>~12 h</small>
                   </button>
-                  <button className="rating-good" onClick={() => rate("good")}>
+                  <button className="rating-good" disabled={!reviewReady} onClick={() => rate("good")}>
                     {language === "hu" ? "Jó" : "Good"}
                     <small>{sectionProgress.streak > 0 ? "3–14 d" : "~1 d"}</small>
                   </button>
