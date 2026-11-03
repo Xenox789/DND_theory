@@ -31,7 +31,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q33",
     topics: ["numpy","official-example","indexing"],
-    prompt: { hu: "my_array.shape=(32,5). Mely result shape-ek helyesek?", en: "my_array.shape=(32,5). Which result shapes are correct?" },
+    prompt: { hu: "my_array.shape=(32,5). Mely result alakok (shapes) helyesek?", en: "my_array.shape=(32,5). Which result shapes are correct?" },
     choices: [
       { id: "a", text: { hu: "my_array[:,:] → (32,5)", en: "my_array[:,:] → (32,5)" } },
       { id: "b", text: { hu: "my_array[:,1] → (32,)", en: "my_array[:,1] → (32,)" } },
@@ -44,7 +44,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q34",
     topics: ["numpy","official-example","indexing"],
-    prompt: { hu: "my_array.shape=(32,5). Mely result shape-ek helyesek?", en: "my_array.shape=(32,5). Which result shapes are correct?" },
+    prompt: { hu: "my_array.shape=(32,5). Mely result alakok (shapes) helyesek?", en: "my_array.shape=(32,5). Which result shapes are correct?" },
     choices: [
       { id: "a", text: { hu: "my_array[0,:-1] → (4,)", en: "my_array[0,:-1] → (4,)" } },
       { id: "b", text: { hu: "my_array[[0],:] → (1,5)", en: "my_array[[0],:] → (1,5)" } },
@@ -70,7 +70,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q36",
     topics: ["numpy","official-example","shapes"],
-    prompt: { hu: "my_array.shape=(32,5). Mely result shape-ek helyesek?", en: "my_array.shape=(32,5). Which result shapes are correct?" },
+    prompt: { hu: "my_array.shape=(32,5). Mely result alakok (shapes) helyesek?", en: "my_array.shape=(32,5). Which result shapes are correct?" },
     choices: [
       { id: "a", text: { hu: "(my_array < 0).shape = (32,5)", en: "(my_array < 0).shape = (32,5)" } },
       { id: "b", text: { hu: "my_array.T.shape = (5,32)", en: "my_array.T.shape = (5,32)" } },
@@ -83,7 +83,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q37",
     topics: ["numpy","official-example","broadcasting"],
-    prompt: { hu: "my_array.shape=(32,5). Mi a shape-je my_array + my_array[:,None,:] expressionnek?", en: "my_array.shape=(32,5). What is the shape of my_array + my_array[:,None,:]?" },
+    prompt: { hu: "my_array.shape=(32,5). Mi a alakja (shape) my_array + my_array[:,None,:] expressionnek?", en: "my_array.shape=(32,5). What is the shape of my_array + my_array[:,None,:]?" },
     choices: [
       { id: "a", text: { hu: "(32,32,5)", en: "(32,32,5)" } },
       { id: "b", text: { hu: "(32,5)", en: "(32,5)" } },
@@ -95,7 +95,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q38",
     topics: ["numpy","official-example","reductions"],
-    prompt: { hu: "my_array.shape=(32,5). Mely mean result shape-ek helyesek?", en: "my_array.shape=(32,5). Which mean result shapes are correct?" },
+    prompt: { hu: "my_array.shape=(32,5). Mely mean result alakok (shapes) helyesek?", en: "my_array.shape=(32,5). Which mean result shapes are correct?" },
     choices: [
       { id: "a", text: { hu: "np.mean(my_array,axis=0) → (5,)", en: "np.mean(my_array,axis=0) → (5,)" } },
       { id: "b", text: { hu: "np.mean(my_array,axis=1) → (32,)", en: "np.mean(my_array,axis=1) → (32,)" } },
@@ -109,8 +109,8 @@ export const numpyExampleQuestions: Question[] = [
     topics: ["numpy","official-example","reductions"],
     prompt: { hu: "my_array.shape=(32,5), numeric dtype. Mely type-állítások igazak?", en: "my_array.shape=(32,5), numeric dtype. Which type statements are true?" },
     choices: [
-      { id: "a", text: { hu: "np.sum(my_array,axis=0) resultja numpy.ndarray.", en: "np.sum(my_array,axis=0) returns a numpy.ndarray." } },
-      { id: "b", text: { hu: "np.sum(my_array) resultja numpy.ndarray.", en: "np.sum(my_array) returns a numpy.ndarray." } },
+      { id: "a", text: { hu: "np.sum(my_array,axis=0) eredménye numpy.ndarray.", en: "np.sum(my_array,axis=0) returns a numpy.ndarray." } },
+      { id: "b", text: { hu: "np.sum(my_array) eredménye numpy.ndarray.", en: "np.sum(my_array) returns a numpy.ndarray." } },
       { id: "c", text: { hu: "np.sum(my_array) minden tengely (axis) redukciója miatt skalár NumPy-érték (scalar NumPy value).", en: "np.sum(my_array) is a scalar NumPy value because all axes are collapsed." } }
     ],
     correctIds: ["a","c"],
@@ -144,7 +144,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q42",
     topics: ["numpy","official-example","boolean-indexing"],
-    prompt: { hu: "my_array=np.arange(4).reshape(2,-1). Mi my_array[my_array>0] shape-je?", en: "my_array=np.arange(4).reshape(2,-1). What is the shape of my_array[my_array>0]?" },
+    prompt: { hu: "my_array=np.arange(4).reshape(2,-1). Mi my_array[my_array>0] alakja (shape)?", en: "my_array=np.arange(4).reshape(2,-1). What is the shape of my_array[my_array>0]?" },
     choices: [
       { id: "a", text: { hu: "(3,)", en: "(3,)" } },
       { id: "b", text: { hu: "(2,2)", en: "(2,2)" } },
@@ -168,7 +168,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q44",
     topics: ["numpy","official-example","broadcasting"],
-    prompt: { hu: "my_array=np.arange(4).reshape(2,-1). Mi a shape-je my_array * my_array.reshape(2,2,-1) expressionnek?", en: "my_array=np.arange(4).reshape(2,-1). What is the shape of my_array * my_array.reshape(2,2,-1)?" },
+    prompt: { hu: "my_array=np.arange(4).reshape(2,-1). Mi a alakja (shape) my_array * my_array.reshape(2,2,-1) expressionnek?", en: "my_array=np.arange(4).reshape(2,-1). What is the shape of my_array * my_array.reshape(2,2,-1)?" },
     choices: [
       { id: "a", text: { hu: "(2,2,2)", en: "(2,2,2)" } },
       { id: "b", text: { hu: "(2,2,1)", en: "(2,2,1)" } },
@@ -195,7 +195,7 @@ export const numpyExampleQuestions: Question[] = [
     choices: [
       { id: "a", text: { hu: "Igen.", en: "Yes." } },
       { id: "b", text: { hu: "Nem.", en: "No." } },
-      { id: "c", text: { hu: "1D-ben .T shape-je továbbra is (4,).", en: "For a 1D array, .T still has shape (4,)." } }
+      { id: "c", text: { hu: "1D-ben .T alakja (shape) továbbra is (4,).", en: "For a 1D array, .T still has shape (4,)." } }
     ],
     correctIds: ["a","c"],
     explanation: { hu: "1D transpose nem változtat shape-et, és view/share-memory behavior marad.", en: "A 1D transpose does not change shape and retains shared-memory/view behavior." }
@@ -250,7 +250,7 @@ export const numpyExampleQuestions: Question[] = [
     topics: ["numpy","official-example","copies","elementwise"],
     prompt: { hu: "my_array=np.arange(4); my_array2=my_array+my_array; majd my_array2[:]=99. Módosul my_array?", en: "my_array=np.arange(4); my_array2=my_array+my_array; then my_array2[:]=99. Is my_array modified?" },
     choices: [
-      { id: "a", text: { hu: "Nem, az arithmetic operation resultja külön array.", en: "No, the arithmetic-operation result is a separate array." } },
+      { id: "a", text: { hu: "Nem, az arithmetic operation eredménye külön array.", en: "No, the arithmetic-operation result is a separate array." } },
       { id: "b", text: { hu: "Igen, mert element-wise operation view-t ad.", en: "Yes, because an element-wise operation returns a view." } }
     ],
     correctIds: ["a"],
@@ -343,7 +343,7 @@ export const numpyExampleQuestions: Question[] = [
   {
     id: "np-q59",
     topics: ["numpy","advanced-indexing","shape"],
-    prompt: { hu: "a=np.array([[0,1,2],[10,11,12]]). Mely official-practice resultok helyesek?", en: "a=np.array([[0,1,2],[10,11,12]]). Which practice results are correct?" },
+    prompt: { hu: "a=np.array([[0,1,2],[10,11,12]]). Mely official-practice eredmények helyesek?", en: "a=np.array([[0,1,2],[10,11,12]]). Which practice results are correct?" },
     choices: [
       { id: "a", text: { hu: "a[1,[2,0]] → [12,10], shape (2,)", en: "a[1,[2,0]] → [12,10], shape (2,)" } },
       { id: "b", text: { hu: "a[[1,1,0],[0,2,2]] → [10,12,2], shape (3,)", en: "a[[1,1,0],[0,2,2]] → [10,12,2], shape (3,)" } },
