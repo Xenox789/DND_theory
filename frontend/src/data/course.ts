@@ -10,6 +10,7 @@ import { backpropLesson, backpropQuestions } from "./backprop";
 import { numpyLesson } from "./numpyLesson";
 import { numpyCoreQuestions } from "./numpyQuestionsCore";
 import { numpyExampleQuestions } from "./numpyQuestionsExamples";
+import { officialTheoryQuestions } from "./officialTheoryQuestions";
 
 export const lessons: Lesson[] = [
   mlFundamentalsLesson,
@@ -23,6 +24,7 @@ export const lessons: Lesson[] = [
 ];
 
 export const questionBank: Question[] = [
+  ...officialTheoryQuestions,
   {
     id: "q1",
     topics: ["supervised-learning", "data"],
@@ -184,3 +186,10 @@ export const questionBank: Question[] = [
   ...numpyCoreQuestions,
   ...numpyExampleQuestions
 ];
+
+
+export const officialQuestionBank: Question[] = questionBank.filter((question) =>
+  question.topics.includes("official-example")
+);
+
+export const extendedQuestionBank: Question[] = questionBank;
