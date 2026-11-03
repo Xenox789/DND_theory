@@ -101,11 +101,11 @@ export const logisticRegressionLesson: Lesson = {
         { symbol: "hθ(x)", hu: "Az 1-es osztály becsült valószínűsége.", en: "Estimated probability of class 1." }
       ],
       workedExample: {
-        hu: "Szemléltető példa: két laborértékből betegségkockázatot becsülünk. A modell z=θ₀+θ₁x₁+θ₂x₂ pontszámot számol, majd a szigmoid például h=0,82 értéket adhat, amit 82%-os becsült az 1-es osztály valószínűségeként (class-1 probability) értelmezünk.",
+        hu: "Szemléltető példa: két laborértékből betegségkockázatot becsülünk. A modell z=θ₀+θ₁x₁+θ₂x₂ pontszámot számol, majd a szigmoid például h=0,82 értéket adhat, amit az 1-es osztályhoz tartozás 82%-os becsült valószínűségeként (class-1 probability) értelmezünk.",
         en: "Illustrative example: estimate disease risk from two lab values. The model computes z=θ₀+θ₁x₁+θ₂x₂ and the sigmoid may produce h=0.82, interpreted as an 82% estimated class-1 probability."
       },
       connections: {
-        hu: "Ha a mesterséges neuron (artificial neuron) aktivációs függvénye szigmoid, akkor a a 4–6. előadás (Lectures 4–6) megfogalmazása szerint maga a neuron többváltozós logisztikus regressziónak tekinthető.",
+        hu: "Ha a mesterséges neuron (artificial neuron) aktivációs függvénye szigmoid, akkor a 4–6. előadás megfogalmazása szerint maga a neuron többváltozós logisztikus regressziónak tekinthető.",
         en: "If an artificial neuron uses sigmoid activation, Lectures 4–6 describe it as multivariate logistic regression."
       },
       examTrap: {
