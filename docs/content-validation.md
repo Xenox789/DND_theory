@@ -822,3 +822,11 @@ Rules:
 - For NumPy, preserve the official scope exclusion: ndarray.strides and stride tricks are not part of Theory Test 1.
 
 The frontend build runs scripts/check-pedagogy-consistency.mjs to verify section/profile coverage and retrieval-question references.
+
+### Exam-close vs learning-question wording
+
+- Questions shown inside Learn should test the same concepts but may be paraphrased to require retrieval rather than visual recognition.
+- Questions tagged `official-example` are reserved for the Exam-close Test mode and should remain close to the wording and scenarios of the official Theory Test example document.
+- Do not label a newly invented question as official merely because it covers the same topic.
+- Open-ended calculation/explanation exercises belong in chapter-end summary practice unless the application can score them objectively.
+- Hungarian prose should be idiomatic Hungarian. Keep important English technical vocabulary in parentheses after the Hungarian term instead of inserting English words into Hungarian grammar.
