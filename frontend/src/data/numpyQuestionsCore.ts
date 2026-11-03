@@ -219,7 +219,7 @@ export const numpyCoreQuestions: Question[] = [
   {
     id: "np-q18",
     topics: ["numpy","newaxis"],
-    prompt: { hu: "Ha v.shape=(32,), mely shape-ek helyesek?", en: "If v.shape=(32,), which shapes are correct?" },
+    prompt: { hu: "Ha v.shape=(32,), mely alakok (shapes) helyesek?", en: "If v.shape=(32,), which shapes are correct?" },
     choices: [
       { id: "a", text: { hu: "v[:,None] → (32,1)", en: "v[:,None] → (32,1)" } },
       { id: "b", text: { hu: "v[None,:] → (1,32)", en: "v[None,:] → (1,32)" } },
@@ -245,7 +245,7 @@ export const numpyCoreQuestions: Question[] = [
   {
     id: "np-q20",
     topics: ["numpy","reductions","axis"],
-    prompt: { hu: "Ha a.shape=(4,5), mely result shape-ek helyesek?", en: "If a.shape=(4,5), which result shapes are correct?" },
+    prompt: { hu: "Ha a.shape=(4,5), mely result alakok (shapes) helyesek?", en: "If a.shape=(4,5), which result shapes are correct?" },
     choices: [
       { id: "a", text: { hu: "np.sum(a,axis=0) → (5,)", en: "np.sum(a,axis=0) → (5,)" } },
       { id: "b", text: { hu: "np.sum(a,axis=1) → (4,)", en: "np.sum(a,axis=1) → (4,)" } },
@@ -309,12 +309,12 @@ export const numpyCoreQuestions: Question[] = [
     topics: ["numpy","views","advanced-indexing"],
     prompt: { hu: "Mely állítások igazak advanced indexing és memory sharing kapcsolatára?", en: "Which statements are true about advanced indexing and memory sharing?" },
     choices: [
-      { id: "a", text: { hu: "Advanced indexing resultja új array.", en: "Advanced indexing returns a new array." } },
+      { id: "a", text: { hu: "Advanced indexing eredménye új array.", en: "Advanced indexing returns a new array." } },
       { id: "b", text: { hu: "A selected elements másolódnak.", en: "The selected elements are copied." } },
       { id: "c", text: { hu: "A result módosítása általában nem módosítja az original arrayt.", en: "Modifying the result generally does not modify the original array." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Ez különbözteti meg az advanced indexing resultot a basic-indexing view-tól.", en: "This distinguishes advanced-indexing results from basic-indexing views." }
+    explanation: { hu: "Ez különbözteti meg az advanced indexing eredményt a basic-indexing view-tól.", en: "This distinguishes advanced-indexing results from basic-indexing views." }
   },
   {
     id: "np-q26",
