@@ -219,7 +219,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Az előadás szerint logisztikus regresszió (logistic regression) bináris osztályozás (binary classification) módszer (method). A sigmoid miatt valószínűség (probability) becslést állít elő 0 és 1 között.",
+      hu: "Az előadás szerint a logisztikus regresszió (logistic regression) bináris osztályozási (binary classification) módszer. A szigmoid miatt 0 és 1 közötti valószínűségbecslést ad.",
       en: "According to the lecture, logistic regression is a binary-classification method. The sigmoid produces a probability estimate between 0 and 1."
     }
   },
@@ -257,7 +257,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A kurzus megfogalmazása: logisztikus regresszió (logistic regression) hipotézis (hypothesis) = Sigmoid ∘ lineáris regresszió (linear regression). Emiatt maga a teljes hipotézis (hypothesis) nem lineáris.",
+      hu: "A kurzus megfogalmazásában a logisztikus regresszió hipotézise: szigmoid ∘ lineáris regresszió. A szigmoid miatt a teljes hipotézisfüggvény nem lineáris.",
       en: "The course states: Logistic regression hypothesis = Sigmoid ∘ Linear regression. Therefore, the complete hypothesis itself is not linear."
     }
   },
@@ -265,7 +265,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q4",
     topics: ["decision-boundary"],
     prompt: {
-      hu: "A kurzus 0.5 thresholdja mellett mely állítások igazak?",
+      hu: "A kurzusban használt 0,5-ös döntési küszöb (threshold) mellett mely állítások igazak?",
       en: "With the course's 0.5 threshold, which statements are true?"
     },
     choices: [
@@ -276,7 +276,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A valószínűség (probability) becslés (prediction) küszöbölése külön lépés. Például h=0.73 esetén a osztálycímke (class label) 1.",
+      hu: "A valószínűségbecslés küszöbölése külön lépés. Például h=0,73 esetén, 0,5-ös küszöbnél az osztálycímke (class label) 1.",
       en: "Thresholding the probability prediction is a separate step. For example, h=0.73 gives class label 1."
     }
   },
@@ -284,7 +284,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q5",
     topics: ["decision-boundary", "geometry"],
     prompt: {
-      hu: "Mely geometriai állítások igazak a kurzus logisztikus regresszió (logistic regression) (regression) példáiban?",
+      hu: "Mely geometriai állítások igazak a kurzus logisztikus regressziós (logistic regression) példáiban?",
       en: "Which geometric statements are true in the course logistic-regression examples?"
     },
     choices: [
@@ -295,7 +295,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A döntési határ (decision boundary) bemeneti térbeli (input space) fogalom: {x | h(x)=0.5}. Egy jellemző (feature) esetén pont, két jellemző (feature) esetén a kurzus ábráján egyenes (line).",
+      hu: "A döntési határ (decision boundary) a bemeneti térben értelmezett halmaz: {x | h(x)=0,5}. Egy jellemzőnél pont, két jellemzőnél a kurzus lineáris logisztikus modelljében egyenes.",
       en: "The decision boundary is defined in input space: {x | h(x)=0.5}. With one feature it is a point; with two features the course shows a line."
     }
   },
@@ -315,7 +315,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "2 jellemző (feature) + tengelymetszet / eltolás (intercept) = 3 paraméter és 3 X-oszlop. Mind Xθ, mind az elemenkénti (element-wise) szigmoid kimenete (sigmoid output) egy 100 elemű vektor (vector).",
+      hu: "2 jellemző (feature) + tengelymetszet / eltolás (intercept) = 3 paraméter és 3 X-oszlop. Mind az Xθ lineáris pontszám, mind az elemenként alkalmazott szigmoid kimenete 100 elemű vektor.",
       en: "Two features plus the intercept give 3 parameters and 3 columns in X. Both Xθ and its elementwise sigmoid output are 100-element vectors."
     }
   },
@@ -334,7 +334,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "X a jellemző (feature) mátrix (matrix), y a címke (label) vektor (vector), θ pedig a modellparaméterek vektor (vector).",
+      hu: "X a jellemzőmátrix (feature matrix), y a címkék vektora, θ pedig a modellparaméterek vektora.",
       en: "X is the feature matrix, y the label vector, and θ the model-parameter vector."
     }
   },
@@ -353,7 +353,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A kurzus logisztikus regresszióhoz (logistic regression) logisztikus veszteség (logistic loss) / BCE-t használ. A veszteség (loss) példák felett átlagolt skalár (scalar) célfüggvény (objective).",
+      hu: "A kurzus logisztikus regresszióhoz logisztikus veszteséget, vagyis bináris keresztentrópiát (BCE) használ. A példákon átlagolt teljes veszteség skalár célfüggvény.",
       en: "The course uses logistic loss / BCE for logistic regression. It is a scalar objective averaged over examples."
     }
   },
@@ -410,7 +410,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a"],
     explanation: {
-      hu: "A modellparaméterek azért változnak, hogy a logisztikus/BCE-célfüggvény (logistic/BCE objective) (objective) J(θ) csökkenjen.",
+      hu: "A modellparamétereket azért változtatjuk, hogy a logisztikus/BCE-veszteségből képzett J(θ) célfüggvény csökkenjen.",
       en: "Model parameters are changed so that the logistic/BCE objective J(θ) decreases."
     }
   },
@@ -418,7 +418,7 @@ export const logisticRegressionQuestions: Question[] = [
     id: "log-q12",
     topics: ["logistic-regression", "gradient"],
     prompt: {
-      hu: "Az előadás 4 NumPy recap alapján mely állítások igazak logisztikus regresszió (logistic regression) gradienscsökkentés (gradient descent)nél?",
+      hu: "A 4. előadás NumPy-összefoglalója alapján mely állítások igazak a logisztikus regresszió gradienscsökkentésére (gradient descent)?",
       en: "According to the Lecture 4 NumPy recap, which statements are true for logistic-regression gradient descent?"
     },
     choices: [
@@ -429,7 +429,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A gradiens (gradient) θ-val kompatibilis vektor (vector), nem X-szel azonos shape-jű mátrix (matrix). A kurzus kódja: X.T @ (h-y) / y.size.",
+      hu: "A gradiens θ-val azonos méretű vektor, nem X-szel azonos alakú mátrix. A kurzus kódjában: `X.T @ (h-y) / y.size`.",
       en: "The gradient is a vector compatible with θ, not a matrix with the same shape as X. The course code uses X.T @ (h-y) / y.size."
     }
   },
@@ -448,7 +448,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "Pontosan ez az előadás érvelése: az MSE+sigmoid problémás nem konvex (non-convex) célfüggvényt (objective) adhat; a logisztikus/BCE-veszteség (logistic/BCE loss) konvex (convex), ezért gradienscsökkentés (gradient descent) számára megfelelőbb.",
+      hu: "Az előadás érvelése szerint a szigmoid + MSE kombináció nem konvex célfüggvényt adhat, míg a logisztikus/BCE-veszteség konvex, ezért a logisztikus regresszióhoz ezt használjuk.",
       en: "This is exactly the lecture's argument: MSE + sigmoid can create a problematic non-convex objective; logistic/BCE loss is convex and therefore better suited to gradient descent."
     }
   },
@@ -467,7 +467,7 @@ export const logisticRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "0.82 a skalár (scalar) valószínűség (probability) becslés. Thresholdolás után diszkrét (discrete) címke (label) 1 lesz.",
+      hu: "A 0,82 egy skalár valószínűségbecslés. A 0,5-ös küszöb alkalmazása után az osztálycímke 1.",
       en: "0.82 is a scalar probability estimate. After thresholding, the discrete label is 1."
     }
   }
