@@ -1,4 +1,5 @@
 import type { Lesson, Question } from "../types";
+import { enrichLesson } from "./lessonEnrichment";
 import { mlFundamentalsLesson } from "./mlFundamentals";
 import { linearRegressionLesson, linearRegressionQuestions } from "./linearRegression";
 import { logisticRegressionLesson, logisticRegressionQuestions } from "./logisticRegression";
@@ -21,7 +22,7 @@ export const lessons: Lesson[] = [
   sgdLesson,
   backpropLesson,
   numpyLesson
-];
+].map(enrichLesson);
 
 export const questionBank: Question[] = [
   ...officialTheoryQuestions,
