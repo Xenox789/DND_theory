@@ -28,8 +28,10 @@ export function LearningDashboard({
     }))
   );
 
-  const reviewed = allSections.filter((item) => item.progress.visits > 0).length;
-  const mastered = allSections.filter((item) => item.progress.streak >= 3).length;
+  const isStarted = (item: ReturnType<typeof getSectionProgress>) =>
+    item.visits > 0 || (item.quizAttempts ?? 0) > 0;
+  const reviewed = allSections.filter((item) => isStarted(item.progress)).length;
+  const mastered = allSections.filter((item) => masteryLabel(item.progress) === "mastered").length;
   const due = allSections.filter((item) => isReviewDue(item.progress));
   const total = allSections.length;
   const progressPercent = total === 0 ? 0 : Math.round((reviewed / total) * 100);
@@ -110,8 +112,8 @@ export function LearningDashboard({
             const items = lesson.sections.map((section) =>
               getSectionProgress(progress, lesson.id, section.id)
             );
-            const learned = items.filter((item) => item.visits > 0).length;
-            const lessonMastered = items.filter((item) => item.streak >= 3).length;
+            const learned = items.filter(isStarted).length;
+            const lessonMastered = items.filter((item) => masteryLabel(item) === "mastered").length;
             const lessonDue = items.filter((item) => isReviewDue(item)).length;
             const pct = Math.round((learned / Math.max(1, items.length)) * 100);
 
@@ -136,7 +138,11 @@ export function LearningDashboard({
                         : learned > 0
                           ? "Folyamatban"
                           : "Új"
-                      : masteryLabel(items[0] ?? { visits: 0, streak: 0, lastReviewed: null, nextReview: null, rating: null })}
+                      : lessonMastered === items.length && items.length > 0
+                        ? "Mastered"
+                        : learned > 0
+                          ? "In progress"
+                          : "New"}
                   </span>
                 </div>
                 <h3>{lesson.title[language]}</h3>
