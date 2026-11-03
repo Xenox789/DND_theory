@@ -136,6 +136,86 @@ export const pedagogyProfiles: Record<string, PedagogyProfile> = {
     ]
   ),
 
+  "supervised-paradigm": p(
+    "1. előadás 26–55. oldal — supervised learning",
+    "Lecture 1 pp. 26–55 — supervised learning",
+    "Mi az a két dolog, amely minden felügyelt tanítási példában közvetlenül rendelkezésre áll?",
+    "What two things are directly available in every supervised training example?",
+    [
+      "Egy mondatban fogalmazd meg: miért tudjuk supervised learningben közvetlenül mérni, mennyire rossz a becslés?",
+      "In one sentence, explain why supervised learning can directly measure how wrong a prediction is.",
+      "Mert minden tanítási példához ismerjük a valódi y címkét, ezért ŷ és y közvetlenül összehasonlítható.",
+      "Because the true label y is known for each training example, so ŷ can be compared directly with y."
+    ],
+    [
+      "Felügyelt tanulásnál a modell a tanítás során maga találja ki, mi legyen a helyes y címke.",
+      "In supervised learning, the model invents the correct y label during training.",
+      false,
+      "A y címke a tanítóminta része; a modell ennek becslését tanulja meg.",
+      "The label y is part of the training sample; the model learns to predict it."
+    ]
+  ),
+
+  "unsupervised-paradigm": p(
+    "1. előadás 56–72. oldal — unsupervised learning",
+    "Lecture 1 pp. 56–72 — unsupervised learning",
+    "Ha nincs y címke, mitől lesz mégis jól definiált egy unsupervised feladat?",
+    "If there is no y label, what still makes an unsupervised task well defined?",
+    [
+      "Mondj két, az előadásban szereplő unsupervised feladatot, és írd le röviden, mit keresünk bennük.",
+      "Name two unsupervised tasks from the lecture and briefly state what is learned.",
+      "Például klaszterezésnél hasonló csoportokat keresünk; dimenziócsökkentésnél tömör reprezentációt; sample generationnél az adateloszlást.",
+      "For example, clustering seeks similar groups; dimensionality reduction seeks a compact representation; sample generation learns the data distribution."
+    ],
+    [
+      "Unsupervised learningben nincs címke, ezért nincs semmilyen célfüggvény vagy optimalizálási cél.",
+      "Because unsupervised learning has no labels, it has no objective or optimization target.",
+      false,
+      "A feladatnak továbbra is van célja; csak nem egy külsőleg megadott y címke becslése.",
+      "The task still has an objective; it is simply not prediction of an externally provided y label."
+    ]
+  ),
+
+  "reinforcement-paradigm": p(
+    "1. előadás 74–77. oldal — reinforcement learning",
+    "Lecture 1 pp. 74–77 — reinforcement learning",
+    "Mi a különbség a supervised y címke és az RL reward között?",
+    "What is the difference between a supervised label y and an RL reward?",
+    [
+      "Írd le a ciklust négy szóval: mit figyel meg az agent, mit választ, mit változtat, és mit kaphat vissza?",
+      "Describe the loop in four pieces: what does the agent observe, choose, affect, and receive?",
+      "Állapot (state) → akció (action) → környezet változása → jutalom (reward).",
+      "State → action → environment change → reward."
+    ],
+    [
+      "RL-ben minden állapothoz megkapjuk a helyes akciót mint címkét.",
+      "In RL, every state comes with the correct action as a label.",
+      false,
+      "Az agent jutalomból tanul; a reward nem feltétlenül mondja meg közvetlenül, melyik akció lett volna helyes.",
+      "The agent learns from reward; reward does not necessarily state the correct action directly."
+    ]
+  ),
+
+  "compare-paradigms": p(
+    "1. előadás — supervised / unsupervised / reinforcement összehasonlítás",
+    "Lecture 1 — comparing supervised / unsupervised / reinforcement learning",
+    "Ha egy új feladatot kapsz, milyen három kérdéssel döntöd el gyorsan, melyik paradigmába tartozik?",
+    "What three questions can quickly identify which learning paradigm a new task belongs to?",
+    [
+      "Sorold be: címkézett képosztályozás; címke nélküli klaszterezés; játékot játszó agent jutalommal.",
+      "Classify: labeled image classification; unlabeled clustering; a game-playing agent with rewards.",
+      "Supervised; unsupervised; reinforcement learning.",
+      "Supervised; unsupervised; reinforcement learning."
+    ],
+    [
+      "Ha nincs y címke, akkor a feladat automatikusan unsupervised.",
+      "If there is no y label, the task is automatically unsupervised.",
+      false,
+      "RL-ben sincs minden állapothoz y címke, mégsem unsupervised: agent–environment interakció és reward határozza meg.",
+      "RL also lacks a y label for every state, yet it is not unsupervised: agent-environment interaction and reward define the setting."
+    ]
+  ),
+
   "tasks": p(
     "1. előadás + Theory Test példa — regresszió, osztályozás és unsupervised feladatok",
     "Lecture 1 + Theory Test example — regression, classification, and unsupervised tasks",
