@@ -194,6 +194,126 @@ export const mlFundamentalsLesson: Lesson = {
       ]
     },
     {
+      id: "supervised-paradigm",
+      title: {
+        hu: "Felügyelt tanulás: példákból a helyes kimenetet tanuljuk",
+        en: "Supervised learning: learn the expected output from labeled examples"
+      },
+      body: {
+        hu: "Felügyelt tanulásnál (supervised learning) a tanítóminta bemenet–címke párokból áll: (x,y). Az x a bemenet, az y pedig az adott példához tartozó ismert helyes vagy elvárt kimenet. A feladat olyan hθ(x) hipotézisfüggvény megtanulása, amely új x bemenetekre is jól becsüli y-t, vagyis ŷ=hθ(x) közel legyen a valódi címkéhez.",
+        en: "In supervised learning, the training sample consists of input-label pairs (x,y). x is the input and y is the known desired output. The goal is to learn a hypothesis hθ(x) that predicts y well for new inputs, so ŷ=hθ(x) is close to the true label."
+      },
+      why: {
+        hu: "A tanulási jel itt közvetlen: minden tanítási példánál össze tudjuk hasonlítani a modell ŷ becslését a valódi y címkével. A veszteségfüggvény ezt az eltérést számszerűsíti, a tanítás pedig olyan θ paramétereket keres, amelyek csökkentik a veszteséget.",
+        en: "The learning signal is direct: for every training example, prediction ŷ can be compared with the true label y. The loss quantifies this difference and training searches for parameters θ that reduce it."
+      },
+      workedExample: {
+        hu: "Az 1. előadás példája: x egy város lakossága, y az autók száma. Sok ismert (lakosság, autók száma) párból megtanulunk egy modellt, majd egy új város lakosságából megbecsüljük az autók számát. Ugyanez a séma működik képből életkor becslésénél is: x a kép, y az életkor.",
+        en: "Lecture 1 example: x is a city's population and y is the number of cars. From many known pairs we learn a model, then estimate the number of cars for a new city. The same pattern applies to estimating age from an image: x is the image and y is age."
+      },
+      connections: {
+        hu: "A regresszió (regression) és az osztályozás (classification) a kurzusban felügyelt tanulási feladatok. A különbség közöttük főként a címke természetében van: regressziónál folytonos, osztályozásnál kategória.",
+        en: "Regression and classification are supervised-learning tasks in the course. They mainly differ in the nature of the label: continuous for regression, categorical for classification."
+      },
+      examTrap: {
+        hu: "A címke y nem a modell becslése. y a tanítóadatból ismert célérték; ŷ a modell becslése.",
+        en: "The label y is not the model prediction. y is the known target from the training data; ŷ is the prediction."
+      },
+      keyTerms: [
+        { term: "supervised learning", hu: "felügyelt tanulás" },
+        { term: "label", hu: "címke" },
+        { term: "prediction", hu: "becslés" }
+      ]
+    },
+    {
+      id: "unsupervised-paradigm",
+      title: {
+        hu: "Felügyelet nélküli tanulás: nincs megadott y címke",
+        en: "Unsupervised learning: there is no provided y label"
+      },
+      body: {
+        hu: "Felügyelet nélküli tanulásnál (unsupervised learning) nincs minden x bemenethez megadott helyes y címke. Emiatt önmagában az, hogy „tanuljunk az adatokból”, még nem határozza meg a feladatot: külön meg kell mondani, milyen szerkezetet vagy tulajdonságot keresünk. Az 1. előadás példái a klaszterezés (clustering), a tömörítés / dimenziócsökkentés (compression / dimensionality reduction) és a mintagenerálás (sample generation).",
+        en: "In unsupervised learning there is no provided correct y label for each input x. Therefore the task must be defined by what structure or property we want to learn. Lecture 1 lists clustering, compression/dimensionality reduction, and sample generation as examples."
+      },
+      why: {
+        hu: "Itt nem egy ismert y címkéhez próbáljuk hozzáigazítani ŷ-t. A célfüggvényt az adott feladat alapján definiáljuk. Dimenziócsökkentésnél például megtanulhatunk egy tömör reprezentációt z, amelyből az eredeti x minél jobban rekonstruálható.",
+        en: "Here we are not matching predictions to a provided label y. The objective depends on the task. In dimensionality reduction, for example, a compressed representation z can be learned so that the original x can be reconstructed well."
+      },
+      workedExample: {
+        hu: "Klaszterezésnél címkék nélkül próbáljuk hasonló csoportokba rendezni az adatpontokat. Dimenziócsökkentésnél az 1. előadás PCA-s arc példája kevesebb változóval írja le az adatot, majd ebből rekonstruálja az eredetit. A tananyag denoisingot és mintagenerálást is unsupervised alkalmazásként mutat.",
+        en: "In clustering, data points are grouped by similarity without labels. For dimensionality reduction, Lecture 1 uses a PCA face example where fewer variables represent the data and the original is reconstructed. The course also shows denoising and sample generation as unsupervised applications."
+      },
+      connections: {
+        hu: "A felügyelet nélküli tanulás tehát nem azt jelenti, hogy nincs cél vagy veszteség. Azt jelenti, hogy a cél nem egy külsőleg megadott y címke becslése.",
+        en: "Unsupervised learning does not mean there is no objective or loss. It means the objective is not to predict an externally provided label y."
+      },
+      examTrap: {
+        hu: "A klaszterezés, dimenziócsökkentés és zajcsökkentés a Theory Test példadokumentum keretében felügyelet nélküli feladatként szerepelnek.",
+        en: "Clustering, dimensionality reduction, and denoising are treated as unsupervised tasks in the Theory Test example framing."
+      },
+      keyTerms: [
+        { term: "unsupervised learning", hu: "felügyelet nélküli tanulás" },
+        { term: "clustering", hu: "klaszterezés" },
+        { term: "dimensionality reduction", hu: "dimenziócsökkentés" }
+      ]
+    },
+    {
+      id: "reinforcement-paradigm",
+      title: {
+        hu: "Megerősítéses tanulás: akciók és jutalmak",
+        en: "Reinforcement learning: actions and rewards"
+      },
+      body: {
+        hu: "Megerősítéses tanulásnál (reinforcement learning, RL) egy ügynök (agent) kölcsönhatásba lép a környezettel (environment). Megfigyeli a környezet állapotát, választ egy akciót (action), ezzel befolyásolja a környezetet, majd bizonyos célok teljesülésekor pozitív vagy akár negatív jutalmat (reward) kap.",
+        en: "In reinforcement learning, an agent interacts with an environment. It observes the state, chooses an action, influences the environment, and receives a positive or negative reward when predefined goals are met."
+      },
+      why: {
+        hu: "A cél nem az, hogy minden állapothoz megkapjuk a helyes akció címkéjét. A tanuló olyan akciókat próbál választani, amelyek várhatóan maximalizálják a jövőben összegyűjtött jutalmak teljes mennyiségét.",
+        en: "The goal is not to receive the correct action label for every state. The learner tries to choose actions that are expected to maximize total future reward."
+      },
+      workedExample: {
+        hu: "Képzelj el egy játékot: az agent látja az aktuális állapotot, például a pálya helyzetét, majd balra vagy jobbra léphet. Nem kap minden lépés után egy „helyes válasz” címkét. Ehelyett például jutalmat kap a cél eléréséért és negatív jutalmat egy hibáért.",
+        en: "Imagine a game: the agent observes the current state and may move left or right. It does not receive a correct-answer label after every step; instead it may receive reward for reaching a goal and negative reward for a mistake."
+      },
+      connections: {
+        hu: "Az 1. előadás külön kiemeli a ritkás visszajelzés (sparse feedback) és a credit assignment problémáját: egy később kapott jutalomból nem mindig egyszerű megmondani, melyik korábbi akció volt érte felelős.",
+        en: "Lecture 1 highlights sparse feedback and the credit-assignment problem: when a reward arrives later, it may be difficult to determine which earlier action was responsible."
+      },
+      examTrap: {
+        hu: "Az RL reward nem ugyanaz, mint a supervised y címke. A reward azt jelzi, mennyire volt kedvező a következmény; nem feltétlenül mondja meg közvetlenül, melyik akció lett volna a helyes.",
+        en: "An RL reward is not the same as a supervised label y. Reward indicates how favorable the consequence was; it does not necessarily directly state which action was correct."
+      },
+      keyTerms: [
+        { term: "agent", hu: "ügynök" },
+        { term: "environment", hu: "környezet" },
+        { term: "action", hu: "akció" },
+        { term: "reward", hu: "jutalom" }
+      ]
+    },
+    {
+      id: "compare-paradigms",
+      title: {
+        hu: "A három csoport összehasonlítása",
+        en: "Comparing the three learning paradigms"
+      },
+      body: {
+        hu: "A legegyszerűbb megkülönböztetéshez három kérdést tegyél fel. 1) Van minden példához ismert helyes y címke? → felügyelt tanulás. 2) Nincs y címke, és magukban az adatokban keresünk szerkezetet, tömör reprezentációt vagy eloszlást? → felügyelet nélküli tanulás. 3) Egy agent cselekszik egy környezetben, és jutalmakból tanulja meg, mely akciók vezetnek hosszú távon jó eredményhez? → megerősítéses tanulás.",
+        en: "A simple distinction uses three questions. 1) Is a correct label y provided for every example? → supervised learning. 2) Is there no y label and we seek structure, a compact representation, or a data distribution? → unsupervised learning. 3) Does an agent act in an environment and learn from rewards which actions lead to good long-term outcomes? → reinforcement learning."
+      },
+      why: {
+        hu: "A döntő különbség a tanulási jel (learning signal). Supervised esetben közvetlen célértékünk van; unsupervised esetben a feladatot az adatokból definiált cél írja le; RL esetben a környezet jutalma értékeli az akciók következményét.",
+        en: "The decisive difference is the learning signal. Supervised learning has a direct target, unsupervised learning uses an objective defined from the data, and reinforcement learning uses environmental reward to evaluate consequences of actions."
+      },
+      workedExample: {
+        hu: "Ugyanaz a kép háromféle helyzetben: ha meg van adva, hogy „kutya”, supervised. Ha címke nélkül hasonló képeket csoportosítunk, unsupervised. Ha egy robot a kamerakép alapján akciót választ és jutalmat kap azért, hogy eléri a célt, reinforcement learning.",
+        en: "The same image can appear in three settings: if the label 'dog' is provided, supervised; if similar images are grouped without labels, unsupervised; if a robot uses the image to choose actions and receives reward for reaching a goal, reinforcement learning."
+      },
+      examTrap: {
+        hu: "A „nincs y címke” önmagában nem elég ahhoz, hogy valami unsupervised legyen. RL-ben sincs minden állapothoz klasszikus y címke, de van agent–environment interakció és reward.",
+        en: "The absence of a y label alone does not make a task unsupervised. RL also lacks a classical label for every state, but it has agent-environment interaction and reward."
+      }
+    },
+    {
       id: "tasks",
       title: {
         hu: "Regresszió, osztályozás és felügyelet nélküli feladatok",
