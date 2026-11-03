@@ -35,12 +35,12 @@ export const questionBank: Question[] = [
     choices: [
       { id: "a", text: { hu: "bemenet (input)–címke (label) párokból állhat.", en: "It can consist of input–label pairs." } },
       { id: "b", text: { hu: "Az x jelöli a bemenetet.", en: "x denotes the input." } },
-      { id: "c", text: { hu: "Az y jelöli a modellparaméterek (model parameters) értékeit.", en: "y denotes the model parameters." } },
+      { id: "c", text: { hu: "Az y jelöli a modellparaméterek értékeit.", en: "y denotes the model parameters." } },
       { id: "d", text: { hu: "Az y jelölheti a valódi címkét.", en: "y can denote the true label." } }
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "Felügyelt tanulásban a tanítóminta (training sample) (x, y) párokból áll. x a bemenet (input), y a valódi címke (true label) (label). A modellparaméterek (model parameters) külön, például θ-val vannak jelölve.",
+      hu: "Felügyelt tanulásban a tanítóminta (training sample) (x, y) párokból áll. x a bemenet (input), y a valódi címke (true label) (label). A modellparaméterek külön, például θ-val vannak jelölve.",
       en: "In supervised learning the training sample consists of (x, y) pairs. x is the input and y is the true label. Model parameters are separate, for example θ."
     }
   },
@@ -59,7 +59,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A hipotézisfüggvény (hypothesis function) a bemenet (input) és a paraméterek (parameters) alapján becslést ad. Az optimalizálás (optimization) célja nem X minimalizálása.",
+      hu: "A hipotézisfüggvény (hypothesis function) a bemenet (input) és a paraméterek alapján becslést ad. Az optimalizálás (optimization) célja nem X minimalizálása.",
       en: "The hypothesis function produces a prediction using the input and parameters. Optimization does not minimize X."
     }
   },
@@ -97,7 +97,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Az előadás (lecture) három fő csoportot nevez meg: supervised, unsupervised és megerősítéses tanulás (reinforcement learning).",
+      hu: "Az előadás három fő csoportot nevez meg: supervised, unsupervised és megerősítéses tanulás (reinforcement learning).",
       en: "The lecture names supervised, unsupervised, and reinforcement learning as the three main groups."
     }
   },
@@ -109,14 +109,14 @@ export const questionBank: Question[] = [
       en: "We want to predict a patient's cholesterol level from weight, age, height, and sex. Which statements are true?"
     },
     choices: [
-      { id: "a", text: { hu: "Ez regresszió (regression) feladat (task).", en: "This is a regression task." } },
+      { id: "a", text: { hu: "Ez regresszió (regression) feladat.", en: "This is a regression task." } },
       { id: "b", text: { hu: "A koleszterinszint (cholesterol level) a címke (label).", en: "The cholesterol level is the label." } },
-      { id: "c", text: { hu: "Az életkor (age) a modellparaméter (model parameter) θ egyik eleme.", en: "Age is one of the model parameters θ." } },
+      { id: "c", text: { hu: "Az életkor (age) a modellparaméter θ egyik eleme.", en: "Age is one of the model parameters θ." } },
       { id: "d", text: { hu: "A személyes jellemzők (personal attributes) a jellemző (feature)/bemenet (input) adatok részei.", en: "The personal attributes are part of the feature/input data." } }
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "A koleszterinszint (cholesterol level) folytonos célváltozó, ezért regresszió (regression). A beteg tulajdonságai X/x jellemző (feature) adatok, nem a megtanulandó θ paraméterek (parameters).",
+      hu: "A koleszterinszint (cholesterol level) folytonos célváltozó, ezért regresszió (regression). A beteg tulajdonságai X/x jellemző (feature) adatok, nem a megtanulandó θ paraméterek.",
       en: "Cholesterol level is a continuous target, so this is regression. Patient attributes are X/x features, not learnable θ parameters."
     }
   },
@@ -154,7 +154,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["b", "d"],
     explanation: {
-      hu: "A paraméterek (parameters) értékeit azért változtatjuk, hogy J(θ) csökkenjen. Nem a bemenet (input) adatokat vagy az adathalmaz (dataset) méretét minimalizáljuk.",
+      hu: "A paraméterek értékeit azért változtatjuk, hogy J(θ) csökkenjen. Nem a bemenet (input) adatokat vagy az adathalmaz (dataset) méretét minimalizáljuk.",
       en: "We change parameter values so that J(θ) decreases. We do not minimize the input data or dataset size."
     }
   },
@@ -168,12 +168,12 @@ export const questionBank: Question[] = [
     choices: [
       { id: "a", text: { hu: "y → true címke (label)", en: "y → true label" } },
       { id: "b", text: { hu: "ŷ → becslés (prediction)", en: "ŷ → prediction" } },
-      { id: "c", text: { hu: "θ → modellparaméterek (model parameters)", en: "θ → model parameters" } },
+      { id: "c", text: { hu: "θ → modellparaméterek", en: "θ → model parameters" } },
       { id: "d", text: { hu: "x → veszteségfüggvény (loss function)", en: "x → loss function" } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A szokásos jelölésben x a bemenet (input), y a valódi címke (true label) (label), ŷ a becslés (prediction), θ pedig a modellparaméterek (model parameters).",
+      hu: "A szokásos jelölésben x a bemenet (input), y a valódi címke (true label) (label), ŷ a becslés (prediction), θ pedig a modellparaméterek.",
       en: "In the usual notation x is the input, y the true label, ŷ the prediction, and θ the model parameters."
     }
   },
