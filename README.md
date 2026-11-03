@@ -155,3 +155,13 @@ The learning flow combines:
 - one-click navigation to related interactive labs.
 
 The review scheduler is intentionally simple and adaptive. Its intervals are a study aid, not claimed to be a uniquely optimal scientific scheduling algorithm.
+
+## Learning and exam practice v1.1
+
+- Learn concept steps now use automatically scored multi-answer mini-tests instead of open-ended tasks.
+- Each concept can use 2–3 paraphrased self-check questions so learning practice does not simply memorize the exam wording.
+- Longer open-ended exercises are grouped into a chapter-end summary exercise set with revealable answer keys.
+- Test has two modes: **Exam-close** for official-example-aligned wording and **Extended practice** for the full bank.
+- Official Theory Test example topics are kept separate from the paraphrased Learn questions.
+- Hungarian learning text is being normalized to natural Hungarian prose, with important English technical terms retained in parentheses.
+- The pedagogy CI check validates all learning-step question mappings and the dedicated official theory bank.
