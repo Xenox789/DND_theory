@@ -68,6 +68,7 @@ export function GuidedLessonView({
   const section = lesson.sections[activeIndex];
   const sectionProgress = getSectionProgress(progress, lesson.id, section.id);
   const nextReview = formatReviewDate(sectionProgress.nextReview, language);
+  const reviewReady = !sectionProgress.nextReview || new Date(sectionProgress.nextReview).getTime() <= Date.now();
   const pedagogy = pedagogyForSection(section.id);
 
   const conceptChecks = useMemo(() => checkpointsForSection(questions, section.id, 3), [questions, section.id]);
@@ -390,11 +391,11 @@ export function GuidedLessonView({
                     {language === "hu" ? "Újra" : "Again"}
                     <small>~20 min</small>
                   </button>
-                  <button className="rating-hard" onClick={() => rate("hard")}>
+                  <button className="rating-hard" disabled={!reviewReady} onClick={() => rate("hard")}>
                     {language === "hu" ? "Nehéz" : "Hard"}
                     <small>~12 h</small>
                   </button>
-                  <button className="rating-good" onClick={() => rate("good")}>
+                  <button className="rating-good" disabled={!reviewReady} onClick={() => rate("good")}>
                     {language === "hu" ? "Jó" : "Good"}
                     <small>{sectionProgress.streak > 0 ? "3–14 d" : "~1 d"}</small>
                   </button>
