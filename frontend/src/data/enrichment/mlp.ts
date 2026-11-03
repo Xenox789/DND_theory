@@ -30,8 +30,8 @@ export const mlpExtras: Record<string, LessonContentSupplement> = {
   },
   "two-layer-hypothesis": {
     "ex": [
-      "A képletet négy lépésre bontjuk: z₁=W₁x+b₁, a₁=g₁(z₁), z₂=W₂a₁+b₂, ŷ=g₂(z₂). Ha x=[1,2], W₁ az egységmátrix, b₁=[0,0], g₁=ReLU, W₂=[3,4], b₂=0 és g₂=identity, akkor z₁=[1,2], a₁=[1,2], z₂=11, ŷ=11. Az alakok: (2,)→(2,)→(2,)→(1,).",
-      "Break it into z₁=W₁x+b₁, a₁=g₁(z₁), z₂=W₂a₁+b₂, ŷ=g₂(z₂). With x=[1,2], W₁=identity, b₁=[0,0], g₁=ReLU, W₂=[3,4], b₂=0, g₂=identity: z₁=[1,2], a₁=[1,2], z₂=11, ŷ=11. Shapes: (2,)→(2,)→(2,)→(1,)."
+      "A képletet négy lépésre bontjuk: z₁=W₁x+b₁, a₁=g₁(z₁), z₂=W₂a₁+b₂, ŷ=g₂(z₂). Ha x=[1,2], W₁ az egységmátrix, b₁=[0,0], g₁=ReLU, W₂=[[3,4]], b₂=[0] és g₂=identity, akkor z₁=[1,2], a₁=[1,2], z₂=[11], ŷ=[11]. Az alakok: (2,)→(2,)→(2,)→(1,)→(1,).",
+      "Break it into z₁=W₁x+b₁, a₁=g₁(z₁), z₂=W₂a₁+b₂, ŷ=g₂(z₂). With x=[1,2], W₁=identity, b₁=[0,0], g₁=ReLU, W₂=[[3,4]], b₂=[0], g₂=identity: z₁=[1,2], a₁=[1,2], z₂=[11], ŷ=[11]. Shapes: (2,)→(2,)→(2,)→(1,)→(1,)."
     ]
   },
   "activation-functions": {
