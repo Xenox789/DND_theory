@@ -11,9 +11,17 @@ const lessonFiles = [
   "src/data/numpyLesson.ts"
 ];
 
-const pedagogyPath = "src/study/pedagogy.ts";
-const checkpointPath = "src/study/checkpoints.ts";
-const coursePath = "src/data/course.ts";
+const questionFiles = [
+  "src/data/linearRegression.ts",
+  "src/data/logisticRegression.ts",
+  "src/data/generalizationQuestions.ts",
+  "src/data/mlp.ts",
+  "src/data/sgd.ts",
+  "src/data/backprop.ts",
+  "src/data/numpyQuestionsCore.ts",
+  "src/data/numpyQuestionsExamples.ts",
+  "src/data/officialTheoryQuestions.ts"
+];
 
 const errors = [];
 const sectionIds = [];
@@ -24,7 +32,7 @@ for (const path of lessonFiles) {
   sectionIds.push(...ids.slice(1));
 }
 
-const pedagogy = fs.readFileSync(pedagogyPath, "utf8");
+const pedagogy = fs.readFileSync("src/study/pedagogy.ts", "utf8");
 const profileIds = [...pedagogy.matchAll(/^\s*"([^"]+)": p\(/gm)].map((match) => match[1]);
 
 for (const id of sectionIds) {
@@ -41,35 +49,75 @@ if (new Set(profileIds).size !== profileIds.length) {
   errors.push("Duplicate pedagogy profile IDs detected.");
 }
 
-const checkpoints = fs.readFileSync(checkpointPath, "utf8");
-const checkpointIds = [...checkpoints.matchAll(/"[^"]+":\s*"([^"]+)"/g)].map((match) => match[1]);
-const course = fs.readFileSync(coursePath, "utf8");
-const questionIds = new Set(
-  [...course.matchAll(/id:\s*"(q\d+)"/g)].map((match) => match[1])
+const checkpoints = fs.readFileSync("src/study/checkpoints.ts", "utf8");
+const mapBodyMatch = checkpoints.match(
+  /const sectionQuestionMap:[\s\S]*?=\s*\{([\s\S]*?)\n\};/
 );
 
-for (const path of [
-  "src/data/linearRegression.ts",
-  "src/data/logisticRegression.ts",
-  "src/data/generalizationQuestions.ts",
-  "src/data/mlp.ts",
-  "src/data/sgd.ts",
-  "src/data/backprop.ts",
-  "src/data/numpyQuestionsCore.ts",
-  "src/data/numpyQuestionsExamples.ts"
-]) {
+if (!mapBodyMatch) {
+  errors.push("Could not parse sectionQuestionMap.");
+}
+
+const checkpointSections = [];
+const checkpointIds = [];
+
+if (mapBodyMatch) {
+  const entryRegex = /"([^"]+)":\s*\[([^\]]*)\]/g;
+  for (const match of mapBodyMatch[1].matchAll(entryRegex)) {
+    checkpointSections.push(match[1]);
+    const ids = [...match[2].matchAll(/"([^"]+)"/g)].map((item) => item[1]);
+    if (ids.length === 0) errors.push("No learning questions mapped for section: " + match[1]);
+    checkpointIds.push(...ids);
+  }
+}
+
+for (const id of sectionIds) {
+  if (!checkpointSections.includes(id)) {
+    errors.push("Missing learning-question mapping for section: " + id);
+  }
+}
+for (const id of checkpointSections) {
+  if (!sectionIds.includes(id)) {
+    errors.push("Question mapping references unknown section: " + id);
+  }
+}
+
+const questionIds = new Set();
+const course = fs.readFileSync("src/data/course.ts", "utf8");
+for (const match of course.matchAll(/id:\s*"(q\d+)"/g)) {
+  questionIds.add(match[1]);
+}
+
+for (const path of questionFiles) {
   const source = fs.readFileSync(path, "utf8");
-  for (const match of source.matchAll(/id:\s*"((?:lr|log|gen|mlp|sgd|bp|np)-q\d+)"/g)) {
+  for (const match of source.matchAll(/id:\s*"([^"]+-q\d+)"/g)) {
     questionIds.add(match[1]);
   }
 }
 
 for (const id of checkpointIds) {
-  if (!questionIds.has(id)) errors.push("Checkpoint references unknown question: " + id);
+  if (!questionIds.has(id)) errors.push("Learning step references unknown question: " + id);
+}
+
+const officialSource = fs.readFileSync("src/data/officialTheoryQuestions.ts", "utf8");
+const officialIds = [...officialSource.matchAll(/id:\s*"(official-q\d+)"/g)].map((m) => m[1]);
+
+if (officialIds.length < 20) {
+  errors.push("Official theory bank unexpectedly small: " + officialIds.length);
+}
+if (new Set(officialIds).size !== officialIds.length) {
+  errors.push("Duplicate official theory question IDs detected.");
 }
 
 if (sectionIds.length !== profileIds.length) {
-  errors.push(`Section/profile count mismatch: ${sectionIds.length} sections vs ${profileIds.length} profiles`);
+  errors.push(
+    `Section/profile count mismatch: ${sectionIds.length} sections vs ${profileIds.length} profiles`
+  );
+}
+if (sectionIds.length !== checkpointSections.length) {
+  errors.push(
+    `Section/checkpoint-map count mismatch: ${sectionIds.length} sections vs ${checkpointSections.length} mappings`
+  );
 }
 
 if (errors.length > 0) {
@@ -79,5 +127,5 @@ if (errors.length > 0) {
 }
 
 console.log(
-  `Pedagogy consistency check passed: ${sectionIds.length} learning steps, ${profileIds.length} profiles, ${checkpointIds.length} mapped retrieval checkpoints.`
+  `Pedagogy consistency check passed: ${sectionIds.length} learning steps, ${profileIds.length} pedagogy profiles, ${checkpointIds.length} mapped mini-test references, ${officialIds.length} official theory questions.`
 );
