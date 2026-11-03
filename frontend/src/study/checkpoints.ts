@@ -1,79 +1,99 @@
 import type { Question } from "../types";
 
-const sectionQuestionMap: Record<string, string> = {
-  "data-point": "q1",
-  "hypothesis": "q2",
-  "loss": "q3",
-  "three-groups": "q4",
-  "tasks": "q5",
+const sectionQuestionMap: Record<string, string[]> = {
+  "why-ml": ["q4"],
+  "data-point": ["q1", "q8"],
+  "hypothesis": ["q2", "q8"],
+  "loss": ["q3", "q7"],
+  "three-groups": ["q4"],
+  "tasks": ["q5", "q6"],
 
-  "regression-linear-hypothesis": "lr-q2",
-  "multivariate-geometry": "lr-q2",
-  "matrix-form": "lr-q6",
-  "least-squares": "lr-q3",
-  "gradient": "lr-q4",
-  "gradient-descent": "lr-q5",
-  "feature-scaling": "lr-q10",
-  "normal-equation": "lr-q8",
+  "regression-linear-hypothesis": ["lr-q14", "lr-q2", "lr-q1"],
+  "multivariate-geometry": ["lr-q1", "lr-q2"],
+  "matrix-form": ["lr-q6", "lr-q7", "lr-q1"],
+  "least-squares": ["lr-q3", "lr-q5"],
+  "gradient": ["lr-q4", "lr-q5"],
+  "gradient-descent": ["lr-q4", "lr-q5"],
+  "feature-scaling": ["lr-q10", "lr-q11", "lr-q13"],
+  "normal-equation": ["lr-q8", "lr-q9"],
 
-  "binary-classification": "log-q1",
-  "sigmoid": "log-q2",
-  "logistic-hypothesis": "log-q3",
-  "decision-boundary": "log-q4",
-  "binary-cross-entropy": "log-q8",
-  "convex-logistic": "log-q13",
+  "binary-classification": ["log-q1", "log-q6", "log-q7"],
+  "sigmoid": ["log-q2", "log-q14"],
+  "logistic-hypothesis": ["log-q3", "log-q6", "log-q11"],
+  "decision-boundary": ["log-q4", "log-q5", "log-q14"],
+  "binary-cross-entropy": ["log-q8", "log-q9", "log-q10"],
+  "convex-logistic": ["log-q13", "log-q12"],
 
-  "generalization": "gen-q3",
-  "underfit-overfit": "gen-q2",
-  "risk-factors": "gen-q6",
-  "three-way-split": "gen-q1",
-  "hyperparameters": "gen-q11",
-  "l2": "gen-q8",
-  "early-stopping": "gen-q13",
-  "solutions-summary": "gen-q4",
+  "generalization": ["gen-q3", "gen-q6"],
+  "underfit-overfit": ["gen-q2", "gen-q3", "gen-q7"],
+  "risk-factors": ["gen-q4", "gen-q5", "gen-q6"],
+  "three-way-split": ["gen-q1", "gen-q10", "gen-q16"],
+  "hyperparameters": ["gen-q10", "gen-q11", "gen-q12"],
+  "l2": ["gen-q8", "gen-q9"],
+  "early-stopping": ["gen-q13", "gen-q14", "gen-q15"],
+  "solutions-summary": ["gen-q6", "gen-q8", "gen-q13"],
 
-  "artificial-neuron": "mlp-q1",
-  "single-neuron-limit": "mlp-q2",
-  "fully-connected": "mlp-q3",
-  "parameter-count": "mlp-q5",
-  "two-layer-hypothesis": "mlp-q7",
-  "activation-functions": "mlp-q9",
-  "output-by-task": "mlp-q8",
+  "artificial-neuron": ["mlp-q1", "mlp-q2"],
+  "single-neuron-limit": ["mlp-q2", "mlp-q9"],
+  "fully-connected": ["mlp-q3", "mlp-q4"],
+  "parameter-count": ["mlp-q5", "mlp-q6", "mlp-q19"],
+  "two-layer-hypothesis": ["mlp-q7", "mlp-q9"],
+  "activation-functions": ["mlp-q10", "mlp-q11", "mlp-q12"],
+  "output-by-task": ["mlp-q8", "mlp-q13", "mlp-q18"],
+  "softmax": ["mlp-q14", "mlp-q15", "mlp-q16"],
+  "nonconvex": ["mlp-q20", "lr-q5"],
 
-  "batch-gradient-descent": "sgd-q1",
-  "why-sgd": "sgd-q2",
-  "batch-size-tradeoff": "sgd-q4",
-  "learning-rate-batch": "sgd-q6",
-  "gpu-memory": "sgd-q7",
-  "sgd-variants": "sgd-q8",
+  "batch-gradient-descent": ["sgd-q1", "sgd-q2"],
+  "why-sgd": ["sgd-q2", "sgd-q3"],
+  "batch-size-tradeoff": ["sgd-q4", "sgd-q5"],
+  "learning-rate-batch": ["sgd-q6", "sgd-q4"],
+  "gpu-memory": ["sgd-q7", "sgd-q5"],
+  "sgd-variants": ["sgd-q8", "sgd-q9"],
 
-  "why-backprop": "bp-q6",
-  "computational-graph": "bp-q1",
-  "chain-rule": "bp-q2",
-  "local-rules": "bp-q3",
-  "forward-example": "bp-q7",
-  "backward-example": "bp-q8",
-  "parameter-update": "bp-q10",
-  "training-cycle": "bp-q11",
+  "why-backprop": ["bp-q6", "bp-q11"],
+  "computational-graph": ["bp-q1", "bp-q6"],
+  "chain-rule": ["bp-q2", "bp-q14"],
+  "local-rules": ["bp-q3", "bp-q4", "bp-q5"],
+  "forward-example": ["bp-q7", "bp-q9"],
+  "backward-example": ["bp-q8", "bp-q9"],
+  "parameter-update": ["bp-q10", "bp-q11"],
+  "training-cycle": ["bp-q12", "bp-q11"],
+  "autograd": ["bp-q13", "bp-q1"],
 
-  "numpy-array-programming": "np-q1",
-  "numpy-attributes": "np-q2",
-  "numpy-zero-shapes": "np-q3",
-  "numpy-creation-reshape": "np-q8",
-  "numpy-indexing-types": "np-q9",
-  "numpy-basic-indexing": "np-q10",
-  "numpy-advanced-indexing": "np-q12",
-  "numpy-broadcasting": "np-q15",
-  "numpy-newaxis": "np-q18",
-  "numpy-reductions": "np-q19",
-  "numpy-views-copies": "np-q13"
+  "numpy-array-programming": ["np-q1", "np-q3"],
+  "numpy-attributes": ["np-q2", "np-q3", "np-q4"],
+  "numpy-zero-shapes": ["np-q4", "np-q3"],
+  "numpy-creation-reshape": ["np-q7", "np-q8"],
+  "numpy-indexing-types": ["np-q9", "np-q10", "np-q12"],
+  "numpy-basic-indexing": ["np-q10", "np-q11"],
+  "numpy-advanced-indexing": ["np-q12", "np-q13", "np-q14"],
+  "numpy-broadcasting": ["np-q15", "np-q16", "np-q17"],
+  "numpy-newaxis": ["np-q18", "np-q17"],
+  "numpy-reductions": ["np-q19", "np-q20"],
+  "numpy-transpose": ["np-q21", "np-q22"],
+  "numpy-views-copies": ["np-q23", "np-q24", "np-q25"],
+  "numpy-common-functions": ["np-q28", "np-q29", "np-q19"],
+  "numpy-scope": ["np-q30"]
 };
+
+export function checkpointsForSection(
+  questions: Question[],
+  sectionId: string,
+  limit = 3
+): Question[] {
+  const ids = sectionQuestionMap[sectionId] ?? [];
+  const byId = new Map(questions.map((question) => [question.id, question]));
+  return ids
+    .map((id) => byId.get(id))
+    .filter((question): question is Question => Boolean(question))
+    .slice(0, limit);
+}
 
 export function checkpointForSection(
   questions: Question[],
   sectionId: string
 ): Question | null {
-  const questionId = sectionQuestionMap[sectionId];
-  if (!questionId) return null;
-  return questions.find((question) => question.id === questionId) ?? null;
+  return checkpointsForSection(questions, sectionId, 1)[0] ?? null;
 }
+
+export const mappedLearningCheckpointIds = Object.values(sectionQuestionMap).flat();
