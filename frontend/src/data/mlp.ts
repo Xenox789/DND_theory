@@ -39,7 +39,7 @@ export const mlpLesson: Lesson = {
         { symbol: "a", hu: "A neuron aktiváció utáni kimenete.", en: "Neuron output after the activation." }
       ],
       connections: {
-        hu: "Az előadás kifejezetten megjegyzi szerint ha g a szigmoid függvény, akkor egy mesterséges neuron többváltozós logisztikus regressziónak tekinthető.",
+        hu: "Az előadás kifejezetten megjegyzi, hogy ha g a szigmoid függvény, akkor egy mesterséges neuron többváltozós logisztikus regressziónak tekinthető.",
         en: "The lecture explicitly notes that if g is sigmoid, an artificial neuron is equivalent to multivariate logistic regression."
       },
       examTrap: {
@@ -60,7 +60,7 @@ export const mlpLesson: Lesson = {
         en: "Why is one neuron not enough?"
       },
       body: {
-        hu: "Egyetlen szigmoid neuronnal kapott döntési határ lineáris: két bemeneti változó esetén egy egyenes, magasabb dimenzióban hipersík. Az 5. előadás (Lecture 5) IRIS-példája azt mutatja, hogy bizonyos kategóriák nem választhatók szét egyetlen ilyen lineáris határral.",
+        hu: "Egyetlen szigmoid neuronnal kapott döntési határ lineáris: két bemeneti változó esetén egy egyenes, magasabb dimenzióban hipersík. Az 5. előadás IRIS-példája azt mutatja, hogy bizonyos kategóriák nem választhatók szét egyetlen ilyen lineáris határral.",
         en: "A single sigmoid neuron produces a linear decision boundary: a line for two input variables and a hyperplane in higher dimensions. The Lecture 5 IRIS example shows that some categories cannot be separated by one such boundary."
       },
       why: {
@@ -87,7 +87,7 @@ export const mlpLesson: Lesson = {
         en: "Fully connected layers and matrix shapes"
       },
       body: {
-        hu: "Teljesen összekötött rétegben (fully connected / dense layer) az előző réteg minden kimenete kapcsolatban áll a következő réteg minden neuronjával. Ha az előző réteg S_(k−1) értéket ad és a k-adik réteg S_k neuront tartalmaz, akkor a súlymátrix W_k alakja (S_k, S_(k−1)), az eltolásvektor b_k alakja pedig (S_k,).",
+        hu: "Teljesen összekötött (fully connected, dense) rétegben az előző réteg minden kimenete kapcsolatban áll a következő réteg minden neuronjával. Ha az előző réteg S_(k−1) értéket ad és a k-adik réteg S_k neuront tartalmaz, akkor a súlymátrix W_k alakja (S_k, S_(k−1)), az eltolásvektor b_k alakja pedig (S_k,).",
         en: "In a fully connected / dense layer, every output of the previous layer connects to every neuron in the next layer. If the previous layer has size S_(k−1) and layer k has S_k neurons, W_k has shape (S_k, S_(k−1)) and b_k has shape (S_k,)."
       },
       why: {
@@ -187,7 +187,7 @@ export const mlpLesson: Lesson = {
         en: "The course presents three popular activation functions: sigmoid, tanh, and ReLU. Sigmoid maps to (0,1), tanh to (−1,1), and ReLU outputs 0 for negative inputs and the input itself for positive inputs."
       },
       why: {
-        hu: "A nemlineáris aktivációk teszik lehetővé, hogy több réteg együtt ne csak egyetlen lineáris függvényt valósítson meg. Az 5. előadás (Lecture 5) a ReLU-ról azt emeli ki, hogy egyszerűen számolható és gyakran jól működik.",
+        hu: "A nemlineáris aktivációk teszik lehetővé, hogy több réteg együtt ne csak egyetlen lineáris függvényt valósítson meg. Az 5. előadás a ReLU-ról azt emeli ki, hogy egyszerűen számolható és gyakran jól működik.",
         en: "Nonlinear activations allow multiple layers to represent more than a single linear function. Lecture 5 highlights ReLU as simple to compute and often effective."
       },
       formula: {
@@ -210,7 +210,7 @@ export const mlpLesson: Lesson = {
         en: "Output layer: determined by the task"
       },
       body: {
-        hu: "A kimeneti réteg aktivációját és méretét a megoldandó feladathoz kell igazítani. Regressziónál tetszőleges folytonos értéket szeretnénk, ezért a tananyag tipikusan identitás aktivációt (identity) vagy g₂ elhagyását javasolja. Bináris osztályozásnál egyetlen szigmoid kimenet adhat az 1-es osztály valószínűségét (class-1 probability). Többosztályos, kölcsönösen kizáró kategóriáknál a softmax több valószínűséget ad, amelyek összege 1.",
+        hu: "A kimeneti réteg aktivációját és méretét a megoldandó feladathoz kell igazítani. Regressziónál tetszőleges folytonos értéket szeretnénk, ezért a tananyag tipikusan identitásaktivációt (identity) vagy g₂ elhagyását javasolja. Bináris osztályozásnál egyetlen szigmoid kimenet adhat az 1-es osztály valószínűségét (class-1 probability). Többosztályos, kölcsönösen kizáró kategóriáknál a softmax több valószínűséget ad, amelyek összege 1.",
         en: "Output activation and size must match the task. For regression, arbitrary continuous values are needed, so the course typically uses identity / omits g₂. Binary classification uses one sigmoid probability. Multiclass classification with mutually exclusive classes uses softmax probabilities summing to 1."
       },
       why: {
@@ -222,7 +222,7 @@ export const mlpLesson: Lesson = {
         en: "regression: identity + MSE    |    binary classification: sigmoid + BCE    |    multiclass: softmax + cross-entropy"
       },
       connections: {
-        hu: "A logisztikus regresszió sigmoid + BCE párosa közvetlenül visszatér a bináris neurális hálózati kimenetnél. A cross-entropy a BCE többosztályos általánosítása a tananyag megfogalmazása szerint.",
+        hu: "A logisztikus regresszió sigmoid + BCE párosa közvetlenül visszatér a bináris neurális hálózati kimenetnél. A keresztentrópia (cross-entropy) a BCE többosztályos általánosítása a tananyag megfogalmazása szerint.",
         en: "The sigmoid+BCE pairing from logistic regression reappears for binary neural-network outputs. The course presents cross-entropy as the multiclass generalization of BCE/logistic loss."
       },
       examTrap: {
@@ -283,7 +283,7 @@ export const mlpLesson: Lesson = {
         en: "Gradients are still required; backpropagation computes them. An optimizer such as SGD or Adam then uses those gradients to update parameters."
       },
       examTrap: {
-        hu: "A hivatalos mintakérdés direkt összeveti a lineáris regresszió + MSE és az MLP + MSE esetét. Az elsőnél a konvexitás miatt van globális-optimum garancia megfelelően kis lépésnél; az MLP-nél általában nincs.",
+        hu: "A hivatalos mintakérdés direkt összeveti a lineáris regresszió + MSE és az MLP + MSE esetét. Az elsőnél a konvexitás miatt van globális optimumra vonatkozó garancia megfelelően kis lépésnél; az MLP-nél általában nincs.",
         en: "The official example directly contrasts linear regression + MSE with MLP + MSE. Convexity provides a global-optimum guarantee for the former with a sufficiently small step, but generally not for the MLP."
       }
     }
