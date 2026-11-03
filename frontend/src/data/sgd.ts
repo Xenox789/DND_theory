@@ -205,7 +205,7 @@ export const sgdQuestions: Question[] = [
   {
     id: "sgd-q1",
     topics: ["batch-gradient-descent"],
-    prompt: { hu: "Mely állítások igazak batch gradienscsökkentésre (batch gradient descent) az előadás szerint?", en: "Which statements are true about batch gradient descent according to the lecture?" },
+    prompt: { hu: "Mely állítások igazak a teljes adathalmazos gradienscsökkentésre (batch gradient descent) az előadás szerint?", en: "Which statements are true about batch gradient descent according to the lecture?" },
     choices: [
       { id: "a", text: { hu: "A teljes tanítóhalmazon (training set) átlagoljuk a veszteséget (loss).", en: "The loss is averaged over the entire training set." } },
       { id: "b", text: { hu: "Egy frissítés (update) gradienséhez (gradient) az egész adathalmazt (dataset) használjuk.", en: "The entire dataset is used for one update gradient." } },
@@ -213,12 +213,12 @@ export const sgdQuestions: Question[] = [
       { id: "d", text: { hu: "Mindig csak egyetlen tanítási példát (training example) használ.", en: "It always uses exactly one training example." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A teljes batch (full batch) az egész tanítóhalmazból (training set) számít egy frissítés (update) gradienst (gradient).", en: "A full batch computes one update gradient from the whole training set." }
+    explanation: { hu: "A batch gradient descent egy paraméterfrissítéshez a teljes tanítóhalmaz alapján számít gradienst.", en: "A full batch computes one update gradient from the whole training set." }
   },
   {
     id: "sgd-q2",
     topics: ["sgd","mini-batch"],
-    prompt: { hu: "Hogyan írja le az előadás az SGD-t?", en: "How does the lecture describe SGD?" },
+    prompt: { hu: "Hogyan írja le az előadás a sztochasztikus gradienscsökkentést (SGD)?", en: "How does the lecture describe SGD?" },
     choices: [
       { id: "a", text: { hu: "Véletlenszerű tanítóadat-részmintát (training-data sub-sample) választ.", en: "It selects a random sub-sample of the training data." } },
       { id: "b", text: { hu: "Egy mini-batch alapján számít közelítő gradienst (gradient).", en: "It computes an approximate gradient from a mini-batch." } },
@@ -226,23 +226,23 @@ export const sgdQuestions: Question[] = [
       { id: "d", text: { hu: "A gradiens (gradient) minden stepben szükségszerűen pontos teljes adathalmazon számított gradiens (full-dataset gradient).", en: "The gradient is necessarily the exact full-dataset gradient at every step." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "SGD az előadásban (lecture) véletlen (random) mini-batchből közelítő gradienst (gradient) számol.", en: "In the lecture, SGD computes an approximate gradient from a random mini-batch." }
+    explanation: { hu: "Az előadásban az SGD véletlenszerűen kiválasztott mini-batchből számol közelítő gradienst.", en: "In the lecture, SGD computes an approximate gradient from a random mini-batch." }
   },
   {
     id: "sgd-q3",
     topics: ["sgd","example-question"],
-    prompt: { hu: "Igaz-e a kurzus értelmezése alapján, hogy SGD-ben minden paraméterfrissítést (parameter update) kötelező pontosan egyetlen tanítási példa (training example) gradienséből (gradient) számolni?", en: "According to the course framing, must every SGD parameter update be computed from exactly one training example?" },
+    prompt: { hu: "Igaz-e a kurzus szerint, hogy SGD-ben minden paraméterfrissítéshez kötelező pontosan egyetlen tanítási példát használni?", en: "According to the course framing, must every SGD parameter update be computed from exactly one training example?" },
     choices: [
       { id: "a", text: { hu: "Nem; az előadás véletlen mini-batchet (random mini-batch) / részmintát (sub-sample) használ.", en: "No; the lecture uses a random mini-batch / sub-sample." } },
       { id: "b", text: { hu: "Igen; több példa használata már nem lehet SGD.", en: "Yes; using more than one example can no longer be SGD." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "Az előadás és az előadás 6 összefoglaló is mini-batch gradienst (gradient) nevez SGD-nek.", en: "Both the lecture and the Lecture 6 recap describe SGD using mini-batch gradients." }
+    explanation: { hu: "Az 5–6. előadás az SGD gyakorlati változatát mini-batch-alapú gradiensbecsléssel mutatja be; a 6. előadás külön kiemeli, hogy nem szükségképpen egyetlen példát használunk.", en: "Both the lecture and the Lecture 6 recap describe SGD using mini-batch gradients." }
   },
   {
     id: "sgd-q4",
     topics: ["batch-size","variance"],
-    prompt: { hu: "Mi várható, ha csökkentjük a mini-batch méretet (size)?", en: "What is expected if we decrease the mini-batch size?" },
+    prompt: { hu: "Mi várható, ha csökkentjük a mini-batch méretét (batch size)?", en: "What is expected if we decrease the mini-batch size?" },
     choices: [
       { id: "a", text: { hu: "A gradiensbecslés (gradient estimate) varianciája (variance) nő.", en: "Gradient-estimate variance increases." } },
       { id: "b", text: { hu: "Nő annak esélye, hogy egy frissítés (update) rossz irányba visz.", en: "The chance that an update moves in the wrong direction increases." } },
@@ -250,12 +250,12 @@ export const sgdQuestions: Question[] = [
       { id: "d", text: { hu: "A gradiens (gradient) szükségszerűen pontosabb lesz.", en: "The gradient necessarily becomes more accurate." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Az előadás kisebb mini-batchhez nagyobb varianciája (variance)t és nagyobb rossz irányú frissítés kockázatát (wrong-direction risk) társít.", en: "The lecture associates smaller mini-batches with higher variance and a greater risk of wrong-direction updates." }
+    explanation: { hu: "Az előadás szerint kisebb mini-batch esetén nő a gradiensbecslés varianciája (variance), ezért nagyobb az esélye egy kedvezőtlen irányú frissítésnek.", en: "The lecture associates smaller mini-batches with higher variance and a greater risk of wrong-direction updates." }
   },
   {
     id: "sgd-q5",
     topics: ["batch-size","compute"],
-    prompt: { hu: "Mi várható, ha növeljük a mini-batch méretet (size)?", en: "What is expected if we increase the mini-batch size?" },
+    prompt: { hu: "Mi várható, ha növeljük a mini-batch méretét (batch size)?", en: "What is expected if we increase the mini-batch size?" },
     choices: [
       { id: "a", text: { hu: "Nő a computing requirement.", en: "Computing requirements increase." } },
       { id: "b", text: { hu: "Nő a memóriaigény (memory) requirement.", en: "Memory requirements increase." } },
@@ -263,36 +263,36 @@ export const sgdQuestions: Question[] = [
       { id: "d", text: { hu: "A memóriaigény (memory) requirement biztosan csökken.", en: "Memory requirements definitely decrease." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Nagyobb batch több példát (example) dolgoz fel egyszerre: stabilabb becslés lehet, nagyobb számítási igény (compute)/memóriaigény (memory) áron.", en: "A larger batch processes more examples at once: the estimate can be more stable, at higher compute/memory cost." }
+    explanation: { hu: "Nagyobb mini-batch több példát használ egy frissítéshez, ezért a gradiensbecslés stabilabb lehet, viszont nő a számítási és memóriaigény.", en: "A larger batch processes more examples at once: the estimate can be more stable, at higher compute/memory cost." }
   },
   {
     id: "sgd-q6",
     topics: ["batch-size","learning-rate"],
-    prompt: { hu: "Mit mond az előadás kis mini-batch és tanulási ráta (learning rate) kapcsolatáról?", en: "What does the lecture say about small mini-batches and learning rate?" },
+    prompt: { hu: "Mit mond az előadás a kis mini-batch és a tanulási ráta (learning rate) kapcsolatáról?", en: "What does the lecture say about small mini-batches and learning rate?" },
     choices: [
       { id: "a", text: { hu: "Kis mini-batch esetén szükség lehet kisebb tanulási rátára (learning rate) a konvergenciához (convergence).", en: "With a small mini-batch, a smaller learning rate may be needed for convergence." } },
       { id: "b", text: { hu: "A nagyobb gradiens (gradient) variancia (variance) miatt túl nagy tanulási ráta (learning rate) problémás lehet.", en: "Because of higher gradient variance, an excessively large learning rate can be problematic." } },
       { id: "c", text: { hu: "Kis batch esetén mindig növelni kell a tanulási ráta (learning rate) értékét.", en: "With a small batch, the learning rate must always be increased." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A dia (slide) kifejezetten azt mondja: kis mini-batch esetén csökkenteni kellhet a tanulási ráta (learning rate) értékét a konvergenciához (convergence).", en: "The slide explicitly states that with a small mini-batch the learning rate may need to be reduced to achieve convergence." }
+    explanation: { hu: "A dia kifejezetten azt mondja, hogy kis mini-batch esetén a konvergenciához szükség lehet a tanulási ráta csökkentésére.", en: "The slide explicitly states that with a small mini-batch the learning rate may need to be reduced to achieve convergence." }
   },
   {
     id: "sgd-q7",
     topics: ["gpu-memory","batch-size"],
-    prompt: { hu: "Mely állítás szerepel az előadásban (lecture) nagy neurális hálózatok (neural networks) batchméret (batch size) megválasztásáról?", en: "Which statement appears in the lecture about batch-size selection for large neural networks?" },
+    prompt: { hu: "Mely állítás szerepel az előadásban a nagy neurális hálózatok mini-batch méretének megválasztásáról?", en: "Which statement appears in the lecture about batch-size selection for large neural networks?" },
     choices: [
       { id: "a", text: { hu: "Efficiency szempontból gyakran annyi példát (example) választunk, amennyi befér GPU memoryba.", en: "For efficiency, one often chooses as many examples as fit in GPU memory." } },
       { id: "b", text: { hu: "Ez egy gyakorlati heuristic.", en: "This is a practical heuristic." } },
       { id: "c", text: { hu: "Ez minden problémára bizonyítottan optimális batch size.", en: "This is a proven optimal batch size for every problem." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "Az előadás ezt efficiency considerationként, nem univerzális matematikai optimumként adja meg.", en: "The lecture gives this as an efficiency consideration, not a universal mathematical optimum." }
+    explanation: { hu: "Az előadás ezt gyakorlati hatékonysági megfontolásként említi, nem univerzális matematikai optimumként.", en: "The lecture gives this as an efficiency consideration, not a universal mathematical optimum." }
   },
   {
     id: "sgd-q8",
     topics: ["sgd-variants"],
-    prompt: { hu: "Melyeket sorolja fel az előadás SGD/optimizer variantként?", en: "Which are listed by the lecture as SGD/optimizer variants?" },
+    prompt: { hu: "Mely optimalizálóváltozatokat sorolja fel az előadás az SGD mellett?", en: "Which are listed by the lecture as SGD/optimizer variants?" },
     choices: [
       { id: "a", text: { hu: "momentumos SGD (SGD with Momentum)", en: "momentumos SGD (SGD with Momentum)" } },
       { id: "b", text: { hu: "AdaGrad", en: "AdaGrad" } },
@@ -306,13 +306,13 @@ export const sgdQuestions: Question[] = [
   {
     id: "sgd-q9",
     topics: ["mlp-training"],
-    prompt: { hu: "Mely állítások igazak neural-hálózat (network) trainingre az előadás szerint?", en: "Which statements are true about neural-network training according to the lecture?" },
+    prompt: { hu: "Mely állítások igazak neurális hálózatok tanítására az előadás szerint?", en: "Which statements are true about neural-network training according to the lecture?" },
     choices: [
       { id: "a", text: { hu: "A veszteség (loss) gradiensét (gradient) a modellparaméterek szerint használjuk frissítésre (update).", en: "Gradients of the loss with respect to model parameters are used for updates." } },
       { id: "b", text: { hu: "SGD gradienscsökkentés-alapú tanítási algoritmus (gradient-descent-based training algorithm).", en: "SGD is a gradient-descent-based training algorithm." } },
       { id: "c", text: { hu: "hiperparaméterek (hyperparameters) értékeket is szükségszerűen SGD tanítja.", en: "Hyperparameters are necessarily trained by SGD as well." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "modellparaméterek gradiens (gradient) gradienscsökkentéssel (gradient descent) taníthatók; a kurzus korábban különválasztotta a hiperparaméter (hyperparameter) kiválasztást (selection).", en: "Model parameters can be trained with gradient descent; the course previously separated this from hyperparameter selection." }
+    explanation: { hu: "A modellparaméterek tipikusan gradiensalapú módszerrel tanulhatók; a hiperparaméterek kiválasztását a kurzus ettől külön kezeli.", en: "Model parameters can be trained with gradient descent; the course previously separated this from hyperparameter selection." }
   }
 ];
