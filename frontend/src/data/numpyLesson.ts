@@ -16,7 +16,7 @@ export const numpyLesson: Lesson = {
       id: "numpy-array-programming",
       title: { hu: "Miért használunk NumPy-t?", en: "Why do we use NumPy?" },
       body: {
-        hu: "A NumPy az tömbprogramozás (array programming) megközelítést támogatja: sok egyedi Python-művelet és ciklus helyett teljes tömbökön (tömbök (arrays)) végzünk vektorizált műveleteket (vectorized műveletek). A numpy.ndarray többdimenziós, homogén adattípust használó tömb. Az elemek típusa általában közös dtype, és a NumPy natív, tömör tárolást használ.",
+        hu: "A NumPy az array programming megközelítést támogatja: sok egyedi Python-művelet és ciklus helyett teljes tömbökön (arrays) végzünk vektorizált műveleteket (vectorized operations). A numpy.ndarray többdimenziós, homogén adattípust használó tömb. Az elemek típusa általában közös dtype, és a NumPy natív, tömör tárolást használ.",
         en: "NumPy supports array programming: instead of many scalar Python operations and loops, vectorized operations are applied to whole arrays. numpy.ndarray is a multidimensional homogeneous array with a common dtype and compact native storage."
       },
       why: {
@@ -36,8 +36,8 @@ export const numpyLesson: Lesson = {
         en: "A Python list can contain mixed types. A normal ndarray uses one common dtype. dtype=object is a special exception that may store Python-object references."
       },
       keyTerms: [
-        { term: "tömbprogramozás (array programming)", hu: "tömbprogramozás" },
-        { term: "vectorized művelet", hu: "vektorizált művelet" },
+        { term: "array programming", hu: "tömbprogramozás" },
+        { term: "vectorized operation", hu: "vektorizált művelet" },
         { term: "ndarray", hu: "NumPy-tömb" }
       ]
     },
@@ -49,7 +49,7 @@ export const numpyLesson: Lesson = {
         en: "The Theory Test focuses especially on shape, ndim, size, and dtype. shape is the tuple of axis lengths, ndim the number of axes, size the total number of elements, dtype the NumPy datatype of the elements, and itemsize the number of bytes per element."
       },
       why: {
-        hu: "A legtöbb NumPy-kérdés valójában alak-követés. Ha pontosan tudod, hány tengely van, melyik milyen hosszú, és egy művelet mely tengelyt tartja meg vagy tünteti el, akkor a eredmény alakok (shapes) nagy része levezethető.",
+        hu: "A legtöbb NumPy-kérdés valójában alak-követés. Ha pontosan tudod, hány tengely van, melyik milyen hosszú, és egy művelet mely tengelyt tartja meg vagy tünteti el, akkor a result shape-ek nagy része levezethető.",
         en: "Most NumPy questions are really shape-tracking questions. If you know how many axes exist, their lengths, and which operation keeps or removes which axis, most result shapes can be derived."
       },
       formula: {
@@ -68,15 +68,15 @@ export const numpyLesson: Lesson = {
         en: "If a.shape == (32,5), there are two axes so a.ndim == 2. There are 32·5=160 elements, so a.size == 160."
       },
       examTrap: {
-        hu: "A shape tuple. Egy 1D, öt elemű array alakja (shape) (5,), nem 5. A size és az ndim ezzel szemben skalár egész szám.",
+        hu: "A shape tuple. Egy 1D, öt elemű array shape-je (5,), nem 5. A size és az ndim ezzel szemben skalár egész szám.",
         en: "shape is a tuple. A one-dimensional five-element array has shape (5,), not 5. size and ndim are scalar integers."
       }
     },
     {
       id: "numpy-zero-shapes",
-      title: { hu: "Nulla hosszúságú tengely is lehet érvényes", en: "Zero-length axes are érvényes" },
+      title: { hu: "Nulla hosszúságú tengely is lehet érvényes", en: "Zero-length axes are valid" },
       body: {
-        hu: "A NumPy shape tengelyhosszai között 0 is szerepelhet. Például a forrásban np.zeros((2,0,3)) érvényes array, amelynek alakja (shape) (2,0,3). Mivel az egyik tengely hossza 0, az összes elemszám (size) is 0.",
+        hu: "A NumPy shape tengelyhosszai között 0 is szerepelhet. Például a forrásban np.zeros((2,0,3)) érvényes array, amelynek shape-je (2,0,3). Mivel az egyik tengely hossza 0, az összes elemszám (size) is 0.",
         en: "A NumPy shape may contain an axis of length zero. The source uses np.zeros((2,0,3)) as a valid example. Because one axis length is zero, the total size is also zero."
       },
       why: {
@@ -92,7 +92,7 @@ export const numpyLesson: Lesson = {
       id: "numpy-creation-reshape",
       title: { hu: "Array létrehozás és reshape", en: "Array creation and reshape" },
       body: {
-        hu: "A gyakorlati anyag több létrehozófüggvényt használ: np.array, np.arange, np.zeros, np.ones, np.full és ezek _like változatai. A reshape ugyanazokat az elemeket új tengelystruktúrában értelmezi. Az elemszámnak változatlannak kell maradnia.",
+        hu: "A practice anyag több létrehozófüggvényt használ: np.array, np.arange, np.zeros, np.ones, np.full és ezek _like változatai. A reshape ugyanazokat az elemeket új tengelystruktúrában értelmezi. Az elemszámnak változatlannak kell maradnia.",
         en: "The practice material uses creation functions such as np.array, np.arange, np.zeros, np.ones, np.full, and _like variants. reshape interprets the same elements using a new axis structure while preserving the element count."
       },
       why: {
@@ -102,7 +102,7 @@ export const numpyLesson: Lesson = {
       formula: { hu: "np.arange(4).reshape(2,-1) → shape (2,2)", en: "np.arange(4).reshape(2,-1) → shape (2,2)" },
       formulaTerms: [
         { symbol: "-1", hu: "Egyetlen tengely helyén használható; NumPy az elemszámból automatikusan kiszámítja a szükséges hosszt.", en: "May be used for one axis; NumPy infers the required length from the element count." },
-        { symbol: "reshape", hu: "Új alakot (shape) kér ugyanazokhoz az elemekhez.", en: "Requests a new shape for the same elements." }
+        { symbol: "reshape", hu: "Új shape-et kér ugyanazokhoz az elemekhez.", en: "Requests a new shape for the same elements." }
       ],
       workedExample: {
         hu: "np.arange(4) értékei [0,1,2,3]. Ha két sort kérünk reshape(2,-1) formában, akkor soronként 2 elem kell, ezért a -1 értéke 2 lesz, és az eredmény [[0,1],[2,3]].",
@@ -117,25 +117,25 @@ export const numpyLesson: Lesson = {
       id: "numpy-indexing-types",
       title: { hu: "Három indexelési kategória", en: "Three indexing categories" },
       body: {
-        hu: "A multidimenziós gyakorlati anyag három fontos esetet különít el. Egyedi elem indexelésnél (individual element indexing) minden tengelyhez egész indexet adunk, így skalárt kapunk. Alap indexelésnél (alap indexelés (basic indexing)) egész indexeket és slice-okat kombinálunk, legalább egy slice mellett; az eredmény array és jellemzően view. Haladó indexelésnél (haladó indexelés (advanced indexing)) legalább egy egész indexsorozat/lista/array vagy logikai maszk (boolean mask) szerepel; az eredmény új array.",
+        hu: "A multidimenziós practice anyag három fontos esetet különít el. Egyedi elem indexelésnél (individual element indexing) minden tengelyhez egész indexet adunk, így skalárt kapunk. Alap indexelésnél (basic indexing) egész indexeket és slice-okat kombinálunk, legalább egy slice mellett; az eredmény array és jellemzően view. Haladó indexelésnél (advanced indexing) legalább egy egész indexsorozat/lista/array vagy boolean mask szerepel; az eredmény új array.",
         en: "The multidimensional practice material distinguishes three cases. Individual element indexing uses an integer for every axis and returns a scalar. Basic indexing combines integer indices and slices with at least one slice, returning an array and typically a view. Advanced indexing uses at least one integer sequence/array or boolean mask and returns a new array."
       },
       why: {
-        hu: "Ez a felosztás egyszerre mondja meg, milyen lesz az eredmény alakja és azt is, hogy megoszthat-e memóriát az eredeti tömbbel. Emiatt a Theory Testben a shape és a view/copy kérdések összekapcsolódnak.",
+        hu: "Ez a felosztás egyszerre mondja meg, milyen lesz az eredmény alakja és azt is, hogy megoszthat-e memóriát az eredeti arrayjel. Emiatt a Theory Testben a shape és a view/copy kérdések összekapcsolódnak.",
         en: "This classification helps determine both result shape and memory-sharing behavior, which is why shape and view/copy questions are closely connected in the Theory Test."
       },
       formula: {
-        hu: "a[1,2] → egyedi elem    |    a[1,:] → alap indexelés (basic indexing)    |    a[[1,0],:] → haladó indexelés (advanced indexing)",
+        hu: "a[1,2] → egyedi elem    |    a[1,:] → basic indexing    |    a[[1,0],:] → advanced indexing",
         en: "a[1,2] → individual element    |    a[1,:] → basic indexing    |    a[[1,0],:] → advanced indexing"
       },
       formulaTerms: [
-        { symbol: "integer index", hu: "Egy konkrét pozíciót választ az adott tengelyen, és basic indexingben eltünteti azt a tengelyt.", en: "Selects one position on an axis and collapses that axis under alap indexelés (basic indexing)." },
+        { symbol: "integer index", hu: "Egy konkrét pozíciót választ az adott tengelyen, és basic indexingben eltünteti azt a tengelyt.", en: "Selects one position on an axis and collapses that axis under basic indexing." },
         { symbol: "slice", hu: "Tartományt választ, és megtartja a tengelyt.", en: "Selects a range and retains the axis." },
-        { symbol: "integer sequence", hu: "Tetszőleges pozíciók listája; advanced indexinget indít.", en: "Sequence of arbitrary positions; triggers haladó indexelés (advanced indexing)." },
-        { symbol: "logikai maszk (boolean mask)", hu: "Igaz/hamis kiválasztási maszk; advanced indexinget indít.", en: "True/false selection mask; triggers haladó indexelés (advanced indexing)." }
+        { symbol: "integer sequence", hu: "Tetszőleges pozíciók listája; advanced indexinget indít.", en: "Sequence of arbitrary positions; triggers advanced indexing." },
+        { symbol: "boolean mask", hu: "Igaz/hamis kiválasztási maszk; advanced indexinget indít.", en: "True/false selection mask; triggers advanced indexing." }
       ],
       examTrap: {
-        hu: "Az a[0,:] és a[[0],:] nem ugyanaz. Az első alap indexelés (basic indexing): a 0. tengely összeomlik. A második haladó indexelés (advanced indexing): a kiválasztott sor egy (1,...) hosszúságú tengelyként megmarad.",
+        hu: "Az a[0,:] és a[[0],:] nem ugyanaz. Az első basic indexing: a 0. tengely összeomlik. A második advanced indexing: a kiválasztott sor egy (1,...) hosszúságú tengelyként megmarad.",
         en: "a[0,:] and a[[0],:] are not the same. The first is basic indexing and collapses axis 0; the second is advanced indexing and retains a length-1 result axis."
       }
     },
@@ -147,7 +147,7 @@ export const numpyLesson: Lesson = {
         en: "With basic indexing, a simple shape rule applies: an integer-indexed axis disappears, while a sliced axis remains. This is true even if a slice selects only one element."
       },
       workedExample: {
-        hu: "Ha a.shape == (32,5), akkor a[:,1] alakja (shape) (32,), mert a második tengely egész indexet kap. a[1,:] alakja (shape) (5,). a[1:,:] alakja (shape) (31,5). a[0,:-1] alakja (shape) (4,).",
+        hu: "Ha a.shape == (32,5), akkor a[:,1] shape-je (32,), mert a második tengely egész indexet kap. a[1,:] shape-je (5,). a[1:,:] shape-je (31,5). a[0,:-1] shape-je (4,).",
         en: "If a.shape == (32,5), then a[:,1] has shape (32,), a[1,:] has shape (5,), a[1:,:] has shape (31,5), and a[0,:-1] has shape (4,)."
       },
       why: {
@@ -161,35 +161,35 @@ export const numpyLesson: Lesson = {
     },
     {
       id: "numpy-advanced-indexing",
-      title: { hu: "Advanced indexing és logikai maszk (boolean mask)", en: "Advanced indexing and boolean masks" },
+      title: { hu: "Advanced indexing és boolean mask", en: "Advanced indexing and boolean masks" },
       body: {
-        hu: "Advanced indexing esetén egész indexsorozattal vagy boolean maskkal tetszőleges elemeket választhatunk. A week 6 anyag explicit szabálya: haladó indexelés (advanced indexing) soha nem ad view-t; új array készül a kiválasztott elemek másolatával.",
+        hu: "Advanced indexing esetén egész indexsorozattal vagy boolean maskkal tetszőleges elemeket választhatunk. A week 6 anyag explicit szabálya: advanced indexing soha nem ad view-t; új array készül a kiválasztott elemek másolatával.",
         en: "Advanced indexing selects arbitrary elements using integer sequences or boolean masks. Week 6 states explicitly that advanced indexing never produces a view; it creates a new array containing copies of the selected values."
       },
       why: {
-        hu: "Tetszőleges, nem összefüggő memóriahelyek kiválasztását nem lehet egyszerűen ugyanannak a memóriának egy új nézeteként kezelni, ezért NumPy új eredmény tömböt állít elő.",
+        hu: "Tetszőleges, nem összefüggő memóriahelyek kiválasztását nem lehet egyszerűen ugyanannak a memóriának egy új nézeteként kezelni, ezért NumPy új result arrayt állít elő.",
         en: "Arbitrary non-contiguous selections cannot generally be represented as a simple view of the same memory, so NumPy creates a new result array."
       },
       formula: {
-        hu: "a[[1,2]] → egész indexeket tartalmazó tömbbel végzett indexelés (integer-array indexing) → copy    |    a[a<0] → boolean-maszkos indexelés (mask indexing) → copy",
+        hu: "a[[1,2]] → integer-array indexing → copy    |    a[a<0] → boolean-mask indexing → copy",
         en: "a[[1,2]] → integer-array indexing → copy    |    a[a<0] → boolean-mask indexing → copy"
       },
       formulaTerms: [
-        { symbol: "a < 0", hu: "Elemről elemre végzett összehasonlítás, amely a shape-jével azonos boolean tömböt ad.", en: "Element-wise comparison producing a logikai tömb (boolean array) with the same shape as a." },
-        { symbol: "a[a < 0]", hu: "A mask True helyein található értékeket választja ki; tipikusan 1D eredményt ad.", en: "Selects values where the mask is True; typically returns a 1D eredmény." }
+        { symbol: "a < 0", hu: "Elemről elemre végzett összehasonlítás, amely a shape-jével azonos boolean arrayt ad.", en: "Element-wise comparison producing a boolean array with the same shape as a." },
+        { symbol: "a[a < 0]", hu: "A mask True helyein található értékeket választja ki; tipikusan 1D resultot ad.", en: "Selects values where the mask is True; typically returns a 1D result." }
       ],
       workedExample: {
-        hu: "Ha a=np.arange(4).reshape(2,2), akkor a>0 egy (2,2) logikai tömb (boolean array). Az a[a>0] viszont három értéket választ: [1,2,3], ezért alakja (shape) (3,).",
+        hu: "Ha a=np.arange(4).reshape(2,2), akkor a>0 egy (2,2) boolean array. Az a[a>0] viszont három értéket választ: [1,2,3], ezért shape-je (3,).",
         en: "If a=np.arange(4).reshape(2,2), a>0 is a (2,2) boolean array, while a[a>0] selects [1,2,3] and therefore has shape (3,)."
       },
       examTrap: {
-        hu: "A mask létrehozása és a maskkal történő indexelés külön művelet. (a<0).shape megegyezik a.shape értékével, de a[a<0] alakja (shape) a kiválasztott elemek számától függ.",
+        hu: "A mask létrehozása és a maskkal történő indexelés külön művelet. (a<0).shape megegyezik a.shape értékével, de a[a<0] shape-je a kiválasztott elemek számától függ.",
         en: "Creating a mask and indexing with it are different operations. (a<0).shape matches a.shape, while a[a<0] depends on how many elements were selected."
       }
     },
     {
       id: "numpy-broadcasting",
-      title: { hu: "Broadcasting: hogyan illeszt össze különböző alakok (shapes)et a NumPy?", en: "Broadcasting: how NumPy matches different shapes" },
+      title: { hu: "Broadcasting: hogyan illeszt össze különböző shape-eket a NumPy?", en: "Broadcasting: how NumPy matches different shapes" },
       body: {
         hu: "A broadcasting lehetővé teszi, hogy kompatibilis, de nem azonos shape-jű arrayeken element-wise műveletet végezzünk anélkül, hogy fizikailag lemásolnánk az adatot. A forrás algoritmusa szerint először a rövidebb shape elé 1-es hosszúságú tengelyeket képzelünk, amíg az ndim egyezik. Ezután tengelyenként a méretek akkor kompatibilisek, ha egyenlők vagy legalább az egyik 1.",
         en: "Broadcasting allows element-wise operations on compatible arrays with different shapes without physically copying data. The source's algorithm first prepends length-1 axes to the shorter shape until dimensionality matches, then requires each pair of dimensions to be equal or one of them to be 1."
@@ -198,7 +198,7 @@ export const numpyLesson: Lesson = {
         hu: "Az 1 hosszúságú tengely (length-1 axis) virtuálisan megismételhető a másik tömb (array) megfelelő tengelyének hosszára. Ez teszi lehetővé például, hogy ugyanazt a eltolásvektort (bias vector) egy teljes batch minden példájára alkalmazzuk.",
         en: "A length-1 axis can be virtually repeated to match the other array. This makes operations such as applying the same bias vector to every example in a batch possible."
       },
-      formula: { hu: "kompatibilis tengelypár: a=b vagy a=1 vagy b=1", en: "compatible dimenzió pair: a=b or a=1 or b=1" },
+      formula: { hu: "kompatibilis tengelypár: a=b vagy a=1 vagy b=1", en: "compatible dimension pair: a=b or a=1 or b=1" },
       formulaTerms: [
         { symbol: "(2,3)+(3,)", hu: "A (3,) logikailag (1,3) lesz, majd az 1-es tengely 2-re broadcastolódik → (2,3).", en: "(3,) is treated as (1,3), then the length-1 axis broadcasts to 2 → (2,3)." },
         { symbol: "(2,3)+(2,)", hu: "A (2,) logikailag (1,2); az utolsó tengelyen 3 és 2 nem egyenlő, egyik sem 1 → hiba.", en: "(2,) becomes (1,2); final dimensions 3 and 2 are unequal and neither is 1 → error." }
@@ -208,7 +208,7 @@ export const numpyLesson: Lesson = {
         en: "In the official example (32,5)+(32,) fails because (32,) becomes (1,32) and 5 vs 32 is incompatible. (32,5)+(32,1) works because the length-1 axis can expand to 5."
       },
       examTrap: {
-        hu: "A broadcasting a utolsó dimenziók (trailing dimensions), vagyis a shape jobb oldala felől illeszkedik. Az, hogy két array első dimenziója azonos, önmagában nem elég.",
+        hu: "A broadcasting a trailing dimensions, vagyis a shape jobb oldala felől illeszkedik. Az, hogy két array első dimenziója azonos, önmagában nem elég.",
         en: "Broadcasting aligns trailing dimensions, i.e. from the right side of the shape. Matching first dimensions alone is not sufficient."
       }
     },
@@ -233,7 +233,7 @@ export const numpyLesson: Lesson = {
       id: "numpy-reductions",
       title: { hu: "Redukciók: mit jelent az axis paraméter?", en: "Reductions: what does the axis parameter mean?" },
       body: {
-        hu: "A redukciós műveletek (reduction / collapse műveletek), például sum, mean, any, all vagy argmax, több elemből kevesebb eredményt készítenek. Ha megadunk egy axis értéket, azon a tengelyen aggregálunk, ezért az a tengely eltűnik az eredmény shape-jéből. Axis nélkül minden tengely összeomolhat egyetlen skalárrá.",
+        hu: "A redukciós műveletek (reduction / collapse operations), például sum, mean, any, all vagy argmax, több elemből kevesebb eredményt készítenek. Ha megadunk egy axis értéket, azon a tengelyen aggregálunk, ezért az a tengely eltűnik az eredmény shape-jéből. Axis nélkül minden tengely összeomolhat egyetlen skalárrá.",
         en: "Reduction / collapse operations such as sum, mean, any, all, and argmax combine many elements into fewer outputs. Specifying an axis collapses that axis; without an axis, all axes may collapse into one scalar."
       },
       why: {
@@ -242,15 +242,15 @@ export const numpyLesson: Lesson = {
       },
       formula: { hu: "a.shape=(32,5) → mean(axis=0) shape (5,); mean(axis=1) shape (32,); sum() → skalár", en: "a.shape=(32,5) → mean(axis=0) shape (5,); mean(axis=1) shape (32,); sum() → scalar" },
       formulaTerms: [
-        { symbol: "axis=0", hu: "A 0. tengelyt aggregáljuk; az első dimenzió eltűnik.", en: "Aggregate along axis 0; the first dimenzió disappears." },
-        { symbol: "axis=1", hu: "Az 1. tengelyt aggregáljuk; a második dimenzió eltűnik.", en: "Aggregate along axis 1; the second dimenzió disappears." }
+        { symbol: "axis=0", hu: "A 0. tengelyt aggregáljuk; az első dimension eltűnik.", en: "Aggregate along axis 0; the first dimension disappears." },
+        { symbol: "axis=1", hu: "Az 1. tengelyt aggregáljuk; a második dimension eltűnik.", en: "Aggregate along axis 1; the second dimension disappears." }
       ],
       workedExample: {
-        hu: "Egy (32,5) tömböt tekinthetsz 32 példának és 5 jellemzőnek. mean(axis=0) minden jellemző átlagát adja a 32 példán keresztül → 5 szám. mean(axis=1) minden példa 5 jellemzőjének átlagát adja → 32 szám.",
+        hu: "Egy (32,5) arrayt tekinthetsz 32 példának és 5 jellemzőnek. mean(axis=0) minden jellemző átlagát adja a 32 példán keresztül → 5 szám. mean(axis=1) minden példa 5 jellemzőjének átlagát adja → 32 szám.",
         en: "Think of (32,5) as 32 examples and 5 features. mean(axis=0) gives one mean per feature → 5 values. mean(axis=1) gives one mean per example → 32 values."
       },
       examTrap: {
-        hu: "np.sum(a,axis=0) tömböt adhat, mert marad tengely. np.sum(a) minden tengelyt redukál, ezért NumPy-skalár eredményt ad.",
+        hu: "np.sum(a,axis=0) arrayt adhat, mert marad tengely. np.sum(a) minden tengelyt redukál, ezért NumPy-skalár eredményt ad.",
         en: "np.sum(a,axis=0) can return an array because an axis remains. np.sum(a) reduces all axes and returns a NumPy scalar."
       }
     },
@@ -273,9 +273,9 @@ export const numpyLesson: Lesson = {
     },
     {
       id: "numpy-views-copies",
-      title: { hu: "View és copy: ugyanazt a memóriát nézzük, vagy új adatot kaptunk?", en: "Views and copies: megosztott memória (shared memory) or independent data?" },
+      title: { hu: "View és copy: ugyanazt a memóriát nézzük, vagy új adatot kaptunk?", en: "Views and copies: shared memory or independent data?" },
       body: {
-        hu: "A view olyan array, amely ugyanazt az underlying memóriát osztja meg egy másik tömbbel. Emiatt a view-n keresztül végzett módosítás az eredeti tömbben is megjelenhet. A copy ezzel szemben önálló adatot tartalmaz. A week 6 anyag view-ként tárgyalja többek között az egyszerű reshape, transpose és alap indexelés (basic indexing) eseteket; haladó indexelés (advanced indexing) viszont új tömböt ad.",
+        hu: "A view olyan array, amely ugyanazt az underlying memóriát osztja meg egy másik arrayjel. Emiatt a view-n keresztül végzett módosítás az eredeti arrayben is megjelenhet. A copy ezzel szemben önálló adatot tartalmaz. A week 6 anyag view-ként tárgyalja többek között az egyszerű reshape, transpose és basic indexing eseteket; advanced indexing viszont új arrayt ad.",
         en: "A view shares underlying memory with another array, so modifying the view may change the original. A copy owns independent data. Week 6 discusses simple reshape, transpose, and basic-indexing cases as views, while advanced indexing creates a new array."
       },
       why: {
@@ -284,7 +284,7 @@ export const numpyLesson: Lesson = {
       },
       formula: { hu: "y=x[1:2] → view → y[:]=99 módosíthatja x-et    |    y=x[[1,2]] → copy → x nem változik", en: "y=x[1:2] → view → y[:]=99 may modify x    |    y=x[[1,2]] → copy → x unchanged" },
       workedExample: {
-        hu: "A hivatalos példákban x=np.arange(4). Ha y=x[1:2], majd y[:]=99, akkor x [0,99,2,3] lesz. Ha viszont y=x[[1,2]], majd y-t módosítjuk, x változatlan marad, mert az egész indexeket tartalmazó tömbbel végzett indexelés (integer-array indexing) haladó indexelés (advanced indexing).",
+        hu: "A hivatalos példákban x=np.arange(4). Ha y=x[1:2], majd y[:]=99, akkor x [0,99,2,3] lesz. Ha viszont y=x[[1,2]], majd y-t módosítjuk, x változatlan marad, mert az integer-array indexing advanced indexing.",
         en: "In the official examples, x=np.arange(4). With y=x[1:2], setting y[:]=99 changes x to [0,99,2,3]. With y=x[[1,2]], modifying y leaves x unchanged because integer-array indexing is advanced indexing."
       },
       connections: {
@@ -298,12 +298,12 @@ export const numpyLesson: Lesson = {
       keyTerms: [
         { term: "view", hu: "memóriát megosztó nézet" },
         { term: "copy", hu: "másolat" },
-        { term: "megosztott memória (shared memory)", hu: "megosztott memória" }
+        { term: "shared memory", hu: "megosztott memória" }
       ]
     },
     {
       id: "numpy-common-functions",
-      title: { hu: "Gyakori függvények, amelyekre konkrét eredményt kérdezhetnek", en: "Common functions with eredmény-based exam questions" },
+      title: { hu: "Gyakori függvények, amelyekre konkrét eredményt kérdezhetnek", en: "Common functions with result-based exam questions" },
       body: {
         hu: "A hivatalos mintakérdések konkrét kódok eredményére is rákérdeznek. Fontos a np.count_nonzero, np.any, np.all, np.unique, np.bincount, np.sort, np.argsort és a boolean filtering működése. Ezeknél nem elég a függvény nevét felismerni; az outputot is le kell tudni vezetni.",
         en: "The official example questions ask for concrete outputs of code using np.count_nonzero, np.any, np.all, np.unique, np.bincount, np.sort, np.argsort, and boolean filtering. Recognizing the function name is not enough; the output must be derived."
@@ -311,9 +311,9 @@ export const numpyLesson: Lesson = {
       formula: { hu: "a=[3,1,2] → unique(a)=[1,2,3], bincount(a)=[0,1,1,1], argsort(a)=[1,2,0]", en: "a=[3,1,2] → unique(a)=[1,2,3], bincount(a)=[0,1,1,1], argsort(a)=[1,2,0]" },
       formulaTerms: [
         { symbol: "np.unique", hu: "A különböző értékeket adja vissza rendezett sorrendben.", en: "Returns distinct values in sorted order." },
-        { symbol: "np.bincount", hu: "Nemnegatív egész értékek előfordulásszámát adja; a eredmény indexe maga az érték.", en: "Counts occurrences of non-negative integers, using each value as the eredmény index." },
+        { symbol: "np.bincount", hu: "Nemnegatív egész értékek előfordulásszámát adja; a result indexe maga az érték.", en: "Counts occurrences of non-negative integers, using each value as the result index." },
         { symbol: "np.sort", hu: "Az értékeket rendezi.", en: "Sorts the values." },
-        { symbol: "np.argsort", hu: "Azokat az indexeket adja, amelyek rendezett sorrendbe állítanák az tömböt.", en: "Returns indices that would sort the array." },
+        { symbol: "np.argsort", hu: "Azokat az indexeket adja, amelyek rendezett sorrendbe állítanák az arrayt.", en: "Returns indices that would sort the array." },
         { symbol: "np.any", hu: "Igaz, ha legalább egy vizsgált érték True.", en: "True if at least one considered value is True." },
         { symbol: "np.all", hu: "Igaz, ha minden vizsgált érték True.", en: "True if all considered values are True." }
       ],
@@ -326,11 +326,11 @@ export const numpyLesson: Lesson = {
       id: "numpy-scope",
       title: { hu: "Pontosan mi tartozik a Theory Test 1 NumPy-részébe?", en: "Exactly what is in scope for NumPy on Theory Test 1?" },
       body: {
-        hu: "A hivatalos mintakérdés-dokumentum (example document) szerint a NumPy-kérdések a 3–6. hét „Video to watch before gyakorlati” anyagaira épülnek. Az ndarray.strides és a stride tricks explicit ki vannak zárva a Theory Test 1-ből.",
+        hu: "A hivatalos mintakérdés-dokumentum (example document) szerint a NumPy-kérdések a 3–6. hét „Video to watch before practice” anyagaira épülnek. Az ndarray.strides és a stride tricks explicit ki vannak zárva a Theory Test 1-ből.",
         en: "According to the official example document, NumPy questions are based on the weeks 3–6 „Video to watch before practice” materials. ndarray.strides and stride tricks are explicitly excluded from Theory Test 1."
       },
       why: {
-        hu: "A view/copy viselkedés ettől még tesztanyag. Azt kell tudni, mely magas szintű műveletek adnak view-t vagy új tömböt; nem kell a stride-mechanizmus belső részleteit levezetni.",
+        hu: "A view/copy viselkedés ettől még tesztanyag. Azt kell tudni, mely magas szintű műveletek adnak view-t vagy új arrayt; nem kell a stride-mechanizmus belső részleteit levezetni.",
         en: "View/copy behavior is still testable. You need to know which high-level operations return views or new arrays, but not derive the internal stride mechanism."
       },
       examTrap: {
