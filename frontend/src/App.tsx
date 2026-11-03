@@ -32,25 +32,9 @@ export default function App() {
 
   const selectedLesson = lessons.find((lesson) => lesson.id === lessonId) ?? lessons[0];
 
-  const questionsForSelectedLesson = useMemo(() => {
-    const prefixes: Record<string, string> = {
-      "ml-fundamentals": "q",
-      "linear-regression": "lr-q",
-      "logistic-regression": "log-q",
-      "generalization-overfitting": "gen-q",
-      "artificial-neuron-mlp": "mlp-q",
-      "sgd-minibatches": "sgd-q",
-      "backprop-computational-graphs": "bp-q",
-      "numpy-theory": "np-q"
-    };
-
-    const prefix = prefixes[selectedLesson.id];
-    if (!prefix) return [];
-    if (prefix === "q") {
-      return questionBank.filter((question) => /^q\d+$/.test(question.id));
-    }
-    return questionBank.filter((question) => question.id.startsWith(prefix));
-  }, [selectedLesson]);
+  // Section checkpoints refer to stable question IDs, including cross-chapter questions.
+  // Pass the full bank, and let checkpointsForSection select the relevant questions.
+  const questionsForSelectedLesson = questionBank;
 
   const sectionLabMap: Partial<Record<string, LabId>> = {
     "regression-linear-hypothesis": "linear-regression",

@@ -4,6 +4,7 @@ import type { Language, Question } from "../types";
 type Props = {
   questions: Question[];
   language: Language;
+  onComplete?: (score: number, maximum: number) => void;
 };
 
 type AnswerState = {
@@ -26,7 +27,7 @@ function scoreQuestion(question: Question, selected: string[]) {
   return 0;
 }
 
-export function ConceptCheck({ questions, language }: Props) {
+export function ConceptCheck({ questions, language, onComplete }: Props) {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, AnswerState>>({});
 
@@ -67,10 +68,18 @@ export function ConceptCheck({ questions, language }: Props) {
   };
 
   const check = () => {
-    setAnswers((previous) => ({
-      ...previous,
+    const nextAnswers = {
+      ...answers,
       [current.id]: { ...state, checked: true }
-    }));
+    };
+    setAnswers(nextAnswers);
+    if (onComplete && questions.every((q) => nextAnswers[q.id]?.checked)) {
+      const points = questions.reduce(
+        (sum, q) => sum + scoreQuestion(q, nextAnswers[q.id].selected),
+        0
+      );
+      onComplete(points, questions.length);
+    }
   };
 
   const score = state.checked ? scoreQuestion(current, state.selected) : null;

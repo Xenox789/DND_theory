@@ -1,10 +1,10 @@
 import type { Question } from "../types";
 
 const sectionQuestionMap: Record<string, string[]> = {
-  "why-ml": ["q4"],
-  "data-point": ["q1", "q8"],
-  "hypothesis": ["q2", "q8"],
-  "loss": ["q3", "q7"],
+  "why-ml": ["q13"],
+  "data-point": ["q1", "q14", "q8"],
+  "hypothesis": ["q2", "q14", "q8"],
+  "loss": ["q3", "q15", "q7"],
   "three-groups": ["q4", "q12"],
   "supervised-paradigm": ["q9", "q1"],
   "unsupervised-paradigm": ["q10", "q12"],

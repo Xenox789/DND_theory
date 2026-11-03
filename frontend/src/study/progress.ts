@@ -6,6 +6,9 @@ export type SectionProgress = {
   lastReviewed: string | null;
   nextReview: string | null;
   rating: ReviewRating | null;
+  quizAttempts?: number;
+  bestQuizScore?: number;
+  quizPassed?: boolean;
 };
 
 export type StudyProgress = Record<string, SectionProgress>;
@@ -17,7 +20,10 @@ const EMPTY: SectionProgress = {
   streak: 0,
   lastReviewed: null,
   nextReview: null,
-  rating: null
+  rating: null,
+  quizAttempts: 0,
+  bestQuizScore: 0,
+  quizPassed: false
 };
 
 export function sectionProgressKey(lessonId: string, sectionId: string) {
@@ -92,13 +98,35 @@ export function reviewSection(
   };
 }
 
+// A good self-rating alone must not mark a section as mastered.
+export function recordMiniTestResult(
+  progress: StudyProgress,
+  lessonId: string,
+  sectionId: string,
+  score: number,
+  maximum: number
+): StudyProgress {
+  const key = sectionProgressKey(lessonId, sectionId);
+  const current = getSectionProgress(progress, lessonId, sectionId);
+  const normalized = maximum > 0 ? Math.max(0, Math.min(1, score / maximum)) : 0;
+  return {
+    ...progress,
+    [key]: {
+      ...current,
+      quizAttempts: (current.quizAttempts ?? 0) + 1,
+      bestQuizScore: Math.max(current.bestQuizScore ?? 0, normalized),
+      quizPassed: Boolean(current.quizPassed) || normalized >= 0.8
+    }
+  };
+}
+
 export function isReviewDue(item: SectionProgress, now = Date.now()) {
   if (!item.nextReview) return false;
   return new Date(item.nextReview).getTime() <= now;
 }
 
 export function masteryLabel(item: SectionProgress) {
-  if (item.streak >= 3) return "mastered";
+  if (item.streak >= 3 && item.quizPassed) return "mastered";
   if (item.visits > 0) return "learning";
   return "new";
 }
