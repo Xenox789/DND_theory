@@ -75,6 +75,9 @@ export function reviewSection(
   const key = sectionProgressKey(lessonId, sectionId);
   const current = progress[key] ?? EMPTY;
   const now = new Date();
+  const due = !current.nextReview || new Date(current.nextReview).getTime() <= now.getTime();
+  // Repeated self-ratings before the next review cannot increase mastery.
+  if (!due && rating !== "again") return progress;
   const nextStreak =
     rating === "again"
       ? 0
@@ -89,6 +92,7 @@ export function reviewSection(
   return {
     ...progress,
     [key]: {
+      ...current,
       visits: current.visits + 1,
       streak: nextStreak,
       lastReviewed: now.toISOString(),
