@@ -24,18 +24,18 @@ export const officialTheoryQuestions: Question[] = [
     id: "official-q2",
     topics: ["official-example", "official-theory", "label-format"],
     prompt: {
-      hu: "Milyen alakú lehet a címke (label) a Lectures 1–6 explicit példáiban?",
-      en: "What can be the format of a label in the explicit examples from Lectures 1–6?"
+      hu: "Milyen formátumú lehet egy címke (label): skalár, vektor vagy mátrix?",
+      en: "What can be the format of a label? (scalar, vector, matrix?)"
     },
     choices: [
-      { id: "a", text: { hu: "Skalár, például egy életkor vagy koleszterinszint.", en: "A scalar, for example an age or cholesterol level." } },
-      { id: "b", text: { hu: "Vektor, például több regressziós célérték vagy többosztályos címke.", en: "A vector, for example multiple regression targets or a multiclass label." } },
-      { id: "c", text: { hu: "A kurzus ezen részében kizárólag skalár címke szerepelhet.", en: "Only scalar labels can appear in this part of the course." } }
+      { id: "a", text: { hu: "Skalár.", en: "Scalar." } },
+      { id: "b", text: { hu: "Vektor.", en: "Vector." } },
+      { id: "c", text: { hu: "Mátrix.", en: "Matrix." } }
     ],
-    correctIds: ["a", "b"],
+    correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A korai példákban y skalár, az MLP többkimenetű példáiban viszont y vektor. A mátrix alakú címkére a Lectures 1–6 átnézett anyaga nem ad olyan explicit példát, amely alapján ezt találomra helyesnek jelölhetnénk.",
-      en: "Early examples use scalar y, while the multi-output MLP examples use vector y. The reviewed Lectures 1–6 do not provide an explicit matrix-label example that would justify marking it true here."
+      hu: "A kurzusban szerepelnek skalár címkék, az MLP-részben vektoros címkék, az 1. előadás objektumszegmentálási példájában pedig a pixelszintű kimenet kétdimenziós, mátrixként reprezentálható címke lehet.",
+      en: "The course includes scalar labels, vector labels in the MLP material, and a pixel-level object-segmentation target in Lecture 1 that can be represented as a two-dimensional matrix label."
     }
   },
   {
