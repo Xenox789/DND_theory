@@ -336,7 +336,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q1",
     topics: ["linear-regression", "shapes"],
     prompt: {
-      hu: "200 betegből álló tanítóhalmaz (training set)ünk van. Minden betegnél 4 jellemző (feature) (súly (weight), életkor (age), magasság (height), nem (sex)) alapján koleszterinszintet becslünk lineáris regresszióval. Az tengelymetszetet / eltolást x₀=1 oszloppal kezeljük. Mely állítások igazak?",
+      hu: "200 betegből álló tanítóhalmazunk (training set) van. Minden betegnél 4 jellemző (feature) (súly (weight), életkor (age), magasság (height), nem (sex)) alapján koleszterinszintet becslünk lineáris regresszióval. A tengelymetszetet / eltolást x₀=1 oszloppal kezeljük. Mely állítások igazak?",
       en: "We have a training set of 200 patients. We predict cholesterol level with linear regression from 4 features (weight, age, height, sex), using an x₀=1 column for the intercept. Which statements are true?"
     },
     choices: [
@@ -367,7 +367,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Az tengelymetszet / eltolás (intercept) miatt n bemeneti változó (input variable) mellett n+1 paraméter van. 1 jellemző (feature) → egyenes (line), 2 jellemző (feature) → sík (plane), általánosan hipersík (hyperplane).",
+      hu: "A tengelymetszet / eltolás (intercept) miatt n bemeneti változó (input variable) mellett n+1 paraméter van. 1 jellemző (feature) → egyenes (line), 2 jellemző (feature) → sík (plane), általánosan hipersík (hyperplane).",
       en: "Because of the intercept, n input variables require n+1 parameters. 1 feature → line, 2 features → plane, generally a hyperplane."
     }
   },
@@ -375,7 +375,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q3",
     topics: ["least-squares", "loss"],
     prompt: {
-      hu: "A kurzusban használt J(θ)=1/(2m) Σⱼ(hθ(x⁽ʲ⁾)−y⁽ʲ⁾)² veszteség (loss) formuláról mely állítások igazak?",
+      hu: "A kurzusban használt J(θ)=1/(2m) Σⱼ(hθ(x⁽ʲ⁾)−y⁽ʲ⁾)² veszteségképletről mely állítások igazak?",
       en: "Which statements are true about the course loss formula J(θ)=1/(2m) Σⱼ(hθ(x⁽ʲ⁾)−y⁽ʲ⁾)²?"
     },
     choices: [
@@ -387,7 +387,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c", "d"],
     explanation: {
-      hu: "A veszteség (loss) az összes példa hibájából egyetlen skalár (scalar) célfüggvényt (objective) készít. j példaindex (example index), m a példák száma, a becslési hiba (prediction error) négyzete szerepel az összegben.",
+      hu: "A veszteségfüggvény az összes példa hibáját egyetlen skalár célértékbe sűríti. A j a tanítási példákat indexeli, m a példák száma, az összegben pedig a becslési hiba négyzete szerepel.",
       en: "The loss combines errors from all examples into one scalar objective. j is the example index, m is the number of examples, and squared prediction error is summed."
     }
   },
@@ -395,7 +395,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q4",
     topics: ["gradient", "gradient-descent"],
     prompt: {
-      hu: "Mely állítások igazak a gradiensre (gradient) és gradienscsökkentés (gradient descent)re?",
+      hu: "Mely állítások igazak a gradiensre (gradient) és a gradienscsökkentésre (gradient descent)?",
       en: "Which statements are true about the gradient and gradient descent?"
     },
     choices: [
@@ -406,7 +406,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A gradiens (gradient) felfelé mutat, ezért descentnél kivonjuk a tanulási rátával (learning rate) skálázott gradienst.",
+      hu: "A gradiens a veszteség legmeredekebb növekedésének irányába mutat, ezért gradienscsökkentésnél a tanulási rátával (learning rate) skálázott gradienst kivonjuk a paraméterekből.",
       en: "The gradient points uphill, so descent subtracts the gradient scaled by the learning rate."
     }
   },
@@ -414,7 +414,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q5",
     topics: ["gradient-descent", "convexity"],
     prompt: {
-      hu: "Mely állítások igazak lineáris regresszió (linear regression) + MSE gradienscsökkentés (gradient descent) tanításra?",
+      hu: "Mely állítások igazak lineáris regresszió (linear regression) és MSE-veszteség gradienscsökkentéses (gradient descent) tanítására?",
       en: "Which statements are true for gradient-descent training of linear regression with MSE?"
     },
     choices: [
@@ -425,7 +425,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "lineáris regresszió (linear regression) MSE veszteség (loss) konvex (convex), ezért megfelelő lépésméret (step size) mellett gradienscsökkentés (gradient descent) a globális minimum (global minimum) felé konvergálhat. MLP veszteség (loss) általánosan nem konvex (convex), ezért ugyanez a garancia nincs.",
+      hu: "A lineáris regresszió MSE-vesztesége konvex (convex), ezért megfelelően kis lépésméret mellett a gradienscsökkentés (gradient descent) a globális minimumhoz konvergálhat. Egy MLP vesztesége általában nem konvex, ezért ott ugyanez a garancia nincs.",
       en: "The MSE loss of linear regression is convex, so with an appropriate step size gradient descent can converge toward the global minimum. MLP losses are generally non-convex, so the same guarantee does not hold."
     }
   },
@@ -433,7 +433,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q6",
     topics: ["matrix-form", "shapes"],
     prompt: {
-      hu: "Általánosan m tanítási példa (training example) és n valódi bemenet (input) jellemző (feature) esetén, ha x₀=1 tengelymetszet / eltolás (intercept) oszlopot használunk, mely alakok (shapes) helyesek?",
+      hu: "Ha m tanítási példánk és n valódi bemeneti jellemzőnk (feature) van, és x₀=1 eltolásoszlopot használunk, mely alakok (shapes) helyesek?",
       en: "In general, with m training examples and n real input features, using an x₀=1 intercept column, which shapes are correct?"
     },
     choices: [
@@ -444,7 +444,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "X minden példához (example) egy sort és az n jellemző (feature) + tengelymetszet / eltolás (intercept) miatt n+1 oszlopot tartalmaz. Xθ ezért egy becslést ad mind az m példára (example).",
+      hu: "X minden példához egy sort tartalmaz, az n jellemző és az x₀=1 eltolásoszlop miatt pedig n+1 oszlopa van. Az Xθ szorzat így mind az m példához egy-egy becslést ad.",
       en: "X has one row per example and n+1 columns for n features plus intercept. Therefore Xθ produces one prediction for each of the m examples."
     }
   },
@@ -452,7 +452,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q7",
     topics: ["matrix-form"],
     prompt: {
-      hu: "Mi az x₀=1 dummy variable szerepe?",
+      hu: "Mi az x₀=1 segédváltozó szerepe?",
       en: "What is the role of the x₀=1 dummy variable?"
     },
     choices: [
@@ -463,7 +463,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b"],
     explanation: {
-      hu: "Az x₀=1 konstans oszloppal θ₀ ugyanúgy szerepelhet az Xθ dot productban, mint a többi paraméter.",
+      hu: "Az x₀=1 konstans oszlop lehetővé teszi, hogy θ₀ ugyanabban az Xθ skalár-/mátrixszorzásban szerepeljen, mint a többi paraméter.",
       en: "The constant x₀=1 column lets θ₀ appear in the Xθ dot product just like the other parameters."
     }
   },
@@ -471,7 +471,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q8",
     topics: ["normal-equation"],
     prompt: {
-      hu: "Mely állítások igazak a normal equationre lineáris least squares esetén?",
+      hu: "Mely állítások igazak a normálegyenletre (normal equation) legkisebb négyzetes lineáris regressziónál?",
       en: "Which statements are true about the normal equation for linear least squares?"
     },
     choices: [
@@ -482,7 +482,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "A normal equation algebrai, egy lépéses least-squares megoldás. Az előadás a Moore–Penrose pseudoinverse alakot is megadja.",
+      hu: "A normálegyenlet a legkisebb négyzetes probléma közvetlen algebrai megoldása. Az előadás a Moore–Penrose-pszeudoinverzes alakot is megadja.",
       en: "The normal equation is a direct algebraic least-squares solution. The lecture also gives the Moore–Penrose pseudoinverse form."
     }
   },
@@ -490,7 +490,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q9",
     topics: ["normal-equation", "regularization"],
     prompt: {
-      hu: "A θ=(XᵀX+λI)⁻¹Xᵀy regularized least-squares formulában mely állítások igazak?",
+      hu: "A θ=(XᵀX+λI)⁻¹Xᵀy regularizált legkisebb négyzetes képletben mely állítások igazak?",
       en: "Which statements are true in the regularized least-squares formula θ=(XᵀX+λI)⁻¹Xᵀy?"
     },
     choices: [
@@ -501,7 +501,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "λI hozzáadható XᵀX-hez, ezért I ugyanakkora square egységmátrix (identity matrix) (matrix). λ skalár (scalar) paraméter.",
+      hu: "A λI tagot az XᵀX mátrixhoz adjuk, ezért I ugyanolyan alakú négyzetes egységmátrix (identity matrix). λ skalár regularizációs paraméter.",
       en: "λI is added to XᵀX, so I is an identity matrix of the same square shape. λ is a scalar parameter."
     }
   },
@@ -520,7 +520,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "Az előadás a különböző jellemzőskálákból (feature scales) eredő elnyúlt veszteségfelület (loss surface) és lassú gradienscsökkentés (gradient descent) konvergencia (convergence) miatt javasolja a jellemző (feature) scalinget, minden változóra (variable) külön.",
+      hu: "Az előadás azért javasolja a jellemzőskálázást (feature scaling), mert az eltérő nagyságrendű bemenetek megnyújthatják a veszteségfelületet (loss surface), ami lassíthatja a gradienscsökkentés konvergenciáját. Minden jellemzőt külön skálázunk.",
       en: "The lecture motivates feature scaling by the elongated loss surface and slow gradient-descent convergence caused by different feature scales, independently for each variable."
     }
   },
@@ -528,7 +528,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q11",
     topics: ["feature-scaling", "min-max"],
     prompt: {
-      hu: "Mely állítások igazak a min-max scalingre a kurzus szerint?",
+      hu: "Mely állítások igazak a minimum–maximum skálázásra (min-max scaling) a kurzus szerint?",
       en: "Which statements are true about min-max scaling according to the course?"
     },
     choices: [
@@ -539,7 +539,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Min-max scaling a minimumot 0-ra, a maximumot 1-re viszi. A átlag (mean) nem lesz általában 0, és az előadás kiemeli az outlier-érzékenységet.",
+      hu: "A minimum–maximum skálázás a minimumot 0-ra, a maximumot 1-re képezi. Az átlag nem lesz szükségszerűen 0, és az előadás kiemeli a kiugró értékekkel (outliers) szembeni érzékenységét.",
       en: "Min-max scaling maps the minimum to 0 and maximum to 1. The mean is not generally 0, and the lecture highlights its sensitivity to outliers."
     }
   },
@@ -566,7 +566,7 @@ export const linearRegressionQuestions: Question[] = [
     id: "lr-q13",
     topics: ["feature-scaling", "outliers"],
     prompt: {
-      hu: "A kurzus két tárgyalt scaling módszere közül mely állítás igaz kis számú outlier esetén?",
+      hu: "A kurzusban tárgyalt két skálázási módszer közül melyik állítás igaz néhány kiugró érték (outlier) esetén?",
       en: "Which statement is true, according to the course, when comparing the two discussed scaling methods in the presence of a small number of outliers?"
     },
     choices: [
@@ -576,7 +576,7 @@ export const linearRegressionQuestions: Question[] = [
     ],
     correctIds: ["a", "b"],
     explanation: {
-      hu: "Az előadás explicit megjegyzése: 'Min-max scaling: More sensitive to outliers.' Ezért a két itt tárgyalt módszer közül standardization a robusztusabb.",
+      hu: "Az előadás explicit állítása szerint a min-max scaling érzékenyebb a kiugró értékekre. A két tárgyalt módszer közül ezért a standardizálás (standardization) a robusztusabb.",
       en: "The lecture explicitly notes: 'Min-max scaling: More sensitive to outliers.' Therefore, among these two methods, standardization is the more robust one."
     }
   },
