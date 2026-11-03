@@ -4,15 +4,15 @@ export const numpyCoreQuestions: Question[] = [
   {
     id: "np-q1",
     topics: ["numpy","ndarray"],
-    prompt: { hu: "Mely állítások igazak a numpy.ndarray típusra a practice material szerint?", en: "Which statements are true about numpy.ndarray according to the practice material?" },
+    prompt: { hu: "Mely állítások igazak a numpy.ndarray típusra a gyakorlati anyag szerint?", en: "Which statements are true about numpy.ndarray according to the gyakorlati anyag?" },
     choices: [
       { id: "a", text: { hu: "Az elemeknek közös dtype-juk van.", en: "Its elements have a common dtype." } },
       { id: "b", text: { hu: "Lehet multidimensional.", en: "It can be multidimensional." } },
-      { id: "c", text: { hu: "Vektorizált műveletek (vectorized operations) használhatók rajta.", en: "Vectorized operations can be used on it." } },
+      { id: "c", text: { hu: "Vektorizált műveletek (vectorized műveletek) használhatók rajta.", en: "Vectorized műveletek can be used on it." } },
       { id: "d", text: { hu: "Minden elem kötelezően külön Python object reference.", en: "Every element must be a separate Python object reference." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A NumPy array fix dtype-pal és hatékony natív tárolással dolgozik; dtype=object külön kivétel.", en: "NumPy arrays use a fixed dtype and efficient native storage; dtype=object is a special exception." }
+    explanation: { hu: "A NumPy array fix dtype-pal és hatékony natív tárolással dolgozik; dtype=object külön kivétel.", en: "NumPy tömbök (arrays) use a fixed dtype and efficient native storage; dtype=object is a special exception." }
   },
   {
     id: "np-q2",
@@ -43,7 +43,7 @@ export const numpyCoreQuestions: Question[] = [
   {
     id: "np-q4",
     topics: ["numpy","shape"],
-    prompt: { hu: "Melyek lehetnek valid ndarray.shape értékek?", en: "Which can be valid ndarray.shape values?" },
+    prompt: { hu: "Melyek lehetnek érvényes ndarray.shape értékek?", en: "Which can be érvényes ndarray.shape values?" },
     choices: [
       { id: "a", text: { hu: "(5,6)", en: "(5,6)" } },
       { id: "b", text: { hu: "(1,)", en: "(1,)" } },
@@ -51,12 +51,12 @@ export const numpyCoreQuestions: Question[] = [
       { id: "d", text: { hu: "12", en: "12" } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "shape tuple, és zero-length axis is valid. Egy sima integer nem ndarray.shape.", en: "shape is a tuple, and zero-length axes are valid. A plain integer is not ndarray.shape." }
+    explanation: { hu: "shape tuple, és zero-length axis is érvényes. Egy sima integer nem ndarray.shape.", en: "shape is a tuple, and zero-length axes are érvényes. A plain integer is not ndarray.shape." }
   },
   {
     id: "np-q5",
     topics: ["numpy","dtype"],
-    prompt: { hu: "Melyek példák NumPy dtype-ra a source szerint?", en: "Which are examples of NumPy dtypes in the source?" },
+    prompt: { hu: "Melyek példák NumPy dtype-ra a forrás szerint?", en: "Which are examples of NumPy dtypes in the forrás?" },
     choices: [
       { id: "a", text: { hu: "np.int64", en: "np.int64" } },
       { id: "b", text: { hu: "np.float32", en: "np.float32" } },
@@ -76,12 +76,12 @@ export const numpyCoreQuestions: Question[] = [
       { id: "c", text: { hu: "Az array dtype automatikusan float lesz minden esetben.", en: "The array dtype automatically becomes float in every case." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A source példájában 99.99 int arraybe írva 99 lesz.", en: "In the source example, writing 99.99 into an integer array stores 99." }
+    explanation: { hu: "A forrás példájában 99.99 int arraybe írva 99 lesz.", en: "In the forrás example, writing 99.99 into an integer array stores 99." }
   },
   {
     id: "np-q7",
     topics: ["numpy","creation"],
-    prompt: { hu: "Mely NumPy creation methods szerepelnek a practice materialben?", en: "Which NumPy array-creation methods appear in the practice material?" },
+    prompt: { hu: "Mely NumPy creation methods szerepelnek a gyakorlati materialben?", en: "Which NumPy array-creation methods appear in the gyakorlati anyag?" },
     choices: [
       { id: "a", text: { hu: "np.array", en: "np.array" } },
       { id: "b", text: { hu: "np.arange", en: "np.arange" } },
@@ -89,7 +89,7 @@ export const numpyCoreQuestions: Question[] = [
       { id: "d", text: { hu: "np.ones / np.full", en: "np.ones / np.full" } }
     ],
     correctIds: ["a","b","c","d"],
-    explanation: { hu: "Mindegyik szerepel a weeks 3–5 practice videókban.", en: "All of them appear in the weeks 3–5 practice materials." }
+    explanation: { hu: "Mindegyik szerepel a weeks 3–5 gyakorlati videókban.", en: "All of them appear in the weeks 3–5 gyakorlati materials." }
   },
   {
     id: "np-q8",
@@ -119,60 +119,60 @@ export const numpyCoreQuestions: Question[] = [
   {
     id: "np-q10",
     topics: ["numpy","basic-indexing"],
-    prompt: { hu: "Mely állítások igazak basic indexingre?", en: "Which statements are true about basic indexing?" },
+    prompt: { hu: "Mely állítások igazak basic indexingre?", en: "Which statements are true about alap indexelés (basic indexing)?" },
     choices: [
       { id: "a", text: { hu: "Integer indices és slices kombinációját használja.", en: "It uses a combination of integer indices and slices." } },
-      { id: "b", text: { hu: "Legalább egy slice szükséges az array resulthez.", en: "At least one slice is needed for the array-result case." } },
-      { id: "c", text: { hu: "A source szerint tipikusan view-t ad.", en: "According to the source, it typically returns a view." } },
-      { id: "d", text: { hu: "Integer-list indexing basic indexing.", en: "Integer-list indexing is basic indexing." } }
+      { id: "b", text: { hu: "Legalább egy slice szükséges az array resulthez.", en: "At least one slice is needed for the array-eredmény case." } },
+      { id: "c", text: { hu: "A forrás szerint tipikusan view-t ad.", en: "According to the forrás, it typically returns a view." } },
+      { id: "d", text: { hu: "Integer-list indexing alap indexelés (basic indexing).", en: "Integer-list indexing is alap indexelés (basic indexing)." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Integer list/array már advanced indexing.", en: "An integer list/array triggers advanced indexing." }
+    explanation: { hu: "Integer list/array már haladó indexelés (advanced indexing).", en: "An integer list/array triggers haladó indexelés (advanced indexing)." }
   },
   {
     id: "np-q11",
     topics: ["numpy","basic-indexing"],
-    prompt: { hu: "Basic indexingnél mi történik az axes-szel?", en: "What happens to axes under basic indexing?" },
+    prompt: { hu: "Basic indexingnél mi történik az axes-szel?", en: "What happens to axes under alap indexelés (basic indexing)?" },
     choices: [
       { id: "a", text: { hu: "Integer indexelt axis collapse-ol.", en: "An integer-indexed axis collapses." } },
       { id: "b", text: { hu: "Slice-olt axis megmarad.", en: "A sliced axis is retained." } },
       { id: "c", text: { hu: "Minden axis automatikusan megmarad.", en: "Every axis is automatically retained." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "Ez a shape-követés egyik fő szabálya.", en: "This is one of the key rules for reasoning about result shapes." }
+    explanation: { hu: "Ez a shape-követés egyik fő szabálya.", en: "This is one of the key rules for reasoning about eredmény alakja (eredmény shape)s." }
   },
   {
     id: "np-q12",
     topics: ["numpy","advanced-indexing"],
-    prompt: { hu: "Mi triggereli az advanced indexinget a source szerint?", en: "What triggers advanced indexing according to the source?" },
+    prompt: { hu: "Mi triggereli az advanced indexinget a forrás szerint?", en: "What triggers haladó indexelés (advanced indexing) according to the forrás?" },
     choices: [
       { id: "a", text: { hu: "Integer sequence/list/array indexing.", en: "Integer sequence/list/array indexing." } },
-      { id: "b", text: { hu: "Boolean mask indexing.", en: "Boolean-mask indexing." } },
+      { id: "b", text: { hu: "Boolean maszkos indexelés (mask indexing).", en: "Boolean-maszkos indexelés (mask indexing)." } },
       { id: "c", text: { hu: "Legalább egyszer ilyen indexing használata.", en: "Using at least one such index." } },
       { id: "d", text: { hu: "Csak a colon slice ':' használata.", en: "Using only the colon slice ':'." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A sima slice basic indexing, nem advanced.", en: "A plain slice is basic indexing, not advanced." }
+    explanation: { hu: "A sima slice alap indexelés (basic indexing), nem advanced.", en: "A plain slice is alap indexelés (basic indexing), not advanced." }
   },
   {
     id: "np-q13",
     topics: ["numpy","advanced-indexing","views"],
-    prompt: { hu: "Mely állítás igaz advanced indexing resultjára?", en: "Which statement is true about the result of advanced indexing?" },
+    prompt: { hu: "Mely állítás igaz haladó indexelés (advanced indexing) resultjára?", en: "Which statement is true about the eredmény of haladó indexelés (advanced indexing)?" },
     choices: [
       { id: "a", text: { hu: "Új array készül a selected elements másolatával.", en: "A new array is created containing copies of the selected elements." } },
-      { id: "b", text: { hu: "Mindig view az original arrayre.", en: "It is always a view of the original array." } }
+      { id: "b", text: { hu: "Mindig view az original tömbre.", en: "It is always a view of the original array." } }
     ],
     correctIds: ["a"],
-    explanation: { hu: "A 6. hét source explicit: advanced indexing will never produce a view.", en: "Week 6 explicitly states that advanced indexing will never produce a view." }
+    explanation: { hu: "A 6. hét forrás explicit: haladó indexelés (advanced indexing) will never produce a view.", en: "Week 6 explicitly states that haladó indexelés (advanced indexing) will never produce a view." }
   },
   {
     id: "np-q14",
     topics: ["numpy","boolean-mask"],
-    prompt: { hu: "Mely állítások igazak boolean comparisonre és mask indexingre?", en: "Which statements are true about boolean comparisons and mask indexing?" },
+    prompt: { hu: "Mely állítások igazak boolean comparisonre és mask indexingre?", en: "Which statements are true about boolean comparisons and maszkos indexelés (mask indexing)?" },
     choices: [
-      { id: "a", text: { hu: "a<0 az a-val azonos shape-jű bool arrayt ad.", en: "a<0 returns a bool array with the same shape as a." } },
+      { id: "a", text: { hu: "a<0 az a-val azonos shape-jű bool tömböt ad.", en: "a<0 returns a bool array with the same shape as a." } },
       { id: "b", text: { hu: "a[a<0] a True pozíciók values értékeit választja.", en: "a[a<0] selects values at True positions." } },
-      { id: "c", text: { hu: "Mask indexing advanced indexing.", en: "Mask indexing is advanced indexing." } },
+      { id: "c", text: { hu: "Mask indexing haladó indexelés (advanced indexing).", en: "Mask indexing is haladó indexelés (advanced indexing)." } },
       { id: "d", text: { hu: "a<0 skalár logikai érték (scalar bool) minden többdimenziós tömbnél (multidimensional array).", en: "a<0 is a scalar bool for every multidimensional array." } }
     ],
     correctIds: ["a","b","c"],
@@ -181,7 +181,7 @@ export const numpyCoreQuestions: Question[] = [
   {
     id: "np-q15",
     topics: ["numpy","broadcasting"],
-    prompt: { hu: "Mely dimension párok kompatibilisek broadcastingnál egy pozícióban?", en: "Which dimension pairs are compatible at one position during broadcasting?" },
+    prompt: { hu: "Mely dimenzió párok kompatibilisek broadcastingnál egy pozícióban?", en: "Which dimenzió pairs are compatible at one position during broadcasting?" },
     choices: [
       { id: "a", text: { hu: "3 és 3", en: "3 and 3" } },
       { id: "b", text: { hu: "1 és 7", en: "1 and 7" } },
@@ -201,7 +201,7 @@ export const numpyCoreQuestions: Question[] = [
       { id: "c", text: { hu: "Mindig azonnal ValueError keletkezik.", en: "A ValueError always occurs immediately." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "Ez a practice slides broadcasting algorithmja.", en: "This is the broadcasting algorithm shown in the practice slides." }
+    explanation: { hu: "Ez a gyakorlati slides broadcasting algorithmja.", en: "This is the broadcasting algorithm shown in the gyakorlati slides." }
   },
   {
     id: "np-q17",
@@ -214,12 +214,12 @@ export const numpyCoreQuestions: Question[] = [
       { id: "d", text: { hu: "(2,3) és (2,)", en: "(2,3) and (2,)" } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "(2,) → (1,2), ami 3-mal nem kompatibilis az utolsó axis-on.", en: "(2,) becomes (1,2), whose final dimension is incompatible with 3." }
+    explanation: { hu: "(2,) → (1,2), ami 3-mal nem kompatibilis az utolsó axis-on.", en: "(2,) becomes (1,2), whose final dimenzió is incompatible with 3." }
   },
   {
     id: "np-q18",
     topics: ["numpy","newaxis"],
-    prompt: { hu: "Ha v.shape=(32,), mely shape-ek helyesek?", en: "If v.shape=(32,), which shapes are correct?" },
+    prompt: { hu: "Ha v.shape=(32,), mely alakok (shapes) helyesek?", en: "If v.shape=(32,), which shapes are correct?" },
     choices: [
       { id: "a", text: { hu: "v[:,None] → (32,1)", en: "v[:,None] → (32,1)" } },
       { id: "b", text: { hu: "v[None,:] → (1,32)", en: "v[None,:] → (1,32)" } },
@@ -232,7 +232,7 @@ export const numpyCoreQuestions: Question[] = [
   {
     id: "np-q19",
     topics: ["numpy","reductions"],
-    prompt: { hu: "Melyek példák reduction/collapse operationre?", en: "Which are examples of reduction/collapse operations?" },
+    prompt: { hu: "Melyek példák reduction/collapse operationre?", en: "Which are examples of reduction/collapse műveletek?" },
     choices: [
       { id: "a", text: { hu: "np.sum", en: "np.sum" } },
       { id: "b", text: { hu: "np.mean", en: "np.mean" } },
@@ -240,12 +240,12 @@ export const numpyCoreQuestions: Question[] = [
       { id: "d", text: { hu: "np.argmax", en: "np.argmax" } }
     ],
     correctIds: ["a","b","c","d"],
-    explanation: { hu: "A source mindet collapse operation példaként sorolja.", en: "The source lists all of these as examples of collapse operations." }
+    explanation: { hu: "A forrás mindet collapse művelet példaként sorolja.", en: "The forrás lists all of these as examples of collapse műveletek." }
   },
   {
     id: "np-q20",
     topics: ["numpy","reductions","axis"],
-    prompt: { hu: "Ha a.shape=(4,5), mely result shape-ek helyesek?", en: "If a.shape=(4,5), which result shapes are correct?" },
+    prompt: { hu: "Ha a.shape=(4,5), mely eredmény alakok (shapes) helyesek?", en: "If a.shape=(4,5), which eredmény alakja (eredmény shape)s are correct?" },
     choices: [
       { id: "a", text: { hu: "np.sum(a,axis=0) → (5,)", en: "np.sum(a,axis=0) → (5,)" } },
       { id: "b", text: { hu: "np.sum(a,axis=1) → (4,)", en: "np.sum(a,axis=1) → (4,)" } },
@@ -284,17 +284,17 @@ export const numpyCoreQuestions: Question[] = [
     topics: ["numpy","views"],
     prompt: { hu: "Mit jelent, hogy egy array view?", en: "What does it mean for an array to be a view?" },
     choices: [
-      { id: "a", text: { hu: "Underlying memory-t oszthat meg egy másik arrayjel.", en: "It can share underlying memory with another array." } },
-      { id: "b", text: { hu: "A view módosítása az original/base arrayt is érintheti.", en: "Modifying the view can affect the original/base array." } },
+      { id: "a", text: { hu: "Underlying memory-t oszthat meg egy másik tömbbel.", en: "It can share underlying memory with another array." } },
+      { id: "b", text: { hu: "A view módosítása az original/base tömböt is érintheti.", en: "Modifying the view can affect the original/base array." } },
       { id: "c", text: { hu: "Mindig teljesen független copy.", en: "It is always a completely independent copy." } }
     ],
     correctIds: ["a","b"],
-    explanation: { hu: "A view lényege a shared memory.", en: "The defining idea of a view is shared memory." }
+    explanation: { hu: "A view lényege a megosztott memória (shared memory).", en: "The defining idea of a view is megosztott memória (shared memory)." }
   },
   {
     id: "np-q24",
     topics: ["numpy","views"],
-    prompt: { hu: "Mely műveletek (operations) szerepelnek view-t előállító műveletként (view-producing operation) a 6. hét anyagában?", en: "Which operations are discussed as view-producing in 6. hét?" },
+    prompt: { hu: "Mely műveletek (műveletek) szerepelnek view-t előállító műveletként (view-producing művelet) a 6. hét anyagában?", en: "Which műveletek are discussed as view-producing in 6. hét?" },
     choices: [
       { id: "a", text: { hu: "Reshape", en: "Reshape" } },
       { id: "b", text: { hu: "Transpose / axis swapping", en: "Transpose / axis swapping" } },
@@ -307,27 +307,27 @@ export const numpyCoreQuestions: Question[] = [
   {
     id: "np-q25",
     topics: ["numpy","views","advanced-indexing"],
-    prompt: { hu: "Mely állítások igazak advanced indexing és memory sharing kapcsolatára?", en: "Which statements are true about advanced indexing and memory sharing?" },
+    prompt: { hu: "Mely állítások igazak haladó indexelés (advanced indexing) és memory sharing kapcsolatára?", en: "Which statements are true about haladó indexelés (advanced indexing) and memory sharing?" },
     choices: [
-      { id: "a", text: { hu: "Advanced indexing resultja új array.", en: "Advanced indexing returns a new array." } },
+      { id: "a", text: { hu: "Advanced indexing eredménye új array.", en: "Advanced indexing returns a new array." } },
       { id: "b", text: { hu: "A selected elements másolódnak.", en: "The selected elements are copied." } },
-      { id: "c", text: { hu: "A result módosítása általában nem módosítja az original arrayt.", en: "Modifying the result generally does not modify the original array." } }
+      { id: "c", text: { hu: "A eredmény módosítása általában nem módosítja az original tömböt.", en: "Modifying the eredmény generally does not modify the original array." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "Ez különbözteti meg az advanced indexing resultot a basic-indexing view-tól.", en: "This distinguishes advanced-indexing results from basic-indexing views." }
+    explanation: { hu: "Ez különbözteti meg az haladó indexelés (advanced indexing) eredményt a basic-indexing view-tól.", en: "This distinguishes advanced-indexing results from basic-indexing views." }
   },
   {
     id: "np-q26",
     topics: ["numpy","concatenate","stack"],
-    prompt: { hu: "Mely állítások igazak np.concatenate és np.stack műveletekre a source szerint?", en: "Which statements are true about np.concatenate and np.stack according to the source?" },
+    prompt: { hu: "Mely állítások igazak np.concatenate és np.stack műveletekre a forrás szerint?", en: "Which statements are true about np.concatenate and np.stack according to the forrás?" },
     choices: [
       { id: "a", text: { hu: "concatenate meglévő axis mentén joinol.", en: "concatenate joins along an existing axis." } },
       { id: "b", text: { hu: "stack új axis mentén joinol.", en: "stack joins along a new axis." } },
-      { id: "c", text: { hu: "Mindkettő új arrayt készít.", en: "Both create new arrays." } },
+      { id: "c", text: { hu: "Mindkettő új tömböt készít.", en: "Both create new tömbök (arrays)." } },
       { id: "d", text: { hu: "Loopban ismételt concatenate ajánlott hatékonyság miatt.", en: "Repeated concatenation in a loop is recommended for efficiency." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A source kifejezetten tiltja a concatenate/stack loopban való ismétlését O(n²) költség miatt.", en: "The source explicitly warns against repeated concatenate/stack in a loop because of O(n²) cost." }
+    explanation: { hu: "A forrás kifejezetten tiltja a concatenate/stack loopban való ismétlését O(n²) költség miatt.", en: "The forrás explicitly warns against repeated concatenate/stack in a loop because of O(n²) cost." }
   },
   {
     id: "np-q27",
@@ -335,23 +335,23 @@ export const numpyCoreQuestions: Question[] = [
     prompt: { hu: "Mely állítások igazak ndarray.astype használatára?", en: "Which statements are true about ndarray.astype?" },
     choices: [
       { id: "a", text: { hu: "Datatype conversionre használható.", en: "It can be used for datatype conversion." } },
-      { id: "b", text: { hu: "Ha conversion történik, új arrayt ad.", en: "When conversion occurs, it returns a new array." } },
+      { id: "b", text: { hu: "Ha conversion történik, új tömböt ad.", en: "When conversion occurs, it returns a new array." } },
       { id: "c", text: { hu: "float → int conversion fractional részt elveszíthet.", en: "float → int conversion can lose fractional parts." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A week 5 source ezt explicit példákkal mutatja.", en: "Week 5 demonstrates this explicitly with examples." }
+    explanation: { hu: "A week 5 forrás ezt explicit példákkal mutatja.", en: "Week 5 demonstrates this explicitly with examples." }
   },
   {
     id: "np-q28",
     topics: ["numpy","where"],
-    prompt: { hu: "Mire használható np.where(mask) a source példáiban?", en: "What is np.where(mask) used for in the source examples?" },
+    prompt: { hu: "Mire használható np.where(mask) a forrás példáiban?", en: "What is np.where(mask) used for in the forrás examples?" },
     choices: [
       { id: "a", text: { hu: "A True positions integer indices értékeinek kinyerésére.", en: "To obtain integer indices of True positions." } },
-      { id: "b", text: { hu: "nD mask esetén axis-onként index arrays tuple-jét adhatja.", en: "For an nD mask, it can return a tuple of index arrays separated by axis." } },
+      { id: "b", text: { hu: "nD mask esetén axis-onként index tömbök (arrays) tuple-jét adhatja.", en: "For an nD mask, it can return a tuple of index tömbök (arrays) separated by axis." } },
       { id: "c", text: { hu: "A tuple közvetlenül használható indexingre.", en: "The tuple can be used directly for indexing." } }
     ],
     correctIds: ["a","b","c"],
-    explanation: { hu: "A source ezt standard multidimensional-index formatként mutatja.", en: "The source presents this as the standard multidimensional-index format." }
+    explanation: { hu: "A forrás ezt standard multidimensional-index formatként mutatja.", en: "The forrás presents this as the standard multidimensional-index format." }
   },
   {
     id: "np-q29",
