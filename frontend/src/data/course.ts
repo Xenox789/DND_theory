@@ -29,7 +29,7 @@ export const questionBank: Question[] = [
     id: "q1",
     topics: ["supervised-learning", "data"],
     prompt: {
-      hu: "Mely állítások igazak egy felügyelt tanulás (supervised learning) tanítómintára (training sample)?",
+      hu: "Mely állítások igazak a felügyelt tanulás (supervised learning) tanítómintájára (training sample)?",
       en: "Which statements are true about a supervised learning training sample?"
     },
     choices: [
@@ -40,7 +40,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "Felügyelt tanulásban a tanítóminta (training sample) (x, y) párokból áll. x a bemenet (input), y a valódi címke (true label) (label). A modellparaméterek külön, például θ-val vannak jelölve.",
+      hu: "Felügyelt tanulásban a tanítóminta (training sample) (x,y) párokból áll: x a bemenet (input), y a valódi címke (label). A modellparamétereket ettől külön, például θ-val jelöljük.",
       en: "In supervised learning the training sample consists of (x, y) pairs. x is the input and y is the true label. Model parameters are separate, for example θ."
     }
   },
@@ -48,7 +48,7 @@ export const questionBank: Question[] = [
     id: "q2",
     topics: ["hypothesis-function"],
     prompt: {
-      hu: "Mely állítások igazak a hipotézisfüggvény (hypothesis function) hθ(x) függvényre?",
+      hu: "Mely állítások igazak a hθ(x) hipotézisfüggvényre (hypothesis function)?",
       en: "Which statements are true about the hypothesis function hθ(x)?"
     },
     choices: [
@@ -59,7 +59,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A hipotézisfüggvény (hypothesis function) a bemenet (input) és a paraméterek alapján becslést ad. Az optimalizálás (optimization) célja nem X minimalizálása.",
+      hu: "A hipotézisfüggvény a bemenet és a modellparaméterek alapján becslést készít. Tanításkor nem X-et, hanem a veszteségfüggvény értékét minimalizáljuk a paraméterek módosításával.",
       en: "The hypothesis function produces a prediction using the input and parameters. Optimization does not minimize X."
     }
   },
@@ -74,11 +74,11 @@ export const questionBank: Question[] = [
       { id: "a", text: { hu: "A modell hibáját/teljesítményét számszerűsíti.", en: "It quantifies model error/performance." } },
       { id: "b", text: { hu: "A tanulás során általában minimalizálni szeretnénk.", en: "During learning we usually want to minimize it." } },
       { id: "c", text: { hu: "A teljes célfüggvény (objective) értéke tipikusan skalár (scalar).", en: "The overall objective value is typically a scalar." } },
-      { id: "d", text: { hu: "Mindig ugyanazt a veszteség (loss) functiont használjuk minden gépi tanulási feladatnál.", en: "We always use the same loss function for every ML task." } }
+      { id: "d", text: { hu: "Minden gépi tanulási feladathoz ugyanazt a veszteségfüggvényt (loss function) használjuk.", en: "We always use the same loss function for every ML task." } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A veszteség (loss) az optimalizálás (optimization) célértéke. A megfelelő veszteség (loss) a feladattól függ; például regresszió (regression) és osztályozás (classification) esetén eltérő veszteség (loss) lehet indokolt.",
+      hu: "A veszteség (loss) az optimalizálás célértéke. A megfelelő veszteségfüggvény a feladattól függ; regressziónál és osztályozásnál például eltérő választás lehet indokolt.",
       en: "Loss is the optimization objective. The appropriate loss depends on the task; regression and classification may require different losses."
     }
   },
@@ -97,7 +97,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "Az előadás három fő csoportot nevez meg: supervised, unsupervised és megerősítéses tanulás (reinforcement learning).",
+      hu: "Az előadás három fő csoportot nevez meg: felügyelt tanulás (supervised learning), felügyelet nélküli tanulás (unsupervised learning) és megerősítéses tanulás (reinforcement learning).",
       en: "The lecture names supervised, unsupervised, and reinforcement learning as the three main groups."
     }
   },
@@ -105,7 +105,7 @@ export const questionBank: Question[] = [
     id: "q5",
     topics: ["regression", "classification"],
     prompt: {
-      hu: "Egy beteg koleszterinszint (cholesterol level) értékét szeretnénk becsülni súly (weight), életkor (age), magasság (height) és nem (sex) alapján. Mely állítások igazak?",
+      hu: "Egy beteg koleszterinszintjét szeretnénk megbecsülni testsúly, életkor, magasság és nem alapján. Mely állítások igazak?",
       en: "We want to predict a patient's cholesterol level from weight, age, height, and sex. Which statements are true?"
     },
     choices: [
@@ -116,7 +116,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "A koleszterinszint (cholesterol level) folytonos célváltozó, ezért regresszió (regression). A beteg tulajdonságai X/x jellemző (feature) adatok, nem a megtanulandó θ paraméterek.",
+      hu: "A koleszterinszint folytonos célváltozó, ezért regressziós feladatról van szó. A beteg tulajdonságai az X/x bemeneti jellemzői (features), nem a megtanulandó θ paraméterek.",
       en: "Cholesterol level is a continuous target, so this is regression. Patient attributes are X/x features, not learnable θ parameters."
     }
   },
@@ -124,7 +124,7 @@ export const questionBank: Question[] = [
     id: "q6",
     topics: ["linear-regression"],
     prompt: {
-      hu: "Melyik állítás igaz a lineáris regresszió (linear regression) geometriai értelmezésére?",
+      hu: "Mely állítások igazak a lineáris regresszió (linear regression) geometriai értelmezésére?",
       en: "Which statement is true about the geometric interpretation of linear regression?"
     },
     choices: [
@@ -135,7 +135,7 @@ export const questionBank: Question[] = [
     ],
     correctIds: ["a", "b", "d"],
     explanation: {
-      hu: "lineáris regresszió (linear regression) folytonos érték becslésére szolgál. Egy bemenetnél (input) egyenes, két bemenetnél (input) sík a geometriai lineáris hipotézis (hypothesis).",
+      hu: "A lineáris regresszió folytonos érték becslésére szolgál. Egy bemeneti változónál a hipotézis egyenes, két bemeneti változónál sík.",
       en: "Linear regression predicts continuous values. Geometrically, with one input the linear hypothesis is a line; with two inputs it is a plane."
     }
   },
@@ -147,14 +147,14 @@ export const questionBank: Question[] = [
       en: "What do we want to minimize during model training?"
     },
     choices: [
-      { id: "a", text: { hu: "Az bemenet (input) mátrix (matrix) X méretét.", en: "The size of the input matrix X." } },
+      { id: "a", text: { hu: "A bemeneti mátrix X méretét.", en: "The size of the input matrix X." } },
       { id: "b", text: { hu: "A veszteségfüggvény (loss function) J(θ) értékét.", en: "The value of the loss function J(θ)." } },
       { id: "c", text: { hu: "A tanítási példák (training examples) számát.", en: "The number of training examples." } },
       { id: "d", text: { hu: "Olyan θ értékeket keresünk, amelyek kis veszteséget (loss) eredményeznek.", en: "We search for θ values that result in low loss." } }
     ],
     correctIds: ["b", "d"],
     explanation: {
-      hu: "A paraméterek értékeit azért változtatjuk, hogy J(θ) csökkenjen. Nem a bemenet (input) adatokat vagy az adathalmaz (dataset) méretét minimalizáljuk.",
+      hu: "A paramétereket azért változtatjuk, hogy J(θ) csökkenjen. Nem a bemeneti adatokat vagy az adathalmaz méretét minimalizáljuk.",
       en: "We change parameter values so that J(θ) decreases. We do not minimize the input data or dataset size."
     }
   },
@@ -166,14 +166,14 @@ export const questionBank: Question[] = [
       en: "Which pairings are correct?"
     },
     choices: [
-      { id: "a", text: { hu: "y → true címke (label)", en: "y → true label" } },
+      { id: "a", text: { hu: "y → valódi címke (true label)", en: "y → true label" } },
       { id: "b", text: { hu: "ŷ → becslés (prediction)", en: "ŷ → prediction" } },
       { id: "c", text: { hu: "θ → modellparaméterek", en: "θ → model parameters" } },
       { id: "d", text: { hu: "x → veszteségfüggvény (loss function)", en: "x → loss function" } }
     ],
     correctIds: ["a", "b", "c"],
     explanation: {
-      hu: "A szokásos jelölésben x a bemenet (input), y a valódi címke (true label) (label), ŷ a becslés (prediction), θ pedig a modellparaméterek.",
+      hu: "A szokásos jelölésben x a bemenet (input), y a valódi címke (label), ŷ a becslés (prediction), θ pedig a modellparaméterek vektora.",
       en: "In the usual notation x is the input, y the true label, ŷ the prediction, and θ the model parameters."
     }
   },
