@@ -177,6 +177,82 @@ export const questionBank: Question[] = [
       en: "In the usual notation x is the input, y the true label, ŷ the prediction, and θ the model parameters."
     }
   },
+  {
+    id: "q9",
+    topics: ["supervised-learning", "ml-types"],
+    prompt: {
+      hu: "Mely állítások írják le helyesen a felügyelt tanulást (supervised learning)?",
+      en: "Which statements correctly describe supervised learning?"
+    },
+    choices: [
+      { id: "a", text: { hu: "A tanítóminta (x,y) bemenet–címke párokat tartalmaz.", en: "The training sample contains input-label pairs (x,y)." } },
+      { id: "b", text: { hu: "A modell ŷ becslését össze tudjuk hasonlítani a valódi y címkével.", en: "The model prediction ŷ can be compared with the true label y." } },
+      { id: "c", text: { hu: "A cél tipikusan olyan paramétereket tanulni, amelyekkel új x bemenetekhez is jól becsüljük y-t.", en: "The goal is typically to learn parameters that predict y well for new x inputs." } },
+      { id: "d", text: { hu: "A tanítás során nincs szükség semmilyen ismert célértékre vagy címkére.", en: "Training requires no known targets or labels." } }
+    ],
+    correctIds: ["a", "b", "c"],
+    explanation: {
+      hu: "Felügyelt tanulásban minden tanítási példához ismert y címke tartozik. A modell hθ(x)=ŷ becslést készít, és a tanítás azt próbálja elérni, hogy ŷ jól közelítse y-t.",
+      en: "In supervised learning, each training example has a known label y. The model produces hθ(x)=ŷ and training tries to make ŷ approximate y."
+    }
+  },
+  {
+    id: "q10",
+    topics: ["unsupervised-learning", "ml-types"],
+    prompt: {
+      hu: "Mely állítások igazak a felügyelet nélküli tanulásra (unsupervised learning) az 1. előadás alapján?",
+      en: "Which statements are true about unsupervised learning according to Lecture 1?"
+    },
+    choices: [
+      { id: "a", text: { hu: "Nincs minden x bemenethez megadott helyes y címke.", en: "There is no provided correct y label for every input x." } },
+      { id: "b", text: { hu: "A klaszterezés (clustering) lehet unsupervised feladat.", en: "Clustering can be an unsupervised task." } },
+      { id: "c", text: { hu: "A dimenziócsökkentés (dimensionality reduction) lehet unsupervised feladat.", en: "Dimensionality reduction can be an unsupervised task." } },
+      { id: "d", text: { hu: "Mivel nincs y címke, ezért semmilyen célfüggvény nem lehet.", en: "Because there is no y label, there cannot be any objective function." } }
+    ],
+    correctIds: ["a", "b", "c"],
+    explanation: {
+      hu: "Unsupervised learningben nincs klasszikus y címke minden példához, de ettől még van feladat és cél. Az előadás példái között szerepel a klaszterezés, dimenziócsökkentés, mintagenerálás és denoising.",
+      en: "Unsupervised learning lacks a classical y label for every example, but it still has a task and objective. Lecture examples include clustering, dimensionality reduction, sample generation, and denoising."
+    }
+  },
+  {
+    id: "q11",
+    topics: ["reinforcement-learning", "ml-types"],
+    prompt: {
+      hu: "Mely állítások írják le helyesen a megerősítéses tanulást (reinforcement learning)?",
+      en: "Which statements correctly describe reinforcement learning?"
+    },
+    choices: [
+      { id: "a", text: { hu: "Egy agent állapotot figyel meg és akciót választ.", en: "An agent observes a state and chooses an action." } },
+      { id: "b", text: { hu: "Az agent pozitív vagy negatív rewardot kaphat.", en: "The agent may receive positive or negative reward." } },
+      { id: "c", text: { hu: "A cél olyan akciók választása, amelyek várhatóan maximalizálják a jövőbeli összjutalmat.", en: "The goal is to choose actions expected to maximize total future reward." } },
+      { id: "d", text: { hu: "Minden állapothoz előre megkapjuk a helyes akciót y címkeként.", en: "For every state, the correct action is provided in advance as a label y." } }
+    ],
+    correctIds: ["a", "b", "c"],
+    explanation: {
+      hu: "RL-ben az agent a környezettel kölcsönhatásban tanul. A reward a következmények értékelése, nem minden lépéshez megadott helyes címke.",
+      en: "In RL, the agent learns through interaction with the environment. Reward evaluates consequences; it is not a correct label supplied for every step."
+    }
+  },
+  {
+    id: "q12",
+    topics: ["ml-types", "comparison"],
+    prompt: {
+      hu: "Mely párosítások helyesek a három gépi tanulási paradigma között?",
+      en: "Which pairings correctly distinguish the three machine-learning paradigms?"
+    },
+    choices: [
+      { id: "a", text: { hu: "Címkézett képosztályozás → supervised learning.", en: "Labeled image classification → supervised learning." } },
+      { id: "b", text: { hu: "Címke nélküli klaszterezés → unsupervised learning.", en: "Clustering without labels → unsupervised learning." } },
+      { id: "c", text: { hu: "Játékot játszó agent jutalmakkal → reinforcement learning.", en: "A game-playing agent with rewards → reinforcement learning." } },
+      { id: "d", text: { hu: "Ha nincs y címke, akkor a feladat mindig unsupervised learning.", en: "If there is no label y, the task is always unsupervised learning." } }
+    ],
+    correctIds: ["a", "b", "c"],
+    explanation: {
+      hu: "A címke hiánya önmagában nem elég az unsupervised besoroláshoz. RL-ben sincs minden állapothoz y címke, de van agent–environment interakció és reward.",
+      en: "The absence of y alone is not enough to classify a task as unsupervised. RL also lacks y for every state but includes agent-environment interaction and reward."
+    }
+  },
   ...linearRegressionQuestions,
   ...logisticRegressionQuestions,
   ...generalizationQuestions,
