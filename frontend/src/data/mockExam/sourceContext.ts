@@ -21,6 +21,24 @@ const mlp: SourceContext = {
 export function originalDocumentContext(id: string): SourceContext {
   if (id.startsWith("M")) {
     const n = Number(id.slice(1));
+    if (n === 8 || n === 9) return {
+      hu: "A dokumentum az alábbi feladatok típusát és célját kéri összehasonlítani: regresszió, osztályozás, klaszterezés, dimenziócsökkentés, zajszűrés.",
+      en: "Given different machine learning tasks (regression, classification, clustering, dimensionality reduction, denoising):"
+    };
+    if (n === 26 || n === 27) return n === 26 ? {
+      hu: "A lineáris regresszió hipotézisfüggvényének geometriai értelmezése egy bemeneti változóval, az x–y síkon.",
+      en: "Geometric interpretation of a linear regression hypothesis with 1 input variable, visualized on a 2D plot with x and y axes."
+    } : {
+      hu: "A lineáris regresszió hipotézisfüggvényének geometriai értelmezése két bemeneti változóval, háromdimenziós ábrán.",
+      en: "Geometric interpretation of a linear regression hypothesis with 2 input variables, visualized on a 3D plot."
+    };
+    if (n === 79 || n === 80) return n === 79 ? {
+      hu: "A számítási gráf egyik csomópontja négyzetre emel: c=b². Adott grad_c=∂J/∂c. A cél a b felé visszaterjesztett gradiens meghatározása.",
+      en: "Given a computational graph for J containing a square node c=b², with grad_c=∂J/∂c. Determine the gradient propagated back to b."
+    } : {
+      hu: "A számítási gráf egyik csomópontja összead: c=a+b. Adott grad_c=∂J/∂c. A cél az a és b felé visszaterjesztett gradiensek meghatározása.",
+      en: "Given a computational graph for J containing an addition node c=a+b, with grad_c=∂J/∂c. Determine the gradients propagated back to a and b."
+    };
     if (n >= 12 && n <= 32) {
       const base = cholesterol;
       if (n >= 15 && n <= 22) return {
