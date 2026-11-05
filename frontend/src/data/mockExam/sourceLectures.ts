@@ -12,8 +12,8 @@ export type SourceExample = {
 
 /** One record for each explicit question in the uploaded Theory test 1 examples,
  * in document order. Numbered "M" for Lectures 1–6 (80) and "N" for NumPy (49).
- * Each source reference is associated with an already-authored bilingual
- * question and a same-topic pool of twelve possible statements.
+ * Historical anchor and pool IDs are retained as provenance metadata. Actual
+ * exam answers are now authored per source question in sourceExactLectures.ts.
  */
 const lectureParagraphs = [9,10,11,12,13,14,15,17,18,19,20,22,23,24,26,27,28,29,30,31,32,33,35,36,37,39,40,42,43,44,45,46,47,48,49,50,51,52,54,55,56,58,59,60,61,62,63,64,65,66,67,69,70,71,72,74,75,76,77,81,82,83,84,85,90,91,92,93,94,95,96,97,98,99,100,102,103,104,106,111];
 
