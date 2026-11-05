@@ -6,17 +6,10 @@ import {
   generateMockExam,
   type ExamChapter
 } from "../data/mockExam";
-import { scoreQuestion } from "../study/scoring";
+import { scoreMockQuestion } from "../study/scoring";
 
 type Props = { language: Language };
 type Answers = Record<string, string[]>;
-
-// An unanswered question is zero, even if one omitted correct option
-// would otherwise qualify for partial credit under the mismatch rule.
-function mockScore(question: Question, selected: string[]): number {
-  return selected.length === 0 ? 0 : scoreQuestion(question, selected);
-}
-
 
 function questionChapter(question: Question): ExamChapter {
   const tag = question.topics.find((topic) => topic.startsWith("mock-") && topic !== "mock-exam");
@@ -31,6 +24,7 @@ export function MockExamView({ language }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [showReview, setShowReview] = useState(false);
+  const [confirmIncomplete, setConfirmIncomplete] = useState(false);
 
   const startExam = () => {
     setExam(generateMockExam(length));
@@ -38,23 +32,25 @@ export function MockExamView({ language }: Props) {
     setCurrentIndex(0);
     setSubmitted(false);
     setShowReview(false);
+    setConfirmIncomplete(false);
   };
 
   const answered = exam.filter((q) => (answers[q.id]?.length ?? 0) > 0).length;
   const total = useMemo(
-    () => exam.reduce((sum, q) => sum + mockScore(q, answers[q.id] ?? []), 0),
+    () => exam.reduce((sum, q) => sum + scoreMockQuestion(q, answers[q.id] ?? []), 0),
     [exam, answers]
   );
   const chapterResults = useMemo(() =>
     examChapters.map((chapter) => {
       const items = exam.filter((q) => questionChapter(q) === chapter);
-      const points = items.reduce((sum, q) => sum + mockScore(q, answers[q.id] ?? []), 0);
+      const points = items.reduce((sum, q) => sum + scoreMockQuestion(q, answers[q.id] ?? []), 0);
       return { chapter, points, count: items.length };
     }).filter((item) => item.count > 0),
   [exam, answers]);
 
   const toggle = (question: Question, id: string) => {
     if (submitted) return;
+    setConfirmIncomplete(false);
     setAnswers((previous) => {
       const selected = previous[question.id] ?? [];
       return {
@@ -67,6 +63,14 @@ export function MockExamView({ language }: Props) {
   };
 
   const isHu = language === "hu";
+
+  const finalize = () => {
+    if (answered < exam.length) {
+      setConfirmIncomplete(true);
+    } else {
+      setSubmitted(true);
+    }
+  };
 
   if (exam.length === 0) {
     return (
@@ -154,7 +158,7 @@ export function MockExamView({ language }: Props) {
           <div className="question-list mock-review">
             {exam.map((question, index) => {
               const chosen = answers[question.id] ?? [];
-              const score = mockScore(question, chosen);
+              const score = scoreMockQuestion(question, chosen);
               return (
                 <article className="question-card" key={question.id}>
                   <div className="question-header">
@@ -223,6 +227,23 @@ export function MockExamView({ language }: Props) {
         ))}
       </div>
 
+      {confirmIncomplete && (
+        <div className="mock-submit-warning" role="alert">
+          <strong>{isHu ? "Nem válaszoltál minden kérdésre." : "Some questions are unanswered."}</strong>
+          <p>{isHu
+            ? `${exam.length - answered} kérdés kimaradt. Ezek 0 pontot érnek. Biztosan szeretnéd leadni a tesztet?`
+            : `${exam.length - answered} questions are blank and will score zero. Submit anyway?`}</p>
+          <div className="mock-submit-warning-actions">
+            <button type="button" className="secondary-button" onClick={() => setConfirmIncomplete(false)}>
+              {isHu ? "Vissza a kérdésekhez" : "Return to questions"}
+            </button>
+            <button type="button" className="primary-button" onClick={() => { setSubmitted(true); setConfirmIncomplete(false); }}>
+              {isHu ? "Igen, leadom" : "Submit anyway"}
+            </button>
+          </div>
+        </div>
+      )}
+
       <article className="question-card">
         <div className="question-header">
           <span>{isHu ? "KÉRDÉS" : "QUESTION"} {currentIndex + 1}</span>
@@ -261,7 +282,7 @@ export function MockExamView({ language }: Props) {
               onClick={() => setCurrentIndex((index) => index + 1)}
             >{isHu ? "Következő" : "Next"}</button>
           ) : (
-            <button type="button" className="primary-button" onClick={() => setSubmitted(true)}>
+            <button type="button" className="primary-button" onClick={finalize}>
               {isHu ? "Teszt leadása és kiértékelés" : "Submit and score"}
             </button>
           )}
@@ -269,7 +290,7 @@ export function MockExamView({ language }: Props) {
       </article>
       {currentIndex !== exam.length - 1 && (
         <div className="mock-finish-early">
-          <button type="button" className="secondary-button" onClick={() => setSubmitted(true)}>
+          <button type="button" className="secondary-button" onClick={finalize}>
             {isHu ? "Teszt leadása" : "Submit exam"} · {answered}/{exam.length}
           </button>
         </div>
