@@ -8,15 +8,17 @@ import { mlpMocks } from "./mlp";
 import { numpyMocks } from "./numpy";
 import { sgdMocks } from "./sgd";
 import { examChapters, type ExamChapter, type MockQuestion } from "./types";
-import { sourceExamples, sourceTopicExamples, sourceMappedMockQuestions } from "./sourceMapped";
+import { sourceExamples, sourceTopicExamples, sourceMappedMockQuestions, supplementaryTopicQuestions } from "./sourceMapped";
 
 export { examChapterNames, examChapters } from "./types";
 export type { ExamChapter } from "./types";
 export { sourceExamples, sourceTopicExamples };
 
 export const mockExamQuestionBank: MockQuestion[] = [
-  // All 129 explicit example subquestions plus four additional topic directives:
+  // The 129 literal document subquestions are selected by default.
+  // The four extra topic directives remain available only as supplementary questions.
   ...sourceMappedMockQuestions,
+  ...supplementaryTopicQuestions,
   ...fundamentalsMocks,
   ...linearMocks,
   ...logisticMocks,
@@ -49,8 +51,8 @@ export function generateMockExam(
   // Strictly source-derived questions are the default. Additional
   // lecture practice templates are opt-in, never silently mixed in.
   const eligible = includeSupplementary ? mockExamQuestionBank : sourceMappedMockQuestions;
-  // Source questions now have individually authored stems and choices.
-  // No deduplication by shared topical anchor is needed.
+  // Source questions have independently authored answer choices. The same
+  // exact source ID cannot be repeated in one exam.
   const byChapter = new Map<ExamChapter, MockQuestion[]>(
     examChapters.map((chapter) => {
       const usedAnchors = new Set<string>();
