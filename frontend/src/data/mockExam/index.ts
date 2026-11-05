@@ -8,14 +8,14 @@ import { mlpMocks } from "./mlp";
 import { numpyMocks } from "./numpy";
 import { sgdMocks } from "./sgd";
 import { examChapters, type ExamChapter, type MockQuestion } from "./types";
-import { sourceExamples, sourceMappedMockQuestions } from "./sourceMapped";
+import { sourceExamples, sourceTopicExamples, sourceMappedMockQuestions } from "./sourceMapped";
 
 export { examChapterNames, examChapters } from "./types";
 export type { ExamChapter } from "./types";
-export { sourceExamples };
+export { sourceExamples, sourceTopicExamples };
 
 export const mockExamQuestionBank: MockQuestion[] = [
-  // Every explicit example subquestion from the supplied Theory Test 1 document:
+  // All 129 explicit example subquestions plus four additional topic directives:
   ...sourceMappedMockQuestions,
   ...fundamentalsMocks,
   ...linearMocks,
