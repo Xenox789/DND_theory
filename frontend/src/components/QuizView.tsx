@@ -144,7 +144,7 @@ export function QuizView({ questions, language }: Props) {
               <h2>{question.prompt[language]}</h2>
 
               <div className="choices">
-                {question.choices.map((choice) => {
+                {question.choices.map((choice, choiceIndex) => {
                   const selected = state.selected.includes(choice.id);
                   const correct = question.correctIds.includes(choice.id);
                   const classNames = [
@@ -162,7 +162,7 @@ export function QuizView({ questions, language }: Props) {
                         disabled={state.checked}
                         onChange={() => toggle(question.id, choice.id)}
                       />
-                      <span className="choice-letter">{choice.id.toUpperCase()}</span>
+                      <span className="choice-letter">{String.fromCharCode(65 + choiceIndex)}</span>
                       <span>{choice.text[language]}</span>
                     </label>
                   );
