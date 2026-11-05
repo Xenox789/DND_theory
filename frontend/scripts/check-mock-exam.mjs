@@ -13,7 +13,7 @@ const output = await build({
 });
 const code = output.outputFiles[0].text;
 const moduleUrl = "data:text/javascript;base64," + Buffer.from(code).toString("base64");
-const { examChapters, sourceExamples, sourceTopicExamples, mockExamQuestionBank, generateMockExam } = await import(moduleUrl);
+const { examChapters, sourceExamples, sourceTopicExamples, mockExamQuestionBank, generateMockExam, verbatimSourceEnglish, originalDocumentContext } = await import(moduleUrl);
 
 const scoringOutput = await build({
   entryPoints: ["src/study/scoring.ts"],
@@ -53,8 +53,49 @@ for (const source of [...sourceExamples, ...sourceTopicExamples]) {
   assert.ok(corresponding, "Unmapped document question " + source.id);
   assert.ok(corresponding.topics.includes("source-paragraph-" + source.documentParagraph));
   assert.ok(corresponding.prompt.hu.includes(source.focusHu));
-  assert.ok(corresponding.prompt.en.includes(source.focusEn));
+  if (source.id.startsWith("T")) {
+    assert.equal(corresponding.prompt.en, source.focusEn,
+      "Supplementary topic prompt must remain clearly distinguished.");
+  } else {
+    assert.equal(corresponding.prompt.en, verbatimSourceEnglish[source.id],
+      "Exact original example question must not be rewritten.");
+  }
 }
+
+// Each literal example must use the original English wording, without
+// inserted/generated new subquestions. Context lives in a separate panel.
+for (const source of sourceExamples) {
+  const question = mockExamQuestionBank.find(q => q.id === "source-" + source.id);
+  assert.ok(question, "Missing source question " + source.id);
+  assert.equal(question.prompt.en, verbatimSourceEnglish[source.id],
+    "Changed official English question wording: " + source.id);
+  assert.equal(question.prompt.hu, source.focusHu,
+    "The Hungarian translation should not include unrelated task text");
+}
+const ex = id => originalDocumentContext(id).en;
+assert.ok(ex("M013").includes("cholesterol") && ex("M014").includes("cholesterol"),
+  "All cholesterol-task subquestions must carry their shared example description");
+assert.ok(ex("M040").includes("100 patients") && ex("M042").includes("100 patients"),
+  "All blood-test-task subquestions must show the same original 100-patient example");
+assert.ok(ex("M060").includes("Multi-Layer Perceptron") && ex("M063").includes("20 input variables"),
+  "All MLP-task subquestions must show the original MLP task and formula");
+assert.ok(ex("N010").includes("(32, 5)") && ex("N018").includes("(32, 5)"),
+  "NumPy subquestions must include their original array shapes");
+assert.ok(ex("N034").includes("np.arange(4)") && /np\.array\(\[3,\s*1,\s*2\]\)/.test(ex("N049")),
+  "NumPy views and numerical function contexts must include the exact input arrays");
+assert.ok(ex("M079").includes("c=b²") && ex("M080").includes("c=a+b"),
+  "Backpropagation questions must display their own computational-graph expressions");
+assert.ok(!ex("M026").includes("cholesterol") && !ex("M027").includes("cholesterol"),
+  "Geometric questions must not incorrectly inherit the 200-patient task");
+const s23 = mockExamQuestionBank.find(q=>q.id==="source-M023");
+const s52 = mockExamQuestionBank.find(q=>q.id==="source-M052");
+const s53 = mockExamQuestionBank.find(q=>q.id==="source-M053");
+assert.ok(s23.correctIds.some(id=>s23.choices.find(c=>c.id===id)?.text.en.includes("scalar parameter")),
+  "Document M023 explicitly asks if theta0 is a scalar or vector");
+assert.ok(s52.correctIds.some(id=>s52.choices.find(c=>c.id===id)?.text.en.includes("single scalar")),
+  "Document M052 explicitly asks if theta0 is a scalar or vector");
+assert.ok(s53.correctIds.some(id=>s53.choices.find(c=>c.id===id)?.text.en.includes("between 0 and 1")),
+  "Document M053 asks about the sigmoid model prediction, not the pre-sigmoid score");
 
 for (const chapter of chapters) {
   assert.ok(mockExamQuestionBank.filter(q => q.chapter === chapter).length >= 3,

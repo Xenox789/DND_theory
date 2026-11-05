@@ -27,8 +27,8 @@ fundamentals~official-q4~mock-fund-3~Milyen alakú a teljes veszteségfüggvény
 fundamentals~official-q5~mock-fund-1~Miben különbözik az RL jutalma a felügyelt tanulási címkétől?~How is reinforcement-learning feedback different from supervised labels?
 fundamentals~official-q6~mock-fund-3~Mely tanulási feladatok felügyeltek, melyek felügyelet nélküliek?~Which tasks are supervised and which are unsupervised?
 fundamentals~q10~mock-fund-3~Mi a regresszió, klaszterezés, osztályozás, zajszűrés és dimenziócsökkentés célja?~Goals of regression, classification, clustering, denoising, dimensionality reduction
-linear~official-q7~mock-linear-1~A lineáris regresszió felügyelt regresszió vagy osztályozás?~Is linear regression supervised regression or classification?
-logistic~official-q8~mock-log-1~A logisztikus regresszió felügyelt osztályozás vagy regresszió?~Is logistic regression supervised classification or regression?
+linear~official-q7~mock-linear-1~A lineáris regresszió regresszióra vagy osztályozásra használható? Felügyelt vagy felügyelet nélküli tanulás?~Is linear regression supervised regression or classification?
+logistic~official-q8~mock-log-1~A logisztikus regresszió regresszióra vagy osztályozásra használható? Felügyelt vagy felügyelet nélküli tanulás?~Is logistic regression supervised classification or regression?
 linear~official-q9~mock-linear-1~Melyik modell illik a 200 beteg koleszterinszintjének becslésére?~Which model predicts cholesterol for 200 patients?
 linear~lr-q1~mock-linear-2~Hány modellparaméter kell négy bemeneti jellemzőhöz bias mellett?~How many parameters for four features with an intercept?
 linear~official-q9~mock-linear-3~Milyen veszteséget használjunk a koleszterinszint becslésére?~Which loss is suitable for cholesterol prediction?
@@ -40,7 +40,7 @@ linear~q5~mock-linear-2~A betegek életkora az X vagy a θ része?~Are patient a
 linear~q7~mock-linear-3~Minimalizáljuk-e a bemeneti X mátrixot tanításkor?~Do we minimize X when training?
 linear~q7~mock-linear-3~A veszteséget vagy a becsléseket minimalizáljuk a tanításban?~Do we minimize the loss or the predictions?
 linear~q8~mock-linear-3~A paraméterek értékét vagy magát a θ vektort minimalizáljuk?~Do we minimize θ or the loss by updating θ?
-linear~official-q11~mock-linear-1~Egy beteg lineáris regressziós becslése skalár vagy vektor?~Is one patient's linear prediction a scalar or vector?
+linear~official-q11~mock-linear-1~A θ₀ eltolás (bias) skalár vagy vektor?~Is one patient's linear prediction a scalar or vector?
 linear~lr-q14~mock-linear-1~Milyen tartományba eshet egy lineáris regresszió skalár becslése?~Range of a scalar linear prediction
 linear~q8~mock-linear-2~Egy beteg életkorát bemenetként vagy modellparaméterként kezeljük?~Is one patient's age a feature or a parameter?
 linear~lr-q2~mock-linear-1~Egy bemeneti változónál milyen geometriai alakú a hipotézis?~Geometry of a single-feature linear hypothesis
@@ -54,7 +54,7 @@ linear~official-q14~mock-linear-3~Mikor igazolható globális optimum lineáris 
 mlp~official-q15~mock-mlp-1~Garantálja-e a kis lépésméret a globális optimumot MLP esetén?~Does a small step guarantee a global optimum for an MLP?
 linear~lr-q10~mock-linear-3~Mire szolgál a jellemzőskálázás?~Purpose of feature scaling
 linear~lr-q10~mock-linear-3~Mi romolhat el, ha nem skálázzuk a bemeneteket?~Consequences of omitting feature scaling
-linear~lr-q13~mock-linear-3~Min-max vagy standardizálás érzékenyebb néhány kiugró értékre?~Min-max vs standardization with a few outliers
+linear~lr-q13~mock-linear-3~Melyik robusztusabb kevés kiugró adatponttal szemben: a min–max skálázás vagy a standardizálás?~Min-max vs standardization with a few outliers
 linear~official-q17~mock-linear-3~Mit jelentenek a skálázási képletek szimbólumai?~Symbols and roles in feature-scaling formulas
 logistic~official-q18~mock-log-1~Melyik regressziót válasszuk beteg/egészséges osztályozásra?~Choosing logistic vs linear regression for disease classification
 logistic~log-q6~mock-log-1~Hány paramétert használ a két laborjellemzős modell bias mellett?~Parameter count for two lab features with intercept
@@ -69,9 +69,9 @@ logistic~log-q11~mock-log-3~Minimalizáljuk-e közvetlenül a g(Xθ) becslésvek
 logistic~log-q11~mock-log-3~A θ értékét minimalizáljuk, vagy a θ-t változtatva a veszteséget?~Do we minimize θ, or loss by changing θ?
 logistic~log-q11~mock-log-2~A g szigmoidfüggvényt minimalizáljuk tanítás közben?~Is the sigmoid function g what we minimize?
 logistic~log-q11~mock-log-3~Mi a logisztikus regresszió tanításának célfüggvénye?~What objective is minimized during logistic training?
-logistic~official-q20~mock-log-1~Egyetlen beteg logisztikus becslése skalár vagy vektor?~Shape of a single-patient logistic prediction
-logistic~log-q2~mock-log-2~Milyen tartományú a szigmoid előtti lineáris pontszám?~Range of the pre-sigmoid linear score
-logistic~log-q2~mock-log-2~Milyen tartományú a szigmoid utáni becslés?~Range of a post-sigmoid prediction
+logistic~official-q20~mock-log-1~A θ₀ eltolás (bias) skalár vagy vektor a logisztikus regresszióban?~Shape of a single-patient logistic prediction
+logistic~log-q2~mock-log-2~Milyen értéktartományba eshet egy beteg ŷ=g(θ₂x₂+θ₁x₁+θ₀) becslése?~Range of the pre-sigmoid linear score
+logistic~log-q2~mock-log-2~Milyen értéktartományba eshet a g(θ₂x₂+θ₁x₁+θ₀) szigmoid kimenete?~Range of a post-sigmoid prediction
 logistic~log-q7~mock-log-1~Egy beteg laboreredménye bemeneti adat vagy tanult súly?~Is a patient's lab result input data or a learned weight?
 linear~lr-q3~mock-linear-3~Az MSE veszteség inkább regresszióhoz vagy osztályozáshoz alkalmas?~Is MSE more suitable for regression or classification?
 linear~lr-q3~mock-linear-3~Mit indexel j a négyzetes veszteség képletében?~What does index j enumerate in the squared loss?
@@ -80,7 +80,7 @@ linear~official-q21~mock-linear-3~Skalár, vektor vagy mátrix a teljes J(θ) ve
 mlp~mlp-q6~mock-mlp-1~Mennyi paraméter van a 20–10–1 MLP egészében?~Total parameter count in a 20–10–1 MLP
 mlp~mlp-q5~mock-mlp-1~Mennyi paraméter van a 20 bemenetű, 10 neuronos első rétegben?~Parameter count in the first 20-to-10 layer
 mlp~mlp-q8~mock-mlp-2~Meg kell-e szüntetni a g₁ rejtett aktivációt regressziónál?~Should the hidden activation g₁ be omitted for regression?
-mlp~mlp-q8~mock-mlp-2~Milyen g₂ kimeneti aktiváció illik folytonos regresszióhoz?~What output activation g₂ suits continuous regression?
+mlp~mlp-q8~mock-mlp-2~Elhagyjuk-e a g₂ kimeneti aktivációfüggvényt a folytonos regresszióban?~What output activation g₂ suits continuous regression?
 mlp~mlp-q8~mock-mlp-2~Kell-e szigmoid a folytonos regressziós kimenetre?~Should a continuous regression output use sigmoid?
 generalization~gen-q4~mock-gen-2~Kevesebb tanítópélda növeli-e a túlillesztést?~Effect of reducing training examples on overfitting
 generalization~gen-q5~mock-gen-2~Kevesebb tesztpélda növeli-e a túlillesztést?~Effect of reducing test examples on overfitting
@@ -93,7 +93,7 @@ generalization~gen-q14~mock-gen-3~A training loss növekedése önmagában early
 generalization~gen-q15~mock-gen-2~A csökkenő train és növekvő validation loss túlillesztésre utal?~Do decreasing train and increasing validation losses indicate overfitting?
 generalization~gen-q11~mock-gen-1~Az SGD a modellparamétereket tanítja?~Does SGD train model parameters?
 generalization~gen-q11~mock-gen-1~Az SGD ugyanúgy tanítja a hiperparamétereket?~Does SGD directly learn hyperparameters?
-sgd~sgd-q3~mock-sgd-1~SGD esetén kötelező-e mindig pontosan egy mintából gradienst számolni?~Must SGD always use one training sample per update?
+sgd~sgd-q3~mock-sgd-1~Az SGD olyan gradienscsökkentés-változat, ahol egy lépésben egy tanítóminta gradiensét számoljuk a teljes batch helyett?~Must SGD always use one training sample per update?
 sgd~sgd-q5~mock-sgd-2~Milyen hatása van a mini-batch méretének növelésének?~Effects of increasing mini-batch size
 sgd~sgd-q4~mock-sgd-2~Milyen hatása van a mini-batch méretének csökkentésének?~Effects of decreasing mini-batch size
 backprop~official-q28~mock-bp-1~Mit terjesztünk vissza a c=b² négyzetes csomóponton?~Backward rule for the square node c=b²
