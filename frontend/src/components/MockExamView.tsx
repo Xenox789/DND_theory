@@ -5,6 +5,7 @@ import {
   examChapters,
   generateMockExam,
   sourceExamples,
+  sourceTopicExamples,
   type ExamChapter
 } from "../data/mockExam";
 import { scoreMockQuestion } from "../study/scoring";
@@ -88,12 +89,12 @@ export function MockExamView({ language }: Props) {
       <section className="mock-setup question-card">
         <div className="question-header">
           <span>{isHu ? "RÖVID PRÓBAVIZSGA" : "SHORT MOCK EXAM"}</span>
-          <span>{isHu ? `${sourceExamples.length} dokumentumbeli kérdés` : `${sourceExamples.length} source questions`}</span>
+          <span>{isHu ? `${sourceExamples.length} kérdés + ${sourceTopicExamples.length} témaváltozat` : `${sourceExamples.length} questions + ${sourceTopicExamples.length} topic variants`}</span>
         </div>
         <h2>{isHu ? "Új, véletlenszerű teszt indítása" : "Start a new randomized exam"}</h2>
         <p>{isHu
-          ? "Alapértelmezés szerint a Theory Test 1 példadokumentumának mind a 129 alkérdéséből válogat a teszt, mind a nyolc témakört lefedve. Minden kérdéshez 12 állításváltozat tartozik, amelyekből véletlenszerűen 3–6 jelenik meg."
-          : "By default, the exam samples from all 129 subquestions mapped to the Theory Test 1 example document, spanning eight chapters. Each question has 12 candidate statements, with 3–6 shown at random."}</p>
+          ? "Alapértelmezés szerint a Theory Test 1 példadokumentumának mind a 129 alkérdéséből és 4 további feladattípusából válogat a teszt, mind a nyolc témakört lefedve. Minden kérdéshez 12 állításváltozat tartozik, amelyekből véletlenszerűen 3–6 jelenik meg."
+          : "By default, the exam samples from all 129 explicit subquestions plus four additional topic directives mapped to the Theory Test 1 examples, spanning eight chapters. Each question has 12 candidate statements, with 3–6 shown at random."}</p>
         <div className="mock-length-options" role="group" aria-label={isHu ? "Kérdések száma" : "Question count"}>
           {([15, 20] as const).map((count) => (
             <button
@@ -276,7 +277,7 @@ export function MockExamView({ language }: Props) {
         <div className="question-header">
           <span>{isHu ? "KÉRDÉS" : "QUESTION"} {currentIndex + 1}</span>
           <span>{examChapterNames[questionChapter(current)][language]}</span>
-          {current.topics.some(topic => /^source-[MN]\d+$/.test(topic)) && (
+          {current.topics.some(topic => /^source-[MNT]\d+$/.test(topic)) && (
             <span className="mock-source-label">
               {isHu ? "Példadokumentum" : "Example document"}
             </span>
