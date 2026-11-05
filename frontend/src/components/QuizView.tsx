@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import type { Language, Question } from "../types";
+import { MockExamView } from "./MockExamView";
+import { scoreQuestion } from "../study/scoring";
 
 type Props = {
   questions: Question[];
@@ -11,30 +13,17 @@ type AnswerState = {
   checked: boolean;
 };
 
-function scoreQuestion(question: Question, selected: string[]) {
-  const correct = new Set(question.correctIds);
-  const chosen = new Set(selected);
-  const allIds = new Set([...correct, ...chosen]);
-
-  let mistakes = 0;
-  for (const id of allIds) {
-    if (correct.has(id) !== chosen.has(id)) mistakes += 1;
-  }
-
-  if (mistakes === 0) return 1;
-  if (mistakes === 1) return 0.5;
-  return 0;
-}
-
 export function QuizView({ questions, language }: Props) {
   const [answers, setAnswers] = useState<Record<string, AnswerState>>({});
-  const [mode, setMode] = useState<"official" | "extended">("official");
+  const [mode, setMode] = useState<"mock" | "official" | "extended">("mock");
 
   const visibleQuestions = useMemo(
     () =>
       mode === "official"
         ? questions.filter((question) => question.topics.includes("official-example"))
-        : questions,
+        : mode === "extended"
+          ? questions
+          : [],
     [mode, questions]
   );
 
@@ -78,21 +67,34 @@ export function QuizView({ questions, language }: Props) {
           <h1>{language === "hu" ? "Gyakorló teszt" : "Practice Test"}</h1>
           <p>
             {language === "hu"
-              ? mode === "official"
-                ? "Vizsgaközeli gyakorlás a hivatalos példatémák alapján készített kérdésekkel (nem eredeti vizsgakérdések). Több helyes válasz lehet; egyetlen eltérés fél pont."
-                : "Bővített gyakorlás: a teljes kérdésbank. Több helyes válasz is lehet; pontosan egy eltérés fél pont."
-              : mode === "official"
-                ? "Exam-style practice with questions written from official example topics (not actual exam questions). Multiple answers may be correct; one mismatch gives half credit."
-                : "Extended practice: the full question bank. Multiple answers may be correct; exactly one mismatch gives half credit."}
+              ? mode === "mock"
+                ? "Rövid, véletlenszerű próbavizsga 15 vagy 20 kérdéssel, minden fő témakörből. A válaszlehetőségek is változnak."
+                : mode === "official"
+                  ? "Vizsgaközeli gyakorlás a hivatalos példatémák alapján készített kérdésekkel (nem eredeti vizsgakérdések). Több helyes válasz lehet; egyetlen eltérés fél pont."
+                  : "Bővített gyakorlás: a teljes kérdésbank. Több helyes válasz is lehet; pontosan egy eltérés fél pont."
+              : mode === "mock"
+                ? "A short randomized 15- or 20-question mock exam covering all main chapters, with changing answer choices."
+                : mode === "official"
+                  ? "Exam-style practice with questions written from official example topics (not actual exam questions). Multiple answers may be correct; one mismatch gives half credit."
+                  : "Extended practice: the full question bank. Multiple answers may be correct; exactly one mismatch gives half credit."}
           </p>
         </div>
-        <div className="score-box">
-          <strong>{totalScore.toFixed(1)} / {visibleQuestions.length}</strong>
-          <span>{checkedCount}/{visibleQuestions.length} {language === "hu" ? "ellenőrizve" : "checked"}</span>
-        </div>
+        {mode !== "mock" && (
+          <div className="score-box">
+            <strong>{totalScore.toFixed(1)} / {visibleQuestions.length}</strong>
+            <span>{checkedCount}/{visibleQuestions.length} {language === "hu" ? "ellenőrizve" : "checked"}</span>
+          </div>
+        )}
       </div>
 
       <div className="quiz-mode-switch">
+        <button
+          className={mode === "mock" ? "active" : ""}
+          onClick={() => { setMode("mock"); setAnswers({}); }}
+        >
+          <strong>{language === "hu" ? "Rövid próbavizsga" : "Short mock exam"}</strong>
+          <span>{language === "hu" ? "15 vagy 20 random kérdés • 8 témakör" : "15 or 20 random questions • 8 chapters"}</span>
+        </button>
         <button
           className={mode === "official" ? "active" : ""}
           onClick={() => {
@@ -115,6 +117,10 @@ export function QuizView({ questions, language }: Props) {
         </button>
       </div>
 
+      {mode === "mock" ? (
+        <MockExamView language={language} />
+      ) : (
+        <>
       <div className="question-list">
         {visibleQuestions.map((question, index) => {
           const state = answers[question.id] ?? { selected: [], checked: false };
@@ -181,6 +187,8 @@ export function QuizView({ questions, language }: Props) {
       <button className="secondary-button" onClick={reset}>
         {language === "hu" ? "Teszt újrakezdése" : "Restart test"}
       </button>
+        </>
+      )}
     </div>
   );
 }
