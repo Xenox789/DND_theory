@@ -3,7 +3,7 @@
 **Repo:** Xenox789/DND_theory • **alap:** main a98dd33a • **audit:** csak dokumentáció, nincs kérdésbank-módosítás.
 
 ## 1. Vizsgálat célja
-A gyakorlókérdések és a rövid próbavizsga forrásközelségét, helyességét, a magyar szaknyelvet és a helyes/hibás válaszok elkülöníthetőségét vizsgáltam. Forrás: `theory_test1_examples_26autumn.docx` és a kurzus 1–6. előadásai, illetve NumPy hetek 3–6. A példadokumentum **nem feleletválasztós eredeti vizsgakérdéseket**, hanem példatémákat és feladatokat tartalmaz. A listát maga a dokumentum is *nem teljesnek* nevezi.
+A gyakorlókérdések és a rövid próbavizsga forrásközelségét, helyességét, a magyar szaknyelvet és a helyes/hibás válaszok elkülöníthetőségét vizsgáltam. Elsődleges közvetlenül összevetett forrás: `theory_test1_examples_26autumn.docx`. A kérdések további hivatkozásai a kurzus 1–6. előadásaira, valamint a NumPy 3–6. heti anyagaira utalnak; a teljes előadásszöveg minden állítással való független összevetése **nem** történt meg ebben az auditban. A példadokumentum **nem feleletválasztós eredeti vizsgakérdéseket**, hanem példatémákat és feladatokat tartalmaz. A listát maga a dokumentum is *nem teljesnek* nevezi.
 
 ## 2. Eredmény számokban
 | Mutató | Érték | Értelmezés |
