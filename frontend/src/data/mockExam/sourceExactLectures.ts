@@ -95,10 +95,10 @@ add("M022 M049",p("θ-t változtatjuk, de nem magának a θ vektornak az érték
  [p("A paramétervektor elemeinek összegét minimalizáljuk, függetlenül a hibától.","We minimize the sum of parameters regardless of error."),
   p("A θ értékét nullázzuk, mert csak így csökken a veszteség.","We set θ to zero because this alone minimizes loss."),
   p("A tanítás az X-szel együtt θ-t is változatlanul hagyja.","Training leaves θ unchanged together with X.")]);
-add("M023",p("Egy beteg egyetlen koleszterinbecslése skalár.","One patient's single cholesterol prediction is a scalar."),
- [p("Egy beteg becslése (200,) vektor, mert 200 tanítópélda van.","One prediction is a (200,) vector because training has 200 patients."),
-  p("A becslés ötelemű vektor, mert öt paraméter van.","The prediction is a five-element vector because there are five parameters."),
-  p("Egy beteg becslése (200,5) mátrix.","One patient's prediction is a (200,5) matrix.")]);
+add("M023",p("A θ₀ eltolás (bias) egy skalár paraméter.","The intercept θ₀ is a scalar parameter."),
+ [p("A θ₀ az összes 200 betegre vonatkozó (200,) vektor.","θ₀ is a (200,) vector for all 200 patients."),
+  p("A θ₀ egy ötelemű súlyvektor, mert négy jellemzőnk és biasunk van.","θ₀ is a five-element weight vector because there are four features and a bias."),
+  p("A θ₀ az X mátrix teljes biasoszlopa, nem külön modellparaméter.","θ₀ is the entire intercept column of X, not a separate model parameter.")]);
 add("M026",p("Egyenes egy 2D koordinátarendszerben.","A line in a two-dimensional plot."),
  [p("Sík egy 2D koordinátarendszerben.","A plane in a 2D plot."),
   p("Parabola, mert bias is szerepel.","A parabola because the intercept is included."),
@@ -173,14 +173,14 @@ add("M051",p("A J(θ) veszteség, bináris osztályozásnál gyakran BCE.","Loss
  [p("A g szigmoid függvény meredeksége az összes z-re összegezve.","The sigmoid function's slope summed over all z."),
   p("A paraméterek számát jelölő 3-as egész érték.","The integer 3 representing parameter count."),
   p("A laborjellemzőkből álló X adatmátrix.","Input matrix X of lab values.")]);
-add("M052",p("Egy beteghez egy skalár osztályvalószínűség tartozik.","One patient receives one scalar class probability."),
- [p("Minden beteghez háromdimenziós kimeneti vektor tartozik θ miatt.","Each patient has a three-element prediction because θ has length three."),
-  p("Egy beteg kimenete a 100 elemű teljes y címkevektor.","One patient's output is the entire 100-element y vector."),
-  p("Egyetlen beteg becslése (100,3) mátrix.","A single-patient output is a (100,3) matrix.")]);
-add("M053",p("A szigmoid előtti lineáris z pontszám tetszőleges valós szám lehet.","The pre-sigmoid score z can be any real number."),
- [p("z csak a (0,1) tartományban lehet.","z must be in (0,1)."),
-  p("z csak 0 és 1 egész szám lehet.","z must be exactly 0 or 1."),
-  p("z csak nemnegatív lehet a sigmoid miatt.","z cannot be negative because sigmoid is used.")]);
+add("M052",p("A θ₀ bias egyetlen skalár, nem betegszámú vektor.","The intercept θ₀ is a single scalar, not a vector indexed by patient."),
+ [p("A θ₀ háromelemű vektor, mert a modellnek három paramétere van.","θ₀ is a three-element vector because the model has three parameters."),
+  p("A θ₀ egy 100 elemű vektor, mert 100 betegen tanítunk.","θ₀ is a 100-element vector because there are 100 patients."),
+  p("A θ₀ a teljes (100,3) bemeneti mátrix egyik tanítóadat-oszlopa.","θ₀ is a column of the entire (100,3) training matrix.")]);
+add("M053",p("A logisztikus modell egy beteghez tartozó ŷ=g(z) becslése 0 és 1 közötti.","The prediction ŷ=g(z) for one patient lies strictly between 0 and 1."),
+ [p("Az ŷ a szigmoid előtti z értékkel egyezik meg, ezért korlátlan valós.","ŷ is the pre-sigmoid z value and may therefore be any real number."),
+  p("Az ŷ csak 0 vagy 1 lehet, mert a valódi y címke bináris.","ŷ can only equal exactly 0 or 1 because the true target y is binary."),
+  p("Az ŷ értéke negatív lehet, ha a szigmoid bemenete z negatív.","ŷ can be negative when the pre-sigmoid z is negative.")]);
 add("M056",p("Az MSE elsősorban folytonos regressziós célértékekhez illik.","MSE is primarily suited to continuous regression targets."),
  [p("Az MSE-t kifejezetten többosztályos softmax-logitokra tervezték.","MSE is specifically designed for multiclass softmax logits."),
   p("Az MSE a bináris keresztentrópia másik neve.","MSE is another name for binary cross-entropy."),
@@ -199,11 +199,11 @@ add("M062",p("Nem: a rejtett g₁ aktiváció szükséges lehet a nemlineáris l
  [p("Igen: minden regressziós hálózatban minden aktivációt el kell hagyni.","Yes: every regression network must omit every activation."),
   p("Igen: g₁ a true labelt helyettesíti, ezért regresszióban nem használható.","Yes: g₁ replaces the target label so it cannot be used in regression."),
   p("Nem: g₁ aktiváció csak softmax lehet.","No: g₁ must be softmax.")]);
-add("M063",p("Folytonos, nem korlátozott kimenethez gyakran identitás (lineáris) g₂ aktiváció illik.","For an unrestricted continuous output, identity (linear) g₂ is often appropriate."),
+add("M063",p("Igen: folytonos regressziónál a g₂ elhagyható (identitásfüggvény), ha korlátlan kimenetet akarunk.","Yes: g₂ can be omitted (identity output) for regression with an unrestricted continuous target."),
  [p("A g₂ kötelezően softmax, mert egyetlen kimenet van.","g₂ must be softmax because there is one output."),
   p("A g₂ kötelezően sigmoid, mert az MSE csak 0–1 között értelmezhető.","g₂ must be sigmoid because MSE only works in 0–1."),
   p("A g₂ kötelezően argmax, mert egyetlen szám a cél.","g₂ must be argmax because the target is a single number.")]);
-add("M064",p("Nem: a sigmoid csak 0–1 közötti becslést ad, a folytonos koleszterinértékhez ez általában nem megfelelő.","No: sigmoid restricts predictions to (0,1), usually inappropriate for unconstrained cholesterol values."),
+add("M064",p("Nem: a sigmoid 0–1 közé korlátozza a kimenetet, ami a példában szereplő korlátlan, folytonos regressziós célhoz általában nem megfelelő.","No: sigmoid confines output to (0,1), generally unsuitable for the example's unrestricted continuous regression target."),
  [p("Igen: a sigmoid önmagában garantálja a tetszőleges koleszterinszint becslését.","Yes: sigmoid itself permits arbitrary cholesterol levels."),
   p("Igen: az MSE kimeneti aktivációja mindig sigmoid.","Yes: MSE always requires sigmoid output."),
   p("Igen: a tíz rejtett neuron miatt a kimenet 0–1 tartományú.","Yes: ten hidden neurons force the output into (0,1).")]);
