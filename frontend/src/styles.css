@@ -2683,6 +2683,10 @@ main { min-width: 0; }
 .mock-question-layout > .question-card {
   min-width: 0;
 }
+/* Standalone source questions have no parent task and use full width. */
+.mock-question-layout > .question-card:only-child {
+  grid-column: 1 / -1;
+}
 .mock-source-task {
   border: 1px solid #335477;
   border-radius: 16px;
