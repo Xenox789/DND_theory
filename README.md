@@ -179,3 +179,17 @@ The review scheduler is intentionally simple and adaptive. Its intervals are a s
 - Exam-style questions based on official topics are clearly identified as **practice questions**, not originals from an actual examination.
 - CI now checks source-to-checkpoint mapping, pedagogical enrichment coverage, learning flow, plot consistency and TypeScript build.
 - Note: "Mastered" is a learning-app indicator, not a guarantee of exam performance. Worked examples may extend beyond the official exam's exact wording to make the underlying concepts clear.
+
+## Short randomized mock exams
+
+The **Test → Short mock exam** mode creates a fresh 15- or 20-question exercise.
+
+- Every test covers all eight main chapters. A 15-question test covers seven chapters twice and one chapter once; a 20-question test includes 2–3 questions from each chapter.
+- There is a separate, carefully authored set of **24 mock question templates**, each containing **12 bilingual answer statements** (6 true and 6 false).
+- A test shows a random **3–6 answer options per question** in randomized order, with at least one correct and at least one incorrect statement.
+- Each new attempt randomizes both the selected prompts and their answer alternatives. The mock pool is independent of the original 193-question practice bank.
+- Students answer one question at a time, can navigate backwards and edit previous selections; answers are not revealed until submission.
+- Full score for all true and no false selections, half score for exactly one mistake, zero otherwise. **Unanswered mock questions count as zero.**
+- At the end, the dashboard shows a score, eight topic subtotals and a detailed review with the correct and selected answers.
+- The original **Exam-close** and **Extended practice** tabs remain accessible.
+- Automated tests generate and validate 500 seeded samples to check topic coverage, uniqueness and correctness of sampled options.

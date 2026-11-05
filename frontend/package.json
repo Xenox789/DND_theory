@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run check:plots && npm run check:pedagogy && npm run check:learning && npm run check:enrichment && tsc --noEmit && vite build",
+    "build": "npm run check:plots && npm run check:pedagogy && npm run check:learning && npm run check:enrichment && npm run check:mock && tsc --noEmit && vite build",
     "preview": "vite preview",
     "check:plots": "node scripts/check-plot-consistency.mjs",
     "check:pedagogy": "node scripts/check-pedagogy-consistency.mjs",
     "check:learning": "node scripts/check-learning-flow.mjs",
-    "check:enrichment": "node scripts/check-enrichment-consistency.mjs"
+    "check:enrichment": "node scripts/check-enrichment-consistency.mjs",
+    "check:mock": "node scripts/check-mock-exam.mjs"
   },
   "dependencies": {
     "plotly.js-dist-min": "^2.35.2",
@@ -25,6 +26,7 @@
     "@vitejs/plugin-react": "^4.3.2",
     "typescript": "^5.6.2",
     "vite": "^5.4.8",
-    "@types/react-plotly.js": "^2.6.3"
+    "@types/react-plotly.js": "^2.6.3",
+    "esbuild": "^0.24.0"
   }
 }
