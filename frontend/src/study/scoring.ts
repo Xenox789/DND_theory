@@ -17,3 +17,10 @@ export function scoreQuestion(question: Question, selected: string[]): number {
   if (mistakes === 1) return 0.5;
   return 0;
 }
+
+/** Blank submissions in a mock exam score zero, even with one omitted
+ * true answer (where the ordinary mismatch rule would yield 0.5).
+ */
+export function scoreMockQuestion(question: Question, selected: string[]): number {
+  return selected.length === 0 ? 0 : scoreQuestion(question, selected);
+}
