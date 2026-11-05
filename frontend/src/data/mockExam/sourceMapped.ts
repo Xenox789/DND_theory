@@ -13,6 +13,7 @@ import {
   numpyMocks
 } from "./topicPools";
 import type { MockQuestion } from "./types";
+import { focusedSourcePools } from "./focusedPools";
 
 export const sourceExamples: SourceExample[] = [...lectureSourceExamples, ...numpySourceExamples];
 
@@ -29,7 +30,8 @@ const topicPools = new Map([
   ...mlpMocks,
   ...sgdMocks,
   ...backpropMocks,
-  ...numpyMocks
+  ...numpyMocks,
+  ...focusedSourcePools
 ].map(q => [q.id, q]));
 
 function sixUnique(
