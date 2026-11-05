@@ -85,6 +85,14 @@ for (const count of [15, 20]) {
     };
     const exam = generateMockExam(count, random);
     assert.equal(exam.length, count);
+    assert.ok(exam.every(q => q.id.startsWith("source-")),
+      "By default short exams must exclusively use the 129 explicitly documented examples.");
+    if (seed <= 12) {
+      const mixedExam = generateMockExam(count, random, true);
+      assert.equal(mixedExam.length, count, "Supplementary opt-in must preserve exam length");
+      assert.ok(mixedExam.every(q => mockExamQuestionBank.some(pool => pool.id === q.id)),
+        "Supplementary mode must only use questions from the reviewed bank");
+    }
     assert.equal(new Set(exam.map(q => q.id)).size, count, "Repeated question in one exam");
     const sourceAnchors = exam.flatMap(q => q.topics.filter(t => t.startsWith("source-anchor-")));
     assert.equal(new Set(sourceAnchors).size, sourceAnchors.length, "A single exam must not repeat a source anchor");
