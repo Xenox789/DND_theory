@@ -13,7 +13,7 @@ const output = await build({
 });
 const code = output.outputFiles[0].text;
 const moduleUrl = "data:text/javascript;base64," + Buffer.from(code).toString("base64");
-const { examChapters, sourceExamples, mockExamQuestionBank, generateMockExam } = await import(moduleUrl);
+const { examChapters, sourceExamples, sourceTopicExamples, mockExamQuestionBank, generateMockExam } = await import(moduleUrl);
 
 const scoringOutput = await build({
   entryPoints: ["src/study/scoring.ts"],
@@ -45,9 +45,10 @@ assert.equal(sourceExamples.length, 129, "All 80 lecture and 49 NumPy example su
 assert.equal(sourceExamples.filter(s => s.id.startsWith("M")).length, 80);
 assert.equal(sourceExamples.filter(s => s.id.startsWith("N")).length, 49);
 assert.equal(new Set(sourceExamples.map(s => s.documentParagraph)).size, 129);
-assert.equal(mockExamQuestionBank.length, 153, "129 source subquestions plus 24 topical templates required");
-assert.equal(new Set(mockExamQuestionBank.map(q => q.id)).size, 153, "Question IDs must be unique");
-for (const source of sourceExamples) {
+assert.equal(sourceTopicExamples.length, 4, "Must cover all four additional example-topic instructions");
+assert.equal(mockExamQuestionBank.length, 157, "129 source subquestions, 4 document topic directives and 24 supplementary templates required");
+assert.equal(new Set(mockExamQuestionBank.map(q => q.id)).size, 157, "Question IDs must be unique");
+for (const source of [...sourceExamples, ...sourceTopicExamples]) {
   const corresponding = mockExamQuestionBank.find(q => q.id === "source-" + source.id);
   assert.ok(corresponding, "Unmapped document question " + source.id);
   assert.ok(corresponding.topics.includes("source-paragraph-" + source.documentParagraph));
@@ -86,7 +87,7 @@ for (const count of [15, 20]) {
     const exam = generateMockExam(count, random);
     assert.equal(exam.length, count);
     assert.ok(exam.every(q => q.id.startsWith("source-")),
-      "By default short exams must exclusively use the 129 explicitly documented examples.");
+      "By default short exams must exclusively use documented example questions and topic directives.");
     if (seed <= 12) {
       const mixedExam = generateMockExam(count, random, true);
       assert.equal(mixedExam.length, count, "Supplementary opt-in must preserve exam length");
@@ -128,4 +129,4 @@ for (const count of [15, 20]) {
   }
 }
 assert.ok(signatures.size > 100, "Generated test variants should differ meaningfully");
-console.log("Mock exam checks passed: 129 directly mapped document subquestions + 24 supplementary templates; 12 variants each; 500 balanced trials.");
+console.log("Mock exam checks passed: 129 explicit examples, four source-topic directives and 24 optional supplementary templates; 12 variants each; 500 balanced trials.");
