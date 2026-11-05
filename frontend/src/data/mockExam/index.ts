@@ -13,6 +13,8 @@ import { sourceExamples, sourceTopicExamples, sourceMappedMockQuestions, supplem
 export { examChapterNames, examChapters } from "./types";
 export type { ExamChapter } from "./types";
 export { sourceExamples, sourceTopicExamples };
+export { verbatimSourceEnglish } from "./verbatimSource";
+export { originalDocumentContext } from "./sourceContext";
 
 export const mockExamQuestionBank: MockQuestion[] = [
   // The 129 literal document subquestions are selected by default.
