@@ -17,6 +17,36 @@ import { focusedSourcePools } from "./focusedPools";
 
 export const sourceExamples: SourceExample[] = [...lectureSourceExamples, ...numpySourceExamples];
 
+/** In addition to the 129 explicit questions, the document instructs
+ * preparation of analogous questions about other losses, binary/multiclass
+ * MLP output layers and activation-function characteristics. */
+export const sourceTopicExamples: SourceExample[] = [
+  {
+    id: "T001", documentParagraph: 78, chapter: "logistic",
+    anchorId: "log-q8", variationPoolId: "mock-log-3",
+    focusHu: "Hasonló kérdések más veszteségfüggvényekkel, például a BCE-vel",
+    focusEn: "Analogous questions for other losses, such as BCE"
+  },
+  {
+    id: "T002", documentParagraph: 86, chapter: "mlp",
+    anchorId: "mlp-q13", variationPoolId: "mock-mlp-2",
+    focusHu: "MLP-kimenet és veszteség bináris osztályozási feladatban",
+    focusEn: "MLP outputs and losses for binary classification"
+  },
+  {
+    id: "T003", documentParagraph: 87, chapter: "mlp",
+    anchorId: "mlp-q14", variationPoolId: "mock-mlp-3",
+    focusHu: "MLP-kimenet és veszteség többosztályos osztályozásban",
+    focusEn: "MLP outputs and losses for multiclass classification"
+  },
+  {
+    id: "T004", documentParagraph: 88, chapter: "mlp",
+    anchorId: "mlp-q10", variationPoolId: "mock-mlp-2",
+    focusHu: "Aktivációfüggvények felismerése és kimeneti tartományuk",
+    focusEn: "Recognition and output ranges of activation functions"
+  }
+];
+
 /** This manifest is a direct trace from the 129 question-marked paragraphs
  * in the user-supplied example file to reviewed question content.
  * Source "M" = Lectures 1–6; "N" = NumPy.
@@ -105,4 +135,4 @@ function asMockQuestion(source: SourceExample): MockQuestion {
   };
 }
 
-export const sourceMappedMockQuestions: MockQuestion[] = sourceExamples.map(asMockQuestion);
+export const sourceMappedMockQuestions: MockQuestion[] = [...sourceExamples, ...sourceTopicExamples].map(asMockQuestion);
