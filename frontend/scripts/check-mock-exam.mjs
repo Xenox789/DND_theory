@@ -87,9 +87,11 @@ for (const question of mockExamQuestionBank) {
     assert.ok(question.choices.some(c => c.id === id), "Correct ID missing from options: " + question.id);
   }
 }
+assert.ok(mockExamQuestionBank.some(q => q.id.startsWith("source-") && q.correctIds.length >= 2),
+  "Official multi-select format needs at least some questions with multiple true options");
 const m040 = mockExamQuestionBank.find(q => q.id === "source-M040");
 assert.ok(m040, "Missing logistic parameter count example");
-assert.ok(m040.correctIds.length === 1 &&
+assert.ok(m040.correctIds.length >= 1 &&
   m040.choices.find(c => c.id === m040.correctIds[0])?.text.en.includes("Three parameters"),
   "The 100-patient example must answer PARAMETER COUNT as three parameters");
 assert.ok(m040.choices.every(c => !/gradient|∇|∂J/.test(c.text.en)),
