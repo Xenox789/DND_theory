@@ -5,8 +5,8 @@
 ## Kérdésbank működése
 
 - **129 dokumentumbeli kérdés:** 80 az 1–6. előadásokból és 49 a NumPy-példákból.
-- A rövid, 15/20 kérdéses próbavizsga **alapértelmezésben kizárólag ezt a 129 tételt** használja.
-- A további 24 előadásalapú sablon csak külön bekapcsolva kerül a mintavételbe.
+- A rövid, 15/20 kérdéses próbavizsga **alapértelmezésben ezt a 129 konkrét tételt és a dokumentum további négy kapcsolódó témakijelölését** használja (133 forrásalapú sablon).
+- A további 24 előadásalapú sablon csak külön bekapcsolva kerül a mintavételbe. Így összesen **157 választható sablon** érhető el, ha a kiegészítéseket is kéred.
 - Minden forrástételhez 12, kétnyelvű állításváltozat társul a releváns, meglévő kérdés és egy azonos témakörű, lektorált állításbank kombinációjából (6 igaz, 6 hamis). Ezek **nem 129 külön, a semmiből megírt válaszbank**: több kapcsolódó alkérdés azonos témaköri tényekre is támaszkodhat.
 - Egy teszt 3–6 véletlenszerű válaszlehetőséget mutat, és biztosít legalább egy igaz és egy hamis választ.
 - A kérdésekhez `source-M...` / `source-N...` azonosítók és a DOCX bekezdésindexe kapcsolódik. Hasonló, ugyanarra a meglévő kérdésre épülő alkérdések egy próbavizsgán belül nem ismétlődnek.
@@ -25,6 +25,19 @@
 | Backpropagation | 2 |
 | NumPy | 49 |
 | **Összesen** | **129** |
+
+## További négy, a dokumentumban említett példatípus
+
+Ezek önálló kérdő mondat helyett zárójeles feladattípus-megjelölésként szerepelnek, mégis részét képezik az alapértelmezett tesztnek:
+
+| Kód | DOCX bekezdésindexe | Feladattípus |
+|---|---:|---|
+| `T001` | 78 | További veszteségfüggvényekre vonatkozó hasonló feladatok |
+| `T002` | 86 | Bináris osztályozó MLP kimeneti aktivációja |
+| `T003` | 87 | Többosztályos MLP kimenete és vesztesége |
+| `T004` | 88 | Aktivációfüggvények jellegzetességei és kimeneti tartományai |
+
+**Megjegyzés:** a T004 jelenleg szöveges aktiváció-felismerést kérdez; önálló, kép/grafikon alapú felismerő feladatot ez a fejlesztés nem készít.
 
 ## A 129 kérdés tételes forrásleképezése
 
@@ -112,55 +125,55 @@ A `documentParagraph` a DOCX `python-docx` által számolt, **0-alapú bekezdés
 | `M078` | 104 | SGD | Milyen hatása van a mini-batch méretének csökkentésének? | `sgd-q4` | `mock-sgd-2` |
 | `M079` | 106 | Backpropagation | Mit terjesztünk vissza a c=b² négyzetes csomóponton? | `official-q28` | `mock-bp-1` |
 | `M080` | 111 | Backpropagation | Mit terjesztünk vissza a c=a+b összeadó csomóponton? | `official-q29` | `mock-bp-1` |
-| `N001` | 121 | NumPy | Lehet-e egy ndarray shape értéke (5,6)? | `np-q31` | `mock-np-1` |
-| `N002` | 122 | NumPy | Lehet-e egy ndarray shape értéke (1,)? | `np-q31` | `mock-np-1` |
-| `N003` | 123 | NumPy | Lehet-e egy ndarray shape értéke (0,1,0)? | `np-q31` | `mock-np-1` |
-| `N004` | 124 | NumPy | Lehet-e az ndarray.shape értéke a 12 egész szám? | `np-q32` | `mock-np-1` |
-| `N005` | 125 | NumPy | Lehet-e az ndarray.dtype értéke a (5,6) tuple? | `np-q32` | `mock-np-1` |
-| `N006` | 126 | NumPy | Lehet-e az ndarray.size értéke a (5,6) tuple? | `np-q32` | `mock-np-1` |
-| `N007` | 127 | NumPy | Lehet-e az ndarray.size értéke 12? | `np-q32` | `mock-np-1` |
-| `N008` | 128 | NumPy | Lehet-e az ndarray.ndim értéke a (5,6) tuple? | `np-q32` | `mock-np-1` |
-| `N009` | 130 | NumPy | Milyen az alakja a shape=(32,5) tömb a[:,:] szeletének? | `np-q33` | `mock-np-1` |
-| `N010` | 131 | NumPy | Milyen az alakja a shape=(32,5) tömb a[:,1] szeletének? | `np-q33` | `mock-np-1` |
-| `N011` | 132 | NumPy | Milyen az alakja a shape=(32,5) tömb a[1,:] szeletének? | `np-q33` | `mock-np-1` |
-| `N012` | 133 | NumPy | Milyen az alakja a shape=(32,5) tömb a[1:,:] szeletének? | `np-q33` | `mock-np-1` |
-| `N013` | 134 | NumPy | Milyen az alakja a shape=(32,5) tömb a[0,:-1] részének? | `np-q34` | `mock-np-1` |
-| `N014` | 135 | NumPy | Milyen az alakja a shape=(32,5) tömb a[[0],:] részének? | `np-q34` | `mock-np-1` |
-| `N015` | 136 | NumPy | Milyen az alakja a shape=(32,5) tömb a[[-1,-1],-1] részének? | `np-q34` | `mock-np-1` |
-| `N016` | 138 | NumPy | Broadcasting hibát okoz-e az (32,5) és (32,) alakú tömbök összeadása? | `np-q35` | `mock-np-2` |
-| `N017` | 139 | NumPy | Broadcasting hibát okoz-e a (32,5) és (32,1) alakok összeadása? | `np-q35` | `mock-np-2` |
-| `N018` | 140 | NumPy | Broadcasting hibát okoz-e a (32,5) és (1,32) alakok összeadása? | `np-q35` | `mock-np-2` |
-| `N019` | 141 | NumPy | Broadcasting hibát okoz-e a (32,5) alakú tömb és skalár összeadása? | `np-q35` | `mock-np-2` |
-| `N020` | 143 | NumPy | Milyen alakú az a<0 logikai tömb, ha a.shape=(32,5)? | `np-q36` | `mock-np-2` |
-| `N021` | 144 | NumPy | Milyen az a.T alakja, ha a.shape=(32,5)? | `np-q36` | `mock-np-2` |
-| `N022` | 145 | NumPy | Milyen alakú a.T.T, ha a.shape=(32,5)? | `np-q36` | `mock-np-2` |
-| `N023` | 146 | NumPy | Milyen alakú a+a, ha a.shape=(32,5)? | `np-q36` | `mock-np-2` |
-| `N024` | 147 | NumPy | Milyen alakú a+a[:,None,:], ha a.shape=(32,5)? | `np-q37` | `mock-np-2` |
-| `N025` | 148 | NumPy | Milyen alakú np.mean(a,axis=0) (32,5) bemenettel? | `np-q38` | `mock-np-2` |
-| `N026` | 149 | NumPy | Milyen alakú np.mean(a,axis=1) (32,5) bemenettel? | `np-q38` | `mock-np-2` |
-| `N027` | 150 | NumPy | ndarray lesz-e np.sum(a,axis=0) eredménye (32,5) bemenetre? | `np-q39` | `mock-np-2` |
-| `N028` | 151 | NumPy | ndarray lesz-e np.sum(a) eredménye (32,5) bemenetre? | `np-q39` | `mock-np-2` |
-| `N029` | 154 | NumPy | Milyen az np.arange(4).reshape(2,-1) tömb alakja? | `np-q40` | `mock-np-1` |
-| `N030` | 155 | NumPy | Milyen az a*2+1 alakja, ha a=np.arange(4).reshape(2,-1)? | `np-q41` | `mock-np-1` |
-| `N031` | 156 | NumPy | Milyen az a[a>0] alakja, ha a=np.arange(4).reshape(2,-1)? | `np-q42` | `mock-np-1` |
-| `N032` | 157 | NumPy | Milyen az a[(a>0)&(a%2==0)] alakja? | `np-q43` | `mock-np-1` |
-| `N033` | 158 | NumPy | Milyen az a*a.reshape(2,2,-1) alakja 4 elemnél? | `np-q44` | `mock-np-2` |
-| `N034` | 160 | NumPy | Módosul-e a forrás, ha reshape nézeten keresztül írunk? | `np-q45` | `mock-np-3` |
-| `N035` | 161 | NumPy | Módosul-e a forrás az egydimenziós .T nézetén keresztül írva? | `np-q46` | `mock-np-3` |
-| `N036` | 162 | NumPy | Módosul-e a forrás a np.append eredményének módosításától? | `np-q47` | `mock-np-3` |
-| `N037` | 163 | NumPy | Módosul-e a forrás egyszerű a[1:2] szelet írásakor? | `np-q48` | `mock-np-3` |
-| `N038` | 164 | NumPy | Módosul-e a forrás a[[1,2]] haladó indexelésből kapott tömb írásakor? | `np-q49` | `mock-np-3` |
-| `N039` | 165 | NumPy | Módosul-e a forrás a[a<2] logikai maszkos kiválasztásból íráskor? | `np-q50` | `mock-np-3` |
-| `N040` | 166 | NumPy | Módosul-e a forrás az a+a eredménytömb írásakor? | `np-q51` | `mock-np-3` |
-| `N041` | 169 | NumPy | Mennyi np.count_nonzero(a==0) az a=np.arange(4).reshape(2,-1) példában? | `np-q52` | `mock-np-3` |
-| `N042` | 170 | NumPy | Mennyi np.any(a==0) a négy elemből? | `np-q52` | `mock-np-3` |
-| `N043` | 171 | NumPy | Mennyi np.all(a==0,axis=1) a kétsoros példában? | `np-q52` | `mock-np-3` |
-| `N044` | 173 | NumPy | Mi np.unique([3,1,2]) eredménye? | `np-q53` | `mock-np-3` |
-| `N045` | 174 | NumPy | Mi np.unique([3,1,2]==0) eredménye? | `np-q54` | `mock-np-3` |
-| `N046` | 175 | NumPy | Mi np.bincount([3,1,2]) eredménye? | `np-q55` | `mock-np-3` |
-| `N047` | 176 | NumPy | Mi np.sort([3,1,2])[::-1] eredménye? | `np-q56` | `mock-np-3` |
-| `N048` | 177 | NumPy | Mi np.argsort([3,1,2]) eredménye? | `np-q57` | `mock-np-3` |
-| `N049` | 178 | NumPy | Mi a[a!=0] eredménye, ha a=np.array([3,1,2])? | `np-q58` | `mock-np-3` |
+| `N001` | 121 | NumPy | Lehet-e egy ndarray shape értéke (5,6)? | `pool-np-attributes` | `mock-np-1` |
+| `N002` | 122 | NumPy | Lehet-e egy ndarray shape értéke (1,)? | `pool-np-attributes` | `mock-np-1` |
+| `N003` | 123 | NumPy | Lehet-e egy ndarray shape értéke (0,1,0)? | `pool-np-attributes` | `mock-np-1` |
+| `N004` | 124 | NumPy | Lehet-e az ndarray.shape értéke a 12 egész szám? | `pool-np-attributes` | `mock-np-1` |
+| `N005` | 125 | NumPy | Lehet-e az ndarray.dtype értéke a (5,6) tuple? | `pool-np-attributes` | `mock-np-1` |
+| `N006` | 126 | NumPy | Lehet-e az ndarray.size értéke a (5,6) tuple? | `pool-np-attributes` | `mock-np-1` |
+| `N007` | 127 | NumPy | Lehet-e az ndarray.size értéke 12? | `pool-np-attributes` | `mock-np-1` |
+| `N008` | 128 | NumPy | Lehet-e az ndarray.ndim értéke a (5,6) tuple? | `pool-np-attributes` | `mock-np-1` |
+| `N009` | 130 | NumPy | Milyen az alakja a shape=(32,5) tömb a[:,:] szeletének? | `pool-np-index` | `mock-np-1` |
+| `N010` | 131 | NumPy | Milyen az alakja a shape=(32,5) tömb a[:,1] szeletének? | `pool-np-index` | `mock-np-1` |
+| `N011` | 132 | NumPy | Milyen az alakja a shape=(32,5) tömb a[1,:] szeletének? | `pool-np-index` | `mock-np-1` |
+| `N012` | 133 | NumPy | Milyen az alakja a shape=(32,5) tömb a[1:,:] szeletének? | `pool-np-index` | `mock-np-1` |
+| `N013` | 134 | NumPy | Milyen az alakja a shape=(32,5) tömb a[0,:-1] részének? | `pool-np-index` | `mock-np-1` |
+| `N014` | 135 | NumPy | Milyen az alakja a shape=(32,5) tömb a[[0],:] részének? | `pool-np-index` | `mock-np-1` |
+| `N015` | 136 | NumPy | Milyen az alakja a shape=(32,5) tömb a[[-1,-1],-1] részének? | `pool-np-index` | `mock-np-1` |
+| `N016` | 138 | NumPy | Broadcasting hibát okoz-e az (32,5) és (32,) alakú tömbök összeadása? | `pool-np-broadcast` | `mock-np-2` |
+| `N017` | 139 | NumPy | Broadcasting hibát okoz-e a (32,5) és (32,1) alakok összeadása? | `pool-np-broadcast` | `mock-np-2` |
+| `N018` | 140 | NumPy | Broadcasting hibát okoz-e a (32,5) és (1,32) alakok összeadása? | `pool-np-broadcast` | `mock-np-2` |
+| `N019` | 141 | NumPy | Broadcasting hibát okoz-e a (32,5) alakú tömb és skalár összeadása? | `pool-np-broadcast` | `mock-np-2` |
+| `N020` | 143 | NumPy | Milyen alakú az a<0 logikai tömb, ha a.shape=(32,5)? | `pool-np-reductions` | `mock-np-2` |
+| `N021` | 144 | NumPy | Milyen az a.T alakja, ha a.shape=(32,5)? | `pool-np-reductions` | `mock-np-2` |
+| `N022` | 145 | NumPy | Milyen alakú a.T.T, ha a.shape=(32,5)? | `pool-np-reductions` | `mock-np-2` |
+| `N023` | 146 | NumPy | Milyen alakú a+a, ha a.shape=(32,5)? | `pool-np-reductions` | `mock-np-2` |
+| `N024` | 147 | NumPy | Milyen alakú a+a[:,None,:], ha a.shape=(32,5)? | `pool-np-broadcast` | `mock-np-2` |
+| `N025` | 148 | NumPy | Milyen alakú np.mean(a,axis=0) (32,5) bemenettel? | `pool-np-reductions` | `mock-np-2` |
+| `N026` | 149 | NumPy | Milyen alakú np.mean(a,axis=1) (32,5) bemenettel? | `pool-np-reductions` | `mock-np-2` |
+| `N027` | 150 | NumPy | ndarray lesz-e np.sum(a,axis=0) eredménye (32,5) bemenetre? | `pool-np-reductions` | `mock-np-2` |
+| `N028` | 151 | NumPy | ndarray lesz-e np.sum(a) eredménye (32,5) bemenetre? | `pool-np-reductions` | `mock-np-2` |
+| `N029` | 154 | NumPy | Milyen az np.arange(4).reshape(2,-1) tömb alakja? | `pool-np-transform` | `mock-np-1` |
+| `N030` | 155 | NumPy | Milyen az a*2+1 alakja, ha a=np.arange(4).reshape(2,-1)? | `pool-np-transform` | `mock-np-1` |
+| `N031` | 156 | NumPy | Milyen az a[a>0] alakja, ha a=np.arange(4).reshape(2,-1)? | `pool-np-transform` | `mock-np-1` |
+| `N032` | 157 | NumPy | Milyen az a[(a>0)&(a%2==0)] alakja? | `pool-np-transform` | `mock-np-1` |
+| `N033` | 158 | NumPy | Milyen az a*a.reshape(2,2,-1) alakja 4 elemnél? | `pool-np-transform` | `mock-np-2` |
+| `N034` | 160 | NumPy | Módosul-e a forrás, ha reshape nézeten keresztül írunk? | `pool-np-views` | `mock-np-3` |
+| `N035` | 161 | NumPy | Módosul-e a forrás az egydimenziós .T nézetén keresztül írva? | `pool-np-views` | `mock-np-3` |
+| `N036` | 162 | NumPy | Módosul-e a forrás a np.append eredményének módosításától? | `pool-np-views` | `mock-np-3` |
+| `N037` | 163 | NumPy | Módosul-e a forrás egyszerű a[1:2] szelet írásakor? | `pool-np-views` | `mock-np-3` |
+| `N038` | 164 | NumPy | Módosul-e a forrás a[[1,2]] haladó indexelésből kapott tömb írásakor? | `pool-np-views` | `mock-np-3` |
+| `N039` | 165 | NumPy | Módosul-e a forrás a[a<2] logikai maszkos kiválasztásból íráskor? | `pool-np-views` | `mock-np-3` |
+| `N040` | 166 | NumPy | Módosul-e a forrás az a+a eredménytömb írásakor? | `pool-np-views` | `mock-np-3` |
+| `N041` | 169 | NumPy | Mennyi np.count_nonzero(a==0) az a=np.arange(4).reshape(2,-1) példában? | `pool-np-boolean` | `mock-np-3` |
+| `N042` | 170 | NumPy | Mennyi np.any(a==0) a négy elemből? | `pool-np-boolean` | `mock-np-3` |
+| `N043` | 171 | NumPy | Mennyi np.all(a==0,axis=1) a kétsoros példában? | `pool-np-boolean` | `mock-np-3` |
+| `N044` | 173 | NumPy | Mi np.unique([3,1,2]) eredménye? | `pool-np-functions` | `mock-np-3` |
+| `N045` | 174 | NumPy | Mi np.unique([3,1,2]==0) eredménye? | `pool-np-functions` | `mock-np-3` |
+| `N046` | 175 | NumPy | Mi np.bincount([3,1,2]) eredménye? | `pool-np-functions` | `mock-np-3` |
+| `N047` | 176 | NumPy | Mi np.sort([3,1,2])[::-1] eredménye? | `pool-np-functions` | `mock-np-3` |
+| `N048` | 177 | NumPy | Mi np.argsort([3,1,2]) eredménye? | `pool-np-functions` | `mock-np-3` |
+| `N049` | 178 | NumPy | Mi a[a!=0] eredménye, ha a=np.array([3,1,2])? | `pool-np-functions` | `mock-np-3` |
 
 ## Minőségbiztosítás
 
