@@ -4,6 +4,7 @@ import {
   examChapterNames,
   examChapters,
   generateMockExam,
+  sourceExamples,
   type ExamChapter
 } from "../data/mockExam";
 import { scoreMockQuestion } from "../study/scoring";
@@ -19,6 +20,7 @@ function questionChapter(question: Question): ExamChapter {
 
 export function MockExamView({ language }: Props) {
   const [length, setLength] = useState<15 | 20>(15);
+  const [includeSupplementary, setIncludeSupplementary] = useState(false);
   const [feedbackMode, setFeedbackMode] = useState<"final" | "instant">("final");
   const [checkedQuestions, setCheckedQuestions] = useState<Record<string, boolean>>({});
   const [exam, setExam] = useState<Question[]>([]);
@@ -29,7 +31,7 @@ export function MockExamView({ language }: Props) {
   const [confirmIncomplete, setConfirmIncomplete] = useState(false);
 
   const startExam = () => {
-    setExam(generateMockExam(length));
+    setExam(generateMockExam(length, Math.random, includeSupplementary));
     setAnswers({});
     setCheckedQuestions({});
     setCurrentIndex(0);
@@ -86,12 +88,12 @@ export function MockExamView({ language }: Props) {
       <section className="mock-setup question-card">
         <div className="question-header">
           <span>{isHu ? "RÖVID PRÓBAVIZSGA" : "SHORT MOCK EXAM"}</span>
-          <span>{isHu ? "8 témakör" : "8 chapters"}</span>
+          <span>{isHu ? `${sourceExamples.length} dokumentumbeli kérdés` : `${sourceExamples.length} source questions`}</span>
         </div>
         <h2>{isHu ? "Új, véletlenszerű teszt indítása" : "Start a new randomized exam"}</h2>
         <p>{isHu
-          ? "Mind a nyolc fő témakörből kerülnek be kérdések. Kérdésenként 12 ellenőrzött állításból véletlenszerűen 3–6 jelenik meg, több helyes válasszal is. Eldöntheted, hogy azonnali vagy vizsga végi visszajelzést szeretnél."
-          : "Questions cover all eight chapters. Each draws 3–6 statements from a curated pool of 12, potentially with multiple correct choices. Choose feedback after each question or only at the end."}</p>
+          ? "Alapértelmezés szerint a Theory Test 1 példadokumentumának mind a 129 alkérdéséből válogat a teszt, mind a nyolc témakört lefedve. Minden kérdéshez 12 állításváltozat tartozik, amelyekből véletlenszerűen 3–6 jelenik meg."
+          : "By default, the exam samples from all 129 subquestions mapped to the Theory Test 1 example document, spanning eight chapters. Each question has 12 candidate statements, with 3–6 shown at random."}</p>
         <div className="mock-length-options" role="group" aria-label={isHu ? "Kérdések száma" : "Question count"}>
           {([15, 20] as const).map((count) => (
             <button
@@ -126,6 +128,16 @@ export function MockExamView({ language }: Props) {
             <span>{isHu ? "Ellenőrzés és magyarázat minden kérdés után" : "Check answers after each question"}</span>
           </button>
         </div>
+        <label className="mock-extra-toggle">
+          <input
+            type="checkbox"
+            checked={includeSupplementary}
+            onChange={(event) => setIncludeSupplementary(event.target.checked)}
+          />
+          <span>{isHu
+            ? "A további 24 előadásalapú gyakorlókérdést is használja (nem mind szerepel önálló kérdésként a példadokumentumban)."
+            : "Also include 24 supplementary lecture-based questions (not all appear as standalone examples in the document)."}</span>
+        </label>
         <p className="mock-setup-caption">
           {isHu
             ? "Értékelés: minden helyes választás szükséges. Pontosan egy eltérés 0,5 pontot ér; kettő vagy több eltérés 0 pont."
@@ -264,6 +276,11 @@ export function MockExamView({ language }: Props) {
         <div className="question-header">
           <span>{isHu ? "KÉRDÉS" : "QUESTION"} {currentIndex + 1}</span>
           <span>{examChapterNames[questionChapter(current)][language]}</span>
+          {current.topics.some(topic => /^source-[MN]\\d+$/.test(topic)) && (
+            <span className="mock-source-label">
+              {isHu ? "Példadokumentum" : "Example document"}
+            </span>
+          )}
           {currentScore !== null && (
             <span className={`score-pill score-${String(currentScore).replace(".", "-")}`}>
               {currentScore.toFixed(1)} pt
