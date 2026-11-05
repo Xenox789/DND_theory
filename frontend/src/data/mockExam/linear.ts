@@ -14,7 +14,7 @@ export const linearMocks = [
       ["A θ₁ egyváltozós esetben az egyenes meredekségét határozza meg.", "With one feature θ₁ determines the slope of the line."]
     ],
     falseFacts: [
-      ["Egy bemeneti változóval a lineáris regresszió görbéje szükségszerűen kör.", "With one feature the linear regression curve is necessarily a circle."],
+      ["Egy bemeneti változóval a lineáris regresszió hipotézise szükségszerűen parabola.", "With one input feature the linear regression hypothesis must be a parabola."],
       ["Két bemeneti változó mellett a modell paraméterei csak θ₀ és θ₁ lehetnek.", "With two input features the model can only have θ₀ and θ₁."],
       ["A bias minden mintánál azonos a valódi y címkével.", "The bias always equals the true y label for every sample."],
       ["A lineáris regresszió alapértelmezésben kizárólag két osztály közül választ.", "Linear regression by default only chooses between two classes."],

@@ -62,7 +62,7 @@ export const sgdMocks = [
       ["Tetszőlegesen nagy α mindig garantáltan javítja a veszteséget.", "Arbitrarily large learning rate always guarantees reducing loss."],
       ["A nulla tanulási ráta az alap SGD-ben biztosítja a leggyorsabb súlyváltozást.", "Zero learning rate gives the fastest parameter changes in plain SGD."],
       ["A momentumos SGD nem használhat semmilyen múltbeli információt.", "Momentum SGD cannot incorporate any information from previous steps."],
-      ["Az Adam kizárólag a neurális hálózat kimeneti aktivációs függvénye.", "Adam is exclusively a neural-network output activation function."],
+      ["Az Adam egy veszteségfüggvény, amely minden regressziós feladatban felváltja az MSE-t.", "Adam is a loss function that replaces MSE in every regression task."],
       ["A backpropagation és az optimizer.step minden esetben pontosan ugyanaz a művelet.", "Backpropagation and optimizer.step are exactly the same operation."]
     ],
     explanation: { hu: "A backprop kiszámítja a gradienst, az optimalizáló pedig a tanulási rátát és saját szabályait használja a paraméterfrissítéshez.", en: "Backprop computes gradients; optimizers apply update rules controlled by learning rate and possibly other state." }

@@ -19,7 +19,7 @@ export const logisticMocks = [
       ["A logisztikus regresszió minden egyes mintán egyszerre mátrixot ad vissza.", "Logistic regression always produces a matrix for a single sample."],
       ["Két bemeneti jellemző esetén a modellnek szükségképpen 100 paramétere van.", "With two features the model necessarily has 100 parameters."],
       ["A laborértékek a tanulható θ-ban találhatók, nem az X-ben.", "Laboratory measurements are stored in learnable θ, not in X."],
-      ["A g(Xθ) minden komponensét tanítás előtt 0-ra kell állítani.", "Every component of g(Xθ) must be initialized to zero before training."]
+      ["A szigmoid alkalmazása után a logisztikus regresszió kimenete továbbra is tetszőleges valós szám lehet.", "After applying sigmoid, logistic-regression outputs can still be arbitrary real numbers."]
     ],
     explanation: { hu: "A modell a bemeneti jellemzők súlyozott összegéből a szigmoidon át becsült osztályvalószínűséget számol.", en: "Logistic regression transforms a linear combination of input features into an estimated class probability using sigmoid." }
   }),
@@ -60,7 +60,7 @@ export const logisticMocks = [
     falseFacts: [
       ["y=1 mellett a h=0,01 becslés kisebb BCE-veszteségű, mint h=0,99.", "For y=1 prediction h=0.01 has lower BCE than h=0.99."],
       ["A BCE képletében a logaritmus helyett kötelezően négyzetgyök szerepel.", "BCE must use a square root instead of a logarithm."],
-      ["BCE-vel egyetlen mintára szükségszerűen egy 100×100-as mátrixot kapunk.", "BCE for one sample necessarily returns a 100×100 matrix."],
+      ["A BCE egyetlen példára mindig negatív veszteségértéket ad.", "BCE always produces a negative loss value for one example."],
       ["y=1 mellett a BCE mindig −log(1−h).", "For y=1, BCE always equals −log(1−h)."],
       ["y=0 mellett a helyes becslés h=0,9 adja a legkisebb veszteséget.", "For y=0, prediction h=0.9 produces the smallest loss."],
       ["A loss function értékét tanításkor általában maximalizálni próbáljuk.", "Training generally attempts to maximize the loss function."]

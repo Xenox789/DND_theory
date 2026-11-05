@@ -60,7 +60,7 @@ export const numpyMocks = [
     falseFacts: [
       ["Az a[1:3] egyszerű szeletelés minden esetben független másolatot készít.", "Basic slicing a[1:3] always makes an independent copy."],
       ["Az a[[1,2]] haladó indexelés mindig ugyanazt a memóriát osztja meg, mint a.", "Advanced indexing a[[1,2]] always shares the original data memory."],
-      ["A np.append(a,42) kötelezően felülírja a eredeti a tömb összes elemét.", "np.append(a,42) necessarily overwrites all entries of the original array."],
+      ["A np.append(a,42) helyben bővíti a eredeti a tömböt, és ugyanazt az objektumot adja vissza.", "np.append(a,42) extends the original a array in place and returns that same array."],
       ["Az np.arange(4).reshape(3,2) mindig működik, mert bármilyen elemszám megengedett.", "np.arange(4).reshape(3,2) always succeeds because any element count is allowed."],
       ["A np.argsort([3,1,2]) eredménye [3,2,1].", "np.argsort([3,1,2]) returns [3,2,1]."],
       ["A np.bincount([3,1,2]) eredménye [1,1,1].", "np.bincount([3,1,2]) returns [1,1,1]."]

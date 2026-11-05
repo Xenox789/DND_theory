@@ -21,7 +21,7 @@ export const fundamentalsMocks = [
       ["A klaszterezéshez minden mintához előre megadott osztálycímke szükséges.", "Clustering requires a predefined class label for every example."],
       ["Az RL-környezet minden állapotban közvetlenül megadja a helyes akciót.", "An RL environment directly provides the correct action in every state."],
       ["A regresszió kizárólag felügyelet nélküli feladat lehet.", "Regression can only be an unsupervised task."],
-      ["A megerősítéses tanulásban az agent soha nem lép kapcsolatba a környezettel.", "In reinforcement learning the agent never interacts with the environment."],
+      ["A megerősítéses tanulásban az agent mindig előre megkapja minden állapothoz a legjobb cselekvést címkeként.", "In reinforcement learning the agent always receives the best action as a label for every state."],
       ["A felügyelt és a felügyelet nélküli tanulást kizárólag a bemenet adattípusa különbözteti meg.", "Only input data type distinguishes supervised from unsupervised learning."]
     ],
     explanation: {
@@ -47,7 +47,7 @@ export const fundamentalsMocks = [
     falseFacts: [
       ["Az x általában a tanítás közben optimalizált súlyok vektora.", "x generally represents the weight vector optimized during training."],
       ["A θ jelöli minden esetben a valódi címkék teljes halmazát.", "θ always represents the complete set of true labels."],
-      ["A hθ(x) soha nem függ a bemenet x értékétől.", "hθ(x) never depends on input x."],
+      ["A valódi y címke minden esetben a tanulható θ paramétervektor egyik eleme.", "The true y label is always an element of the trainable parameter vector θ."],
       ["Minden gépi tanulási címke szükségszerűen egyetlen skalár.", "Every machine-learning label is necessarily a scalar."],
       ["A modell előrejelzése minden feladatban kizárólag 0 vagy 1 lehet.", "Model predictions must be either 0 or 1 in every task."],
       ["Tanuláskor mindig az X bemeneti mátrixot próbáljuk minimalizálni.", "Training always tries to minimize the input matrix X."]
@@ -78,7 +78,7 @@ export const fundamentalsMocks = [
       ["A klaszterezés fő célja egy ismert folytonos y célérték pontos becslése.", "Clustering primarily predicts a known continuous target y."],
       ["Minden feladathoz ugyanaz a veszteségfüggvény az egyetlen helyes választás.", "There is exactly one universally correct loss function for all tasks."],
       ["A training loss értéke mindig mátrix, mert több adatponton mérjük.", "Training loss is always a matrix because it uses multiple samples."],
-      ["A zajszűrés célja szükségképpen az összes bemeneti érték nullázása.", "Denoising necessarily aims to set all input values to zero."]
+      ["A zajszűrés kizárólag olyan bináris osztályozás lehet, amely a zaj jelenlétét jelzi.", "Denoising can only be a binary classifier indicating whether noise is present."]
     ],
     explanation: {
       hu: "A regresszió, osztályozás, klaszterezés, dimenziócsökkentés és zajszűrés eltérő célt követ; a veszteség és a kimenet alakja a feladathoz igazodik.",

@@ -40,7 +40,7 @@ export const mlpMocks = [
       ["A tanh minden kimenete szigorúan 0 és 1 közé esik.", "Every tanh output lies strictly between 0 and 1."],
       ["A szigmoid tetszőleges nagy pozitív értéket is visszaadhat.", "Sigmoid can output arbitrarily large positive values."],
       ["Regressziós feladatoknál minden esetben kötelező a végső szigmoid használata.", "Regression tasks always require a final sigmoid."],
-      ["A BCE kizárólag képfelbontás csökkentésére szolgáló aktiváció.", "BCE is an activation function used only for image downsampling."],
+      ["A BCE aktivációs függvény, amelyet kötelező minden rejtett neuron kimenetére alkalmazni.", "BCE is an activation function that must be applied to every hidden neuron."],
       ["Több lineáris réteg köztes nemlinearitás nélkül minden esetben XOR-t tud megoldani.", "A stack of purely linear layers can always solve XOR without nonlinearities."]
     ],
     explanation: { hu: "A hidden nemlinearitás a komplex határokhoz kell; a végső aktiváció és veszteség a célérték természetétől függ.", en: "Hidden nonlinearities add expressive power; the output activation and loss depend on the target type." }

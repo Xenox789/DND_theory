@@ -14,7 +14,7 @@ export const backpropMocks = [
       ["Ha egy változó több útvonalon hat a veszteségre, az útvonalak hozzájárulásait összegezzük.", "If a variable reaches the loss through several paths, the contributions are added."]
     ],
     falseFacts: [
-      ["A számítási gráf kizárólag adatbázisrekordok rendezésére szolgál.", "A computational graph is used only to sort database records."],
+      ["A számítási gráf minden éle kötelezően egy tanulható súlyparamétert jelent.", "Every edge in a computational graph must represent a trainable weight."],
       ["A forward pass mindig a veszteségből indul és a bemenet felé számol.", "The forward pass always starts at the loss and moves toward inputs."],
       ["A backprop minden lokális deriváltat figyelmen kívül hagy.", "Backprop ignores every local derivative."],
       ["A láncszabály szerint a belső és külső deriváltak soha nem szorozhatók össze.", "Under the chain rule, outer and inner derivatives must never be multiplied."],
@@ -62,7 +62,7 @@ export const backpropMocks = [
       ["Ha c=a+b, akkor ∂c/∂a=b.", "For c=a+b, dc/da equals b."],
       ["Ha c=a·b, akkor ∂c/∂a=a.", "For c=a·b, dc/da equals a."],
       ["A loss.backward() minden esetben automatikusan elvégzi az optimizer.step() frissítést is.", "loss.backward() always automatically performs optimizer.step() as well."],
-      ["Az optimizer.step() csak a számítási gráf újrarajzolására szolgál.", "optimizer.step() is only used to redraw the computational graph."],
+      ["Az optimizer.step() csak kiszámítja a gradienseket, de nem frissíti a modellparamétereket.", "optimizer.step() only computes gradients and never updates model parameters."],
       ["A zero_grad() az összes tanítási adatot törli a memóriából.", "zero_grad() deletes all training examples from memory."]
     ],
     explanation: { hu: "Lokális deriváltak: négyzet 2b; összeadás 1 és 1; szorzásnál a másik tényező. A backward, step és zero_grad eltérő feladat.", en: "Local derivatives: square 2b, addition 1 for each input, multiplication the other factor. backward, step and zero_grad perform different operations." }
