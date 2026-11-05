@@ -272,6 +272,51 @@ add("M080",p("grad_a = grad_b = grad_c, mert ∂(a+b)/∂a=∂(a+b)/∂b=1.","gr
   p("grad_a = grad_c + a és grad_b = grad_c + b.","grad_a = grad_c + a and grad_b = grad_c + b."),
   p("grad_a = grad_c/2 és grad_b = grad_c/2.","grad_a = grad_c/2 and grad_b = grad_c/2.")]);
 
+// Multiple independently correct statements are intentionally present in
+// selected questions. The official format may have more than one true answer.
+function extraTrue(ids:string, hu:string, en:string) {
+ for(const id of ids.split(" ")) {
+  const answer=lectureAnswers[id];
+  if(!answer)throw Error("Unknown question for extra true option: "+id);
+  answer.trueChoices.push(p(hu,en));
+ }
+}
+extraTrue("M003","A szegmentáció címkéje például kétdimenziós maszk lehet.","A segmentation target can be a two-dimensional mask.");
+extraTrue("M006 M059","A veszteség lehet skalár akkor is, ha az egyes y címkék vektorok.","The aggregated loss can be scalar even when individual targets y are vectors.");
+extraTrue("M013 M016 M030","A bias miatt θ₀,θ₁,θ₂,θ₃,θ₄ szerepel.","Including the bias gives parameters θ₀,θ₁,θ₂,θ₃,θ₄.");
+extraTrue("M015 M028","Az X minden sora egy beteghez tartozik, és a biasoszloppal öt értéket tartalmaz.","Each row of X corresponds to one patient and contains five values including intercept.");
+extraTrue("M017","Az Xθ szorzat betegként egy-egy regressziós becslést tartalmaz.","The product Xθ contains one regression prediction per patient.");
+extraTrue("M020 M047","Az optimalizációs cél J(θ), nem az X megváltoztatása.","The training objective is J(θ), not altering observed X.");
+extraTrue("M026","Egyváltozós lineáris regresszióban θ₁ a meredekség, θ₀ az y-tengelymetszet.","For one-feature linear regression θ₁ is slope, θ₀ is intercept.");
+extraTrue("M027","A két független bemenet és a skalár kimenet együtt három koordinátatengelyt ad.","Two independent inputs and the scalar output give three coordinate axes.");
+extraTrue("M032","Az I mérete a θ paramétertér dimenziójához illeszkedik.","I is dimensioned to match the parameter space of θ.");
+extraTrue("M033","Konvex legkisebb négyzeteknél nincs eltérő értékű, szigorú lokális minimum.","Convex least squares has no strict suboptimal local minimum.");
+extraTrue("M035","A skálázás csökkentheti a különböző jellemzőnagyságrendek miatti optimalizálási nehézségeket.","Scaling can reduce optimization difficulties caused by vastly different feature magnitudes.");
+extraTrue("M039","A modell egy betegséghez tartozó 0/1 címkét céloz, nem folytonos laborértéket.","The task predicts a binary illness label, not a continuous laboratory measurement.");
+extraTrue("M040","A modell súlyvektora θ=(θ₀,θ₁,θ₂), hossza 3.","The model parameter vector θ=(θ₀,θ₁,θ₂) has length 3.");
+extraTrue("M041","A BCE a valódi 0/1 címkét és az 1-es osztály becsült valószínűségét hasonlítja.","BCE uses the true 0/1 target and the estimated positive-class probability.");
+extraTrue("M042","X száz sorból és három oszlopból áll az x₀=1 oszloppal együtt.","X has 100 rows and three columns including the x₀=1 intercept.");
+extraTrue("M043","A θ₀ bias és a két laborjellemző súlya három tanulható skalár.","The bias θ₀ and two feature weights are three trainable scalars.");
+extraTrue("M044","A g(Xθ) minden beteghez egy 0 és 1 közötti becslést rendel.","g(Xθ) assigns one value between 0 and 1 to each patient.");
+extraTrue("M045 M054","A szigmoid g(0)=0,5 értéket ad.","Sigmoid evaluates to g(0)=0.5.");
+extraTrue("M050","A θ paraméterek a sigmoid alapfüggvényének megváltoztatása nélkül tanulnak.","Parameters θ are learned without changing the sigmoid function itself.");
+extraTrue("M060","A két réteg paraméterszáma külön-külön 210 és 11.","The two layers have 210 and 11 parameters respectively.");
+extraTrue("M061","Az első rétegben 200 kapcsolati súly és 10 külön bias található.","The first layer contains 200 connection weights and 10 biases.");
+extraTrue("M062","A rejtett nemlinearitás regressziós cél esetén is növelheti a modell kifejezőképességét.","A hidden nonlinearity can increase model expressiveness even for regression.");
+extraTrue("M065","A modellparaméterek száma ugyanannyi marad, ha csak a tanítópéldák számát csökkentjük.","Changing only training sample count does not change the number of model parameters.");
+extraTrue("M066","A kisebb teszthalmaz bizonytalanabb becslést adhat a generalizációs hibára.","A smaller test set may give a less precise estimate of generalization error.");
+extraTrue("M067","Ha csak a train halmaz mérete nő, a hálózat súlyainak száma ettől még nem változik.","Increasing only training-set size does not change the network's parameter count.");
+extraTrue("M069","Változatlan adatmennyiség mellett több paraméter nagyobb modellkapacitást jelenthet.","With fixed data quantity, more parameters can increase model capacity.");
+extraTrue("M070","Az early stopping a validation loss értékelésével is meghatározhatja a leállítás idejét.","Early stopping can use validation loss to choose when to stop.");
+extraTrue("M073","A training loss javulása nem garantálja a validation loss javulását.","Improved training loss does not guarantee improved validation loss.");
+extraTrue("M076","A full-batch GD egy frissítéshez az összes tanítómintát használja.","Full-batch GD uses every training example for each update.");
+extraTrue("M077","A nagyobb batch általában csökkenti a gradiensbecslés mintavételi zaját.","A larger batch generally reduces gradient sampling noise.");
+extraTrue("M077","A nagyobb batch gyakran több GPU-aktivációs memóriát igényel.","A larger batch often requires more GPU activation memory.");
+extraTrue("M078","A kisebb batch gyakran több frissítést eredményez epochonként.","A smaller batch often produces more updates per epoch.");
+extraTrue("M078","A kisebb batch miatt a gradiensbecslés mintavételi varianciája nőhet.","The gradient-estimate variance can increase with a smaller batch.");
+extraTrue("M079","A négyzetes csomópont lokális deriváltja ∂c/∂b=2b.","The local derivative of the square node is ∂c/∂b=2b.");
+extraTrue("M080","Az összeadás lokális deriváltja a és b szerint is 1.","For addition, both local derivatives with respect to a and b equal 1.");
+
 const expected = Array.from({length:80},(_,i)=>"M"+String(i+1).padStart(3,"0"));
 for(const id of expected)if(!lectureAnswers[id])throw new Error("Missing exact source question "+id);
 if(Object.keys(lectureAnswers).length!==80)throw new Error("Extra source question!");
