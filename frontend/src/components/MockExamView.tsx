@@ -19,6 +19,8 @@ function questionChapter(question: Question): ExamChapter {
 
 export function MockExamView({ language }: Props) {
   const [length, setLength] = useState<15 | 20>(15);
+  const [feedbackMode, setFeedbackMode] = useState<"final" | "instant">("final");
+  const [checkedQuestions, setCheckedQuestions] = useState<Record<string, boolean>>({});
   const [exam, setExam] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<Answers>({});
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,6 +31,7 @@ export function MockExamView({ language }: Props) {
   const startExam = () => {
     setExam(generateMockExam(length));
     setAnswers({});
+    setCheckedQuestions({});
     setCurrentIndex(0);
     setSubmitted(false);
     setShowReview(false);
@@ -49,7 +52,7 @@ export function MockExamView({ language }: Props) {
   [exam, answers]);
 
   const toggle = (question: Question, id: string) => {
-    if (submitted) return;
+    if (submitted || (feedbackMode === "instant" && checkedQuestions[question.id])) return;
     setConfirmIncomplete(false);
     setAnswers((previous) => {
       const selected = previous[question.id] ?? [];
@@ -63,6 +66,12 @@ export function MockExamView({ language }: Props) {
   };
 
   const isHu = language === "hu";
+  const checkedCount = exam.filter((q) => checkedQuestions[q.id]).length;
+  const checkCurrent = () => {
+    if (feedbackMode !== "instant" || submitted || checkedQuestions[exam[currentIndex].id]) return;
+    setCheckedQuestions((previous) => ({ ...previous, [exam[currentIndex].id]: true }));
+    setConfirmIncomplete(false);
+  };
 
   const finalize = () => {
     if (answered < exam.length) {
@@ -81,8 +90,8 @@ export function MockExamView({ language }: Props) {
         </div>
         <h2>{isHu ? "Új, véletlenszerű teszt indítása" : "Start a new randomized exam"}</h2>
         <p>{isHu
-          ? "Mind a nyolc fő témakörből kerülnek be kérdések. Kérdésenként 12 előre ellenőrzött állítás közül véletlenszerűen 3–6 jelenik meg, több helyes válasszal is. A megoldások csak a teszt leadása után láthatók."
-          : "Questions cover all eight chapters. Each draws 3–6 statements from a curated pool of 12, potentially with multiple correct choices. Answers are revealed only after submission."}</p>
+          ? "Mind a nyolc fő témakörből kerülnek be kérdések. Kérdésenként 12 ellenőrzött állításból véletlenszerűen 3–6 jelenik meg, több helyes válasszal is. Eldöntheted, hogy azonnali vagy vizsga végi visszajelzést szeretnél."
+          : "Questions cover all eight chapters. Each draws 3–6 statements from a curated pool of 12, potentially with multiple correct choices. Choose feedback after each question or only at the end."}</p>
         <div className="mock-length-options" role="group" aria-label={isHu ? "Kérdések száma" : "Question count"}>
           {([15, 20] as const).map((count) => (
             <button
@@ -96,6 +105,26 @@ export function MockExamView({ language }: Props) {
               <span>{isHu ? "kérdés" : "questions"}</span>
             </button>
           ))}
+        </div>
+        <div className="mock-feedback-options" role="group" aria-label={isHu ? "Visszajelzés módja" : "Feedback mode"}>
+          <button
+            type="button"
+            className={feedbackMode === "final" ? "mock-feedback-choice active" : "mock-feedback-choice"}
+            aria-pressed={feedbackMode === "final"}
+            onClick={() => setFeedbackMode("final")}
+          >
+            <strong>{isHu ? "Vizsgamód" : "Exam mode"}</strong>
+            <span>{isHu ? "Helyes válaszok a teszt végén" : "Answers shown after submission"}</span>
+          </button>
+          <button
+            type="button"
+            className={feedbackMode === "instant" ? "mock-feedback-choice active" : "mock-feedback-choice"}
+            aria-pressed={feedbackMode === "instant"}
+            onClick={() => setFeedbackMode("instant")}
+          >
+            <strong>{isHu ? "Tanulómód" : "Study mode"}</strong>
+            <span>{isHu ? "Ellenőrzés és magyarázat minden kérdés után" : "Check answers after each question"}</span>
+          </button>
         </div>
         <p className="mock-setup-caption">
           {isHu
@@ -198,6 +227,8 @@ export function MockExamView({ language }: Props) {
 
   const current = exam[currentIndex];
   const selected = answers[current.id] ?? [];
+  const currentChecked = feedbackMode === "instant" && Boolean(checkedQuestions[current.id]);
+  const currentScore = currentChecked ? scoreMockQuestion(current, selected) : null;
   return (
     <div className="mock-exam">
       <section className="mock-exam-toolbar">
@@ -205,7 +236,9 @@ export function MockExamView({ language }: Props) {
           <span className="eyebrow">{isHu ? "PRÓBAVIZSGA" : "MOCK EXAM"}</span>
           <strong>{currentIndex + 1} / {exam.length}</strong>
         </div>
-        <span>{answered}/{exam.length} {isHu ? "megválaszolva" : "answered"}</span>
+        <span>{feedbackMode === "instant"
+          ? `${checkedCount}/${exam.length} ${isHu ? "ellenőrizve" : "checked"}`
+          : `${answered}/${exam.length} ${isHu ? "megválaszolva" : "answered"}`}</span>
       </section>
       <div className="mock-progress-track" aria-label={isHu ? "Vizsga előrehaladása" : "Exam progress"}>
         <div style={{ width: (100 * (currentIndex + 1) / exam.length) + "%" }} />
@@ -231,6 +264,11 @@ export function MockExamView({ language }: Props) {
         <div className="question-header">
           <span>{isHu ? "KÉRDÉS" : "QUESTION"} {currentIndex + 1}</span>
           <span>{examChapterNames[questionChapter(current)][language]}</span>
+          {currentScore !== null && (
+            <span className={`score-pill score-${String(currentScore).replace(".", "-")}`}>
+              {currentScore.toFixed(1)} pt
+            </span>
+          )}
         </div>
         <h2>{current.prompt[language]}</h2>
         <p className="mock-choices-hint">
@@ -240,10 +278,19 @@ export function MockExamView({ language }: Props) {
         </p>
         <div className="choices">
           {current.choices.map((choice, index) => (
-            <label key={choice.id} className={selected.includes(choice.id) ? "choice selected" : "choice"}>
+            <label
+              key={choice.id}
+              className={[
+                "choice",
+                selected.includes(choice.id) ? "selected" : "",
+                currentChecked && current.correctIds.includes(choice.id) ? "correct" : "",
+                currentChecked && selected.includes(choice.id) && !current.correctIds.includes(choice.id) ? "incorrect" : ""
+              ].filter(Boolean).join(" ")}
+            >
               <input
                 type="checkbox"
                 checked={selected.includes(choice.id)}
+                disabled={currentChecked}
                 onChange={() => toggle(current, choice.id)}
               />
               <span className="choice-letter">{String.fromCharCode(65 + index)}</span>
@@ -251,7 +298,24 @@ export function MockExamView({ language }: Props) {
             </label>
           ))}
         </div>
+        {currentChecked && (
+          <div className="explanation mock-instant-feedback" role="status">
+            <strong>{isHu ? "Eredmény és magyarázat" : "Result and explanation"} · {currentScore?.toFixed(1)} / 1</strong>
+            <p>{isHu
+              ? "A zöld állítások helyesek; az általad kiválasztott hibás válaszok pirossal jelennek meg. Ez a kérdés már nem módosítható."
+              : "Correct statements are green; any incorrect answers you selected are red. This question is now locked."}</p>
+            <p>{current.explanation[language]}</p>
+          </div>
+        )}
         <div className="mock-nav-actions">
+          {feedbackMode === "instant" && !currentChecked && (
+            <button
+              type="button"
+              className="primary-button"
+              disabled={selected.length === 0}
+              onClick={checkCurrent}
+            >{isHu ? "Válasz ellenőrzése" : "Check answer"}</button>
+          )}
           <button
             type="button"
             className="secondary-button"
