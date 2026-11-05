@@ -36,6 +36,16 @@ A gyakorlókérdések és a rövid próbavizsga forrásközelségét, helyesség
 | P1 | `mock-bp-2` | A teljes x=2,w=3,b=4,y=5 numerikus példa az előadásból származik, nem az example dokumentum szó szerinti feladatából. | A hivatalos `c=b²` node gradiensszabályából és `c=a+b` levezetésből készíteni variánst. |
 | P1 | `mock-bp-3` | A PyTorch-autograd/optimizer-specifikus kérdések az előadásból valók, nem a mintakérdéslistából. | A példadokumentum square/add node kérdéseire fókuszálni a vizsgaközeli módban. |
 
+## 3/a. A megfogalmazási minta kizsákmányolhatósága — szimuláció
+
+A tényleges rövidteszt-algoritmus 3–6 állítást jelenít meg, egy–három igaz válasszal. Ezzel az eloszlással 24 sablonon, összesen **24 000 generált kérdéspéldányon** szimuláltam egy egyszerű, **tananyagismeretet nem használó** stratégiát: bejelölni mindent, amiben nem szerepel „mindig”, „soha”, „kizárólag”, „minden”, „kötelező”, „szükségképpen”, „garantálja”, „semmilyen”, „pontosan” stb.
+
+- A kulcsszóalapú stratégia átlagos pontaránya **52,3%** volt.
+- Ugyanezen változatokon a „mindent bejelölök” stratégia **10,5%**-ot ért.
+- A megfogalmazási stratégia az esetek **34%**-ában teljesen jó válaszhalmazt, további **36%**-ában pontosan egy hibát adott.
+
+Ez **szimuláció**, nem hallgatói teljesítménymérés, és nem bizonyítja, hogy valaki minden valós próbavizsgán pontosan ennyit érne el. Viszont demonstrálja, hogy a jelenlegi helyes/hamis megfogalmazás alapvetően megkülönböztethető a feladatmegoldás ismerete nélkül.
+
 ## 4. A magyar szaknyelv: kézzel megerősített javítások
 - `bp-q1`: „Csomópontok (csomópontok)” és „élek (élek)” — redundáns, hibás kétnyelvű jelölés. Javaslat: „csomópontok (nodes)”, „élek (edges)”.
 - `bp-q14`: „paraméterekhez (variables/parameters) (parameters) felé” — értelmetlen többszörözés, nyelvtani hiba. Javaslat: „a korábbi változókhoz és paraméterekhez (variables and parameters)”.
