@@ -16,7 +16,7 @@ function options(ids: string, truth: Pair[], wrong: Pair[], explanation: Pair = 
   }
 }
 function value(ids: string, correct: string, wrong: string[], descHu: string, descEn: string) {
-  add(ids, p(correct,correct), wrong.map(s=>p(s,s)), p(descHu,descEn));
+  add(ids, p(correct,correct.replace(" vagy "," or ")), wrong.map(s=>p(s,s)), p(descHu,descEn));
 }
 
 // Lectures 1–6: direct responses to the document's question, not broad topical pools.
