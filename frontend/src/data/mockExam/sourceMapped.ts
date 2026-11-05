@@ -103,6 +103,13 @@ function asMockQuestion(source: SourceExample): MockQuestion {
   const option = ([hu,en]: readonly [string,string], id: string): Choice => ({
     id, text: { hu, en }
   });
+  // Keep each source question to a manageable 4–6 mutually relevant choices.
+  // Supplementary lectures are deliberately separate from the source-only pool.
+  const trueVariants = answer.trueChoices.slice(0, 3);
+  const falseVariants = answer.falseChoices.slice(0, 6 - trueVariants.length);
+  if (trueVariants.length < 1 || falseVariants.length < 2) {
+    throw new Error("Incomplete source-specific answer set: " + source.id);
+  }
   return {
     id: "source-" + source.id,
     chapter: source.chapter,
@@ -113,10 +120,10 @@ function asMockQuestion(source: SourceExample): MockQuestion {
       en: [contextual.en, source.focusEn].filter(Boolean).join("\n")
     },
     choices: [
-      ...answer.trueChoices.map((v,i)=>option(v,"t"+(i+1))),
-      ...answer.falseChoices.map((v,i)=>option(v,"f"+(i+1)))
+      ...trueVariants.map((v,i)=>option(v,"t"+(i+1))),
+      ...falseVariants.map((v,i)=>option(v,"f"+(i+1)))
     ],
-    correctIds: answer.trueChoices.map((_,i)=>"t"+(i+1)),
+    correctIds: trueVariants.map((_,i)=>"t"+(i+1)),
     explanation: { hu: answer.explanation[0], en: answer.explanation[1] }
   };
 }
