@@ -5,10 +5,10 @@
 ## Kérdésbank működése
 
 - **129 dokumentumbeli kérdés:** 80 az 1–6. előadásokból és 49 a NumPy-példákból.
-- A rövid, 15/20 kérdéses próbavizsga **alapértelmezésben ezt a 129 konkrét tételt és a dokumentum további négy kapcsolódó témakijelölését** használja (133 forrásalapú sablon).
-- A további 24 előadásalapú sablon csak külön bekapcsolva kerül a mintavételbe. Így összesen **157 választható sablon** érhető el, ha a kiegészítéseket is kéred.
+- A rövid, 15/20 kérdéses próbavizsga **alapértelmezésben kizárólag a dokumentumból átvett 129 eredeti angol kérdést** használja. A közös példafeladatok leírása külön, jól látható dobozban jelenik meg az alkérdés mellett (mobilon fölötte).
+- A 4 további, a dokumentumban csak feladattípusként említett kérdés és a 24 önálló, előadásalapú sablon csak külön bekapcsolva kerül a mintavételbe. Így **129 alapértelmezett + 28 opcionális = 157** sablon érhető el.
 - Minden forrástételhez **saját, kétnyelvű, kérdéshez közvetlenül kapcsolódó 4–6 állítás** és külön megoldókulcs tartozik. A korábbi, általános témaköri bankból történő válaszösszekeverést megszüntettük. A 24 opcionális kiegészítő kérdéssablon továbbra is 12-12 válaszvariánst használ.
-- Egy teszt 3–6 véletlenszerű válaszlehetőséget mutat, és biztosít legalább egy igaz és egy hamis választ.
+- Egy teszt 3–6 véletlenszerű válaszlehetőséget mutat, és biztosít legalább egy igaz és egy hamis választ. A magyar kérdés alatt az eredeti, változatlan angol kérdés is látható. Az eredeti DOCX-hez tartozó közös példafeladat (és ahol kell, a képlet vagy NumPy-kód) külön panelen szerepel.
 - A kérdésekhez `source-M...` / `source-N...` azonosítók és a DOCX bekezdésindexe kapcsolódik. Az egymástól független forrás-alkérdések már külön kérdésként szerepelnek; egy konkrét kérdésazonosító egy teszten belül nem ismétlődik.
 - A dokumentum a saját szavai szerint **példakérdések és témák nem teljes listája**; az itt leírt 129-es lefedettség csak a felsorolt, kérdőmondatos tételeket jelenti, nem a teljes lehetséges vizsgaanyagot.
 
@@ -28,7 +28,7 @@
 
 ## További négy, a dokumentumban említett példatípus
 
-Ezek önálló kérdő mondat helyett zárójeles feladattípus-megjelölésként szerepelnek, mégis részét képezik az alapértelmezett tesztnek:
+Ezek önálló kérdő mondat helyett zárójeles feladattípus-megjelölésként szerepelnek, ezért csak az **opcionális kiegészítő módban** jelennek meg:
 
 | Kód | DOCX bekezdésindexe | Feladattípus |
 |---|---:|---|
