@@ -117,12 +117,12 @@ export function MockExamView({ language }: Props) {
       <section className="mock-setup question-card">
         <div className="question-header">
           <span>{isHu ? "RÖVID PRÓBAVIZSGA" : "SHORT MOCK EXAM"}</span>
-          <span>{isHu ? `${sourceExamples.length} kérdés + ${sourceTopicExamples.length} témaváltozat` : `${sourceExamples.length} questions + ${sourceTopicExamples.length} topic variants`}</span>
+          <span>{isHu ? `${sourceExamples.length} eredeti alkérdés` : `${sourceExamples.length} original subquestions`}</span>
         </div>
         <h2>{isHu ? "Új, véletlenszerű teszt indítása" : "Start a new randomized exam"}</h2>
         <p>{isHu
-          ? "Alapértelmezés szerint a Theory Test 1 példadokumentumának mind a 129 alkérdéséből és 4 további feladattípusából válogat a teszt, mind a nyolc témakört lefedve. A forrásalapú kérdésekhez külön megírt, az adott alkérdéshez illő válaszok tartoznak, amelyekből 3–6 jelenik meg."
-          : "By default, the exam samples from all 129 explicit subquestions plus four additional topic directives mapped to the Theory Test 1 examples, spanning eight chapters. Every source question has its own directly relevant answer choices, with 3–6 shown at random."}</p>
+          ? "A teszt kizárólag a Theory Test 1 példadokumentumának 129 konkrét alkérdéséből válogat, az eredeti angol kérdést változatlanul megjelenítve. A közös példafeladat külön dobozban látható. Kérdésenként 3–6, kifejezetten ahhoz tartozó válasz jelenik meg."
+          : "By default, the exam draws only from the 129 explicit subquestions in the Theory Test 1 examples, preserving the original English question. Any shared task context is shown separately. Each question displays 3–6 directly relevant answer statements."}</p>
         <div className="mock-length-options" role="group" aria-label={isHu ? "Kérdések száma" : "Question count"}>
           {([15, 20] as const).map((count) => (
             <button
@@ -164,8 +164,8 @@ export function MockExamView({ language }: Props) {
             onChange={(event) => setIncludeSupplementary(event.target.checked)}
           />
           <span>{isHu
-            ? "A további 24, nem minden esetben közvetlenül dokumentumbeli előadásalapú gyakorlókérdést is használja. Csak külön bekapcsolva."
-            : "Also include 24 supplementary lecture-based questions; these are not all direct example questions."}</span>
+            ? "Kiegészítő gyakorlás: a dokumentum 4 további feladattípusa és 24 önálló, előadásalapú kérdéssablon is bekerül a válogatásba."
+            : "Extended practice: include 4 additional example topics and 24 lecture-based question templates; these are separate from the 129 verbatim examples."}</span>
         </label>
         <p className="mock-setup-caption">
           {isHu
