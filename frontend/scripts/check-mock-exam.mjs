@@ -15,6 +15,30 @@ const code = output.outputFiles[0].text;
 const moduleUrl = "data:text/javascript;base64," + Buffer.from(code).toString("base64");
 const { examChapters, mockExamQuestionBank, generateMockExam } = await import(moduleUrl);
 
+const scoringOutput = await build({
+  entryPoints: ["src/study/scoring.ts"],
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  write: false,
+  logLevel: "silent"
+});
+const scoringUrl = "data:text/javascript;base64," +
+  Buffer.from(scoringOutput.outputFiles[0].text).toString("base64");
+const { scoreQuestion, scoreMockQuestion } = await import(scoringUrl);
+const testQuestion = {
+  id: "scoring-test",
+  correctIds: ["a", "b"],
+  choices: [
+    { id: "a" }, { id: "b" }, { id: "c" }
+  ]
+};
+assert.equal(scoreQuestion(testQuestion, ["a", "b"]), 1, "All correct answers earn 1");
+assert.equal(scoreQuestion(testQuestion, ["a"]), 0.5, "One omitted answer earns 0.5");
+assert.equal(scoreQuestion(testQuestion, ["a", "c"]), 0, "Wrong and missing are two mistakes");
+assert.equal(scoreMockQuestion(testQuestion, []), 0, "Unanswered mock questions earn 0");
+assert.equal(scoreMockQuestion(testQuestion, ["a", "b"]), 1, "Mock exam retains standard scoring");
+
 const chapters = [...examChapters];
 assert.equal(chapters.length, 8, "Must cover all eight learning chapters");
 assert.equal(mockExamQuestionBank.length, 24, "Must have 3 distinct mock questions per chapter");
