@@ -38,7 +38,7 @@ Ugyanakkor jó, forrásközeli disztraktorok például `bp-q3` **2b vs 2c** deri
 ## 3. Kritikus, kézzel ellenőrzött hibák
 | Prioritás | Azonosító | Hiba / hatás | Javítás |
 |---|---|---|---|
-| P0 | `np-q41` | A megadott `my_array=[[0,1],[2,3]]` közönséges Python-lista; `my_array*2+1` `TypeError`-t okoz, nem az állítólag helyes tömböt. | `my_array=np.array([[0,1],[2,3]])` vagy a választ át kell értékelni; szigorú futtatásos teszt. |
+| P0 | `np-q41` | A megadott `my_array=[[0,1],[2,3]]` közönséges Python-lista; `my_array*2+1` `TypeError`-t okoz, nem az állítólag helyes tömböt. Ráadásul a „Mi az eredménye?” kérdéshez eredményérték **és shape-állítás** is helyesnek van jelölve. | `my_array=np.array([[0,1],[2,3]])`, a kérdést „Mely állítások igazak az eredményre?” formára kell írni; az értéket és shape-et NumPy-futtatással tesztelni. |
 | P1 | `mlp-q7` | A kérdés *melyik képlet?*, de a három igaznak jelölt opció közül csak az egyik konkrét MLP-hipotézisképlet, a többi a paraméterhalmaz és egy általános állítás. | Kérdés átfogalmazása vagy helyes válaszok újrakulcsolása; 1–2 hasonló hibás képlet hozzáadása. |
 | P1 | `q6` | HU többes számú („Mely állítások”), EN egyes számú („Which statement is true”), de három helyes kulcs van. | EN: „Which statements are true ...?” |
 | P1 | `official-q2,q6,q10,q13,q19,q24,q25,q27` | Mindegyik megjelenített válasz helyes. | Adott témához illeszkedő, hiteles, nem triviális hamis állítások. |
