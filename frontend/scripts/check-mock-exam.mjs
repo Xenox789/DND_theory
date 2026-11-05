@@ -53,7 +53,13 @@ for (const source of [...sourceExamples, ...sourceTopicExamples]) {
   assert.ok(corresponding, "Unmapped document question " + source.id);
   assert.ok(corresponding.topics.includes("source-paragraph-" + source.documentParagraph));
   assert.ok(corresponding.prompt.hu.includes(source.focusHu));
-  assert.ok(corresponding.prompt.en.includes(source.focusEn));
+  if (source.id.startsWith("T")) {
+    assert.equal(corresponding.prompt.en, source.focusEn,
+      "Supplementary topic prompt must remain clearly distinguished.");
+  } else {
+    assert.equal(corresponding.prompt.en, verbatimSourceEnglish[source.id],
+      "Exact original example question must not be rewritten.");
+  }
 }
 
 // Each literal example must use the original English wording, without
