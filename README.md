@@ -184,10 +184,10 @@ The review scheduler is intentionally simple and adaptive. Its intervals are a s
 
 The **Test → Short mock exam** mode creates a 15- or 20-question exercise.
 
-- By default, it uses **129 explicit subquestions** from the Theory Test 1 example document, plus **four additional source-mentioned question categories**. The optional supplementary mode adds 24 lecture-based practice templates.
+- By default, it uses exactly the **129 original English subquestions** from the Theory Test 1 example document. The optional supplementary mode adds **four additional source-mentioned topics** and **24 lecture-based practice templates**.
 - **Every source-example question now has its own manually authored, bilingual answer key and question-specific alternatives**. Questions about parameter counts, shapes, loss functions, etc., do not reuse unrelated statements from broad topical pools.
-- Each source question includes **4–6 curated alternatives**, with one or more correct options; the exam displays a random **3–6**. The separate 24 supplementary topic templates retain their 12-option pools.
-- Questions and displayed answer order are randomized. All eight chapters are represented in each short exam.
+- Each source question currently includes **4–6 manually authored answer alternatives**, with one or more correct options; the exam displays a random **3–6**. The separate 24 supplementary topic templates retain their 12-option pools.
+- Questions and displayed answer order are randomized. All eight chapters are represented in each short exam. The original shared example task (patient data, MLP network, NumPy arrays, or computation graph) appears **beside the current subquestion on desktop and above it on mobile**, in both the live exam and the answer review. Hungarian translations keep the unmodified original English question as a reference.
 - Choose **Exam mode** (explanations after final submission) or **Study mode** (check and lock individual questions with immediate feedback).
 - Scoring is 1 point for perfect selection, 0.5 for exactly one mistake, and zero otherwise, including unanswered questions.
 - Full original extended practice remains available separately.
