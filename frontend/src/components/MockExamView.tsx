@@ -93,8 +93,8 @@ export function MockExamView({ language }: Props) {
         </div>
         <h2>{isHu ? "Új, véletlenszerű teszt indítása" : "Start a new randomized exam"}</h2>
         <p>{isHu
-          ? "Alapértelmezés szerint a Theory Test 1 példadokumentumának mind a 129 alkérdéséből és 4 további feladattípusából válogat a teszt, mind a nyolc témakört lefedve. Minden kérdéshez 12 állításváltozat tartozik, amelyekből véletlenszerűen 3–6 jelenik meg."
-          : "By default, the exam samples from all 129 explicit subquestions plus four additional topic directives mapped to the Theory Test 1 examples, spanning eight chapters. Each question has 12 candidate statements, with 3–6 shown at random."}</p>
+          ? "Alapértelmezés szerint a Theory Test 1 példadokumentumának mind a 129 alkérdéséből és 4 további feladattípusából válogat a teszt, mind a nyolc témakört lefedve. A forrásalapú kérdésekhez külön megírt, az adott alkérdéshez illő válaszok tartoznak, amelyekből 3–6 jelenik meg."
+          : "By default, the exam samples from all 129 explicit subquestions plus four additional topic directives mapped to the Theory Test 1 examples, spanning eight chapters. Every source question has its own directly relevant answer choices, with 3–6 shown at random."}</p>
         <div className="mock-length-options" role="group" aria-label={isHu ? "Kérdések száma" : "Question count"}>
           {([15, 20] as const).map((count) => (
             <button
@@ -136,8 +136,8 @@ export function MockExamView({ language }: Props) {
             onChange={(event) => setIncludeSupplementary(event.target.checked)}
           />
           <span>{isHu
-            ? "A további 24 előadásalapú gyakorlókérdést is használja (nem mind szerepel önálló kérdésként a példadokumentumban)."
-            : "Also include 24 supplementary lecture-based questions (not all appear as standalone examples in the document)."}</span>
+            ? "A további 24, nem minden esetben közvetlenül dokumentumbeli előadásalapú gyakorlókérdést is használja. Csak külön bekapcsolva."
+            : "Also include 24 supplementary lecture-based questions; these are not all direct example questions."}</span>
         </label>
         <p className="mock-setup-caption">
           {isHu
