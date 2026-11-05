@@ -1,5 +1,6 @@
 import type { Lesson, Question } from "../types";
 import { enrichLesson } from "./lessonEnrichment";
+import { improveQuestion } from "./quality";
 import { mlFundamentalsLesson } from "./mlFundamentals";
 import { linearRegressionLesson, linearRegressionQuestions } from "./linearRegression";
 import { logisticRegressionLesson, logisticRegressionQuestions } from "./logisticRegression";
@@ -319,7 +320,7 @@ export const questionBank: Question[] = [
   ...backpropQuestions,
   ...numpyCoreQuestions,
   ...numpyExampleQuestions
-];
+].map(improveQuestion);
 
 
 export const officialQuestionBank: Question[] = questionBank.filter((question) =>

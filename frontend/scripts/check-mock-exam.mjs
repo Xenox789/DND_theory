@@ -13,7 +13,7 @@ const output = await build({
 });
 const code = output.outputFiles[0].text;
 const moduleUrl = "data:text/javascript;base64," + Buffer.from(code).toString("base64");
-const { examChapters, mockExamQuestionBank, generateMockExam } = await import(moduleUrl);
+const { examChapters, sourceExamples, sourceTopicExamples, mockExamQuestionBank, generateMockExam } = await import(moduleUrl);
 
 const scoringOutput = await build({
   entryPoints: ["src/study/scoring.ts"],
@@ -41,12 +41,24 @@ assert.equal(scoreMockQuestion(testQuestion, ["a", "b"]), 1, "Mock exam retains 
 
 const chapters = [...examChapters];
 assert.equal(chapters.length, 8, "Must cover all eight learning chapters");
-assert.equal(mockExamQuestionBank.length, 24, "Must have 3 distinct mock questions per chapter");
-assert.equal(new Set(mockExamQuestionBank.map(q => q.id)).size, 24, "Question IDs must be unique");
+assert.equal(sourceExamples.length, 129, "All 80 lecture and 49 NumPy example subquestions must be mapped");
+assert.equal(sourceExamples.filter(s => s.id.startsWith("M")).length, 80);
+assert.equal(sourceExamples.filter(s => s.id.startsWith("N")).length, 49);
+assert.equal(new Set(sourceExamples.map(s => s.documentParagraph)).size, 129);
+assert.equal(sourceTopicExamples.length, 4, "Must cover all four additional example-topic instructions");
+assert.equal(mockExamQuestionBank.length, 157, "129 source subquestions, 4 document topic directives and 24 supplementary templates required");
+assert.equal(new Set(mockExamQuestionBank.map(q => q.id)).size, 157, "Question IDs must be unique");
+for (const source of [...sourceExamples, ...sourceTopicExamples]) {
+  const corresponding = mockExamQuestionBank.find(q => q.id === "source-" + source.id);
+  assert.ok(corresponding, "Unmapped document question " + source.id);
+  assert.ok(corresponding.topics.includes("source-paragraph-" + source.documentParagraph));
+  assert.ok(corresponding.prompt.hu.includes(source.focusHu));
+  assert.ok(corresponding.prompt.en.includes(source.focusEn));
+}
 
 for (const chapter of chapters) {
-  assert.equal(mockExamQuestionBank.filter(q => q.chapter === chapter).length, 3,
-    "Need three question prompts for chapter " + chapter);
+  assert.ok(mockExamQuestionBank.filter(q => q.chapter === chapter).length >= 3,
+    "Need multiple distinct question prompts for chapter " + chapter);
 }
 
 for (const question of mockExamQuestionBank) {
@@ -74,7 +86,17 @@ for (const count of [15, 20]) {
     };
     const exam = generateMockExam(count, random);
     assert.equal(exam.length, count);
+    assert.ok(exam.every(q => q.id.startsWith("source-")),
+      "By default short exams must exclusively use documented example questions and topic directives.");
+    if (seed <= 12) {
+      const mixedExam = generateMockExam(count, random, true);
+      assert.equal(mixedExam.length, count, "Supplementary opt-in must preserve exam length");
+      assert.ok(mixedExam.every(q => mockExamQuestionBank.some(pool => pool.id === q.id)),
+        "Supplementary mode must only use questions from the reviewed bank");
+    }
     assert.equal(new Set(exam.map(q => q.id)).size, count, "Repeated question in one exam");
+    const sourceAnchors = exam.flatMap(q => q.topics.filter(t => t.startsWith("source-anchor-")));
+    assert.equal(new Set(sourceAnchors).size, sourceAnchors.length, "A single exam must not repeat a source anchor");
     const coverage = Object.fromEntries(chapters.map(c => [c, 0]));
     for (const question of exam) {
       const chapter = question.topics.find(t => t !== "mock-exam" && t.startsWith("mock-"))?.slice(5);
@@ -107,4 +129,4 @@ for (const count of [15, 20]) {
   }
 }
 assert.ok(signatures.size > 100, "Generated test variants should differ meaningfully");
-console.log("Mock exam checks passed: 24 curated questions, 12 alternatives each, 500 balanced randomized exams.");
+console.log("Mock exam checks passed: 129 explicit examples, four source-topic directives and 24 optional supplementary templates; 12 variants each; 500 balanced trials.");
