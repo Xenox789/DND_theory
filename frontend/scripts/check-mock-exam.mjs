@@ -81,7 +81,7 @@ assert.ok(ex("M060").includes("Multi-Layer Perceptron") && ex("M063").includes("
   "All MLP-task subquestions must show the original MLP task and formula");
 assert.ok(ex("N010").includes("(32, 5)") && ex("N018").includes("(32, 5)"),
   "NumPy subquestions must include their original array shapes");
-assert.ok(ex("N034").includes("np.arange(4)") && ex("N049").includes("np.array([3,1,2])"),
+assert.ok(ex("N034").includes("np.arange(4)") && /np\.array\(\[3,\s*1,\s*2\]\)/.test(ex("N049")),
   "NumPy views and numerical function contexts must include the exact input arrays");
 assert.ok(ex("M079").includes("c=b²") && ex("M080").includes("c=a+b"),
   "Backpropagation questions must display their own computational-graph expressions");
