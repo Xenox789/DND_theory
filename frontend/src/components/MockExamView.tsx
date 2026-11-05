@@ -227,23 +227,6 @@ export function MockExamView({ language }: Props) {
         ))}
       </div>
 
-      {confirmIncomplete && (
-        <div className="mock-submit-warning" role="alert">
-          <strong>{isHu ? "Nem válaszoltál minden kérdésre." : "Some questions are unanswered."}</strong>
-          <p>{isHu
-            ? `${exam.length - answered} kérdés kimaradt. Ezek 0 pontot érnek. Biztosan szeretnéd leadni a tesztet?`
-            : `${exam.length - answered} questions are blank and will score zero. Submit anyway?`}</p>
-          <div className="mock-submit-warning-actions">
-            <button type="button" className="secondary-button" onClick={() => setConfirmIncomplete(false)}>
-              {isHu ? "Vissza a kérdésekhez" : "Return to questions"}
-            </button>
-            <button type="button" className="primary-button" onClick={() => { setSubmitted(true); setConfirmIncomplete(false); }}>
-              {isHu ? "Igen, leadom" : "Submit anyway"}
-            </button>
-          </div>
-        </div>
-      )}
-
       <article className="question-card">
         <div className="question-header">
           <span>{isHu ? "KÉRDÉS" : "QUESTION"} {currentIndex + 1}</span>
@@ -295,6 +278,23 @@ export function MockExamView({ language }: Props) {
           </button>
         </div>
       )}
+      {confirmIncomplete && (
+        <div className="mock-submit-warning" role="alert">
+          <strong>{isHu ? "Nem válaszoltál minden kérdésre." : "Some questions are unanswered."}</strong>
+          <p>{isHu
+            ? `${exam.length - answered} kérdés kimaradt. Ezek 0 pontot érnek. Biztosan szeretnéd leadni a tesztet?`
+            : `${exam.length - answered} questions are blank and will score zero. Submit anyway?`}</p>
+          <div className="mock-submit-warning-actions">
+            <button type="button" className="secondary-button" onClick={() => setConfirmIncomplete(false)}>
+              {isHu ? "Vissza a kérdésekhez" : "Return to questions"}
+            </button>
+            <button type="button" className="primary-button" onClick={() => { setSubmitted(true); setConfirmIncomplete(false); }}>
+              {isHu ? "Igen, leadom" : "Submit anyway"}
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
