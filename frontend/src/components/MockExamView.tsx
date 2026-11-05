@@ -9,6 +9,8 @@ import {
   type ExamChapter
 } from "../data/mockExam";
 import { scoreMockQuestion } from "../study/scoring";
+import { originalDocumentContext } from "../data/mockExam/sourceContext";
+import { verbatimSourceEnglish } from "../data/mockExam/verbatimSource";
 
 type Props = { language: Language };
 type Answers = Record<string, string[]>;
@@ -17,6 +19,32 @@ function questionChapter(question: Question): ExamChapter {
   const tag = question.topics.find((topic) => topic.startsWith("mock-") && topic !== "mock-exam");
   const chapter = tag?.slice(5) as ExamChapter | undefined;
   return chapter && examChapters.includes(chapter) ? chapter : "fundamentals";
+}
+
+function SourceTaskPanel({ question, language }: { question: Question; language: Language }) {
+  const sourceId = question.id.startsWith("source-") ? question.id.slice(7) : "";
+  if (!sourceId) return null;
+  const originalTask = originalDocumentContext(sourceId)[language];
+  if (!originalTask) return null;
+  return (
+    <aside className="mock-source-task" aria-label={language === "hu" ? "A kérdéshez tartozó eredeti példafeladat" : "Original example task"}>
+      <div className="mock-source-task-heading">
+        <span className="eyebrow">{language === "hu" ? "PÉLDAFELADAT" : "EXAMPLE TASK"}</span>
+        <span className="mock-source-task-id">{sourceId}</span>
+      </div>
+      <p>{originalTask}</p>
+      <small>{language === "hu"
+        ? "A példadokumentum közös feladatleírása. Az aktuális alkérdésre az alábbi válaszok vonatkoznak."
+        : "Shared task description from the example document. The answers apply to the current subquestion."}</small>
+    </aside>
+  );
+}
+
+function OriginalQuestionReference({ question, language }: { question: Question; language: Language }) {
+  if (language !== "hu" || !question.id.startsWith("source-")) return null;
+  const original = verbatimSourceEnglish[question.id.slice(7)];
+  if (!original) return null;
+  return <p className="mock-original-english"><strong>Original question:</strong> {original}</p>;
 }
 
 export function MockExamView({ language }: Props) {
@@ -202,12 +230,14 @@ export function MockExamView({ language }: Props) {
               const chosen = answers[question.id] ?? [];
               const score = scoreMockQuestion(question, chosen);
               return (
-                <article className="question-card" key={question.id}>
+                <div className="mock-question-layout mock-review-layout" key={question.id}>
+                <article className="question-card">
                   <div className="question-header">
                     <span>Q{index + 1} · {examChapterNames[questionChapter(question)][language]}</span>
                     <span className={`score-pill score-${String(score).replace(".", "-")}`}>{score.toFixed(1)} pt</span>
                   </div>
                   <h2>{question.prompt[language]}</h2>
+                  <OriginalQuestionReference question={question} language={language} />
                   <div className="choices">
                     {question.choices.map((choice, optionIndex) => {
                       const selected = chosen.includes(choice.id);
@@ -230,6 +260,8 @@ export function MockExamView({ language }: Props) {
                     <p>{question.explanation[language]}</p>
                   </div>
                 </article>
+                <SourceTaskPanel question={question} language={language} />
+                </div>
               );
             })}
           </div>
@@ -273,6 +305,7 @@ export function MockExamView({ language }: Props) {
         ))}
       </div>
 
+      <div className="mock-question-layout">
       <article className="question-card">
         <div className="question-header">
           <span>{isHu ? "KÉRDÉS" : "QUESTION"} {currentIndex + 1}</span>
@@ -289,6 +322,7 @@ export function MockExamView({ language }: Props) {
           )}
         </div>
         <h2>{current.prompt[language]}</h2>
+        <OriginalQuestionReference question={current} language={language} />
         <p className="mock-choices-hint">
           {isHu
             ? "Jelöld be az összes igaz állítást. Legalább egy helyes válasz van; több is lehet."
@@ -353,6 +387,8 @@ export function MockExamView({ language }: Props) {
           )}
         </div>
       </article>
+      <SourceTaskPanel question={current} language={language} />
+      </div>
       {currentIndex !== exam.length - 1 && (
         <div className="mock-finish-early">
           <button type="button" className="secondary-button" onClick={finalize}>
