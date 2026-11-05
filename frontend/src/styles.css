@@ -2656,3 +2656,18 @@ main { min-width: 0; }
 @media (max-width: 640px) {
   .mock-feedback-options { grid-template-columns: 1fr; }
 }
+
+.mock-extra-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  max-width: 750px;
+  padding: 13px 15px;
+  border: 1px solid #324a65;
+  border-radius: 11px;
+  color: #b7cae0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.mock-extra-toggle input { margin: 2px 0 0; flex: none; accent-color: #7faeff; }
+.mock-source-label { font-size: 11px; color: #8dbbc5; font-weight: 600; }
