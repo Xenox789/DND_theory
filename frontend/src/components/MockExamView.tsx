@@ -11,6 +11,13 @@ import { scoreQuestion } from "../study/scoring";
 type Props = { language: Language };
 type Answers = Record<string, string[]>;
 
+// An unanswered question is zero, even if one omitted correct option
+// would otherwise qualify for partial credit under the mismatch rule.
+function mockScore(question: Question, selected: string[]): number {
+  return selected.length === 0 ? 0 : scoreQuestion(question, selected);
+}
+
+
 function questionChapter(question: Question): ExamChapter {
   const tag = question.topics.find((topic) => topic.startsWith("mock-") && topic !== "mock-exam");
   const chapter = tag?.slice(5) as ExamChapter | undefined;
@@ -35,13 +42,13 @@ export function MockExamView({ language }: Props) {
 
   const answered = exam.filter((q) => (answers[q.id]?.length ?? 0) > 0).length;
   const total = useMemo(
-    () => exam.reduce((sum, q) => sum + scoreQuestion(q, answers[q.id] ?? []), 0),
+    () => exam.reduce((sum, q) => sum + mockScore(q, answers[q.id] ?? []), 0),
     [exam, answers]
   );
   const chapterResults = useMemo(() =>
     examChapters.map((chapter) => {
       const items = exam.filter((q) => questionChapter(q) === chapter);
-      const points = items.reduce((sum, q) => sum + scoreQuestion(q, answers[q.id] ?? []), 0);
+      const points = items.reduce((sum, q) => sum + mockScore(q, answers[q.id] ?? []), 0);
       return { chapter, points, count: items.length };
     }).filter((item) => item.count > 0),
   [exam, answers]);
@@ -147,7 +154,7 @@ export function MockExamView({ language }: Props) {
           <div className="question-list mock-review">
             {exam.map((question, index) => {
               const chosen = answers[question.id] ?? [];
-              const score = scoreQuestion(question, chosen);
+              const score = mockScore(question, chosen);
               return (
                 <article className="question-card" key={question.id}>
                   <div className="question-header">
