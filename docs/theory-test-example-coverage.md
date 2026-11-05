@@ -7,9 +7,9 @@
 - **129 dokumentumbeli kérdés:** 80 az 1–6. előadásokból és 49 a NumPy-példákból.
 - A rövid, 15/20 kérdéses próbavizsga **alapértelmezésben ezt a 129 konkrét tételt és a dokumentum további négy kapcsolódó témakijelölését** használja (133 forrásalapú sablon).
 - A további 24 előadásalapú sablon csak külön bekapcsolva kerül a mintavételbe. Így összesen **157 választható sablon** érhető el, ha a kiegészítéseket is kéred.
-- Minden forrástételhez 12, kétnyelvű állításváltozat társul a releváns, meglévő kérdés és egy azonos témakörű, lektorált állításbank kombinációjából (6 igaz, 6 hamis). Ezek **nem 129 külön, a semmiből megírt válaszbank**: több kapcsolódó alkérdés azonos témaköri tényekre is támaszkodhat.
+- Minden forrástételhez **saját, kétnyelvű, kérdéshez közvetlenül kapcsolódó 4–6 állítás** és külön megoldókulcs tartozik. A korábbi, általános témaköri bankból történő válaszösszekeverést megszüntettük. A 24 opcionális kiegészítő kérdéssablon továbbra is 12-12 válaszvariánst használ.
 - Egy teszt 3–6 véletlenszerű válaszlehetőséget mutat, és biztosít legalább egy igaz és egy hamis választ.
-- A kérdésekhez `source-M...` / `source-N...` azonosítók és a DOCX bekezdésindexe kapcsolódik. Hasonló, ugyanarra a meglévő kérdésre épülő alkérdések egy próbavizsgán belül nem ismétlődnek.
+- A kérdésekhez `source-M...` / `source-N...` azonosítók és a DOCX bekezdésindexe kapcsolódik. Az egymástól független forrás-alkérdések már külön kérdésként szerepelnek; egy konkrét kérdésazonosító egy teszten belül nem ismétlődik.
 - A dokumentum a saját szavai szerint **példakérdések és témák nem teljes listája**; az itt leírt 129-es lefedettség csak a felsorolt, kérdőmondatos tételeket jelenti, nem a teljes lehetséges vizsgaanyagot.
 
 ## Fő témakörök
@@ -41,7 +41,7 @@ Ezek önálló kérdő mondat helyett zárójeles feladattípus-megjelöléskén
 
 ## A 129 kérdés tételes forrásleképezése
 
-A `documentParagraph` a DOCX `python-docx` által számolt, **0-alapú bekezdésindexe**, nem oldalszám. Az `anchorId` a kétnyelvű alap-kérdés, a `variationPoolId` a 12-választós témaköri sablon.
+A `documentParagraph` a DOCX `python-docx` által számolt, **0-alapú bekezdésindexe**, nem oldalszám. Az `anchorId` és a `variationPoolId` **történeti hivatkozások a korábbi leképezésre**, nem az új vizsga válaszainak forrásai. Az új, konkrét megoldókulcsok a `sourceExactLectures.ts`, `sourceExactNumpy.ts` és `sourceExactTopics.ts` fájlokban találhatók.
 
 | Kód | Bekezdés | Témakör | Az eredeti kérdés magyar összefoglalása | Alapkérdés | Válaszvariációk forrása |
 |---|---:|---|---|---|---|
@@ -178,7 +178,7 @@ A `documentParagraph` a DOCX `python-docx` által számolt, **0-alapú bekezdés
 ## Minőségbiztosítás
 
 - A CI megköveteli a pontosan 80 + 49 forrásrekordot, az egyedi kódokat és a stabil bekezdés-hozzárendelést.
-- 500 generált tesztpéldán ellenőrzi a témakörök lefedését, a válaszok számát, a megoldókulcsot és a közös alapkérdések ismétlésének kizárását.
+- 500 generált tesztpéldán ellenőrzi a témakörök lefedését, a válaszok számát, a megoldókulcsot és egy kérdésazonosító egy teszten belüli ismétlődésének kizárását.
 - A kérdőmondatos lista mellett a DOCX említi az MLP bináris/multiclass és aktivációfüggvényes változatait is; ezek az önálló példatémákhoz és a kiegészítő sablonokhoz kapcsolódnak.
 
-**Szerkesztői korlát:** A tételes lefedettség automatizáltan ellenőrzött. Az egyes 12-választós állítások teljesen független szemantikai, magyar fordítási és nehézségi szaklektorálása külön ellenőrzési feladat, a strukturális tesztek önmagukban ezt nem garantálják.
+**Szerkesztői korlát:** A tételes lefedettség automatizáltan ellenőrzött. Az összes válasz szemantikai, fordítási és nehézségi független szaklektorálása külön ellenőrzési feladat. Az automatizált tesztek nem bizonyítják önmagukban a teljes tartalmi minőséget.

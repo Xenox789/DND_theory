@@ -182,14 +182,13 @@ The review scheduler is intentionally simple and adaptive. Its intervals are a s
 
 ## Short randomized mock exams
 
-The **Test → Short mock exam** mode creates a fresh 15- or 20-question exercise.
+The **Test → Short mock exam** mode creates a 15- or 20-question exercise.
 
-- Every test covers all eight main chapters. A 15-question test covers seven chapters twice and one chapter once; a 20-question test includes 2–3 questions from each chapter.
-- There is a separate, carefully authored set of **24 mock question templates**, each containing **12 bilingual answer statements** (6 true and 6 false).
-- A test shows a random **3–6 answer options per question** in randomized order, with at least one correct and at least one incorrect statement.
-- Each new attempt randomizes both the selected prompts and their answer alternatives. The mock pool is independent of the original 193-question practice bank.
-- Students answer one question at a time, can navigate backwards and edit previous selections; answers are not revealed until submission.
-- Full score for all true and no false selections, half score for exactly one mistake, zero otherwise. **Unanswered mock questions count as zero.**
-- At the end, the dashboard shows a score, eight topic subtotals and a detailed review with the correct and selected answers.
-- The original **Exam-close** and **Extended practice** tabs remain accessible.
-- Automated tests generate and validate 500 seeded samples to check topic coverage, uniqueness and correctness of sampled options.
+- By default, it uses **129 explicit subquestions** from the Theory Test 1 example document, plus **four additional source-mentioned question categories**. The optional supplementary mode adds 24 lecture-based practice templates.
+- **Every source-example question now has its own manually authored, bilingual answer key and question-specific alternatives**. Questions about parameter counts, shapes, loss functions, etc., do not reuse unrelated statements from broad topical pools.
+- Each source question includes **4–6 curated alternatives**, with one or more correct options; the exam displays a random **3–6**. The separate 24 supplementary topic templates retain their 12-option pools.
+- Questions and displayed answer order are randomized. All eight chapters are represented in each short exam.
+- Choose **Exam mode** (explanations after final submission) or **Study mode** (check and lock individual questions with immediate feedback).
+- Scoring is 1 point for perfect selection, 0.5 for exactly one mistake, and zero otherwise, including unanswered questions.
+- Full original extended practice remains available separately.
+- CI verifies source coverage, answer-option structure, source-specific regression checks and 500 generated exam samples.

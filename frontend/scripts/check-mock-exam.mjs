@@ -62,11 +62,23 @@ for (const chapter of chapters) {
 }
 
 for (const question of mockExamQuestionBank) {
-  assert.equal(question.choices.length, 12, "12 answer variations required: " + question.id);
-  assert.equal(question.correctIds.length, 6, "Each pool must have 6 true variants: " + question.id);
-  assert.equal(new Set(question.choices.map(c => c.id)).size, 12, "Duplicate choice ID: " + question.id);
-  assert.equal(new Set(question.choices.map(c => c.text.hu)).size, 12, "Duplicate HU choice: " + question.id);
-  assert.equal(new Set(question.choices.map(c => c.text.en)).size, 12, "Duplicate EN choice: " + question.id);
+  const sourceQuestion = question.id.startsWith("source-");
+  if (sourceQuestion) {
+    assert.ok(question.choices.length >= 4 && question.choices.length <= 6,
+      "Source question must have 4–6 topic-specific options: " + question.id);
+    assert.ok(question.correctIds.length >= 1, "Source question missing a valid answer: " + question.id);
+    assert.ok(question.choices.length - question.correctIds.length >= 2,
+      "Source question needs two or more plausible false alternatives: " + question.id);
+  } else {
+    assert.equal(question.choices.length, 12, "Supplementary pool requires 12 options: " + question.id);
+    assert.equal(question.correctIds.length, 6, "Supplementary pool requires 6 true choices: " + question.id);
+  }
+  assert.equal(new Set(question.choices.map(c => c.id)).size, question.choices.length,
+    "Duplicate choice ID: " + question.id);
+  assert.equal(new Set(question.choices.map(c => c.text.hu)).size, question.choices.length,
+    "Duplicate HU choice: " + question.id);
+  assert.equal(new Set(question.choices.map(c => c.text.en)).size, question.choices.length,
+    "Duplicate EN choice: " + question.id);
   for (const choice of question.choices) {
     assert.ok(choice.text.hu.trim() && choice.text.en.trim(),
       "Missing translation in " + question.id + " / " + choice.id);
@@ -75,6 +87,18 @@ for (const question of mockExamQuestionBank) {
     assert.ok(question.choices.some(c => c.id === id), "Correct ID missing from options: " + question.id);
   }
 }
+assert.ok(mockExamQuestionBank.some(q => q.id.startsWith("source-") && q.correctIds.length >= 2),
+  "Official multi-select format needs at least some questions with multiple true options");
+const m040 = mockExamQuestionBank.find(q => q.id === "source-M040");
+assert.ok(m040, "Missing logistic parameter count example");
+assert.ok(m040.correctIds.length >= 1 &&
+  m040.choices.find(c => c.id === m040.correctIds[0])?.text.en.includes("Three parameters"),
+  "The 100-patient example must answer PARAMETER COUNT as three parameters");
+assert.ok(m040.choices.every(c => !/gradient|∇|∂J/.test(c.text.en)),
+  "Unrelated gradient-shape claims must never appear in the parameter-count question");
+const m042 = mockExamQuestionBank.find(q => q.id === "source-M042");
+assert.ok(m042 && m042.choices.find(c => c.id === m042.correctIds[0])?.text.en === "(100,3)",
+  "The separate X-matrix-shape question must answer (100,3)");
 
 const signatures = new Set();
 for (const count of [15, 20]) {
@@ -95,8 +119,6 @@ for (const count of [15, 20]) {
         "Supplementary mode must only use questions from the reviewed bank");
     }
     assert.equal(new Set(exam.map(q => q.id)).size, count, "Repeated question in one exam");
-    const sourceAnchors = exam.flatMap(q => q.topics.filter(t => t.startsWith("source-anchor-")));
-    assert.equal(new Set(sourceAnchors).size, sourceAnchors.length, "A single exam must not repeat a source anchor");
     const coverage = Object.fromEntries(chapters.map(c => [c, 0]));
     for (const question of exam) {
       const chapter = question.topics.find(t => t !== "mock-exam" && t.startsWith("mock-"))?.slice(5);
@@ -129,4 +151,4 @@ for (const count of [15, 20]) {
   }
 }
 assert.ok(signatures.size > 100, "Generated test variants should differ meaningfully");
-console.log("Mock exam checks passed: 129 explicit examples, four source-topic directives and 24 optional supplementary templates; 12 variants each; 500 balanced trials.");
+console.log("Mock exam checks passed: 129 individually authored source questions, 4 source-topic directives, 24 supplementary 12-choice templates and 500 randomized exams.");

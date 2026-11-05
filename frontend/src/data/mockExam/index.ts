@@ -49,8 +49,8 @@ export function generateMockExam(
   // Strictly source-derived questions are the default. Additional
   // lecture practice templates are opt-in, never silently mixed in.
   const eligible = includeSupplementary ? mockExamQuestionBank : sourceMappedMockQuestions;
-  // A source subquestion and its siblings may point to the same base question.
-  // A single exam should not show the same base stem multiple times.
+  // Source questions now have individually authored stems and choices.
+  // No deduplication by shared topical anchor is needed.
   const byChapter = new Map<ExamChapter, MockQuestion[]>(
     examChapters.map((chapter) => {
       const usedAnchors = new Set<string>();
@@ -90,9 +90,13 @@ export function generateMockExam(
     const trueOptions = question.choices.filter((choice) => question.correctIds.includes(choice.id));
     const falseOptions = question.choices.filter((choice) => !question.correctIds.includes(choice.id));
 
-    const displayedCount = 3 + Math.floor(random() * 4); // 3–6
-    const maxTrue = Math.min(3, displayedCount - 1);
-    const nTrue = 1 + Math.floor(random() * maxTrue);
+    // Show 3–6 options, chosen only from THIS exact source question.
+    // Never fill with unrelated options from a broad topic pool.
+    const maxCount = Math.min(6, question.choices.length);
+    const displayedCount = 3 + Math.floor(random() * (maxCount - 2));
+    const minTrue = Math.max(1, displayedCount - falseOptions.length);
+    const maxTrue = Math.min(trueOptions.length, displayedCount - 1, 3);
+    const nTrue = minTrue + Math.floor(random() * (maxTrue - minTrue + 1));
     const choices = shuffle([
       ...shuffle(trueOptions, random).slice(0, nTrue),
       ...shuffle(falseOptions, random).slice(0, displayedCount - nTrue)
