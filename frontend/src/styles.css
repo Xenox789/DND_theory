@@ -2671,3 +2671,71 @@ main { min-width: 0; }
 }
 .mock-extra-toggle input { margin: 2px 0 0; flex: none; accent-color: #7faeff; }
 .mock-source-label { font-size: 11px; color: #8dbbc5; font-weight: 600; }
+
+/* Original Theory Test example task is displayed beside its subquestion.
+ * For narrow devices the task is shown first, without horizontal scrolling. */
+.mock-question-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.48fr);
+  gap: 16px;
+  align-items: start;
+}
+.mock-question-layout > .question-card {
+  min-width: 0;
+}
+.mock-source-task {
+  border: 1px solid #335477;
+  border-radius: 16px;
+  background: linear-gradient(165deg, #13253b, #0d1c2c);
+  padding: 20px;
+  position: sticky;
+  top: 94px;
+  overflow-wrap: anywhere;
+}
+.mock-source-task-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.mock-source-task-id {
+  color: #789cba;
+  font-family: Consolas, monospace;
+  font-size: 11px;
+  border: 1px solid #345073;
+  border-radius: 6px;
+  padding: 4px 7px;
+}
+.mock-source-task p {
+  white-space: pre-line;
+  color: #c4d6e9;
+  font-size: 13px;
+  line-height: 1.75;
+  margin: 0 0 18px;
+}
+.mock-source-task small {
+  display: block;
+  padding-top: 12px;
+  border-top: 1px solid #294360;
+  color: #7996af;
+  line-height: 1.55;
+}
+.mock-original-english {
+  border-left: 2px solid #315477;
+  padding: 8px 12px;
+  color: #8eabc8;
+  font-size: 12px;
+  line-height: 1.65;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.mock-original-english strong { color: #add3ff; }
+@media (max-width: 1100px) {
+  .mock-question-layout { grid-template-columns: minmax(0, 1fr); }
+  .mock-question-layout > .mock-source-task {
+    grid-row: 1;
+    position: static;
+  }
+  .mock-question-layout > .question-card { grid-row: 2; }
+}
