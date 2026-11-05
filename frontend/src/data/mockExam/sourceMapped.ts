@@ -35,15 +35,17 @@ const topicPools = new Map([
 function sixUnique(
   anchorChoices: Choice[],
   poolChoices: Choice[],
-  field: "hu" | "en",
   sourceId: string
 ): Choice[] {
   const result: Choice[] = [];
-  const seen = new Set<string>();
+  const seenHu = new Set<string>();
+  const seenEn = new Set<string>();
   for (const choice of [...anchorChoices, ...poolChoices]) {
-    const key = choice.text[field].toLocaleLowerCase().trim().replace(/\s+/g, " ");
-    if (!key || seen.has(key)) continue;
-    seen.add(key);
+    const hu = choice.text.hu.toLocaleLowerCase().trim().replace(/\s+/g, " ");
+    const en = choice.text.en.toLocaleLowerCase().trim().replace(/\s+/g, " ");
+    if (!hu || !en || seenHu.has(hu) || seenEn.has(en)) continue;
+    seenHu.add(hu);
+    seenEn.add(en);
     result.push(choice);
     if (result.length === 6) break;
   }
@@ -64,13 +66,11 @@ function asMockQuestion(source: SourceExample): MockQuestion {
   const trueOptions = sixUnique(
     anchor.choices.filter(choice => answerKey.has(choice.id)),
     pool.choices.filter(choice => poolKey.has(choice.id)),
-    "hu",
     source.id
   );
   const falseOptions = sixUnique(
     anchor.choices.filter(choice => !answerKey.has(choice.id)),
     pool.choices.filter(choice => !poolKey.has(choice.id)),
-    "hu",
     source.id
   );
 
