@@ -43,14 +43,18 @@ function shuffle<T>(items: readonly T[], random: () => number): T[] {
  */
 export function generateMockExam(
   count: 15 | 20,
-  random: () => number = Math.random
+  random: () => number = Math.random,
+  includeSupplementary = false
 ): Question[] {
+  // Strictly source-derived questions are the default. Additional
+  // lecture practice templates are opt-in, never silently mixed in.
+  const eligible = includeSupplementary ? mockExamQuestionBank : sourceMappedMockQuestions;
   // A source subquestion and its siblings may point to the same base question.
   // A single exam should not show the same base stem multiple times.
   const byChapter = new Map<ExamChapter, MockQuestion[]>(
     examChapters.map((chapter) => {
       const usedAnchors = new Set<string>();
-      const candidates = shuffle(mockExamQuestionBank.filter((q) => q.chapter === chapter), random)
+      const candidates = shuffle(eligible.filter((q) => q.chapter === chapter), random)
         .filter((question) => {
           const anchor = question.topics.find(t => t.startsWith("source-anchor-")) ?? question.id;
           if (usedAnchors.has(anchor)) return false;
@@ -61,20 +65,25 @@ export function generateMockExam(
     })
   );
 
-  if (mockExamQuestionBank.length < count || examChapters.some((c) => (byChapter.get(c)?.length ?? 0) < 3)) {
-    throw new Error("The mock-exam question pool is incomplete.");
+  if (eligible.length < count || examChapters.some((c) => (byChapter.get(c)?.length ?? 0) < 2)) {
+    throw new Error("The source-based mock-exam pool is incomplete.");
   }
 
   const chosen: MockQuestion[] = [];
   const chapters = shuffle(examChapters, random);
 
-  // Spread minimum coverage across the entire syllabus, then rotate extras.
-  for (const chapter of chapters) chosen.push(byChapter.get(chapter)![0]);
-  const extras = count - examChapters.length;
-  for (let i = 0; i < extras; i++) {
-    const chapter = chapters[i % chapters.length];
-    const index = 1 + Math.floor(i / chapters.length);
-    chosen.push(byChapter.get(chapter)![index]);
+  // Round-robin across all chapters. The two documented backpropagation
+  // node types must not be duplicated just to make the 20-question balance.
+  for (let round = 0; chosen.length < count; round++) {
+    let added = 0;
+    for (const chapter of chapters) {
+      const question = byChapter.get(chapter)?.[round];
+      if (!question) continue;
+      chosen.push(question);
+      added++;
+      if (chosen.length === count) break;
+    }
+    if (!added) throw new Error("Not enough distinct example questions to create a balanced exam.");
   }
 
   return shuffle(chosen, random).map((question): Question => {
