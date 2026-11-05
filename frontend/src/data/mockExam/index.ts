@@ -8,11 +8,15 @@ import { mlpMocks } from "./mlp";
 import { numpyMocks } from "./numpy";
 import { sgdMocks } from "./sgd";
 import { examChapters, type ExamChapter, type MockQuestion } from "./types";
+import { sourceExamples, sourceMappedMockQuestions } from "./sourceMapped";
 
 export { examChapterNames, examChapters } from "./types";
 export type { ExamChapter } from "./types";
+export { sourceExamples };
 
 export const mockExamQuestionBank: MockQuestion[] = [
+  // Every explicit example subquestion from the supplied Theory Test 1 document:
+  ...sourceMappedMockQuestions,
   ...fundamentalsMocks,
   ...linearMocks,
   ...logisticMocks,
@@ -41,11 +45,20 @@ export function generateMockExam(
   count: 15 | 20,
   random: () => number = Math.random
 ): Question[] {
+  // A source subquestion and its siblings may point to the same base question.
+  // A single exam should not show the same base stem multiple times.
   const byChapter = new Map<ExamChapter, MockQuestion[]>(
-    examChapters.map((chapter) => [
-      chapter,
-      shuffle(mockExamQuestionBank.filter((q) => q.chapter === chapter), random)
-    ])
+    examChapters.map((chapter) => {
+      const usedAnchors = new Set<string>();
+      const candidates = shuffle(mockExamQuestionBank.filter((q) => q.chapter === chapter), random)
+        .filter((question) => {
+          const anchor = question.topics.find(t => t.startsWith("source-anchor-")) ?? question.id;
+          if (usedAnchors.has(anchor)) return false;
+          usedAnchors.add(anchor);
+          return true;
+        });
+      return [chapter, candidates];
+    })
   );
 
   if (mockExamQuestionBank.length < count || examChapters.some((c) => (byChapter.get(c)?.length ?? 0) < 3)) {
