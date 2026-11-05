@@ -276,7 +276,7 @@ export function MockExamView({ language }: Props) {
         <div className="question-header">
           <span>{isHu ? "KÉRDÉS" : "QUESTION"} {currentIndex + 1}</span>
           <span>{examChapterNames[questionChapter(current)][language]}</span>
-          {current.topics.some(topic => /^source-[MN]\\d+$/.test(topic)) && (
+          {current.topics.some(topic => /^source-[MN]\d+$/.test(topic)) && (
             <span className="mock-source-label">
               {isHu ? "Példadokumentum" : "Example document"}
             </span>
