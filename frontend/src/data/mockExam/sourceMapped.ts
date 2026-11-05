@@ -5,7 +5,6 @@ import { lectureAnswers, type SourceAnswer } from "./sourceExactLectures";
 import { numpyAnswers } from "./sourceExactNumpy";
 import { topicAnswers } from "./sourceExactTopics";
 import type { MockQuestion } from "./types";
-import { originalDocumentContext } from "./sourceContext";
 import { verbatimSourceEnglish } from "./verbatimSource";
 
 /** Explicit subquestions and four additional exercise categories mentioned in
@@ -49,7 +48,6 @@ function asMockQuestion(source: SourceExample): MockQuestion {
   if (!answer.trueChoices.length || answer.falseChoices.length < 2) {
     throw new Error("Incomplete source-specific statements for " + source.id);
   }
-  const contextual = originalDocumentContext(source.id);
   const exactEnglish = verbatimSourceEnglish[source.id];
   if (source.id.startsWith("M") || source.id.startsWith("N")) {
     if (!exactEnglish) throw new Error("Missing verbatim original question: " + source.id);
@@ -70,9 +68,8 @@ function asMockQuestion(source: SourceExample): MockQuestion {
     topics: ["mock-exam", "mock-" + source.chapter, "source-" + source.id,
       "source-paragraph-" + source.documentParagraph],
     prompt: {
-      hu: [contextual.hu, source.focusHu, exactEnglish
-        ? "Eredeti kérdés (EN): " + exactEnglish : ""].filter(Boolean).join("\n"),
-      en: [contextual.en, exactEnglish ?? source.focusEn].filter(Boolean).join("\n")
+      hu: source.focusHu,
+      en: exactEnglish ?? source.focusEn
     },
     choices: [
       ...trueVariants.map((v,i)=>option(v,"t"+(i+1))),
