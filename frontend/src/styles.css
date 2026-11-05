@@ -2612,3 +2612,15 @@ main { min-width: 0; }
   .mock-topic-track { grid-row: 2; grid-column: 1 / -1; }
   .mock-setup { padding: 18px; }
 }
+
+.mock-submit-warning {
+  margin: 16px 0;
+  padding: 18px 20px;
+  border: 1px solid #997e44;
+  border-radius: 14px;
+  background: #33291c;
+  color: #f5d9a7;
+}
+.mock-submit-warning p { margin: 8px 0 14px; line-height: 1.55; }
+.mock-submit-warning-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.mock-submit-warning-actions .secondary-button { margin-top: 0; }
