@@ -72,32 +72,32 @@ A rövid próbavizsga állításai nem automatikusan jó minőségűek attól, h
 ## 6. Témakörönkénti példadokumentum-illeszkedés — rövid próbavizsga
 A „közvetlen” **példatémához való közvetlen megfelelést**, nem szó szerinti, hivatalos feleletválasztós kérdést jelent. A „kapcsolódó” a példatémából levezethető, de nem azonos mintakérdés. Az „előadási bővítés” nem tartozik a megadott példakérdések közvetlen listájához.
 
-| ID | Fejezet | Példakérdéshez való viszony | Forrástéma | Hamis opciók abszolút kulcsszóval |
-|---|---|---|---|---:|
-| `mock-fund-1` | fundamentals | közvetlen | Supervised / unsupervised / RL visszajelzés | 6/6 |
-| `mock-fund-2` | fundamentals | közvetlen | Hipotézis, paraméterek, címke alakja | 5/6 |
-| `mock-fund-3` | fundamentals | közvetlen | Regresszió / classification / clustering / denoising, loss | 5/6 |
-| `mock-linear-1` | linear | közvetlen | Lineáris regresszió geometriai alakja | 3/6 |
-| `mock-linear-2` | linear | közvetlen | 200 beteg, 4 jellemző, X és θ alakja | 1/6 |
-| `mock-linear-3` | linear | közvetlen | MSE, gradient descent, normálegyenlet, scaling | 3/6 |
-| `mock-log-1` | logistic | közvetlen | 100 beteg, laborértékek, logisztikus regresszió | 3/6 |
-| `mock-log-2` | logistic | kapcsolódó | Sigmoidból levezetett döntési határ; nincs ilyen önálló példakérdés | 1/6 |
-| `mock-log-3` | logistic | közvetlen | BCE/logistic loss | 3/6 |
-| `mock-gen-1` | generalization | közvetlen | Paraméterek vs hiperparaméterek, validation/test | 4/6 |
-| `mock-gen-2` | generalization | közvetlen | Overfitting kockázati tényezők | 5/6 |
-| `mock-gen-3` | generalization | kapcsolódó | Early stopping példakérdés; L2 részben előadásbeli kiegészítés | 4/6 |
-| `mock-mlp-1` | mlp | közvetlen | MLP 20–10–1 paraméterszám | 5/6 |
-| `mock-mlp-2` | mlp | közvetlen | Aktivációs függvények tartománya és kimenet | 5/6 |
-| `mock-mlp-3` | mlp | közvetlen | Multiclass MLP és softmax | 5/6 |
-| `mock-sgd-1` | sgd | közvetlen | SGD: 1 példa / mini-batch | 4/6 |
-| `mock-sgd-2` | sgd | közvetlen | Batchméret változtatásának következménye | 6/6 |
-| `mock-sgd-3` | sgd | előadási bővítés | Adam, optimizer.step, learning rate; nem önálló example-téma | 5/6 |
-| `mock-bp-1` | backprop | közvetlen | Számítási gráf, local derivative | 5/6 |
-| `mock-bp-2` | backprop | előadási bővítés | x=2,w=3,b=4,y=5 numerikus 6. előadásbeli példa | 0/6 |
-| `mock-bp-3` | backprop | előadási bővítés | PyTorch autograd/optimizer; a példadokumentum square/add node-ra fókuszál | 2/6 |
-| `mock-np-1` | numpy | közvetlen | ndarray.shape, size, indexelés | 0/6 |
-| `mock-np-2` | numpy | közvetlen | Broadcasting, transpose, reduction | 2/6 |
-| `mock-np-3` | numpy | közvetlen | view/copy, reshape, argsort/bincount | 3/6 |
+| ID | Fejezet | Forráskapcsolat | Javítási prioritás | Miért / milyen javítás? |
+|---|---|---|---|---|
+| `mock-fund-1` | fundamentals | közvetlen — Supervised / unsupervised / RL visszajelzés | P1 | 6/6 hamis mondatban abszolút szó; ugyanazon feedback-fogalmak közti árnyalt keverések kellenek (absz.: 6/6) |
+| `mock-fund-2` | fundamentals | közvetlen — Hipotézis, paraméterek, címke alakja | P1 | Túl sok végletes állítás; a címke és paraméter alakjának lehetséges/gyakori esetét keverő disztraktorok (absz.: 5/6) |
+| `mock-fund-3` | fundamentals | közvetlen — Regresszió / classification / clustering / denoising, loss | P1 | A hamis válaszok szinte önmagukat cáfolják; feladat–cél párosításokkal nehezíthető (absz.: 5/6) |
+| `mock-linear-1` | linear | közvetlen — Lineáris regresszió geometriai alakja | P1 | A kör/parabola túl gyenge ellenpélda; 1D/2D geometria és bias közeli hibáival cserélendő (absz.: 3/6) |
+| `mock-linear-2` | linear | közvetlen — 200 beteg, 4 jellemző, X és θ alakja | P2 | Viszonylag jó, számalapú mátrixalak-distraktorok; több szoros közeli dimenziótévedés (absz.: 1/6) |
+| `mock-linear-3` | linear | közvetlen — MSE, gradient descent, normálegyenlet, scaling | P2 | A gradienselőjel és MSE jó tévút; a nyilvánvaló 'mindig' állításokat finomítani (absz.: 3/6) |
+| `mock-log-1` | logistic | közvetlen — 100 beteg, laborértékek, logisztikus regresszió | P1 | A negatív szigmoid-output túl könnyű; X vs θ és 100×3 vs 100×2 alakok értelmesebbek (absz.: 3/6) |
+| `mock-log-2` | logistic | kapcsolódó — Sigmoidból levezetett döntési határ; nincs ilyen önálló példakérdés | P2 | A 0,5-ös határ és szigmoid számok jók; a kör alakú döntési határ gyenge distractor (absz.: 1/6) |
+| `mock-log-3` | logistic | közvetlen — BCE/logistic loss | P2 | BCE képletek közelállóak; egy részük nyilvánvaló/logikailag szélsőséges (absz.: 3/6) |
+| `mock-gen-1` | generalization | közvetlen — Paraméterek vs hiperparaméterek, validation/test | P1 | Hiperparaméter/validation/test szerepcsere jó, de négy abszolút megfogalmazás kiszűrhető (absz.: 4/6) |
+| `mock-gen-2` | generalization | közvetlen — Overfitting kockázati tényezők | P1 | Öt hamis állításban abszolút jelző; train/val görbe és adatmennyiség közeli hibái kellenek (absz.: 5/6) |
+| `mock-gen-3` | generalization | kapcsolódó — Early stopping példakérdés; L2 részben előadásbeli kiegészítés | P1 | L2 és early stopping közös kérdés széles; regularizációs képlet pontos konvenciójához kötni (absz.: 4/6) |
+| `mock-mlp-1` | mlp | közvetlen — MLP 20–10–1 paraméterszám | P1 | 'pontosan nulla súly' kirívó; 200/210/211 és 221 számolási hibákkal nehezíthető (absz.: 5/6) |
+| `mock-mlp-2` | mlp | közvetlen — Aktivációs függvények tartománya és kimenet | P1 | BCE mint aktiváció nyilvánvalóan hibás; sigmoid/tanh/ReLU tartomány és output-loss közelibb (absz.: 5/6) |
+| `mock-mlp-3` | mlp | közvetlen — Multiclass MLP és softmax | P1 | 5 hamis változat végletes; softmax sum=1, logits, one-hot és multioutput regression keverése (absz.: 5/6) |
+| `mock-sgd-1` | sgd | közvetlen — SGD: 1 példa / mini-batch | P1 | 4 hamis változat végletes; epoch, batch size és update-szám tévesztése jobb (absz.: 4/6) |
+| `mock-sgd-2` | sgd | közvetlen — Batchméret változtatásának következménye | P1 | Mind a hat hamis opció abszolút nyelvezettel leleplezhető (absz.: 6/6) |
+| `mock-sgd-3` | sgd | előadási bővítés — Adam, optimizer.step, learning rate; nem önálló example-téma | P1 | Nincs direkt example-témája; Adam és optimizer összekeverése túlságosan nyilvánvaló (absz.: 5/6) |
+| `mock-bp-1` | backprop | közvetlen — Számítási gráf, local derivative | P1 | Öt hamis állítás abszolút; láncszabály szorzás/összegzés tévútjait előtérbe (absz.: 5/6) |
+| `mock-bp-2` | backprop | előadási bővítés — x=2,w=3,b=4,y=5 numerikus 6. előadásbeli példa | P2 | Érdemi numerikus nehézség, jó szoros tévutak; forrása az előadás, nem az example lista (absz.: 0/6) |
+| `mock-bp-3` | backprop | előadási bővítés — PyTorch autograd/optimizer; a példadokumentum square/add node-ra fókuszál | P1 | PyTorch API az example-ön túl; square/add node gradiensekből új kérdés (absz.: 2/6) |
+| `mock-np-1` | numpy | közvetlen — ndarray.shape, size, indexelés | OK | Erős alak/indexelés-alapú near-miss válaszok, megőrizhető (absz.: 0/6) |
+| `mock-np-2` | numpy | közvetlen — Broadcasting, transpose, reduction | OK | Valós broadcasting és axis-keverések; kisebb nyelvi finomítás (absz.: 2/6) |
+| `mock-np-3` | numpy | közvetlen — view/copy, reshape, argsort/bincount | P2 | Funkcionálisan releváns view/copy és argsort; kevesebb mindig/minden típusú tévút (absz.: 3/6) |
 
 ## 7. A 193 kérdés tételes, strukturális ellenőrzése
 **Jelmagyarázat:** „example” = `official-example` tag a kódban, nem hitelesített eredeti vizsgakérdés. „HU ellenőrizendő” = automatikus mintázatjelölés, amelyet emberileg külön szükséges felülvizsgálni. „1 hamis” nem bizonyítja, hogy a válasz önmagában hibás; az egész bankban együtt viszont kihasználható mintázat.
