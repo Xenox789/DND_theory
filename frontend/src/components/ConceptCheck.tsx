@@ -101,7 +101,7 @@ export function ConceptCheck({ questions, language, onComplete }: Props) {
       <h3>{current.prompt[language]}</h3>
 
       <div className="recall-choices">
-        {current.choices.map((choice) => {
+        {current.choices.map((choice, choiceIndex) => {
           const selected = state.selected.includes(choice.id);
           const correct = current.correctIds.includes(choice.id);
           const className = [
@@ -119,7 +119,7 @@ export function ConceptCheck({ questions, language, onComplete }: Props) {
                 disabled={state.checked}
                 onChange={() => toggle(choice.id)}
               />
-              <span className="choice-letter">{choice.id.toUpperCase()}</span>
+              <span className="choice-letter">{String.fromCharCode(65 + choiceIndex)}</span>
               <span>{choice.text[language]}</span>
             </label>
           );
