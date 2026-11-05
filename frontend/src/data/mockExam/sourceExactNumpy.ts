@@ -125,6 +125,57 @@ v("N047","[3,2,1]",["[1,2,3]","[3,1,2]","[2,3,1]","[1,3,2]","[2,1,3]"],"Az np.so
 v("N048","[1,2,0]",["[1,2,3]","[3,1,2]","[2,1,0]","[0,1,2]","[2,0,1]"],"Az argsort a rendezett értékek eredeti indexeit adja.","argsort returns indices that would sort the original values.");
 v("N049","[3,1,2]",["[1,2,3]","[1,2]","[3,2]","[0,1,2]","[3,0,1,2]"],"A bemenet minden eleme nemnulla, a boolean kiválasztás a sorrendet megtartja.","All inputs are nonzero; boolean selection retains their original order.");
 
+function extraTrue(ids:string,hu:string,en:string){
+ for(const id of ids.split(" ")){
+  const item=numpyAnswers[id];
+  if(!item)throw Error("Missing NumPy answer "+id);
+  item.trueChoices.push(p(hu,en));
+ }
+}
+extraTrue("N001","A (5,6) alak két tengelyt és 30 elemet jelent.","Shape (5,6) has two axes and 30 elements.");
+extraTrue("N002","A (1,) alak egydimenziós és egy elemet tartalmaz.","Shape (1,) is one-dimensional and contains one element.");
+extraTrue("N003","A (0,1,0) alak size=0 és ndim=3 értékekkel jár.","Shape (0,1,0) has size=0 and ndim=3.");
+extraTrue("N007","Az (3,4) alakú tömb size attribútuma 12.","An array shaped (3,4) has size=12.");
+extraTrue("N009","A [:,:] minden sort és oszlopot megőriz az eredeti (32,5) alakból.","[:, :] retains every row and column of the original (32,5) shape.");
+extraTrue("N010","Az egész oszlopindex eltünteti a második tengelyt.","An integer column index removes the second axis.");
+extraTrue("N011","Az egész sorindex eltünteti az első tengelyt.","An integer row index removes the first axis.");
+extraTrue("N012","Az a[1:,:] szelet 31 sort és öt oszlopot tartalmaz.","Slice a[1:,:] contains 31 rows and five columns.");
+extraTrue("N014","Az a[[0],:] haladó indexelés egy soros, kétdimenziós tömböt ad.","Advanced indexing a[[0],:] returns a two-dimensional array containing one row.");
+extraTrue("N015","Az indexlista két kiválasztott, utolsó oszlopbeli elemet eredményez.","The index list selects two values from the final column.");
+extraTrue("N016","Broadcastingnál a jobb szélső dimenziók 5 és 32, ezért inkompatibilisek.","Trailing dimensions 5 and 32 are incompatible for broadcasting.");
+extraTrue("N017","Az összeadás eredményalakja (32,5).","The addition produces shape (32,5).");
+extraTrue("N018","Az (1,32) és (32,5) alakok jobb szélső dimenziói nem egyeznek és egyik sem 1.","The trailing dimensions of (1,32) and (32,5) disagree and neither equals 1.");
+extraTrue("N019","A skalár hozzáadása után az eredmény alakja (32,5) marad.","Adding the scalar retains output shape (32,5).");
+extraTrue("N020","Az elemenkénti összehasonlítás (32,5) alakú logikai tömböt ad.","Elementwise comparison produces a boolean array shaped (32,5).");
+extraTrue("N021","A .T felcseréli a kétdimenziós tömb sor- és oszlopdimenzióit.","The .T property swaps the row and column dimensions of a 2D array.");
+extraTrue("N022","A kétszeri transzponálás az eredeti sor- és oszlopszámot állítja vissza.","Two transposes restore the original row and column counts.");
+extraTrue("N023","Az azonos alakú a+a összeadás elemenként történik.","Adding a+a operates elementwise on equally shaped arrays.");
+extraTrue("N024","Az első operandus (32,5) alakja implicit (1,32,5) alaknak számít a broadcastolásban.","For broadcasting the first operand (32,5) acts as shape (1,32,5).");
+extraTrue("N025","Az axis=0 szerinti átlagolás 32 sorból öt oszlopátlagot készít.","Reducing axis=0 averages 32 rows into five column means.");
+extraTrue("N026","Az axis=1 szerinti átlagolás 32 sor mindegyikében öt értéket átlagol.","Reducing axis=1 averages five values within each of 32 rows.");
+extraTrue("N027","Az axis=0 szerinti összegzés eredményének alakja (5,).","Summation along axis=0 yields shape (5,).");
+extraTrue("N028","Az összes elem összege egyetlen NumPy skalár érték.","Summing all elements yields one NumPy scalar value.");
+extraTrue("N029 N030","Az a=np.arange(4).reshape(2,-1) kiinduló tömbben két sor és két oszlop van.","The input a=np.arange(4).reshape(2,-1) has two rows and two columns.");
+extraTrue("N031","Az a[a>0] értékei [1,2,3].","a[a>0] contains values [1,2,3].");
+extraTrue("N032","Az a[(a>0)&(a%2==0)] csak a 2-t választja ki.","a[(a>0)&(a%2==0)] selects only the value 2.");
+extraTrue("N033","A (2,2) és (2,2,1) operandusok (2,2,2) alakra broadcastolódnak.","Operands shaped (2,2) and (2,2,1) broadcast to (2,2,2).");
+extraTrue("N034","Az a.reshape(2,2) a folytonos np.arange(4) adatterületének nézete.","a.reshape(2,2) is a view of the contiguous np.arange(4) storage.");
+extraTrue("N035","Az egydimenziós a.T alakja ugyanaz, mint a-é, és megosztja az adatokat.","The 1D a.T has the same shape as a and shares data.");
+extraTrue("N036","Az np.append(a,42) egy új, ötelemű tömböt ad.","np.append(a,42) produces a new five-element array.");
+extraTrue("N037","Az a[1:2] nézetbe írás az eredeti a 1-es indexű elemét módosítja.","Writing through view a[1:2] changes element a[1] in the source.");
+extraTrue("N038","Az a[[1,2]] advanced indexing nem osztja meg a forrás adattárolóját.","Advanced indexing a[[1,2]] does not share the source data buffer.");
+extraTrue("N039","A boolean maszkos indexelés eredményének írása nem ír vissza az eredeti tömbbe.","Writing into the result of boolean masking does not write through to the source.");
+extraTrue("N040","Az a+a összeadás eredménye új, írható tömb a forrástól független adattárolóval.","a+a produces a writable new array with independent data storage.");
+extraTrue("N041","Az a=np.arange(4) egyetlen nullát tartalmaz az első helyen.","a=np.arange(4) contains exactly one zero in its first position.");
+extraTrue("N042","A logikai tömbben legalább egy True található, ezért az any eredménye True.","The boolean comparison contains at least one True, so any returns True.");
+extraTrue("N043","Mindkét sor tartalmaz nemnulla értéket, ezért egyik sor sem csupa nulla.","Each row contains a nonzero value, so neither row is all-zero.");
+extraTrue("N044","Az np.unique a bemeneti számok különböző értékeit rendezetten adja vissza.","np.unique returns distinct input values in sorted order.");
+extraTrue("N045","Az a==0 összehasonlítás mindhárom pozícióján False érték szerepel.","The comparison a==0 is False at all three positions.");
+extraTrue("N046","A 0 előfordulása 0, az 1,2,3 értékeké egyenként 1.","Value zero occurs 0 times and values 1,2,3 occur once each.");
+extraTrue("N047","A [::-1] szelet megfordítja az np.sort által növekvőre rendezett tömböt.","The [::-1] slice reverses the ascending np.sort output.");
+extraTrue("N048","A rendezési indexek rendre 1,2,0, mert az értékek 1,2,3 ilyen pozíciókon vannak.","Sorted indices are 1,2,0 because values 1,2,3 occur at those positions.");
+extraTrue("N049","A maszk minden elemen True, így a kiválasztás mindhárom értéket megőrzi.","The mask is True for every element, so selection retains all three values.");
+
 const expected=Array.from({length:49},(_,i)=>"N"+String(i+1).padStart(3,"0"));
 for(const id of expected)if(!numpyAnswers[id])throw Error("Missing exact source question "+id);
 if(Object.keys(numpyAnswers).length!==49)throw Error("Extra or duplicate source question");
