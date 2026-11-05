@@ -22,6 +22,19 @@ A gyakorlókérdések és a rövid próbavizsga forrásközelségét, helyesség
 | Abszolút/kizáró szó az igaz állításban | 3/144 | Szerkesztési minta |
 | Abszolút/kizáró szó a hamis állításban | 85/144 | A hibás válasz felismerhető pusztán stílus alapján |
 
+### A hagyományos kérdésbankban is látható nyelvi tippelési jel
+
+A 193 kérdés összesen **525 igazként jelölt és 188 hamisként jelölt választ** tartalmaz. A hamis válaszok közül **47/188 (~25%)**, a helyes válaszok közül **10/525 (~2%)** tartalmaz erős kizáró/abszolút szót a magyar szövegben. A hamis válaszok így nemcsak tartalmilag, hanem gyakran nyelvi mintájuk alapján is felismerhetők.
+
+A különösen gyenge, kézzel ellenőrzött negatív opciók között:
+- `q4` „lineáris programming” (a három ML-csoport felsorolásánál távoli, nem azonos típusú alternatíva);
+- `log-q2` „Véges z esetén g(z) lehet 5” (szigmoid-kimenetnél nyilvánvaló);
+- `gen-q17` „J_test matematikailag nem lehet skalár” (a tesztadatok rendeltetését nem méri);
+- `bp-q6` „Nem kell semmilyen deriváltat számolni” (túl szélsőséges);
+- `np-q53` két választás közül a szimpla eredmény felismerése, nem reprezentatív 3–6 opciós próba.
+
+Ugyanakkor jó, forrásközeli disztraktorok például `bp-q3` **2b vs 2c** deriváltkülönbsége, `mlp-q5` **200 vs 210** paraméterszám, illetve `np-q35` a broadcasting-hiba felismerése. Ezek mintáját érdemes követni.
+
 ## 3. Kritikus, kézzel ellenőrzött hibák
 | Prioritás | Azonosító | Hiba / hatás | Javítás |
 |---|---|---|---|
